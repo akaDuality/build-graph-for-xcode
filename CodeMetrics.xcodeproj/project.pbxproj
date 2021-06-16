@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1E1AC9DF263C2EC8006C3429 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1AC9DE263C2EC8006C3429 /* main.swift */; };
+		1E1AC9E9263C2F4A006C3429 /* FileAnalyzer in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1AC9E8263C2F4A006C3429 /* FileAnalyzer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E1AC9E9263C2F4A006C3429 /* FileAnalyzer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +45,7 @@
 			children = (
 				1E1AC9DD263C2EC8006C3429 /* CodeMetrics */,
 				1E1AC9DC263C2EC8006C3429 /* Products */,
+				1E1AC9E7263C2F4A006C3429 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +65,13 @@
 			path = CodeMetrics;
 			sourceTree = "<group>";
 		};
+		1E1AC9E7263C2F4A006C3429 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,6 +88,9 @@
 			dependencies = (
 			);
 			name = CodeMetrics;
+			packageProductDependencies = (
+				1E1AC9E8263C2F4A006C3429 /* FileAnalyzer */,
+			);
 			productName = CodeMetrics;
 			productReference = 1E1AC9DB263C2EC8006C3429 /* CodeMetrics */;
 			productType = "com.apple.product-type.tool";
@@ -285,6 +298,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1E1AC9E8263C2F4A006C3429 /* FileAnalyzer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FileAnalyzer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1E1AC9D3263C2EC8006C3429 /* Project object */;
 }
