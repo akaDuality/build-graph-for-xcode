@@ -6,7 +6,7 @@
         let projectsFolder: URL = "/Users/rubanov/Documents/Projects/"
         
         func testPizza() throws {
-            let srcRoot: URL = projectsFolder.appendingPathComponent("DodoPizza/")
+            let srcRoot: URL = projectsFolder.appendingPathComponent("dodo-mobile-ios/DodoPizza/")
             
             // Overall
             try LineCount(folder: srcRoot).read()
