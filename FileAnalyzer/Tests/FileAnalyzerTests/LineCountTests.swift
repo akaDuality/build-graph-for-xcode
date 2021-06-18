@@ -2,9 +2,12 @@
     @testable import FileAnalyzer
     
     final class LineCountTests: XCTestCase {
-        let srcRoot: URL = "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/"
         
-        func testExample() throws {
+        let projectsFolder: URL = "/Users/rubanov/Documents/Projects/"
+        
+        func testPizza() throws {
+            let srcRoot: URL = projectsFolder.appendingPathComponent("DodoPizza/")
+            
             // Overall
             try LineCount(folder: srcRoot).read()
             try LineCount(folder: srcRoot.appendingPathComponent("Common/")).read()
@@ -12,6 +15,24 @@
             // App
             try LineCount(folder: srcRoot.appendingPathComponent("DodoPizza/Domain/")).read()
             try LineCount(folder: srcRoot.appendingPathComponent("DodoPizza/Module/")).read()
+        }
+        
+        func testDoner() throws {
+            let srcRoot: URL = projectsFolder.appendingPathComponent("doner-mobile-ios/")
+            
+            try LineCount(folder: srcRoot).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Sources/")).read()
+
+            try LineCount(folder: srcRoot.appendingPathComponent("Pods/")).read()
+        }
+        
+        func testDrinkit() throws {
+            let srcRoot: URL = projectsFolder.appendingPathComponent("drinkit-mobile-ios")
+            
+            try LineCount(folder: srcRoot).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Core/")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Pods/")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Sources/")).read()
         }
     }
     
