@@ -9,8 +9,8 @@
             let srcRoot: URL = projectsFolder.appendingPathComponent("dodo-mobile-ios/DodoPizza/")
             
             // Overall
-            try LineCount(folder: srcRoot).read()
-            try LineCount(folder: srcRoot.appendingPathComponent("Common/")).read()
+            try LineCount(folder: srcRoot).read(project: .pizza)
+            try LineCount(folder: srcRoot.appendingPathComponent("DCommon/")).read()
             
             // App
             try LineCount(folder: srcRoot.appendingPathComponent("DodoPizza/Domain/")).read()
