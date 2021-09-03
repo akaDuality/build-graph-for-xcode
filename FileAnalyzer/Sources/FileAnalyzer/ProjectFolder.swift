@@ -8,7 +8,11 @@
 import Foundation
 
 public struct ProjectFolder {
-    let projectsFolder: URL = "/Users/rubanov/Documents/Projects/"
+    init(projectsFolder: URL) {
+        self.projectsFolder = projectsFolder
+    }
+
+    let projectsFolder: URL
     
     public var pizza: URL {
         projectsFolder.appendingPathComponent("dodo-mobile-ios/DodoPizza/")

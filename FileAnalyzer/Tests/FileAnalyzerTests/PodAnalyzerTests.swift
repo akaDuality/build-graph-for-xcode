@@ -11,7 +11,9 @@ import XCTest
 
 class PodAnalyzerTests: XCTestCase {
     func test() {
-        PodAnalyzer().analyze()
+        let path: URL = "/Users/rubanov/Documents/Projects/"
+        
+        PodAnalyzer().analyze(pathToCommonFolder: path)
     }
     
     func test_readPodfile() throws {

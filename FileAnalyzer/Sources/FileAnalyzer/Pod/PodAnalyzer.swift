@@ -9,8 +9,9 @@ import Foundation
 
 class PodAnalyzer {
     
-    func analyze() {
-        let projects = projects()
+    func analyze(pathToCommonFolder: URL) {
+        let projectFolder = ProjectFolder(projectsFolder: pathToCommonFolder)
+        let projects = projects(folder: projectFolder)
         
         let allPods = projects.allPods()
             .withoutTestHelpers()
@@ -22,11 +23,11 @@ class PodAnalyzer {
                                  projects: projects)
     }
     
-    func projects() -> [Podfile] {
-        let folders = ProjectFolder()
-        let pizzaPods   = Podfile(path: folders.pizza.podfile,   name: "Pizza")
-        let donerPods   = Podfile(path: folders.doner.podfile,   name: "Doner")
-        let drinkitPods = Podfile(path: folders.drinkit.podfile, name: "Drinkit")
+    func projects(folder: ProjectFolder) -> [Podfile] {
+        
+        let pizzaPods   = Podfile(path: folder.pizza.podfile,   name: "Pizza")
+        let donerPods   = Podfile(path: folder.doner.podfile,   name: "Doner")
+        let drinkitPods = Podfile(path: folder.drinkit.podfile, name: "Drinkit")
         return [pizzaPods, donerPods, drinkitPods]
     }
 }

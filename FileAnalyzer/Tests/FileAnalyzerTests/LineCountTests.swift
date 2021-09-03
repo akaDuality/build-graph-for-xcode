@@ -3,7 +3,7 @@
     
     final class LineCountTests: XCTestCase {
         
-        let projectsFolder = ProjectFolder()
+        let projectsFolder = ProjectFolder(projectsFolder: "/Users/rubanov/Documents/Projects/")
         
         func testPizza() throws {
             let srcRoot: URL = projectsFolder.pizza
