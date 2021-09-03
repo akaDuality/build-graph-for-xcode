@@ -22,8 +22,11 @@ class PodAnalyzerTests: XCTestCase {
         let podfile = Podfile(path: path,
                               name: "Test")
         XCTAssertEqual(podfile.pods, ["SwiftLint", "libPhoneNumber-iOS", "BlackBox", "AppsFlyerFramework", "Quick", "Firebase/Performance", "NCallback", "SnapshotTesting", "FirebaseMessaging", "Crypto", "RTIconButton", "Nuke", "Nimble", "Firebase/Crashlytics", "NQueueTestHelpers", "NRequest", "PinLayout", "CryptoTestHelpers", "LKAlertController", "Acquirers", "InAppStory", "MBProgressHUD", "PREBorderView", "KVOController", "HCaptcha", "AcquirersTestHelpers", "NQueue", "FirebaseInstallations", "Bagel", "KeychainSwift", "NInjectTestHelpers", "Qase", "AssertEqualProperties", "Firebase/Analytics", "FirebaseDynamicLinks", "Threads", "NSpry", "Firebase", "NInject", "DeviceKit", "NCallbackTestHelpers", "SZTextView", "Firebase/RemoteConfig", "NRequestTestHelpers"])
-        
         XCTAssertEqual(podfile.pods.count, 44)
+        
+        XCTAssertEqual(podfile.pods.withoutTestHelpers(), ["Firebase/Crashlytics", "Qase", "Quick", "InAppStory", "SZTextView", "Crypto", "Threads", "Nimble", "LKAlertController", "Bagel", "FirebaseDynamicLinks", "NSpry", "Firebase/Analytics", "NInject", "RTIconButton", "NQueue", "BlackBox", "MBProgressHUD", "Firebase/RemoteConfig", "Firebase", "SnapshotTesting", "NRequest", "DeviceKit", "HCaptcha", "KVOController", "PinLayout", "Nuke", "FirebaseMessaging", "AppsFlyerFramework", "PREBorderView", "libPhoneNumber-iOS", "KeychainSwift", "Acquirers", "FirebaseInstallations", "NCallback", "AssertEqualProperties", "SwiftLint", "Firebase/Performance"])
+        
+        XCTAssertEqual(podfile.pods.withoutTestHelpers().count, 38)
     }
     
     func testSimplePod() {

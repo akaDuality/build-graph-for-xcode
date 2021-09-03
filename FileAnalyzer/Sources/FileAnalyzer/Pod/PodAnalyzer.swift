@@ -7,43 +7,51 @@
 
 import Foundation
 
-
 class PodAnalyzer {
     
     func analyze() {
+        let projects = projects()
+        
+        let allPods = projects.allPods()
+            .withoutTestHelpers()
+        
+        let externalPods = allPods.subtracting(internalPods)
+        
+        PodStatsPrinter().output(externalPods: internalPods,
+                                 internalPods: externalPods,
+                                 projects: projects)
+    }
+    
+    func projects() -> [Podfile] {
         let folders = ProjectFolder()
         let pizzaPods   = Podfile(path: folders.pizza.podfile,   name: "Pizza")
         let donerPods   = Podfile(path: folders.doner.podfile,   name: "Doner")
         let drinkitPods = Podfile(path: folders.drinkit.podfile, name: "Drinkit")
-        
-        compare(projects: [pizzaPods, donerPods, drinkitPods])
+        return [pizzaPods, donerPods, drinkitPods]
     }
-    
-    private func compare(projects: [Podfile]) {
-        let allPods = allPods(in: projects)
-        
-        for pod in allPods {
-            print(podState(of: pod, in: projects))
-        }
-    }
-    
-    private func podState(of pod: Pod,
-                          in projects: [Podfile]
-    ) -> String {
-        var text = "\(pod)"
-        for project in projects {
-            let contain = project.pods.contains(pod)
-            let result = contain ? "TRUE": "FALSE"
-            text.append(" \(result)")
-        }
-        return text
-    }
-    
-    private func allPods(in pods: [Podfile]) -> PodSet {
+}
+
+extension Array where Element == Podfile {
+    func allPods() -> PodSet {
         var allPods = PodSet()
-        for pod in pods {
+        for pod in self {
             allPods.formUnion(pod.pods)
         }
+        
         return allPods
+    }
+}
+
+extension Set where Element == Pod {
+    func withoutTestHelpers() -> PodSet {
+        filter { pod in
+            !pod.isTestHelper
+        }
+    }
+}
+
+extension Pod {
+    var isTestHelper: Bool {
+        hasSuffix("TestHelpers")
     }
 }
