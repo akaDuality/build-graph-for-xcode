@@ -23,6 +23,8 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "FileAnalyzerTests",
-            dependencies: ["FileAnalyzer"]),
+            dependencies: ["FileAnalyzer"],
+            resources: [.process("Podfile")]
+        ),
     ]
 )

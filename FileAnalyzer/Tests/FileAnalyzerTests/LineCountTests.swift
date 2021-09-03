@@ -3,10 +3,10 @@
     
     final class LineCountTests: XCTestCase {
         
-        let projectsFolder: URL = "/Users/rubanov/Documents/Projects/"
+        let projectsFolder = ProjectFolder()
         
         func testPizza() throws {
-            let srcRoot: URL = projectsFolder.appendingPathComponent("dodo-mobile-ios/DodoPizza/")
+            let srcRoot: URL = projectsFolder.pizza
             
             // Overall
             try LineCount(folder: srcRoot).read(project: .pizza)
@@ -18,7 +18,7 @@
         }
         
         func testDoner() throws {
-            let srcRoot: URL = projectsFolder.appendingPathComponent("doner-mobile-ios/")
+            let srcRoot: URL = projectsFolder.doner
             
             try LineCount(folder: srcRoot).read()
             try LineCount(folder: srcRoot.appendingPathComponent("Sources/")).read()
@@ -27,7 +27,7 @@
         }
         
         func testDrinkit() throws {
-            let srcRoot: URL = projectsFolder.appendingPathComponent("drinkit-mobile-ios")
+            let srcRoot: URL = projectsFolder.drinkit
             
             try LineCount(folder: srcRoot).read()
             try LineCount(folder: srcRoot.appendingPathComponent("Core/")).read()
@@ -36,10 +36,4 @@
         }
     }
     
-    extension URL: ExpressibleByStringLiteral {
-        public typealias StringLiteralType = String
-        
-        public init(stringLiteral value: String) {
-            self = URL(string: value)!
-        }
-    }
+    
