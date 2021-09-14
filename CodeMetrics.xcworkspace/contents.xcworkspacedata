@@ -16,4 +16,7 @@
    <FileRef
       location = "group:LeadTime">
    </FileRef>
+   <FileRef
+      location = "group:UnitTests">
+   </FileRef>
 </Workspace>
