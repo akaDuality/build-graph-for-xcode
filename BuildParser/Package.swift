@@ -28,7 +28,7 @@ let package = Package(
         .testTarget(
             name: "BuildParserTests",
             dependencies: ["BuildParser"],
-            resources: [.process("AppEvents.json"),
-                        .process("TestEvents.json")]),
+            resources: [.process("Samples/AppEvents.json"),
+                        .process("Samples/TestEvents.json")]),
     ]
 )

@@ -5,9 +5,9 @@
 //  Created by Mikhail Rubanov on 09.10.2021.
 //
 
-import UIKit
+import QuartzCore
 
-class Graph: UIView {
+class Graph: CALayer {
     let events: [Event]
     let highlightedEvent: Event?
     
@@ -29,31 +29,31 @@ class Graph: UIView {
         self.higlightedLift = .init()
         self.texts = .init()
         
-        super.init(frame: .zero)
+        super.init()
         
-        setup()
+        setup(scale: 3)
     }
     
-    func setup() {
+    func setup(scale: CGFloat) {
         
-        higlightedLift.backgroundColor = UIColor.white.withAlphaComponent(0.05).cgColor
+        higlightedLift.backgroundColor = Colors.liftColor
         self.higlightedLift.frame = .zero
-        layer.addSublayer(higlightedLift)
+        addSublayer(higlightedLift)
         
         for rect in rects {
             let layer = CALayer()
-            layer.contentsScale = UIScreen.main.scale
+            layer.contentsScale = scale
             layer.backgroundColor = rect.backgroundColor.withAlphaComponent(alpha(for: rect)).cgColor
             shapes.append(layer)
-            self.layer.addSublayer(layer)
+            addSublayer(layer)
             
             let textLayer = CATextLayer()
-            textLayer.contentsScale = UIScreen.main.scale
+            textLayer.contentsScale = scale
             texts.append(textLayer)
-            self.layer.addSublayer(textLayer)
+            self.addSublayer(textLayer)
         }
         
-        backgroundColor = .darkGray
+        backgroundColor = Colors.backColor
     }
     
     func alpha(for rect: EventRelativeRect) -> CGFloat {
@@ -72,8 +72,8 @@ class Graph: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutSublayers() {
+        super.layoutSublayers()
        
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]
@@ -106,15 +106,15 @@ class Graph: UIView {
                             y: frame.minY + 1,
                             width: 150, // TODO: calculate on fly
                             height: height)
-        text.foregroundColor = UIColor.label.cgColor
+        text.foregroundColor = Colors.textColor
         text.fontSize = fontSize
     }
     
     let height: CGFloat = 8
     let space: CGFloat = 1
     let fontSize: CGFloat = 5
-    
-    override var intrinsicContentSize: CGSize {
+
+    var intrinsicContentSize: CGSize {
         return CGSize(width: 2400,
                       height: CGFloat(rects.count) * (height + space))
     }
