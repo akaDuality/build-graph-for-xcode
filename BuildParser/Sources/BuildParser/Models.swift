@@ -6,9 +6,9 @@ struct Event {
     let endDate: Date
     
     var type: EventType {
-        if taskName.hasSuffix("TestHelpers") {
+        if taskName.hasSuffix(helpersSuffix) {
             return .helpers
-        } else if taskName.hasSuffix("Unit-Tests") {
+        } else if taskName.hasSuffix(testsSuffix) {
             return .tests
         } else {
             return .framework
@@ -18,6 +18,19 @@ struct Event {
         case framework
         case helpers
         case tests
+    }
+    
+    private let helpersSuffix = "TestHelpers"
+    private let testsSuffix = "TestHelpers-Unit-Tests"
+    
+    var domain: String {
+        if taskName.hasSuffix(helpersSuffix) {
+            return String(taskName.dropLast(helpersSuffix.count))
+        } else if taskName.hasSuffix(testsSuffix) {
+            return String(taskName.dropLast(testsSuffix.count))
+        } else {
+            return taskName
+        }
     }
 }
 

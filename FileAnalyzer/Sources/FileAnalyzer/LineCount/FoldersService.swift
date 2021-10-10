@@ -17,8 +17,9 @@ class FoldersService {
     private let fileManager = FileManager.default
     
     private let exclude = ["vendor", "KeyBindings", "fastlane", "scripts", "MindBoxNotification", "FigmaExport",
-                           "DodoPizza.xcodeproj",
-                           "DodoPizza.xcworkspace"]
+                           "DemoAppTemplate", "ExampleModule", "Tuist", "Derived", // Tuist
+                           "DodoPizza.xcodeproj", "DodoPizza.xcworkspace"
+    ]
     
     func folders() throws -> [URL] {
         let projectContent: [String] = try fileManager.contentsOfDirectory(atPath: folder.path)

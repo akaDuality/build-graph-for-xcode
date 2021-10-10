@@ -9,18 +9,24 @@ import UIKit
 
 class Graph: UIView {
     let events: [Event]
-    private(set) var shapes: [CALayer]
-    private(set) var texts: [CATextLayer]
-    let rects: [EventRelativeRect]
+    let highlightedEvent: Event?
     
-    init(events: [Event]) {
+    private(set) var shapes: [CALayer]
+    private let higlightedLift: CALayer
+    private(set) var texts: [CATextLayer]
+    private let rects: [EventRelativeRect]
+    
+    init(events: [Event], highlightedEvent: Event?) {
         self.events = events
+        self.highlightedEvent = highlightedEvent
+        
         self.rects = events.map { event in
             EventRelativeRect(event: event,
                               absoluteStart: events.start(),
                               totalDuration: events.duration())
         }
         self.shapes = .init()
+        self.higlightedLift = .init()
         self.texts = .init()
         
         super.init(frame: .zero)
@@ -29,10 +35,15 @@ class Graph: UIView {
     }
     
     func setup() {
+        
+        higlightedLift.backgroundColor = UIColor.white.withAlphaComponent(0.05).cgColor
+        self.higlightedLift.frame = .zero
+        layer.addSublayer(higlightedLift)
+        
         for rect in rects {
             let layer = CALayer()
             layer.contentsScale = UIScreen.main.scale
-            layer.backgroundColor = rect.backgroundColor.cgColor
+            layer.backgroundColor = rect.backgroundColor.withAlphaComponent(alpha(for: rect)).cgColor
             shapes.append(layer)
             self.layer.addSublayer(layer)
             
@@ -43,6 +54,18 @@ class Graph: UIView {
         }
         
         backgroundColor = .darkGray
+    }
+    
+    func alpha(for rect: EventRelativeRect) -> CGFloat {
+        if let highlightedEvent = highlightedEvent {
+            if rect.event.domain == highlightedEvent.domain {
+                return 1
+            } else {
+                return 0.25
+            }
+        } else {
+            return 1
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -58,6 +81,12 @@ class Graph: UIView {
             shape.frame = frame
             
             drawText(rect: rect, i: i, frame: frame)
+            
+            if rect.event.taskName == highlightedEvent?.taskName {
+                higlightedLift.frame = CGRect(x: frame.minX,
+                                              y: 0, width: frame.width,
+                                              height: self.frame.height)
+            }
         }
     }
     
