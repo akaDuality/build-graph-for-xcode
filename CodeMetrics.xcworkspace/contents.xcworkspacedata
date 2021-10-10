@@ -10,4 +10,7 @@
    <FileRef
       location = "group:LeadTime">
    </FileRef>
+   <FileRef
+      location = "group:BuildParser">
+   </FileRef>
 </Workspace>
