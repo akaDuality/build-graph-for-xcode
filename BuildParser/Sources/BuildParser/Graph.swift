@@ -7,18 +7,27 @@
 
 import QuartzCore
 
-class Graph: CALayer {
+public class Graph: CALayer {
     let events: [Event]
-    let highlightedEvent: Event?
+    public var highlightedEvent: Event? = nil {
+        didSet {
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(0)
+            setNeedsLayout()
+            layoutIfNeeded()
+            CATransaction.commit()
+            
+            higlightedLift.opacity = (highlightedEvent != nil) ? 1: 0
+        }
+    }
     
     private(set) var shapes: [CALayer]
     private let higlightedLift: CALayer
     private(set) var texts: [CATextLayer]
     private let rects: [EventRelativeRect]
     
-    init(events: [Event], highlightedEvent: Event?) {
+    public init(events: [Event]) {
         self.events = events
-        self.highlightedEvent = highlightedEvent
         
         self.rects = events.map { event in
             EventRelativeRect(event: event,
@@ -31,19 +40,46 @@ class Graph: CALayer {
         
         super.init()
         
-        setup(scale: 3)
+        setup(scale: contentsScale)
+    }
+    public override init(layer: Any) {
+        let layer = layer as! Graph
+        
+        self.events = layer.events
+        self.shapes = layer.shapes
+        self.texts = layer.texts
+        self.higlightedLift = layer.higlightedLift
+        self.rects = layer.rects
+        super.init(layer: layer)
+    }
+   
+    // MARK: - Event
+    public func highlightEvent(at coordinate: CGPoint) {
+        let event = event(at: coordinate)
+        highlightedEvent = event
     }
     
-    func setup(scale: CGFloat) {
+    private func event(at coorditate: CGPoint) -> Event? {
+        for (i, shape) in shapes.enumerated() {
+            if shape
+                .frame.insetBy(dx: 0, dy: -space/2)
+                .inLine(coorditate) {
+                return events[i]
+            }
+        }
+        return nil
+    }
+    
+    // MARK: - Drawing
+    private func setup(scale: CGFloat) {
         
         higlightedLift.backgroundColor = Colors.liftColor
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
         
-        for rect in rects {
+        for _ in rects {
             let layer = CALayer()
             layer.contentsScale = scale
-            layer.backgroundColor = rect.backgroundColor.withAlphaComponent(alpha(for: rect)).cgColor
             shapes.append(layer)
             addSublayer(layer)
             
@@ -56,29 +92,30 @@ class Graph: CALayer {
         backgroundColor = Colors.backColor
     }
     
-    func alpha(for rect: EventRelativeRect) -> CGFloat {
+    private func alpha(for rect: EventRelativeRect) -> CGFloat {
         if let highlightedEvent = highlightedEvent {
             if rect.event.domain == highlightedEvent.domain {
                 return 1
             } else {
-                return 0.25
+                return 0.1
             }
         } else {
             return 1
         }
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSublayers() {
+    public override func layoutSublayers() {
         super.layoutSublayers()
-       
+        
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]
             let frame = frame(for: i, rect: rect)
             shape.frame = frame
+            shape.backgroundColor = rect.backgroundColor.copy(alpha: alpha(for: rect))
             
             drawText(rect: rect, i: i, frame: frame)
             
@@ -91,12 +128,13 @@ class Graph: CALayer {
     }
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
-        let width: CGFloat = self.frame.width
+        let width = self.frame.width
+        let height = self.frame.height
         
         return CGRect(x: width * rect.start,
-                      y: CGFloat(i) * (height + space),
+                      y: height - CGFloat(i) * (self.height + space),
                       width: width * rect.duration,
-                      height: height)
+                      height: self.height)
     }
     
     private func drawText(rect: EventRelativeRect, i: Int, frame: CGRect) {
@@ -117,5 +155,10 @@ class Graph: CALayer {
     var intrinsicContentSize: CGSize {
         return CGSize(width: 2400,
                       height: CGFloat(rects.count) * (height + space))
+    }
+}
+extension CGRect {
+    func inLine(_ coordinate: CGPoint) -> Bool {
+        (minY...maxY).contains(coordinate.y)
     }
 }

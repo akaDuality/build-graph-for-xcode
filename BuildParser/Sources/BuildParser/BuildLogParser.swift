@@ -1,15 +1,9 @@
 import Foundation
 
-class BuildLogParser {
-    func buildLog(path: URL) throws -> EventsDTO {
-        let file = try Data(contentsOf: path)
-        let decoder =  JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
-        let buildLog = try decoder.decode(EventsDTO.self, from: file)
-        return buildLog
-    }
+public class BuildLogParser {
+    public init() {}
     
-    func parse(path: URL) throws -> [Event] {
+    public func parse(path: URL) throws -> [Event] {
         let buildLog = try buildLog(path: path)
         
         var events = [Event]()
@@ -26,6 +20,14 @@ class BuildLogParser {
             }
         }
         return events
+    }
+    
+    func buildLog(path: URL) throws -> EventsDTO {
+        let file = try Data(contentsOf: path)
+        let decoder =  JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+        let buildLog = try decoder.decode(EventsDTO.self, from: file)
+        return buildLog
     }
 }
 

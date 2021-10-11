@@ -1,6 +1,14 @@
 import Foundation
 
-struct Event {
+public struct Event {
+    public init(taskName: String,
+                startDate: Date,
+                endDate: Date) {
+        self.taskName = taskName
+        self.startDate = startDate
+        self.endDate = endDate
+    }
+    
     let taskName: String
     let startDate: Date
     let endDate: Date

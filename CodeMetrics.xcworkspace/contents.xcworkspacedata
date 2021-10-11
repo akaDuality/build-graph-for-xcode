@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:BuildGraph/BuildGraph.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:BuildParser">
+   </FileRef>
+   <FileRef
       location = "group:CodeMetrics.xcodeproj">
    </FileRef>
    <FileRef
@@ -9,8 +15,5 @@
    </FileRef>
    <FileRef
       location = "group:LeadTime">
-   </FileRef>
-   <FileRef
-      location = "group:BuildParser">
    </FileRef>
 </Workspace>

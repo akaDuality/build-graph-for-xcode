@@ -33,14 +33,16 @@ final class BuildParserTests: XCTestCase {
     
     func test_drawingTestEvents() throws {
         let events = try parser.parse(path: testEventsPath)
-        let view = Graph(events: events, highlightedEvent: events[100])
+        let view = Graph(events: events)
+        view.highlightedEvent = events[100]
+            
         view.frame = .init(x: 0,
                            y: 0,
                            width: view.intrinsicContentSize.width,
                            height: view.intrinsicContentSize.height)
         let layer: CALayer = view
         assertSnapshot(matching: layer,
-                       as: .image(),
+                       as: .image,
                        record: true)
     }
 }

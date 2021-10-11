@@ -22,12 +22,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "BuildParser",
-            dependencies: [.product(name: "SnapshotTesting",
-                                    package: "swift-snapshot-testing",
-                                    condition: nil)]),
+            dependencies: []),
         .testTarget(
             name: "BuildParserTests",
-            dependencies: ["BuildParser"],
+            dependencies: ["BuildParser", .product(name: "SnapshotTesting",
+                                                   package: "swift-snapshot-testing",
+                                                   condition: nil)],
             resources: [.process("Samples/AppEvents.json"),
                         .process("Samples/TestEvents.json")]),
     ]
