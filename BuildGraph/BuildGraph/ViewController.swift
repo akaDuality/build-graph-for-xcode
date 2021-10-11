@@ -36,6 +36,10 @@ class ViewController: NSViewController {
         
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
         
         addMouseTracking()
     }
@@ -43,7 +47,8 @@ class ViewController: NSViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         
-        addMouseTracking()
+//        addMouseTracking()
+        view.updateTrackingAreas()
        
         layer.updateWithoutAnimation {
             layer.frame = view.frame
@@ -53,11 +58,15 @@ class ViewController: NSViewController {
         contentView.bounds = layer.frame
     }
     
+    var trackingArea: NSTrackingArea!
     func addMouseTracking() {
-        view.addTrackingRect(view.frame,
-                             owner: self,
-                             userData: nil,
-                             assumeInside: false)
+        trackingArea = NSTrackingArea(rect: view.bounds,
+                                      options: [.activeAlways,
+                                                .mouseMoved,
+                                                .inVisibleRect],
+                                      owner: self,
+                                      userInfo: nil)
+        view.addTrackingArea(trackingArea)
     }
 
     override var representedObject: Any? {
@@ -75,7 +84,6 @@ class ViewController: NSViewController {
         let coordinate = contentView.convert(
             event.locationInWindow,
             from: nil)
-//        print(coordinate)
         
         layer.highlightEvent(at: coordinate)
         layer.drawConcurrency(at: coordinate)
