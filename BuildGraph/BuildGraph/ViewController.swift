@@ -8,6 +8,14 @@
 import Cocoa
 import BuildParser
 
+class FlippedView: NSView {
+    override var isFlipped: Bool {
+        get {
+            true
+        }
+    }
+}
+
 class ViewController: NSViewController {
 
     var layer: Graph!
@@ -15,7 +23,7 @@ class ViewController: NSViewController {
 //        view as! NSScrollView
 //    }
     @IBOutlet weak var scrollView: NSScrollView!
-    let contentView = NSView()
+    let contentView = FlippedView()
     
     override func viewDidLoad() {
         super.viewDidLoad()

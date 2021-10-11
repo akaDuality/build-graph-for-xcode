@@ -65,8 +65,6 @@ public class Graph: CALayer {
                 .frame.insetBy(dx: 0, dy: -space/2)
                 .inLine(
                     coorditate
-//                    CGPoint(x: coorditate.x,
-//                                y: frame.height - coorditate.y)
                 ) {
                 return events[i]
             }
@@ -133,10 +131,9 @@ public class Graph: CALayer {
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
         let width = self.frame.width
-        let height = self.frame.height
         
         return CGRect(x: width * rect.start,
-                      y: height - CGFloat(i) * (self.height + space),
+                      y: CGFloat(i) * (self.height + space),
                       width: width * rect.duration,
                       height: self.height)
     }
