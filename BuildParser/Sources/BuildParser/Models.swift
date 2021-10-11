@@ -62,24 +62,23 @@ extension Array where Element == Event {
     func start() -> Date {
         first!.startDate
     }
+    
+    func concurency(at timeFromStart: TimeInterval) -> Int {
+        return events(at: timeFromStart).count
+    }
+    
+    private func events(at timeFromStart: TimeInterval) -> [Event] {
+        let checkDate = Date(timeInterval: timeFromStart, since: start())
+        
+        return self.filter { $0.hit(time: checkDate) }
+    }
 }
 extension Event {
     var duration: TimeInterval {
         endDate.timeIntervalSince(startDate)
     }
-}
-
-struct EventsDTO: Decodable {
-    let events: [EventDTO]
-}
-
-struct EventDTO: Decodable {
-    let date: Date
-    let taskName: String
-    let event: EventType
-}
-
-enum EventType: String, Decodable {
-    case start
-    case end
+    
+    func hit(time: Date) -> Bool {
+        (startDate...endDate).contains(time)
+    }
 }

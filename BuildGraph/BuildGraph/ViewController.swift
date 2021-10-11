@@ -19,20 +19,17 @@ class FlippedView: NSView {
 class ViewController: NSViewController {
 
     var layer: Graph!
-//    var scrollView: NSScrollView {
-//        view as! NSScrollView
-//    }
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = Bundle.main.url(forResource: "TestEvents", withExtension: "json")!
+        let url = Bundle.main.url(forResource: "AppEvents", withExtension: "json")!
         let events = try! BuildLogParser().parse(path: url)
         layer = Graph(
-            events: events)
-        layer.contentsScale = NSScreen.main!.backingScaleFactor
+            events: events,
+            scale: NSScreen.main!.backingScaleFactor)
         
         contentView.wantsLayer = true
         contentView.layer?.addSublayer(layer)
@@ -46,9 +43,6 @@ class ViewController: NSViewController {
 
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
-//        scrollView.contentView.scroll(
-//            to: CGPoint(x: 0,
-//                        y: contentView.frame.size.height))
         
         addMouseTracking()
     }
@@ -84,12 +78,10 @@ class ViewController: NSViewController {
         let coordinate = contentView.convert(
             event.locationInWindow,
             from: nil)
-        print(coordinate)
+//        print(coordinate)
         
         layer.highlightEvent(at: coordinate)
-//                                CGPoint(
-//            x: coordinate.x,
-//            y: scrollView.frame.height - coo))
+        layer.drawConcurency(at: coordinate)
     }
     
     override func mouseExited(with event: NSEvent) {

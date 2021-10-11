@@ -7,15 +7,23 @@
 
 import QuartzCore
 
+extension CALayer {
+    func updateWithoutAnimation(_ block: () -> Void) {
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(0)
+        block()
+        CATransaction.commit()
+    }
+}
+
 public class Graph: CALayer {
     let events: [Event]
     public var highlightedEvent: Event? = nil {
         didSet {
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(0)
-            setNeedsLayout()
-            layoutIfNeeded()
-            CATransaction.commit()
+            updateWithoutAnimation {
+                setNeedsLayout()
+                layoutIfNeeded()
+            }
             
             higlightedLift.opacity = (highlightedEvent != nil) ? 1: 0
         }
@@ -26,7 +34,10 @@ public class Graph: CALayer {
     private(set) var texts: [CATextLayer]
     private let rects: [EventRelativeRect]
     
-    public init(events: [Event]) {
+    private let concurencyLine: CALayer
+    private let concurencyTitle: CATextLayer
+    
+    public init(events: [Event], scale: CGFloat) {
         self.events = events
         
         self.rects = events.map { event in
@@ -38,9 +49,12 @@ public class Graph: CALayer {
         self.higlightedLift = .init()
         self.texts = .init()
         
+        self.concurencyLine = CALayer()
+        self.concurencyTitle = CATextLayer()
+        
         super.init()
         
-        setup(scale: contentsScale)
+        setup(scale: scale)
     }
     public override init(layer: Any) {
         let layer = layer as! Graph
@@ -50,6 +64,10 @@ public class Graph: CALayer {
         self.texts = layer.texts
         self.higlightedLift = layer.higlightedLift
         self.rects = layer.rects
+        
+        self.concurencyLine = layer.concurencyLine
+        self.concurencyTitle = layer.concurencyTitle
+        
         super.init(layer: layer)
     }
    
@@ -57,6 +75,24 @@ public class Graph: CALayer {
     public func highlightEvent(at coordinate: CGPoint) {
         let event = event(at: coordinate)
         highlightedEvent = event
+    }
+    
+    private var coordinate: CGPoint = .zero {
+        didSet {
+            updateWithoutAnimation {
+                setNeedsLayout()
+                layoutIfNeeded()
+            }
+        }
+    }
+    public func drawConcurency(at coordinate: CGPoint) {
+        self.coordinate = coordinate
+        
+        let relativeX = coordinate.x / frame.width
+        let time = events.duration() * relativeX
+        let concurency = events.concurency(at: time)
+        concurencyTitle.string = "\(concurency)"
+        print(concurency)
     }
     
     private func event(at coorditate: CGPoint) -> Event? {
@@ -79,6 +115,14 @@ public class Graph: CALayer {
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
         
+        concurencyLine.backgroundColor = Colors.concurencyColor
+        addSublayer(concurencyLine)
+        
+        concurencyTitle.contentsScale = scale
+        concurencyTitle.foregroundColor = Colors.concurencyColor
+        concurencyTitle.fontSize = 20
+        addSublayer(concurencyTitle)
+        
         for _ in rects {
             let layer = CALayer()
             layer.contentsScale = scale
@@ -99,7 +143,7 @@ public class Graph: CALayer {
             if rect.event.domain == highlightedEvent.domain {
                 return 1
             } else {
-                return 0.1
+                return Colors.dimmingAlpha
             }
         } else {
             return 1
@@ -112,6 +156,16 @@ public class Graph: CALayer {
     
     public override func layoutSublayers() {
         super.layoutSublayers()
+        
+        concurencyLine.frame = CGRect(x: coordinate.x,
+                                      y: 0,
+                                      width: 1,
+                                      height: frame.height)
+        let titleHeight: CGFloat = 20
+        concurencyTitle.frame = CGRect(x: coordinate.x + 10,
+                                       y: coordinate.y - titleHeight - 10,
+                                       width: 100,
+                                       height: titleHeight)
         
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]

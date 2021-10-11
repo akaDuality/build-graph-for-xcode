@@ -16,6 +16,7 @@
 		1EDB5E5327135F0100741EEF /* BuildGraphUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E5227135F0100741EEF /* BuildGraphUITestsLaunchTests.swift */; };
 		1EDB5E6127135F1600741EEF /* BuildParser in Frameworks */ = {isa = PBXBuildFile; productRef = 1EDB5E6027135F1600741EEF /* BuildParser */; };
 		1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E6227136DBE00741EEF /* TestEvents.json */; };
+		1EDB6A242714183500741EEF /* AppEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A232714182600741EEF /* AppEvents.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		1EDB5E5027135F0100741EEF /* BuildGraphUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphUITests.swift; sourceTree = "<group>"; };
 		1EDB5E5227135F0100741EEF /* BuildGraphUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1EDB5E6227136DBE00741EEF /* TestEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TestEvents.json; sourceTree = "<group>"; };
+		1EDB6A232714182600741EEF /* AppEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppEvents.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				1EDB5E3827135F0100741EEF /* Assets.xcassets */,
 				1EDB5E3A27135F0100741EEF /* Main.storyboard */,
 				1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */,
+				1EDB6A232714182600741EEF /* AppEvents.json */,
 				1EDB5E6227136DBE00741EEF /* TestEvents.json */,
 			);
 			path = BuildGraph;
@@ -241,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDB6A242714183500741EEF /* AppEvents.json in Resources */,
 				1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */,
 				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
 				1EDB5E3C27135F0100741EEF /* Main.storyboard in Resources */,
