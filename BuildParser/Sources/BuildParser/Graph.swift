@@ -63,7 +63,11 @@ public class Graph: CALayer {
         for (i, shape) in shapes.enumerated() {
             if shape
                 .frame.insetBy(dx: 0, dy: -space/2)
-                .inLine(coorditate) {
+                .inLine(
+                    coorditate
+//                    CGPoint(x: coorditate.x,
+//                                y: frame.height - coorditate.y)
+                ) {
                 return events[i]
             }
         }
@@ -152,7 +156,7 @@ public class Graph: CALayer {
     let space: CGFloat = 1
     let fontSize: CGFloat = 5
 
-    var intrinsicContentSize: CGSize {
+    public var intrinsicContentSize: CGSize {
         return CGSize(width: 2400,
                       height: CGFloat(rects.count) * (height + space))
     }

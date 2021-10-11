@@ -11,6 +11,11 @@ import BuildParser
 class ViewController: NSViewController {
 
     var layer: Graph!
+//    var scrollView: NSScrollView {
+//        view as! NSScrollView
+//    }
+    @IBOutlet weak var scrollView: NSScrollView!
+    let contentView = NSView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +24,23 @@ class ViewController: NSViewController {
         let events = try! BuildLogParser().parse(path: url)
         layer = Graph(
             events: events)
+        layer.contentsScale = NSScreen.main!.backingScaleFactor
         
-        view.wantsLayer = true
-        view.layer?.addSublayer(layer)
+        contentView.wantsLayer = true
+        contentView.layer?.addSublayer(layer)
+        layer.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: layer.intrinsicContentSize.width,
+            height: layer.intrinsicContentSize.height)
+        contentView.frame = layer.frame
+        contentView.bounds = layer.frame
+
+        scrollView.documentView = contentView
+        scrollView.allowsMagnification = true
+//        scrollView.contentView.scroll(
+//            to: CGPoint(x: 0,
+//                        y: contentView.frame.size.height))
         
         addMouseTracking()
     }
@@ -31,7 +50,8 @@ class ViewController: NSViewController {
         
         addMouseTracking()
         
-        self.layer.frame = view.frame
+//        self.layer.frame = view.frame
+        
     }
     
     func addMouseTracking() {
@@ -53,14 +73,20 @@ class ViewController: NSViewController {
     }
     
     override func mouseMoved(with event: NSEvent) {
-        let coordinate = view.convert(event.locationInWindow, to: nil)
+        let coordinate = contentView.convert(
+            event.locationInWindow,
+            from: nil)
         print(coordinate)
         
         layer.highlightEvent(at: coordinate)
+//                                CGPoint(
+//            x: coordinate.x,
+//            y: scrollView.frame.height - coo))
     }
     
     override func mouseExited(with event: NSEvent) {
         view.window?.acceptsMouseMovedEvents = false
+        
+        layer.highlightedEvent = nil
     }
 }
-
