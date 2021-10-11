@@ -33,14 +33,7 @@ class ViewController: NSViewController {
         
         contentView.wantsLayer = true
         contentView.layer?.addSublayer(layer)
-        layer.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: layer.intrinsicContentSize.width,
-            height: layer.intrinsicContentSize.height)
-        contentView.frame = layer.frame
-        contentView.bounds = layer.frame
-
+        
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
         
@@ -51,9 +44,13 @@ class ViewController: NSViewController {
         super.viewDidLayout()
         
         addMouseTracking()
-        
-//        self.layer.frame = view.frame
-        
+       
+        layer.updateWithoutAnimation {
+            layer.frame = view.frame
+            layer.layoutIfNeeded()
+        }
+        contentView.frame = layer.frame
+        contentView.bounds = layer.frame
     }
     
     func addMouseTracking() {
@@ -81,7 +78,7 @@ class ViewController: NSViewController {
 //        print(coordinate)
         
         layer.highlightEvent(at: coordinate)
-        layer.drawConcurency(at: coordinate)
+        layer.drawConcurrency(at: coordinate)
     }
     
     override func mouseExited(with event: NSEvent) {

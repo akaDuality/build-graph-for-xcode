@@ -8,7 +8,7 @@
 import QuartzCore
 
 extension CALayer {
-    func updateWithoutAnimation(_ block: () -> Void) {
+    public func updateWithoutAnimation(_ block: () -> Void) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(0)
         block()
@@ -34,8 +34,8 @@ public class Graph: CALayer {
     private(set) var texts: [CATextLayer]
     private let rects: [EventRelativeRect]
     
-    private let concurencyLine: CALayer
-    private let concurencyTitle: CATextLayer
+    private let concurrencyLine: CALayer
+    private let concurrencyTitle: CATextLayer
     
     public init(events: [Event], scale: CGFloat) {
         self.events = events
@@ -49,8 +49,8 @@ public class Graph: CALayer {
         self.higlightedLift = .init()
         self.texts = .init()
         
-        self.concurencyLine = CALayer()
-        self.concurencyTitle = CATextLayer()
+        self.concurrencyLine = CALayer()
+        self.concurrencyTitle = CATextLayer()
         
         super.init()
         
@@ -65,8 +65,8 @@ public class Graph: CALayer {
         self.higlightedLift = layer.higlightedLift
         self.rects = layer.rects
         
-        self.concurencyLine = layer.concurencyLine
-        self.concurencyTitle = layer.concurencyTitle
+        self.concurrencyLine = layer.concurrencyLine
+        self.concurrencyTitle = layer.concurrencyTitle
         
         super.init(layer: layer)
     }
@@ -85,13 +85,13 @@ public class Graph: CALayer {
             }
         }
     }
-    public func drawConcurency(at coordinate: CGPoint) {
+    public func drawConcurrency(at coordinate: CGPoint) {
         self.coordinate = coordinate
         
         let relativeX = coordinate.x / frame.width
         let time = events.duration() * relativeX
         let concurency = events.concurency(at: time)
-        concurencyTitle.string = "\(concurency)"
+        concurrencyTitle.string = "\(concurency)"
         print(concurency)
     }
     
@@ -115,13 +115,13 @@ public class Graph: CALayer {
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
         
-        concurencyLine.backgroundColor = Colors.concurencyColor
-        addSublayer(concurencyLine)
+        concurrencyLine.backgroundColor = Colors.concurencyColor
+        addSublayer(concurrencyLine)
         
-        concurencyTitle.contentsScale = scale
-        concurencyTitle.foregroundColor = Colors.concurencyColor
-        concurencyTitle.fontSize = 20
-        addSublayer(concurencyTitle)
+        concurrencyTitle.contentsScale = scale
+        concurrencyTitle.foregroundColor = Colors.concurencyColor
+        concurrencyTitle.fontSize = 20
+        addSublayer(concurrencyTitle)
         
         for _ in rects {
             let layer = CALayer()
@@ -157,15 +157,15 @@ public class Graph: CALayer {
     public override func layoutSublayers() {
         super.layoutSublayers()
         
-        concurencyLine.frame = CGRect(x: coordinate.x,
-                                      y: 0,
-                                      width: 1,
-                                      height: frame.height)
+        concurrencyLine.frame = CGRect(x: coordinate.x,
+                                       y: 0,
+                                       width: 1,
+                                       height: frame.height)
         let titleHeight: CGFloat = 20
-        concurencyTitle.frame = CGRect(x: coordinate.x + 10,
-                                       y: coordinate.y - titleHeight - 10,
-                                       width: 100,
-                                       height: titleHeight)
+        concurrencyTitle.frame = CGRect(x: coordinate.x + 10,
+                                        y: coordinate.y - titleHeight - 10,
+                                        width: 100,
+                                        height: titleHeight)
         
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]
