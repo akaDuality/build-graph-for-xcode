@@ -37,6 +37,9 @@ public class Graph: CALayer {
     private let concurrencyLine: CALayer
     private let concurrencyTitle: CATextLayer
     
+    private let periods: [Period]
+    private var periodsShapes: [CALayer]
+    
     public init(events: [Event], scale: CGFloat) {
         self.events = events
         
@@ -51,6 +54,9 @@ public class Graph: CALayer {
         
         self.concurrencyLine = CALayer()
         self.concurrencyTitle = CATextLayer()
+        
+        self.periods = events.allPeriods()
+        self.periodsShapes = .init()
         
         super.init()
         
@@ -69,6 +75,8 @@ public class Graph: CALayer {
         self.concurrencyTitle = layer.concurrencyTitle
         self.coordinate = layer.coordinate
         
+        self.periods = layer.periods
+        self.periodsShapes = layer.periodsShapes
         super.init(layer: layer)
     }
    
@@ -111,6 +119,15 @@ public class Graph: CALayer {
     
     // MARK: - Drawing
     private func setup(scale: CGFloat) {
+        
+        for period in periods {
+            let periodLayer = CALayer()
+            let alpha: CGFloat = 1 / CGFloat(period.concurrency)
+            periodLayer.backgroundColor = .init(red: 1,
+                                                green: 0, blue: 0, alpha: alpha / 4)
+            periodsShapes.append(periodLayer)
+            addSublayer(periodLayer)
+        }
         
         higlightedLift.backgroundColor = Colors.liftColor
         self.higlightedLift.frame = .zero
@@ -165,6 +182,22 @@ public class Graph: CALayer {
     
     public override func layoutSublayers() {
         super.layoutSublayers()
+        
+        let duration = events.duration()
+        for (i, period) in periods.enumerated() {
+            let layer = periodsShapes[i]
+            
+            let relativeStart = relativeStart(absoluteStart: events.start(),
+                                              start: period.start,
+                                              duration: duration)
+            let relativeDuration = relativeDuration(start: period.start,
+                                                    end: period.end,
+                                                    duration: duration)
+            layer.frame = CGRect(x: relativeStart * self.frame.width,
+                                 y: 0,
+                                 width: relativeDuration * self.frame.width,
+                                 height: self.frame.height)
+        }
         
         if let coordinate = coordinate {
             concurrencyHidden = false

@@ -117,7 +117,14 @@ struct Period {
     let concurrency: Int
     let start: Date
     let end: Date
-}
-extension Array where Element == Period {
     
+    
+}
+
+func relativeStart(absoluteStart: Date, start: Date, duration: TimeInterval) -> CGFloat {
+    CGFloat(start.timeIntervalSince(absoluteStart) / duration)
+}
+
+func relativeDuration(start: Date, end: Date, duration: TimeInterval) -> CGFloat {
+    CGFloat(end.timeIntervalSince(start) / duration)
 }

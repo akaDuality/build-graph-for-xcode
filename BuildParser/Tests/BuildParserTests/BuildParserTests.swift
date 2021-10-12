@@ -32,13 +32,13 @@ final class App_BuildParserTests: XCTestCase {
         XCTAssertEqual(events.count, 86)
     }
     
-//    func testConcurency() {
-//        let concurency = events.concurrency(at: 0)
-//        XCTAssertEqual(concurency, 18)
-//
-//        let concurency2 = events.concurrency(at: 240)
-//        XCTAssertEqual(concurency2, 1)
-//    }
+    func testConcurency() {
+        let concurency = events.concurrency(at: 0)
+        XCTAssertEqual(concurency, 18)
+        
+        let concurency2 = events.concurrency(at: 240)
+        XCTAssertEqual(concurency2, 1)
+    }
     
     func testPeriods() {
         let periodsWithLessConcurrency = events.periods(concurrency: 1)
@@ -48,12 +48,6 @@ final class App_BuildParserTests: XCTestCase {
     func testAllPeriods() {
         let allPeriods = events.allPeriods()
         XCTAssertEqual(allPeriods.count, 61)
-        
-//        let concurency = allPeriods.concurrency(at: 0)
-//        XCTAssertEqual(concurency, 18)
-//        
-//        let concurency2 = allPeriods.concurrency(at: 240)
-//        XCTAssertEqual(concurency2, 1)
     }
 }
 
