@@ -67,6 +67,7 @@ public class Graph: CALayer {
         
         self.concurrencyLine = layer.concurrencyLine
         self.concurrencyTitle = layer.concurrencyTitle
+        self.coordinate = layer.coordinate
         
         super.init(layer: layer)
     }
@@ -77,7 +78,7 @@ public class Graph: CALayer {
         highlightedEvent = event
     }
     
-    private var coordinate: CGPoint = .zero {
+    public var coordinate: CGPoint? = .zero {
         didSet {
             updateWithoutAnimation {
                 setNeedsLayout()
@@ -90,7 +91,7 @@ public class Graph: CALayer {
         
         let relativeX = coordinate.x / frame.width
         let time = events.duration() * relativeX
-        let concurency = events.concurency(at: time)
+        let concurency = events.concurrency(at: time)
         concurrencyTitle.string = "\(concurency)"
         print(concurency)
     }
@@ -154,18 +155,31 @@ public class Graph: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var concurrencyHidden: Bool = false {
+        didSet {
+            let opacity: Float = concurrencyHidden ? 0: 1
+            concurrencyLine.opacity = opacity
+            concurrencyTitle.opacity = opacity
+        }
+    }
+    
     public override func layoutSublayers() {
         super.layoutSublayers()
         
-        concurrencyLine.frame = CGRect(x: coordinate.x,
-                                       y: 0,
-                                       width: 1,
-                                       height: frame.height)
-        let titleHeight: CGFloat = 20
-        concurrencyTitle.frame = CGRect(x: coordinate.x + 10,
-                                        y: coordinate.y - titleHeight - 10,
-                                        width: 100,
-                                        height: titleHeight)
+        if let coordinate = coordinate {
+            concurrencyHidden = false
+            concurrencyLine.frame = CGRect(x: coordinate.x,
+                                           y: 0,
+                                           width: 1,
+                                           height: frame.height)
+            let titleHeight: CGFloat = 20
+            concurrencyTitle.frame = CGRect(x: coordinate.x + 10,
+                                            y: coordinate.y - titleHeight - 10,
+                                            width: 100,
+                                            height: titleHeight)
+        } else {
+            concurrencyHidden = true
+        }
         
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]

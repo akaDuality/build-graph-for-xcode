@@ -47,9 +47,6 @@ class ViewController: NSViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         
-//        addMouseTracking()
-        view.updateTrackingAreas()
-       
         layer.updateWithoutAnimation {
             layer.frame = view.frame
             layer.layoutIfNeeded()
@@ -60,12 +57,14 @@ class ViewController: NSViewController {
     
     var trackingArea: NSTrackingArea!
     func addMouseTracking() {
-        trackingArea = NSTrackingArea(rect: view.bounds,
-                                      options: [.activeAlways,
-                                                .mouseMoved,
-                                                .inVisibleRect],
-                                      owner: self,
-                                      userInfo: nil)
+        trackingArea = NSTrackingArea(
+            rect: view.bounds,
+            options: [.activeAlways,
+                      .mouseMoved,
+                      .mouseEnteredAndExited,
+                      .inVisibleRect],
+            owner: self,
+            userInfo: nil)
         view.addTrackingArea(trackingArea)
     }
 
@@ -93,5 +92,6 @@ class ViewController: NSViewController {
         view.window?.acceptsMouseMovedEvents = false
         
         layer.highlightedEvent = nil
+        layer.coordinate = nil
     }
 }

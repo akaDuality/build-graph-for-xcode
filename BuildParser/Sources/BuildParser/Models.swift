@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 public struct Event {
     public init(taskName: String,
@@ -63,7 +64,7 @@ extension Array where Element == Event {
         first!.startDate
     }
     
-    func concurency(at timeFromStart: TimeInterval) -> Int {
+    func concurrency(at timeFromStart: TimeInterval) -> Int {
         return events(at: timeFromStart).count
     }
     
@@ -71,6 +72,35 @@ extension Array where Element == Event {
         let checkDate = Date(timeInterval: timeFromStart, since: start())
         
         return self.filter { $0.hit(time: checkDate) }
+    }
+    
+    func periods(concurrency: Int) -> [Date] {
+        let allDates = map(\.startDate) + map(\.endDate)
+        return allDates.filter { date in
+            let time = date.timeIntervalSince(start()) + 0.01
+            return self.concurrency(at: time) == concurrency
+        }
+        
+        // TODO: Potential duplication with allPeriods()
+    }
+    
+    func allPeriods() -> [Period] {
+        let set: Set<Date> = Set(map(\.startDate) + map(\.endDate))
+        let allDates = set.sorted()
+        
+        var periods = [Period]()
+        for index in 0..<allDates.count - 1 {
+            let start = allDates[index]
+            let end = allDates[index + 1]
+            let interval = end.timeIntervalSince(start)
+            
+            let middleTime = start.addingTimeInterval(interval / 2)
+            let concurrency = concurrency(at: middleTime.timeIntervalSince(self.start()))
+            let period = Period(concurrency: concurrency, start: start, end: end)
+            periods.append(period)
+        }
+        
+        return periods
     }
 }
 extension Event {
@@ -81,4 +111,13 @@ extension Event {
     func hit(time: Date) -> Bool {
         (startDate...endDate).contains(time)
     }
+}
+
+struct Period {
+    let concurrency: Int
+    let start: Date
+    let end: Date
+}
+extension Array where Element == Period {
+    
 }

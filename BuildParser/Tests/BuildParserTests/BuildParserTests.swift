@@ -1,14 +1,17 @@
 import XCTest
 @testable import BuildParser
 
-import SnapshotTesting
-
 let appEventsPath = Bundle.module.url(forResource: "AppEvents", withExtension: "json")!
 let testEventsPath = Bundle.module.url(forResource: "TestEvents", withExtension: "json")!
 
-final class BuildParserTests: XCTestCase {
+final class App_BuildParserTests: XCTestCase {
     
     let parser = BuildLogParser()
+    var events: [Event]!
+   
+    override func setUpWithError() throws {
+        events = try parser.parse(path: appEventsPath)
+    }
     
     func testParsing() throws {
         let buildLog = try parser.buildLog(path: testEventsPath)
@@ -26,16 +29,40 @@ final class BuildParserTests: XCTestCase {
     }
     
     func testParsingToCombinedEvents_appEvents() throws {
-        let events = try parser.parse(path: appEventsPath)
         XCTAssertEqual(events.count, 86)
+    }
+    
+//    func testConcurency() {
+//        let concurency = events.concurrency(at: 0)
+//        XCTAssertEqual(concurency, 18)
+//
+//        let concurency2 = events.concurrency(at: 240)
+//        XCTAssertEqual(concurency2, 1)
+//    }
+    
+    func testPeriods() {
+        let periodsWithLessConcurrency = events.periods(concurrency: 1)
+        XCTAssertEqual(periodsWithLessConcurrency.count, 6)
+    }
+    
+    func testAllPeriods() {
+        let allPeriods = events.allPeriods()
+        XCTAssertEqual(allPeriods.count, 61)
         
-        Analyzer().analyze(events: events)
-        
-        let concurency = events.concurency(at: 0)
-        XCTAssertEqual(concurency, 18)
-        
-        let concurency2 = events.concurency(at: 240)
-        XCTAssertEqual(concurency2, 1)
+//        let concurency = allPeriods.concurrency(at: 0)
+//        XCTAssertEqual(concurency, 18)
+//        
+//        let concurency2 = allPeriods.concurrency(at: 240)
+//        XCTAssertEqual(concurency2, 1)
+    }
+}
+
+final class Test_BuildParserTests: XCTestCase {
+    
+    let parser = BuildLogParser()
+    var events: [Event]!
+    override func setUpWithError() throws {
+        events = try parser.parse(path: appEventsPath)
     }
     
     func testParsingToCombinedEvents_testEvents() throws {
@@ -43,39 +70,6 @@ final class BuildParserTests: XCTestCase {
         XCTAssertEqual(events.count, 196)
         
         Analyzer().analyze(events: events)
-    }
-}
-
-final class GraphTests: XCTestCase {
-    
-    let parser = BuildLogParser()
-    
-    func test_drawingAppEvents() throws {
-        let events = try parser.parse(path: appEventsPath)
-        let view = Graph(events: events, scale: 3)
-        
-        view.frame = .init(x: 0,
-                           y: 0,
-                           width: view.intrinsicContentSize.width,
-                           height: view.intrinsicContentSize.height)
-        let layer: CALayer = view
-        assertSnapshot(matching: layer,
-                       as: .image,
-                       record: true)
-    }
-    
-    func test_drawingTestEvents() throws {
-        let events = try parser.parse(path: testEventsPath)
-        let view = Graph(events: events, scale: 3)
-        view.highlightedEvent = events[100]
-        
-        view.frame = .init(x: 0,
-                           y: 0,
-                           width: view.intrinsicContentSize.width,
-                           height: view.intrinsicContentSize.height)
-        let layer: CALayer = view
-        assertSnapshot(matching: layer,
-                       as: .image,
-                       record: true)
+        // TODO: nothing to check
     }
 }
