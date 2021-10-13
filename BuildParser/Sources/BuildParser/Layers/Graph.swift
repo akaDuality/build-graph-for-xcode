@@ -19,39 +19,16 @@ extension CALayer {
 
 public class Graph: CALayer {
     let events: [Event]
-    public var highlightedEvent: Event? = nil {
-        didSet {
-            updateWithoutAnimation {
-                setNeedsLayout()
-                layoutIfNeeded()
-            }
-            
-            higlightedLift.opacity = (highlightedEvent != nil) ? 1: 0
-        }
-    }
     
-    private(set) var shapes: [CALayer]
-    private let higlightedLift: CALayer
-    private(set) var texts: [CATextLayer]
-    private let rects: [EventRelativeRect]
-    
+    private let modulesLayer: ModulesLayer
     private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
     
     public init(events: [Event], scale: CGFloat) {
         self.events = events
         
-        self.rects = events.map { event in
-            EventRelativeRect(event: event,
-                              absoluteStart: events.start(),
-                              totalDuration: events.duration())
-        }
-        self.shapes = .init()
-        self.higlightedLift = .init()
-        self.texts = .init()
-        
-        self.concurrencyLayer = ConcurrencyLayer(
-            events: events, scale: scale)
+        self.modulesLayer = ModulesLayer(events: events, scale: scale)
+        self.concurrencyLayer = ConcurrencyLayer(events: events, scale: scale)
         
         self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
                                          start: events.start(),
@@ -65,24 +42,24 @@ public class Graph: CALayer {
         let layer = layer as! Graph
         
         self.events = layer.events
-        self.shapes = layer.shapes
-        self.texts = layer.texts
-        self.higlightedLift = layer.higlightedLift
-        self.rects = layer.rects
-        
+        self.modulesLayer = layer.modulesLayer
         self.concurrencyLayer = layer.concurrencyLayer
         self.periodsLayer = layer.periodsLayer
         
         super.init(layer: layer)
     }
+    
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
    
-    // MARK: - Event
+    // MARK: - Actions
+    // MARK: Event
     public func highlightEvent(at coordinate: CGPoint) {
-        let event = event(at: coordinate)
-        highlightedEvent = event
+        modulesLayer.highlightEvent(at: coordinate)
     }
     
-    // MARK: - Concurrency
+    // MARK: Concurrency
     public func drawConcurrency(at coordinate: CGPoint) {
         concurrencyLayer.drawConcurrency(at: coordinate)
     }
@@ -91,59 +68,16 @@ public class Graph: CALayer {
         concurrencyLayer.coordinate = nil
     }
     
-    private func event(at coorditate: CGPoint) -> Event? {
-        for (i, shape) in shapes.enumerated() {
-            if shape
-                .frame.insetBy(dx: 0, dy: -space/2)
-                .inLine(
-                    coorditate
-                ) {
-                return events[i]
-            }
-        }
-        return nil
+    public func clearHighlightedEvent() {
+        modulesLayer.highlightedEvent = nil
     }
     
-    // MARK: - Drawing
     private func setup(scale: CGFloat) {
-        
         addSublayer(periodsLayer)
-        
-        higlightedLift.backgroundColor = Colors.liftColor
-        self.higlightedLift.frame = .zero
-        addSublayer(higlightedLift)
-        
+        addSublayer(modulesLayer)
         addSublayer(concurrencyLayer)
-        
-        for _ in rects {
-            let layer = CALayer()
-            layer.contentsScale = scale
-            shapes.append(layer)
-            addSublayer(layer)
-            
-            let textLayer = CATextLayer()
-            textLayer.contentsScale = scale
-            texts.append(textLayer)
-            self.addSublayer(textLayer)
-        }
-        
+    
         backgroundColor = Colors.backColor
-    }
-    
-    private func alpha(for rect: EventRelativeRect) -> CGFloat {
-        if let highlightedEvent = highlightedEvent {
-            if rect.event.domain == highlightedEvent.domain {
-                return 1
-            } else {
-                return Colors.dimmingAlpha
-            }
-        } else {
-            return 1
-        }
-    }
-    
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     public override func layoutSublayers() {
@@ -152,57 +86,11 @@ public class Graph: CALayer {
         periodsLayer.frame = bounds
         concurrencyLayer.frame = bounds
         
-        for (i, shape) in shapes.enumerated() {
-            let rect = rects[i]
-            let frame = frame(for: i, rect: rect)
-            shape.frame = frame
-            
-            let event = events[i]
-            if events.isBlocker(event) {
-                shape.backgroundColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
-                    .copy(alpha: alpha(for: rect))
-            } else {
-                shape.backgroundColor = rect.backgroundColor
-                    .copy(alpha: alpha(for: rect))
-            }
-            
-            drawText(rect: rect, i: i, frame: frame)
-            
-            if rect.event.taskName == highlightedEvent?.taskName {
-                higlightedLift.frame = CGRect(x: frame.minX,
-                                              y: 0, width: frame.width,
-                                              height: self.frame.height)
-            }
-        }
+        modulesLayer.frame = bounds
     }
-    
-    private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
-        let width = self.frame.width
-        
-        return CGRect(x: width * rect.start,
-                      y: CGFloat(i) * (self.height + space),
-                      width: width * rect.duration,
-                      height: self.height)
-    }
-    
-    private func drawText(rect: EventRelativeRect, i: Int, frame: CGRect) {
-        let text = texts[i]
-        text.string = rect.text
-        text.frame = CGRect(x: frame.maxX + 2,
-                            y: frame.minY + 1,
-                            width: 150, // TODO: calculate on fly
-                            height: height)
-        text.foregroundColor = Colors.textColor
-        text.fontSize = fontSize
-    }
-    
-    let height: CGFloat = 8
-    let space: CGFloat = 1
-    let fontSize: CGFloat = 5
 
     public var intrinsicContentSize: CGSize {
-        return CGSize(width: 2400,
-                      height: CGFloat(rects.count) * (height + space))
+        return modulesLayer.intrinsicContentSize
     }
 }
 extension CGRect {

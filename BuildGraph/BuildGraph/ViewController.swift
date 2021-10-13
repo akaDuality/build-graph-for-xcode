@@ -95,7 +95,7 @@ class ViewController: NSViewController {
     override func mouseExited(with event: NSEvent) {
         view.window?.acceptsMouseMovedEvents = false
         
-        layer.highlightedEvent = nil
+        layer.clearHighlightedEvent()
         layer.clearConcurrency()
     }
 }
