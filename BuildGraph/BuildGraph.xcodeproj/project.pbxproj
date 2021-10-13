@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0FAD512716D1C700DE2128 /* AppEventsMoveDomain.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FAD502716D1C700DE2128 /* AppEventsMoveDomain.json */; };
+		1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE5462716E35F00DE2128 /* AppEventsMoveDataPerstance.json */; };
+		1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */; };
 		1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3427135F0000741EEF /* AppDelegate.swift */; };
 		1EDB5E3727135F0000741EEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3627135F0000741EEF /* ViewController.swift */; };
 		1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3827135F0100741EEF /* Assets.xcassets */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E0FAD502716D1C700DE2128 /* AppEventsMoveDomain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppEventsMoveDomain.json; sourceTree = "<group>"; };
+		1E0FE5462716E35F00DE2128 /* AppEventsMoveDataPerstance.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppEventsMoveDataPerstance.json; sourceTree = "<group>"; };
+		1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestEventsMoveDomainAndDataPersistence.json; sourceTree = "<group>"; };
 		1EDB5E3127135F0000741EEF /* BuildGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E3427135F0000741EEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDB5E3627135F0000741EEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +115,9 @@
 				1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */,
 				1EDB6A232714182600741EEF /* AppEvents.json */,
 				1EDB5E6227136DBE00741EEF /* TestEvents.json */,
+				1E0FAD502716D1C700DE2128 /* AppEventsMoveDomain.json */,
+				1E0FE5462716E35F00DE2128 /* AppEventsMoveDataPerstance.json */,
+				1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */,
 			);
 			path = BuildGraph;
 			sourceTree = "<group>";
@@ -246,6 +255,9 @@
 			files = (
 				1EDB6A242714183500741EEF /* AppEvents.json in Resources */,
 				1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */,
+				1E0FAD512716D1C700DE2128 /* AppEventsMoveDomain.json in Resources */,
+				1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */,
+				1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */,
 				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
 				1EDB5E3C27135F0100741EEF /* Main.storyboard in Resources */,
 			);

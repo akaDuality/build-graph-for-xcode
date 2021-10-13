@@ -6,6 +6,7 @@
 //
 
 import QuartzCore
+import AppKit
 
 extension CALayer {
     public func updateWithoutAnimation(_ block: () -> Void) {
@@ -37,8 +38,7 @@ public class Graph: CALayer {
     private let concurrencyLine: CALayer
     private let concurrencyTitle: CATextLayer
     
-    private let periods: [Period]
-    private var periodsShapes: [CALayer]
+    private let periodsLayer: PeriodsLayer
     
     public init(events: [Event], scale: CGFloat) {
         self.events = events
@@ -55,8 +55,9 @@ public class Graph: CALayer {
         self.concurrencyLine = CALayer()
         self.concurrencyTitle = CATextLayer()
         
-        self.periods = events.allPeriods()
-        self.periodsShapes = .init()
+        self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
+                                         start: events.start(),
+                                         totalDuration: events.duration())
         
         super.init()
         
@@ -75,8 +76,8 @@ public class Graph: CALayer {
         self.concurrencyTitle = layer.concurrencyTitle
         self.coordinate = layer.coordinate
         
-        self.periods = layer.periods
-        self.periodsShapes = layer.periodsShapes
+        self.periodsLayer = layer.periodsLayer
+        
         super.init(layer: layer)
     }
    
@@ -120,14 +121,7 @@ public class Graph: CALayer {
     // MARK: - Drawing
     private func setup(scale: CGFloat) {
         
-        for period in periods {
-            let periodLayer = CALayer()
-            let alpha: CGFloat = 1 / CGFloat(period.concurrency)
-            periodLayer.backgroundColor = .init(red: 1,
-                                                green: 0, blue: 0, alpha: alpha / 4)
-            periodsShapes.append(periodLayer)
-            addSublayer(periodLayer)
-        }
+        addSublayer(periodsLayer)
         
         higlightedLift.backgroundColor = Colors.liftColor
         self.higlightedLift.frame = .zero
@@ -183,21 +177,7 @@ public class Graph: CALayer {
     public override func layoutSublayers() {
         super.layoutSublayers()
         
-        let duration = events.duration()
-        for (i, period) in periods.enumerated() {
-            let layer = periodsShapes[i]
-            
-            let relativeStart = relativeStart(absoluteStart: events.start(),
-                                              start: period.start,
-                                              duration: duration)
-            let relativeDuration = relativeDuration(start: period.start,
-                                                    end: period.end,
-                                                    duration: duration)
-            layer.frame = CGRect(x: relativeStart * self.frame.width,
-                                 y: 0,
-                                 width: relativeDuration * self.frame.width,
-                                 height: self.frame.height)
-        }
+        periodsLayer.frame = bounds
         
         if let coordinate = coordinate {
             concurrencyHidden = false
@@ -218,7 +198,15 @@ public class Graph: CALayer {
             let rect = rects[i]
             let frame = frame(for: i, rect: rect)
             shape.frame = frame
-            shape.backgroundColor = rect.backgroundColor.copy(alpha: alpha(for: rect))
+            
+            let event = events[i]
+            if events.isBlocker(event) {
+                shape.backgroundColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
+                    .copy(alpha: alpha(for: rect))
+            } else {
+                shape.backgroundColor = rect.backgroundColor
+                    .copy(alpha: alpha(for: rect))
+            }
             
             drawText(rect: rect, i: i, frame: frame)
             

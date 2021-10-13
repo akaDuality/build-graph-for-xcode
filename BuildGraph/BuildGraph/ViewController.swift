@@ -25,7 +25,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = Bundle.main.url(forResource: "AppEvents", withExtension: "json")!
+        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance", withExtension: "json")!
         let events = try! BuildLogParser().parse(path: url)
         layer = Graph(
             events: events,
@@ -48,11 +48,15 @@ class ViewController: NSViewController {
         super.viewDidLayout()
         
         layer.updateWithoutAnimation {
-            layer.frame = view.frame
+            layer.frame = CGRect(x: 0, y: 0,
+                                 width: view.frame.width,
+                                 height: layer.intrinsicContentSize.height)
             layer.layoutIfNeeded()
         }
         contentView.frame = layer.frame
         contentView.bounds = layer.frame
+        
+//        self.view.window?.minSize = NSSize(width: 500, height: min(400, layer.frame.height)) // Don't work
     }
     
     var trackingArea: NSTrackingArea!

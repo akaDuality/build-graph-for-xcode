@@ -74,6 +74,14 @@ extension Array where Element == Event {
         return self.filter { $0.hit(time: checkDate) }
     }
     
+    func concurrency(at date: Date) -> Int {
+        return events(at: date).count
+    }
+    
+    private func events(at date: Date) -> [Event] {
+        return self.filter { $0.hit(time: date) }
+    }
+    
     func periods(concurrency: Int) -> [Date] {
         let allDates = map(\.startDate) + map(\.endDate)
         return allDates.filter { date in
@@ -102,7 +110,14 @@ extension Array where Element == Event {
         
         return periods
     }
+    
+    func isBlocker(_ event: Event) -> Bool {
+        let concBefore = concurrency(at: event.endDate.addingTimeInterval(-0.01))
+        let concAfter  = concurrency(at: event.endDate.addingTimeInterval(0.01))
+        return concAfter > concBefore
+    }
 }
+
 extension Event {
     var duration: TimeInterval {
         endDate.timeIntervalSince(startDate)
@@ -117,8 +132,6 @@ struct Period {
     let concurrency: Int
     let start: Date
     let end: Date
-    
-    
 }
 
 func relativeStart(absoluteStart: Date, start: Date, duration: TimeInterval) -> CGFloat {
