@@ -35,10 +35,8 @@ public class Graph: CALayer {
     private(set) var texts: [CATextLayer]
     private let rects: [EventRelativeRect]
     
-    private let concurrencyLine: CALayer
-    private let concurrencyTitle: CATextLayer
-    
     private let periodsLayer: PeriodsLayer
+    private let concurrencyLayer: ConcurrencyLayer
     
     public init(events: [Event], scale: CGFloat) {
         self.events = events
@@ -52,8 +50,8 @@ public class Graph: CALayer {
         self.higlightedLift = .init()
         self.texts = .init()
         
-        self.concurrencyLine = CALayer()
-        self.concurrencyTitle = CATextLayer()
+        self.concurrencyLayer = ConcurrencyLayer(
+            events: events, scale: scale)
         
         self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
                                          start: events.start(),
@@ -72,10 +70,7 @@ public class Graph: CALayer {
         self.higlightedLift = layer.higlightedLift
         self.rects = layer.rects
         
-        self.concurrencyLine = layer.concurrencyLine
-        self.concurrencyTitle = layer.concurrencyTitle
-        self.coordinate = layer.coordinate
-        
+        self.concurrencyLayer = layer.concurrencyLayer
         self.periodsLayer = layer.periodsLayer
         
         super.init(layer: layer)
@@ -87,22 +82,13 @@ public class Graph: CALayer {
         highlightedEvent = event
     }
     
-    public var coordinate: CGPoint? = .zero {
-        didSet {
-            updateWithoutAnimation {
-                setNeedsLayout()
-                layoutIfNeeded()
-            }
-        }
-    }
+    // MARK: - Concurrency
     public func drawConcurrency(at coordinate: CGPoint) {
-        self.coordinate = coordinate
-        
-        let relativeX = coordinate.x / frame.width
-        let time = events.duration() * relativeX
-        let concurency = events.concurrency(at: time)
-        concurrencyTitle.string = "\(concurency)"
-        print(concurency)
+        concurrencyLayer.drawConcurrency(at: coordinate)
+    }
+    
+    public func clearConcurrency() {
+        concurrencyLayer.coordinate = nil
     }
     
     private func event(at coorditate: CGPoint) -> Event? {
@@ -127,13 +113,7 @@ public class Graph: CALayer {
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
         
-        concurrencyLine.backgroundColor = Colors.concurencyColor
-        addSublayer(concurrencyLine)
-        
-        concurrencyTitle.contentsScale = scale
-        concurrencyTitle.foregroundColor = Colors.concurencyColor
-        concurrencyTitle.fontSize = 20
-        addSublayer(concurrencyTitle)
+        addSublayer(concurrencyLayer)
         
         for _ in rects {
             let layer = CALayer()
@@ -166,33 +146,11 @@ public class Graph: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var concurrencyHidden: Bool = false {
-        didSet {
-            let opacity: Float = concurrencyHidden ? 0: 1
-            concurrencyLine.opacity = opacity
-            concurrencyTitle.opacity = opacity
-        }
-    }
-    
     public override func layoutSublayers() {
         super.layoutSublayers()
         
         periodsLayer.frame = bounds
-        
-        if let coordinate = coordinate {
-            concurrencyHidden = false
-            concurrencyLine.frame = CGRect(x: coordinate.x,
-                                           y: 0,
-                                           width: 1,
-                                           height: frame.height)
-            let titleHeight: CGFloat = 20
-            concurrencyTitle.frame = CGRect(x: coordinate.x + 10,
-                                            y: coordinate.y - titleHeight - 10,
-                                            width: 100,
-                                            height: titleHeight)
-        } else {
-            concurrencyHidden = true
-        }
+        concurrencyLayer.frame = bounds
         
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]

@@ -96,6 +96,6 @@ class ViewController: NSViewController {
         view.window?.acceptsMouseMovedEvents = false
         
         layer.highlightedEvent = nil
-        layer.coordinate = nil
+        layer.clearConcurrency()
     }
 }
