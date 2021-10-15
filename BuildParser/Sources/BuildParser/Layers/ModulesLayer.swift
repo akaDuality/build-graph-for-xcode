@@ -133,12 +133,19 @@ class ModulesLayer: CALayer {
     }
     
     private func drawText(rect: EventRelativeRect, i: Int, frame: CGRect) {
+        let textWidth: CGFloat = 150 // TODO: calculate on fly
+        let textOffset: CGFloat = 2
         let text = texts[i]
         text.string = rect.text
-        text.frame = CGRect(x: frame.maxX + 2,
+        text.frame = CGRect(x: frame.maxX + textOffset,
                             y: frame.minY + 1,
-                            width: 150, // TODO: calculate on fly
+                            width: textWidth,
                             height: height)
+        
+        if i == events.count - 1 {
+            text.alignmentMode = .right
+            text.frame = text.frame.offsetBy(dx: -textWidth - textOffset*4, dy: 0)
+        }
         text.foregroundColor = Colors.textColor
         text.fontSize = fontSize
     }
@@ -162,5 +169,11 @@ class ModulesLayer: CALayer {
         } else {
             return 1
         }
+    }
+}
+
+extension CGRect {
+    func inLine(_ coordinate: CGPoint) -> Bool {
+        (minY...maxY).contains(coordinate.y)
     }
 }

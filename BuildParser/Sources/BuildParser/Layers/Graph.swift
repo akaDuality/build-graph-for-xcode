@@ -24,6 +24,8 @@ public class Graph: CALayer {
     private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
     
+    private let fullframes: [CALayer]
+    
     public init(events: [Event], scale: CGFloat) {
         self.events = events
         
@@ -34,6 +36,9 @@ public class Graph: CALayer {
                                          start: events.start(),
                                          totalDuration: events.duration())
         
+        fullframes = [modulesLayer, concurrencyLayer, periodsLayer]
+        
+        // Time Layer
         super.init()
         
         setup(scale: scale)
@@ -45,6 +50,7 @@ public class Graph: CALayer {
         self.modulesLayer = layer.modulesLayer
         self.concurrencyLayer = layer.concurrencyLayer
         self.periodsLayer = layer.periodsLayer
+        self.fullframes = layer.fullframes
         
         super.init(layer: layer)
     }
@@ -73,9 +79,9 @@ public class Graph: CALayer {
     }
     
     private func setup(scale: CGFloat) {
-        addSublayer(periodsLayer)
-        addSublayer(modulesLayer)
-        addSublayer(concurrencyLayer)
+        for layer in fullframes {
+            addSublayer(layer)
+        }
     
         backgroundColor = Colors.backColor
     }
@@ -83,18 +89,13 @@ public class Graph: CALayer {
     public override func layoutSublayers() {
         super.layoutSublayers()
         
-        periodsLayer.frame = bounds
-        concurrencyLayer.frame = bounds
-        
-        modulesLayer.frame = bounds
+        for layer in fullframes {
+            layer.frame = bounds
+        }
     }
 
     public var intrinsicContentSize: CGSize {
         return modulesLayer.intrinsicContentSize
     }
 }
-extension CGRect {
-    func inLine(_ coordinate: CGPoint) -> Bool {
-        (minY...maxY).contains(coordinate.y)
-    }
-}
+
