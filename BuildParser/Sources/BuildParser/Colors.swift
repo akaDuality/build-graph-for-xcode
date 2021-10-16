@@ -13,6 +13,7 @@ struct Colors {
     static let liftColor: CGColor = .init(gray: 0, alpha: 0.05)
     static let concurencyColor: CGColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
     static let dimmingAlpha: CGFloat = 0.25
+    static let timeColor: CGColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
 }
 
 extension EventRelativeRect {
