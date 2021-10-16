@@ -73,7 +73,6 @@ class ConcurrencyLayer: CALayer {
         concurrencyTitle.foregroundColor = Colors.concurencyColor
         concurrencyTitle.fontSize = 20
         addSublayer(concurrencyTitle)
-        
     }
     
     public override func layoutSublayers() {

@@ -23,6 +23,7 @@ public class Graph: CALayer {
     private let modulesLayer: ModulesLayer
     private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
+    private let timelineLayer: TimelineLayer
     
     private let fullframes: [CALayer]
     
@@ -35,8 +36,9 @@ public class Graph: CALayer {
         self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
                                          start: events.start(),
                                          totalDuration: events.duration())
+        self.timelineLayer = TimelineLayer(eventsDuration: events.duration(), scale: scale)
         
-        fullframes = [modulesLayer, concurrencyLayer, periodsLayer]
+        fullframes = [modulesLayer, concurrencyLayer, periodsLayer, timelineLayer]
         
         // Time Layer
         super.init()
@@ -51,6 +53,7 @@ public class Graph: CALayer {
         self.concurrencyLayer = layer.concurrencyLayer
         self.periodsLayer = layer.periodsLayer
         self.fullframes = layer.fullframes
+        self.timelineLayer = layer.timelineLayer
         
         super.init(layer: layer)
     }
@@ -67,6 +70,7 @@ public class Graph: CALayer {
     
     // MARK: Concurrency
     public func drawConcurrency(at coordinate: CGPoint) {
+        timelineLayer.coordinate = coordinate
         concurrencyLayer.drawConcurrency(at: coordinate)
     }
     

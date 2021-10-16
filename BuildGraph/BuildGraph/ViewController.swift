@@ -46,17 +46,22 @@ class ViewController: NSViewController {
     
     override func viewDidLayout() {
         super.viewDidLayout()
+        let contentHeight = layer.intrinsicContentSize.height
+        
+        let offset: CGFloat = 10
         
         layer.updateWithoutAnimation {
             layer.frame = CGRect(x: 0, y: 0,
-                                 width: view.frame.width,
-                                 height: layer.intrinsicContentSize.height)
+                                 width: view.frame.width - offset,
+                                 height: max(contentHeight, view.frame.height))
             layer.layoutIfNeeded()
         }
-        contentView.frame = layer.frame
+        contentView.frame = layer.bounds
         contentView.bounds = layer.frame
         
-//        self.view.window?.minSize = NSSize(width: 500, height: min(400, layer.frame.height)) // Don't work
+        view.window?.contentMinSize = NSSize(
+            width: 500,
+            height: min(400, contentHeight))
     }
     
     var trackingArea: NSTrackingArea!
