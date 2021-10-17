@@ -1,9 +1,9 @@
 import Foundation
 
 struct Collector {
-    let reportParser = XCReportParser()
+    let converter = XCReportToJSONConverter()
     
-    func collectUnitTestMetrics(projectPath: String) -> XCReportFacade? {
+    func collectUnitTestMetrics(projectPath: String) -> Report? {
         let settingsParser = BuildSettingsParser(projectURL: URL(string: projectPath)!)
         
         guard let derivedDataURL = getDerivedDataPath(parser: settingsParser),
@@ -13,19 +13,17 @@ struct Collector {
             return nil
         }
         
-        let reportModel = reportParser.parseReport(path: lastTestReport.path)
+        let reportJSONURL = converter.getReportJSON(xcResultPath: lastTestReport)
+        var reportModel: Report?
         
-        // experiment
-        let urlWithFile = URL(string: "file://" + lastTestReport.path)!
-        let newReport = ReportParser(filePath: urlWithFile)
         do {
-            let allTotalTest = try newReport.parseTotalTests()
+            let failParser = JSONFailParser(filePath: reportJSONURL)
+            reportModel = try failParser.parse()
         } catch let error {
             print(error)
         }
-        //experiment
         
-        return XCReportFacade(report: reportModel)
+        return reportModel
     }
     
     private func getDerivedDataPath(parser settingsParser: BuildSettingsParser) -> URL? {
