@@ -1,55 +1,12 @@
 import Foundation
-import FileAnalyzer
 
-public struct BuildSettingsParser {
-    fileprivate(set) var settings: BuildSettings?
-    
-    private var projectFileURL: URL?
-    private let xCodeProjectFileExt = "xcodeproj"
-    
-    public init(projectURL: URL) {
-        if projectURL.path.lowercased().hasSuffix(xCodeProjectFileExt) {
-            self.projectFileURL = projectURL
-        } else if let foundProjectFile = self.findXCodeProjectFile(folderURL: projectURL) {
-            self.projectFileURL = foundProjectFile
-        } else {
-            fatalError("Wrong XCode project file URL (or file not found in folder (\(projectURL)")
-        }
-        
-        let settingsString = shell("xcodebuild -project \(projectFileURL!.path) -showBuildSettings")
-        
-        let arrayOfSettings = settingsString.split(separator: "\n")
-            .map { $0.trimmingCharacters(in: .whitespaces) }
-            .filter { $0.contains("=") }
-            
-        let arrayOfSettingPairs = arrayOfSettings
-            .map { $0.split(separator: "=")
-                .map { $0.trimmingCharacters(in: .whitespaces) }
-            }
-
-        var dict = [String: String]()
-        for pair in arrayOfSettingPairs {
-            if pair.count == 2 {
-                dict[pair[0]] = pair[1]
-            }
-        }
-        
-        settings = BuildSettings(raw: dict)
-    }
-    
-    private func findXCodeProjectFile(folderURL: URL) -> URL? {
-        let foundResults = try? FileManager.default.findInDirectory(url: folderURL, by: "xcodeproj", isRecursively: false)
-        return foundResults?.first
-    }
-}
-
-struct BuildSettings {
+struct BuildSettingsModel {
     let raw: [String: String]
     
     var derivedDataDir: URL? {
         guard let buildRoot = raw["BUILD_ROOT"],
               var buildRootURL = URL(string: buildRoot) else { return nil }
-
+        
         while buildRootURL.pathComponents.count > 0,
               !buildRootURL.lastPathComponent.lowercased().contains("derived"),
               !buildRootURL.lastPathComponent.lowercased().contains("xcode")
@@ -59,7 +16,7 @@ struct BuildSettings {
         return buildRootURL
     }
     
-    var project: String? {
+    var projectName: String? {
         raw["PROJECT"]
     }
 }

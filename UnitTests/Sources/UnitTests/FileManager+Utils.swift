@@ -37,6 +37,6 @@ extension FileManager {
             }
         }
         
-        return foundURLs
+        return try sortByCreateDate(paths: foundURLs)
     }
 }
