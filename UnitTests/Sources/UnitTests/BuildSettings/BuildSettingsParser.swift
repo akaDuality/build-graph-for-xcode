@@ -1,12 +1,15 @@
 import Foundation
 import FileAnalyzer
 
+/// Структура для доступа к настройкам Xcode проекта
 public struct BuildSettingsParser {
     fileprivate(set) var settings: BuildSettingsModel?
     
     private var projectFileURL: URL?
     private let xCodeProjectFileExt = "xcodeproj"
     
+    /// Стандартная инициализация
+    /// - Parameter projectURL: Путь до папки с проектом (с файлом xcodeproj)
     public init(projectURL: URL) {
         if projectURL.path.lowercased().hasSuffix(xCodeProjectFileExt) {
             self.projectFileURL = projectURL

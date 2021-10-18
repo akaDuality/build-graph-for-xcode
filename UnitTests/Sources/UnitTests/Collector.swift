@@ -1,7 +1,7 @@
 import Foundation
 
 struct Collector {
-    let converter = XCReportToJSONConverter()
+    let converter = XCResultToJSONConverter()
     
     func collectUnitTestMetrics(projectPath: String) -> Report? {
         let settingsParser = BuildSettingsParser(projectURL: URL(string: projectPath)!)
