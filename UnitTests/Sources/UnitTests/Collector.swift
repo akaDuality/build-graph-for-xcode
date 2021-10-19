@@ -23,6 +23,9 @@ struct Collector {
             print(error)
         }
         
+        let allTestNames = findAllTests(path: lastTestReport, id: reportModel?.testsRefId() ?? "")
+        reportModel?.testNames = allTestNames
+        
         return reportModel
     }
     
@@ -75,5 +78,28 @@ struct Collector {
         
         return lastReport
     }
+    
+    private func findAllTests(path: URL, id: String) -> [String] {
+        let jsonFilePath = converter.getTestsRefJSON(xcResultPath: path, id: id)
+        var json = ""
+        do {
+            json = String(data: try Data(contentsOf: jsonFilePath), encoding: .utf8) ?? ""
+        } catch let error {
+            print(error)
+        }
+        
+        let expression = "(?m)^.*\"_value\"\\s:\\s\"(.*/.*\\(\\))\""
+        let names = json.match(expression).compactMap { $0.last }
+        
+        return names
+    }
 }
 
+extension String {
+    func match(_ regex: String) -> [[String]] {
+        let nsString = self as NSString
+        return (try? NSRegularExpression(pattern: regex, options: []))?.matches(in: self, options: [], range: NSMakeRange(0, nsString.length)).map { match in
+            (0..<match.numberOfRanges).map { match.range(at: $0).location == NSNotFound ? "" : nsString.substring(with: match.range(at: $0)) }
+        } ?? []
+    }
+}

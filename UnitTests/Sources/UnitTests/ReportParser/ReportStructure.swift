@@ -26,6 +26,7 @@ struct Report: Codable {
     let issues: Issues
     let metrics: Metrics
     let actions: Actions
+    var testNames: [String]?
     
     func failedNames() throws -> [String] {
         return issues.testFailureSummaries?._values.compactMap { value in
@@ -55,6 +56,36 @@ struct Report: Codable {
     func testsRefId() -> String? {
         actions._values.first?.actionResult.testsRef?.id._value
     }
+    
+    func specsNumber() -> Int {
+        guard let testNames = testNames else {
+            return 0
+        }
+        
+        let allSpecs = testNames.applyFilter(FilterRules.specUnitRule).count
+        return allSpecs - snapshotTestsNumber() - integrTestsNumber()
+    }
+    
+    func xcTestsNumber() -> Int {
+        guard let testNames = testNames else {
+            return 0
+        }
+        return testNames.count - specsNumber() - snapshotTestsNumber() - integrTestsNumber()
+    }
+    
+    func snapshotTestsNumber() -> Int {
+        guard let testNames = testNames else {
+            return 0
+        }
+        return testNames.applyFilter(FilterRules.snapshotsTestRule).count
+    }
+    
+    func integrTestsNumber() -> Int {
+        guard let testNames = testNames else {
+            return 0
+        }
+        return testNames.applyFilter(FilterRules.integrTestRule).count
+    }
 }
 
 extension Report: CustomDebugStringConvertible {
@@ -62,6 +93,13 @@ extension Report: CustomDebugStringConvertible {
         var descr = "\n- - - - - - - - - - - - - -\n\n"
         
         descr.append("Total Tests: \t\t \(metrics.testsCount.intValue) \n")
+        
+        descr.append("Specs: \t\t\t\t \(specsNumber()) \n")
+        descr.append("Snapshots: \t\t\t \(snapshotTestsNumber()) \n")
+        descr.append("Integration: \t\t \(integrTestsNumber()) \n")
+        descr.append("XCTests: \t\t\t \(xcTestsNumber()) \n")
+        
+        descr.append("\n")
         
         if let warningsCount = metrics.warningCount?.intValue {
             descr.append("Warnings: \t\t\t \(warningsCount) \n")
