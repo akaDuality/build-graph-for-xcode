@@ -112,7 +112,7 @@ Crypto in Crypto (explicit)
         let string = try String(contentsOf: url, encoding: .utf8)
         let dependencies = parseFile(string)
 
-        print(customDump(dependencies))
+//        print(customDump(dependencies))
         assertSnapshot(matching: dependencies, as: .description)
     }
     
