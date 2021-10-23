@@ -6,6 +6,7 @@
 //
 
 import QuartzCore
+import Interface
 
 class ConcurrencyLayer: CALayer {
     private let events: [Event]

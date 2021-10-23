@@ -7,6 +7,7 @@
 
 import CoreGraphics
 import Foundation
+import Interface
 
 struct EventRelativeRect {
     let event: Event

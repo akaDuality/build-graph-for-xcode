@@ -7,11 +7,23 @@
 
 import QuartzCore
 import AppKit
+import Interface
 
 class ModulesLayer: CALayer {
     private let events: [Event]
     private let rects: [EventRelativeRect]
     private(set) var shapes: [EventLayer]
+    
+    var dependencies: [Dependency] = [
+        Dependency(
+            target: Target(target: "DUIKit", project: "DUIKit"),
+            dependencies: [
+                Target(target: "Stories", project: "Stories"),
+                Target(target: "Rate", project: "Rate"),
+                Target(target: "Phone", project: "Phone"),
+                Target(target: "Payment", project: "Payment"),
+            ])
+    ]
     
     public var highlightedEvent: Event? = nil {
         didSet {
@@ -95,25 +107,11 @@ class ModulesLayer: CALayer {
         let bezierLayer = CAShapeLayer()
         bezierLayer.strokeColor = NSColor.red.cgColor
         bezierLayer.fillColor = NSColor.clear.cgColor
-        bezierLayer.lineWidth = 2
+        bezierLayer.lineWidth = 1
         addSublayer(bezierLayer)
         
          return bezierLayer
     }()
-    
-    var path = CGMutablePath()
-    
-    func connect(
-        from: CGPoint,
-        to: CGPoint) {
-        
-        let offset: CGFloat = 100
-        path.move(to: from)
-        path.addCurve(to: to,
-                      control1: from.offset(x: 0, y: offset * 2),
-                      control2: to.offset(x: -offset, y: 0),
-                      transform: .identity)
-    }
     
     override func layoutSublayers() {
         super.layoutSublayers()
@@ -139,14 +137,53 @@ class ModulesLayer: CALayer {
             }
         }
         
-        path = CGMutablePath()
-        for (i, shape) in shapes.dropLast().enumerated() {
-            let nextFrame = shapes[i + 1].frame
-            connect(from: shape.frame.bottomCenter,
-                    to: nextFrame.leftCenter)
+        if let highlightedEvent = highlightedEvent {
+            drawConnections(for: highlightedEvent)
         }
+    }
+    
+    func drawConnections(for event: Event) {
+        path = CGMutablePath()
+        
+        for dependency in dependencies {
+            guard let fromIndex = events.index(name: dependency.target.target)
+            else { continue }
+            
+            for target in dependency.dependencies {
+                guard target.target == event.taskName
+                        || dependency.target.target == event.taskName
+                else { continue }
+                
+                guard let toIndex = events.index(name: target.target)
+                else { continue }
+                
+                connectModules(
+                    from: shapes[toIndex],
+                    to: shapes[fromIndex])
+            }
+        }
+        
         bezierLayer.frame = bounds
         bezierLayer.path = path
+    }
+    
+    var path = CGMutablePath()
+    
+    func connect(
+        from: CGPoint,
+        to: CGPoint) {
+        
+        let offset: CGFloat = 100
+        path.move(to: from)
+        path.addCurve(to: to,
+                      control1: from.offset(x: offset, y: 0),
+                      control2: to.offset(x: -offset, y: 0),
+                      transform: .identity)
+    }
+    
+    func connectModules(from: CALayer, to: CALayer) {
+        connect(from: from.frame.rightCenter,
+                to: to.frame.leftCenter)
     }
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
@@ -186,8 +223,12 @@ extension CGRect {
         (minY...maxY).contains(coordinate.y)
     }
     
+    var rightCenter: CGPoint {
+        CGPoint(x: maxX, y: midY)
+    }
+    
     var bottomCenter: CGPoint {
-        CGPoint(x: midX, y: minY)
+        CGPoint(x: midX, y: maxY)
     }
     
     var leftCenter: CGPoint {
@@ -199,5 +240,13 @@ extension CGPoint {
     func offset(x: CGFloat, y: CGFloat) -> CGPoint {
         CGPoint(x: self.x + x,
                 y: self.y + y)
+    }
+}
+
+extension Array where Element == Event {
+    public func index(name: String) -> Int? {
+        firstIndex { event in
+            event.taskName == name
+        }
     }
 }

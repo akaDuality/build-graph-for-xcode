@@ -1,4 +1,5 @@
 import Foundation
+import Interface
 
 public class BuildLogParser {
     public init() {}

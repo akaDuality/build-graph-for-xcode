@@ -1,19 +1,17 @@
-import Foundation
-import SwiftUI
+//
+//  File.swift
+//  
+//
+//  Created by Mikhail Rubanov on 23.10.2021.
+//
 
-public struct Event {
-    public init(taskName: String,
-                startDate: Date,
-                endDate: Date) {
-        self.taskName = taskName
-        self.startDate = startDate
-        self.endDate = endDate
-    }
-    
-    let taskName: String
-    let startDate: Date
-    let endDate: Date
-    
+import Foundation
+import Interface
+
+let helpersSuffix = "TestHelpers"
+let testsSuffix = "TestHelpers-Unit-Tests"
+
+extension Event {
     var type: EventType {
         if taskName.hasSuffix(helpersSuffix) {
             return .helpers
@@ -29,8 +27,7 @@ public struct Event {
         case tests
     }
     
-    private let helpersSuffix = "TestHelpers"
-    private let testsSuffix = "TestHelpers-Unit-Tests"
+    
     
     var domain: String {
         if taskName.hasSuffix(helpersSuffix) {

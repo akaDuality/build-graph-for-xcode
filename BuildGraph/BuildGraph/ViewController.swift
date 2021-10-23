@@ -7,6 +7,7 @@
 
 import Cocoa
 import BuildParser
+import GraphParser
 
 class FlippedView: NSView {
     override var isFlipped: Bool {
@@ -18,19 +19,23 @@ class FlippedView: NSView {
 
 class ViewController: NSViewController {
 
-    var layer: Graph!
+    var layer: AppLayer!
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = Bundle.main.url(forResource: "TuistIntel",
+        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
                                   withExtension: "json")!
         let events = try! BuildLogParser().parse(path: url)
-        layer = Graph(
+        layer = AppLayer(
             events: events,
             scale: NSScreen.main!.backingScaleFactor)
+        
+        let depsURL = Bundle.main.url(forResource: "targetGraph", withExtension: "txt")!
+        let depsContent = try! String(contentsOf: depsURL)
+        layer.dependencies = DependencyParser().parseFile(depsContent)
         
         contentView.wantsLayer = true
         contentView.layer?.addSublayer(layer)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Interface
 
 class Analyzer {
     func analyze(events: [Event]) {

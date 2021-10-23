@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  AppLayer.swift
 //  
 //
 //  Created by Mikhail Rubanov on 09.10.2021.
@@ -7,6 +7,7 @@
 
 import QuartzCore
 import AppKit
+import Interface
 
 extension CALayer {
     public func updateWithoutAnimation(_ block: () -> Void) {
@@ -17,8 +18,14 @@ extension CALayer {
     }
 }
 
-public class Graph: CALayer {
+public class AppLayer: CALayer {
     let events: [Event]
+    
+    public var dependencies: [Dependency] = [] {
+        didSet {
+            modulesLayer.dependencies = dependencies
+        }
+    }
     
     private let modulesLayer: ModulesLayer
     private let periodsLayer: PeriodsLayer
@@ -46,7 +53,7 @@ public class Graph: CALayer {
         setup(scale: scale)
     }
     public override init(layer: Any) {
-        let layer = layer as! Graph
+        let layer = layer as! AppLayer
         
         self.events = layer.events
         self.modulesLayer = layer.modulesLayer
@@ -54,6 +61,7 @@ public class Graph: CALayer {
         self.periodsLayer = layer.periodsLayer
         self.fullframes = layer.fullframes
         self.timelineLayer = layer.timelineLayer
+        self.dependencies = layer.dependencies
         
         super.init(layer: layer)
     }
