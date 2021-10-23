@@ -6,6 +6,7 @@
 //
 
 import QuartzCore
+import AppKit
 
 class ModulesLayer: CALayer {
     private let events: [Event]
@@ -90,9 +91,33 @@ class ModulesLayer: CALayer {
         return nil
     }
     
+    lazy var bezierLayer: CAShapeLayer = {
+        let bezierLayer = CAShapeLayer()
+        bezierLayer.strokeColor = NSColor.red.cgColor
+        bezierLayer.fillColor = NSColor.clear.cgColor
+        bezierLayer.lineWidth = 2
+        addSublayer(bezierLayer)
+        
+         return bezierLayer
+    }()
+    
+    var path = CGMutablePath()
+    
+    func connect(
+        from: CGPoint,
+        to: CGPoint) {
+        
+        let offset: CGFloat = 100
+        path.move(to: from)
+        path.addCurve(to: to,
+                      control1: from.offset(x: 0, y: offset * 2),
+                      control2: to.offset(x: -offset, y: 0),
+                      transform: .identity)
+    }
+    
     override func layoutSublayers() {
         super.layoutSublayers()
-
+        
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]
             let frame = frame(for: i, rect: rect)
@@ -113,6 +138,15 @@ class ModulesLayer: CALayer {
                                               height: self.frame.height)
             }
         }
+        
+        path = CGMutablePath()
+        for (i, shape) in shapes.dropLast().enumerated() {
+            let nextFrame = shapes[i + 1].frame
+            connect(from: shape.frame.bottomCenter,
+                    to: nextFrame.leftCenter)
+        }
+        bezierLayer.frame = bounds
+        bezierLayer.path = path
     }
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
@@ -150,5 +184,20 @@ class ModulesLayer: CALayer {
 extension CGRect {
     func inLine(_ coordinate: CGPoint) -> Bool {
         (minY...maxY).contains(coordinate.y)
+    }
+    
+    var bottomCenter: CGPoint {
+        CGPoint(x: midX, y: minY)
+    }
+    
+    var leftCenter: CGPoint {
+        CGPoint(x: minX, y: midY)
+    }
+}
+
+extension CGPoint {
+    func offset(x: CGFloat, y: CGFloat) -> CGPoint {
+        CGPoint(x: self.x + x,
+                y: self.y + y)
     }
 }
