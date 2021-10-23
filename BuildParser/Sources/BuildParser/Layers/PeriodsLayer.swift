@@ -67,7 +67,9 @@ class PeriodsLayer: CALayer {
             layer.frame = CGRect(x: relativeStart * self.frame.width,
                                  y: 0,
                                  width: relativeDuration * self.frame.width,
-                                 height: self.frame.height)
+                                 height: PeriodsLayer.periodsHeight)
+            // TODO: Expand height if user move cursore over period
         }
     }
+    static public let periodsHeight: CGFloat = 10
 }

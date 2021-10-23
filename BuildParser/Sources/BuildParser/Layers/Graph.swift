@@ -38,7 +38,7 @@ public class Graph: CALayer {
                                          totalDuration: events.duration())
         self.timelineLayer = TimelineLayer(eventsDuration: events.duration(), scale: scale)
         
-        fullframes = [modulesLayer, concurrencyLayer, periodsLayer, timelineLayer]
+        fullframes = [periodsLayer, modulesLayer, concurrencyLayer, timelineLayer]
         
         // Time Layer
         super.init()

@@ -33,6 +33,7 @@
             try LineCount(folder: srcRoot.appendingPathComponent("Core/")).read()
             try LineCount(folder: srcRoot.appendingPathComponent("Pods/")).read()
             try LineCount(folder: srcRoot.appendingPathComponent("Sources/")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Sources/Screens")).read()
         }
     }
     

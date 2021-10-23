@@ -25,7 +25,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance", withExtension: "json")!
+        let url = Bundle.main.url(forResource: "TuistIntel",
+                                  withExtension: "json")!
         let events = try! BuildLogParser().parse(path: url)
         layer = Graph(
             events: events,

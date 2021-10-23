@@ -125,9 +125,9 @@ class ModulesLayer: CALayer {
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
         let width = self.frame.width
-        
+        let startY = PeriodsLayer.periodsHeight * 1.5
         return CGRect(x: width * rect.start,
-                      y: CGFloat(i) * (self.height + space),
+                      y: startY + CGFloat(i) * (self.height + space),
                       width: width * rect.duration,
                       height: self.height)
     }
@@ -152,7 +152,7 @@ class ModulesLayer: CALayer {
     
     public var intrinsicContentSize: CGSize {
         return CGSize(width: 2400,
-                      height: CGFloat(rects.count) * (height + space))
+                      height: CGFloat(rects.count) * (height + space) + PeriodsLayer.periodsHeight)
     }
     
     let height: CGFloat = 8
