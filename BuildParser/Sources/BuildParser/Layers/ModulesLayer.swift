@@ -10,8 +10,7 @@ import QuartzCore
 class ModulesLayer: CALayer {
     private let events: [Event]
     private let rects: [EventRelativeRect]
-    private(set) var shapes: [CALayer]
-    private(set) var texts: [CATextLayer]
+    private(set) var shapes: [EventLayer]
     
     public var highlightedEvent: Event? = nil {
         didSet {
@@ -40,7 +39,6 @@ class ModulesLayer: CALayer {
                               totalDuration: events.duration())
         }
         self.shapes = .init()
-        self.texts = .init()
         self.higlightedLift = .init()
         
         super.init()
@@ -53,7 +51,6 @@ class ModulesLayer: CALayer {
         
         self.events = layer.events
         self.shapes = layer.shapes
-        self.texts = layer.texts
         self.highlightedEvent = layer.highlightedEvent
         self.rects = layer.rects
         self.higlightedLift = layer.higlightedLift
@@ -70,25 +67,22 @@ class ModulesLayer: CALayer {
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
         
-        for _ in rects {
-            let layer = CALayer()
+        for (i, event) in events.enumerated() {
+            let layer = EventLayer(
+                text: event.taskName,
+                isLast: i == events.count)
             layer.contentsScale = scale
             shapes.append(layer)
             addSublayer(layer)
-            
-            let textLayer = CATextLayer()
-            textLayer.contentsScale = scale
-            texts.append(textLayer)
-            self.addSublayer(textLayer)
         }
     }
     
-    private func event(at coorditate: CGPoint) -> Event? {
+    private func event(at coordinate: CGPoint) -> Event? {
         for (i, shape) in shapes.enumerated() {
             if shape
-                .frame.insetBy(dx: 0, dy: -space/2)
+                .frame.insetBy(dx: 0, dy: -vSpace/2)
                 .inLine(
-                    coorditate
+                    coordinate
                 ) {
                 return events[i]
             }
@@ -113,8 +107,6 @@ class ModulesLayer: CALayer {
                     .copy(alpha: alpha(for: rect))
             }
             
-            drawText(rect: rect, i: i, frame: frame)
-            
             if rect.event.taskName == highlightedEvent?.taskName {
                 higlightedLift.frame = CGRect(x: frame.minX,
                                               y: 0, width: frame.width,
@@ -126,38 +118,21 @@ class ModulesLayer: CALayer {
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
         let width = self.frame.width
         let startY = PeriodsLayer.periodsHeight * 1.5
+        
         return CGRect(x: width * rect.start,
-                      y: startY + CGFloat(i) * (self.height + space),
+                      y: startY + CGFloat(i) * (self.height + vSpace),
                       width: width * rect.duration,
                       height: self.height)
     }
     
-    private func drawText(rect: EventRelativeRect, i: Int, frame: CGRect) {
-        let textWidth: CGFloat = 150 // TODO: calculate on fly
-        let textOffset: CGFloat = 2
-        let text = texts[i]
-        text.string = rect.text
-        text.frame = CGRect(x: frame.maxX + textOffset,
-                            y: frame.minY + 1,
-                            width: textWidth,
-                            height: height)
-        
-        if i == events.count - 1 {
-            text.alignmentMode = .right
-            text.frame = text.frame.offsetBy(dx: -textWidth - textOffset*4, dy: 0)
-        }
-        text.foregroundColor = Colors.textColor
-        text.fontSize = fontSize
-    }
-    
     public var intrinsicContentSize: CGSize {
         return CGSize(width: 2400,
-                      height: CGFloat(rects.count) * (height + space) + PeriodsLayer.periodsHeight)
+                      height: CGFloat(rects.count) * (height + vSpace) + PeriodsLayer.periodsHeight)
     }
     
-    let height: CGFloat = 8
-    let space: CGFloat = 1
-    let fontSize: CGFloat = 5
+    var height: CGFloat = 14
+    let vSpace: CGFloat = 1
+    
 
     private func alpha(for rect: EventRelativeRect) -> CGFloat {
         if let highlightedEvent = highlightedEvent {
