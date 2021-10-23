@@ -27,6 +27,10 @@ class ModulesLayer: CALayer {
     
     public var highlightedEvent: Event? = nil {
         didSet {
+            guard highlightedEvent != oldValue else {
+                return // skip redraw of modules, nothing changed
+            }
+            
             updateWithoutAnimation {
                 setNeedsLayout()
                 layoutIfNeeded()
@@ -103,9 +107,19 @@ class ModulesLayer: CALayer {
         return nil
     }
     
-    lazy var bezierLayer: CAShapeLayer = {
+    lazy var criticalDependenciesLayer: CAShapeLayer = {
         let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = NSColor.red.cgColor
+        bezierLayer.strokeColor = Colors.criticalDependencyColor
+        bezierLayer.fillColor = NSColor.clear.cgColor
+        bezierLayer.lineWidth = 1
+        addSublayer(bezierLayer)
+        
+        return bezierLayer
+    }()
+    
+    lazy var regularDependenciesLayer: CAShapeLayer = {
+        let bezierLayer = CAShapeLayer()
+        bezierLayer.strokeColor = Colors.regularDependencyColor
         bezierLayer.fillColor = NSColor.clear.cgColor
         bezierLayer.lineWidth = 1
         addSublayer(bezierLayer)
@@ -137,43 +151,49 @@ class ModulesLayer: CALayer {
             }
         }
         
-        if let highlightedEvent = highlightedEvent {
-            drawConnections(for: highlightedEvent)
-        }
+        drawConnections(for: highlightedEvent)
     }
     
-    func drawConnections(for event: Event) {
-        path = CGMutablePath()
+    func drawConnections(for event: Event?) {
+        regularPath = CGMutablePath()
+        criticalPath = CGMutablePath()
         
         for dependency in dependencies {
             guard let fromIndex = events.index(name: dependency.target.target)
             else { continue }
             
             for target in dependency.dependencies {
-                guard target.target == event.taskName
-                        || dependency.target.target == event.taskName
-                else { continue }
+                
+                let isHighlightedModule = target.target == event?.taskName
+                || dependency.target.target == event?.taskName
                 
                 guard let toIndex = events.index(name: target.target)
                 else { continue }
                 
                 connectModules(
                     from: shapes[toIndex],
-                    to: shapes[fromIndex])
+                    to: shapes[fromIndex],
+                    on: regularPath,
+                    isHighlightedModule: isHighlightedModule
+                )
             }
         }
         
-        bezierLayer.frame = bounds
-        bezierLayer.path = path
+        regularDependenciesLayer.frame = bounds
+        regularDependenciesLayer.path = regularPath
+        
+        criticalDependenciesLayer.frame = bounds
+        criticalDependenciesLayer.path = criticalPath
     }
     
-    var path = CGMutablePath()
+    var regularPath = CGMutablePath()
+    var criticalPath = CGMutablePath()
     
     func connect(
         from: CGPoint,
-        to: CGPoint) {
-        
-        let offset: CGFloat = 100
+        to: CGPoint,
+        on path: CGMutablePath) {
+        let offset: CGFloat = 75
         path.move(to: from)
         path.addCurve(to: to,
                       control1: from.offset(x: offset, y: 0),
@@ -181,9 +201,21 @@ class ModulesLayer: CALayer {
                       transform: .identity)
     }
     
-    func connectModules(from: CALayer, to: CALayer) {
+    func connectModules(
+        from: CALayer,
+        to: CALayer,
+        on path: CGMutablePath,
+        isHighlightedModule: Bool) {
+        
+        let isBlockerDependency = (to.frame.minX - from.frame.maxX) / bounds.width < 0.01
+        guard (isBlockerDependency && highlightedEvent == nil)
+        || isHighlightedModule else {
+            return
+        }
+        
         connect(from: from.frame.rightCenter,
-                to: to.frame.leftCenter)
+                to: to.frame.leftCenter,
+                on: isBlockerDependency ? criticalPath : regularPath)
     }
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {

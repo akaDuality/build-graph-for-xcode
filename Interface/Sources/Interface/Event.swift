@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Event {
+public struct Event: Equatable {
     public init(taskName: String,
                 startDate: Date,
                 endDate: Date) {

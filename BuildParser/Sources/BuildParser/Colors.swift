@@ -6,14 +6,18 @@
 //
 
 import CoreGraphics
+import AppKit
 
 struct Colors {
-    static let textColor: CGColor = .init(gray: 0, alpha: 1)
-    static let backColor: CGColor = .init(gray: 1, alpha: 1)
+    static let textColor: CGColor = NSColor.labelColor.cgColor
+    static let backColor: CGColor = NSColor.textBackgroundColor.cgColor
     static let liftColor: CGColor = .init(gray: 0, alpha: 0.05)
-    static let concurencyColor: CGColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
+    static let concurencyColor: CGColor = NSColor.systemRed.cgColor
     static let dimmingAlpha: CGFloat = 0.25
-    static let timeColor: CGColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+    static let timeColor: CGColor = NSColor.tertiaryLabelColor.cgColor
+    
+    static let criticalDependencyColor = NSColor.systemRed.cgColor
+    static let regularDependencyColor = NSColor.secondaryLabelColor.cgColor
 }
 
 extension EventRelativeRect {
