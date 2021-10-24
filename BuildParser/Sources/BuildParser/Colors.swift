@@ -18,6 +18,8 @@ struct Colors {
     
     static let criticalDependencyColor = NSColor.systemRed.cgColor
     static let regularDependencyColor = NSColor.secondaryLabelColor.cgColor
+    
+    static let clear = NSColor.clear.cgColor
 }
 
 extension EventRelativeRect {

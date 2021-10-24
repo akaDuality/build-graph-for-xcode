@@ -6,24 +6,12 @@
 //
 
 import QuartzCore
-import AppKit
 import Interface
 
 class ModulesLayer: CALayer {
-    private let events: [Event]
+    let events: [Event]
     private let rects: [EventRelativeRect]
     private(set) var shapes: [EventLayer]
-    
-    var dependencies: [Dependency] = [
-        Dependency(
-            target: Target(target: "DUIKit", project: "DUIKit"),
-            dependencies: [
-                Target(target: "Stories", project: "Stories"),
-                Target(target: "Rate", project: "Rate"),
-                Target(target: "Phone", project: "Phone"),
-                Target(target: "Payment", project: "Payment"),
-            ])
-    ]
     
     public var highlightedEvent: Event? = nil {
         didSet {
@@ -107,26 +95,6 @@ class ModulesLayer: CALayer {
         return nil
     }
     
-    lazy var criticalDependenciesLayer: CAShapeLayer = {
-        let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = Colors.criticalDependencyColor
-        bezierLayer.fillColor = NSColor.clear.cgColor
-        bezierLayer.lineWidth = 1
-        addSublayer(bezierLayer)
-        
-        return bezierLayer
-    }()
-    
-    lazy var regularDependenciesLayer: CAShapeLayer = {
-        let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = Colors.regularDependencyColor
-        bezierLayer.fillColor = NSColor.clear.cgColor
-        bezierLayer.lineWidth = 1
-        addSublayer(bezierLayer)
-        
-         return bezierLayer
-    }()
-    
     override func layoutSublayers() {
         super.layoutSublayers()
         
@@ -150,72 +118,6 @@ class ModulesLayer: CALayer {
                                               height: self.frame.height)
             }
         }
-        
-        drawConnections(for: highlightedEvent)
-    }
-    
-    func drawConnections(for event: Event?) {
-        regularPath = CGMutablePath()
-        criticalPath = CGMutablePath()
-        
-        for dependency in dependencies {
-            guard let fromIndex = events.index(name: dependency.target.target)
-            else { continue }
-            
-            for target in dependency.dependencies {
-                
-                let isHighlightedModule = target.target == event?.taskName
-                || dependency.target.target == event?.taskName
-                
-                guard let toIndex = events.index(name: target.target)
-                else { continue }
-                
-                connectModules(
-                    from: shapes[toIndex],
-                    to: shapes[fromIndex],
-                    on: regularPath,
-                    isHighlightedModule: isHighlightedModule
-                )
-            }
-        }
-        
-        regularDependenciesLayer.frame = bounds
-        regularDependenciesLayer.path = regularPath
-        
-        criticalDependenciesLayer.frame = bounds
-        criticalDependenciesLayer.path = criticalPath
-    }
-    
-    var regularPath = CGMutablePath()
-    var criticalPath = CGMutablePath()
-    
-    func connect(
-        from: CGPoint,
-        to: CGPoint,
-        on path: CGMutablePath) {
-        let offset: CGFloat = 75
-        path.move(to: from)
-        path.addCurve(to: to,
-                      control1: from.offset(x: offset, y: 0),
-                      control2: to.offset(x: -offset, y: 0),
-                      transform: .identity)
-    }
-    
-    func connectModules(
-        from: CALayer,
-        to: CALayer,
-        on path: CGMutablePath,
-        isHighlightedModule: Bool) {
-        
-        let isBlockerDependency = (to.frame.minX - from.frame.maxX) / bounds.width < 0.01
-        guard (isBlockerDependency && highlightedEvent == nil)
-        || isHighlightedModule else {
-            return
-        }
-        
-        connect(from: from.frame.rightCenter,
-                to: to.frame.leftCenter,
-                on: isBlockerDependency ? criticalPath : regularPath)
     }
     
     private func frame(for i: Int, rect: EventRelativeRect) -> CGRect {
@@ -236,7 +138,6 @@ class ModulesLayer: CALayer {
     var height: CGFloat = 14
     let vSpace: CGFloat = 1
     
-
     private func alpha(for rect: EventRelativeRect) -> CGFloat {
         if let highlightedEvent = highlightedEvent {
             if rect.event.domain == highlightedEvent.domain {
@@ -254,31 +155,5 @@ extension CGRect {
     func inLine(_ coordinate: CGPoint) -> Bool {
         (minY...maxY).contains(coordinate.y)
     }
-    
-    var rightCenter: CGPoint {
-        CGPoint(x: maxX, y: midY)
-    }
-    
-    var bottomCenter: CGPoint {
-        CGPoint(x: midX, y: maxY)
-    }
-    
-    var leftCenter: CGPoint {
-        CGPoint(x: minX, y: midY)
-    }
 }
 
-extension CGPoint {
-    func offset(x: CGFloat, y: CGFloat) -> CGPoint {
-        CGPoint(x: self.x + x,
-                y: self.y + y)
-    }
-}
-
-extension Array where Element == Event {
-    public func index(name: String) -> Int? {
-        firstIndex { event in
-            event.taskName == name
-        }
-    }
-}

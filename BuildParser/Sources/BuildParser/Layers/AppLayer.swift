@@ -27,7 +27,7 @@ public class AppLayer: CALayer {
         }
     }
     
-    private let modulesLayer: ModulesLayer
+    private let modulesLayer: DependeciesLayer
     private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
     private let timelineLayer: TimelineLayer
@@ -37,7 +37,7 @@ public class AppLayer: CALayer {
     public init(events: [Event], scale: CGFloat) {
         self.events = events
         
-        self.modulesLayer = ModulesLayer(events: events, scale: scale)
+        self.modulesLayer = DependeciesLayer(events: events, scale: scale)
         self.concurrencyLayer = ConcurrencyLayer(events: events, scale: scale)
         
         self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
