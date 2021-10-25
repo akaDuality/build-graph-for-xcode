@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19115.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -679,7 +679,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="95" y="-346"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -691,10 +691,10 @@
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minFullScreenContentSize" type="size" width="480" height="270"/>
-                        <toolbar key="toolbar" implicitIdentifier="0F395BED-32A6-443A-A062-20A968E39B45" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="bFf-Cf-uzW">
+                        <toolbar key="toolbar" implicitIdentifier="57A3C102-81FE-4D62-BBD9-DB5C0E958E8D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="rhP-We-AHH">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="NzC-3S-CZE"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Vr1-6i-JoI"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4ty-gb-F8p"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Zst-Tw-KkC"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems/>
                         </toolbar>
@@ -708,7 +708,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="75" y="-65"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -721,21 +721,21 @@
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4h-Zb-19D">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <clipView key="contentView" id="5Vc-38-KhN">
-                                    <rect key="frame" x="1" y="1" width="478" height="268"/>
+                                    <rect key="frame" x="1" y="1" width="463" height="253"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view id="SPS-bz-3FC">
-                                            <rect key="frame" x="0.0" y="0.0" width="463" height="253"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="238"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="t4P-7D-a1w">
-                                    <rect key="frame" x="1" y="253" width="478" height="16"/>
+                                    <rect key="frame" x="1" y="254" width="463" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6zK-P0-jwu">
-                                    <rect key="frame" x="463" y="1" width="16" height="268"/>
+                                    <rect key="frame" x="464" y="1" width="15" height="253"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -748,10 +748,58 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="linkVisibility" destination="u4p-lU-68k" id="HJY-qL-iQy"/>
+                        <outlet property="performanceVisibility" destination="Qni-EK-jLf" id="lnD-w7-t9u"/>
                         <outlet property="scrollView" destination="Y4h-Zb-19D" id="XRM-2P-Bh5"/>
+                        <outlet property="subtaskVisibility" destination="qgd-MY-ac7" id="waQ-Kg-xbn"/>
+                        <outlet property="toolbar" destination="bFf-Cf-uzW" id="lEO-ks-ew6"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <toolbar implicitIdentifier="0F395BED-32A6-443A-A062-20A968E39B45" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="bFf-Cf-uzW">
+                    <allowedToolbarItems>
+                        <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="NzC-3S-CZE"/>
+                        <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Vr1-6i-JoI"/>
+                        <toolbarItem implicitItemIdentifier="0C92BA5F-000F-4504-9751-5818A1D7E2E9" label="Subtasks" paletteLabel="Subtasks" sizingBehavior="auto" id="qgd-MY-ac7">
+                            <nil key="toolTip"/>
+                            <switch key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" state="on" id="XCs-rc-Xx1">
+                                <rect key="frame" x="7" y="14" width="42" height="25"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </switch>
+                            <connections>
+                                <action selector="subtaskVisibilityDidChange:" target="XfG-lQ-9wD" id="7wy-xq-OGs"/>
+                            </connections>
+                        </toolbarItem>
+                        <toolbarItem implicitItemIdentifier="591F15AE-DA2F-4A2D-924A-1048D623F3BE" label="Links" paletteLabel="Links" sizingBehavior="auto" id="u4p-lU-68k">
+                            <nil key="toolTip"/>
+                            <switch key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" state="on" id="3m1-MS-2nW">
+                                <rect key="frame" x="0.0" y="14" width="42" height="25"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <action selector="linkVisibilityDidChange:" target="XfG-lQ-9wD" id="gF3-9A-OCT"/>
+                                </connections>
+                            </switch>
+                        </toolbarItem>
+                        <toolbarItem implicitItemIdentifier="35295B59-0065-4159-9FB2-05FDB38AFBF5" label="Performance" paletteLabel="Performance" sizingBehavior="auto" id="Qni-EK-jLf">
+                            <nil key="toolTip"/>
+                            <switch key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" baseWritingDirection="leftToRight" alignment="left" state="on" id="NQy-Rf-aX8">
+                                <rect key="frame" x="17" y="14" width="42" height="25"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <action selector="performanceVisibilityDidChange:" target="XfG-lQ-9wD" id="m4h-Gz-Pkm"/>
+                                </connections>
+                            </switch>
+                            <connections>
+                                <action selector="performanceDidChange:" target="XfG-lQ-9wD" id="byK-er-DYD"/>
+                            </connections>
+                        </toolbarItem>
+                    </allowedToolbarItems>
+                    <defaultToolbarItems>
+                        <toolbarItem reference="Qni-EK-jLf"/>
+                        <toolbarItem reference="u4p-lU-68k"/>
+                        <toolbarItem reference="qgd-MY-ac7"/>
+                    </defaultToolbarItems>
+                </toolbar>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>

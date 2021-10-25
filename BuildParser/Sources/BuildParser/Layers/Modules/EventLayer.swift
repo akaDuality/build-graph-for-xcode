@@ -6,18 +6,27 @@
 //
 
 import QuartzCore
+import Interface
+import AppKit
 
 class EventLayer: CALayer {
     internal init(
-        text: String,
+        event: Event,
         isLast: Bool) {
-        self.text = text
+        self.event = event
         self.isLast = isLast
         self.textLayer = CATextLayer()
-        
+        self.stepShapes = [CALayer]()
         super.init()
         
         addSublayer(textLayer)
+            
+        for _ in event.steps {
+            let layer = CALayer()
+            layer.backgroundColor = NSColor.systemOrange.cgColor
+            addSublayer(layer)
+            stepShapes.append(layer)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -27,24 +36,52 @@ class EventLayer: CALayer {
     public override init(layer: Any) {
         let layer = layer as! EventLayer
         
-        self.text = layer.text
+        self.event = layer.event
         self.isLast = layer.isLast
         self.textLayer = layer.textLayer
+        self.stepShapes = layer.stepShapes
         
         super.init(layer: layer)
     }
     
-    let text: String
+    let event: Event
     let isLast: Bool
-    
     let textLayer: CATextLayer
+    var stepShapes: [CALayer]
+   
+    var showSubtask: Bool = true {
+        didSet {
+            for stepShapes in stepShapes {
+                stepShapes.isHidden = !showSubtask
+            }
+        }
+    }
     
     override func layoutSublayers() {
         super.layoutSublayers()
         
+        layoutSubtasks()
+        layoutText()
+    }
+    
+    private func layoutSubtasks() {
+        for (i, step) in event.steps.enumerated() {
+            let shape = stepShapes[i]
+            
+            let relativeStartDate = step.startDate.timeIntervalSince(event.startDate) / event.duration
+            let relativeDuration = step.duration / event.duration
+            
+            shape.frame = CGRect(x: CGFloat(relativeStartDate) * frame.width,
+                                 y: 0,
+                                 width: CGFloat(relativeDuration) * frame.width,
+                                 height: self.frame.height)
+        }
+    }
+    
+    private func layoutText() {
         let textWidth: CGFloat = 150 // TODO: calculate on fly
         let textOffset: CGFloat = 2
-        textLayer.string = text
+        textLayer.string = event.description
         textLayer.frame = CGRect(
             x: bounds.maxX + textOffset,
             y: bounds.minY + 1,

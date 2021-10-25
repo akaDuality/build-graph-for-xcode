@@ -34,6 +34,24 @@ public class AppLayer: CALayer {
     
     private let fullframes: [CALayer]
     
+    public var showSubtask: Bool = true {
+        didSet {
+            modulesLayer.showSubtask = showSubtask
+        }
+    }
+    
+    public var showLinks: Bool = true {
+        didSet {
+            modulesLayer.showLinks = showLinks
+        }
+    }
+    
+    public var showPerformance: Bool = true {
+        didSet {
+            periodsLayer.isHidden = !showPerformance
+        }
+    }
+    
     public init(events: [Event], scale: CGFloat) {
         self.events = events
         
@@ -83,6 +101,7 @@ public class AppLayer: CALayer {
     }
     
     public func clearConcurrency() {
+        timelineLayer.coordinate = nil
         concurrencyLayer.coordinate = nil
     }
     

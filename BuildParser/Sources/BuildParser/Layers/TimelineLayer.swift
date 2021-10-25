@@ -117,30 +117,26 @@ class TimelineLayer: CALayer {
         }
         
         // MARK: Pointer
-        if let coordinate = coordinate {
-            let width: CGFloat = 60
-            let time = TimeInterval(coordinate.x / frame.width) * eventsDuration
+        let coordinate = coordinate ?? CGPoint(x: frame.maxX, y: 0)
+        let textWidth: CGFloat = 60
+        let time = TimeInterval(coordinate.x / frame.width) * eventsDuration
+        
+        currentTime.updateWithoutAnimation {
             currentTime.string = dateFormatter.string(from: Date(timeIntervalSince1970: time))
-            
-            let frame = CGRect(x: coordinate.x + 5,
-                               y: frame.height - minuteHeight * 2,
-                               width: width,
-                               height: minuteHeight)
-            
-            if coordinate.x < self.frame.width - width {
-                currentTime.alignmentMode = .left
-                currentTime.frame = frame
-            } else {
-                currentTime.alignmentMode = .right
-                currentTime.frame = frame.offsetBy(dx: -width - 10, dy: 0)
-            }
-            
-            currentTime.isHidden = false
-        } else {
-            currentTime.isHidden = true
         }
         
+        let frame = CGRect(x: coordinate.x + 5,
+                           y: frame.height - minuteHeight * 2,
+                           width: textWidth,
+                           height: minuteHeight)
         
+        if coordinate.x < self.frame.width - textWidth {
+            currentTime.alignmentMode = .left
+            currentTime.frame = frame
+        } else {
+            currentTime.alignmentMode = .right
+            currentTime.frame = frame.offsetBy(dx: -textWidth - 20, dy: 0)
+        }
     }
     
     lazy var dateFormatter: DateFormatter = {

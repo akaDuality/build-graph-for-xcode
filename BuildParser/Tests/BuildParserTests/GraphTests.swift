@@ -7,18 +7,17 @@
 
 import XCTest
 @testable import BuildParser
-
 import SnapshotTesting
 
 final class GraphTests: XCTestCase {
     
     let record = false
     
-    let parser = BuildLogParser()
+    let parser = XcodeBuildTimesParser()
     
     func test_drawingAppEvents() throws {
         let events = try parser.parse(path: appEventsPath)
-        let view = Graph(events: events, scale: 3)
+        let view = AppLayer(events: events, scale: 3)
         
         view.frame = .init(x: 0,
                            y: 0,
@@ -32,7 +31,7 @@ final class GraphTests: XCTestCase {
     
     func test_drawingTestEvents() throws {
         let events = try parser.parse(path: testEventsPath)
-        let view = Graph(events: events, scale: 3)
+        let view = AppLayer(events: events, scale: 3)
 //        view.highlightedEvent = events[100]
 //        view.highlightEvent(at: <#T##CGPoint#>)
         

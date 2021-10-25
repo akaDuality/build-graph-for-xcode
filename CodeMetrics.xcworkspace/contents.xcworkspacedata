@@ -5,7 +5,7 @@
       location = "group:BuildGraph/BuildGraph.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:BuildGraph/../Interface">
+      location = "group:Interface">
    </FileRef>
    <FileRef
       location = "group:GraphParser">

@@ -9,6 +9,15 @@ import QuartzCore
 import Interface
 
 class ModulesLayer: CALayer {
+    
+    var showSubtask: Bool = true {
+        didSet {
+            for shape in shapes {
+                shape.showSubtask = showSubtask
+            }
+        }
+    }
+    
     let events: [Event]
     private let rects: [EventRelativeRect]
     private(set) var shapes: [EventLayer]
@@ -74,7 +83,7 @@ class ModulesLayer: CALayer {
         
         for (i, event) in events.enumerated() {
             let layer = EventLayer(
-                text: event.taskName,
+                event: event,
                 isLast: i == events.count)
             layer.contentsScale = scale
             shapes.append(layer)
@@ -103,14 +112,15 @@ class ModulesLayer: CALayer {
             let frame = frame(for: i, rect: rect)
             shape.frame = frame
             
-            let event = events[i]
-            if events.isBlocker(event) {
-                shape.backgroundColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
-                    .copy(alpha: alpha(for: rect))
-            } else {
+            // TODO: Blockers should be detected by links
+//            let event = events[i]
+//            if events.isBlocker(event) {
+//                shape.backgroundColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
+//                    .copy(alpha: alpha(for: rect))
+//            } else {
                 shape.backgroundColor = rect.backgroundColor
                     .copy(alpha: alpha(for: rect))
-            }
+//            }
             
             if rect.event.taskName == highlightedEvent?.taskName {
                 higlightedLift.frame = CGRect(x: frame.minX,
@@ -131,7 +141,7 @@ class ModulesLayer: CALayer {
     }
     
     public var intrinsicContentSize: CGSize {
-        return CGSize(width: 2400,
+        return CGSize(width: 5000,
                       height: CGFloat(rects.count) * (height + vSpace) + PeriodsLayer.periodsHeight)
     }
     

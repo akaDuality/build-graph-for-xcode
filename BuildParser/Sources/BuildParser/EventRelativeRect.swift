@@ -18,7 +18,7 @@ struct EventRelativeRect {
     
     init(event: Event, absoluteStart: Date, totalDuration: TimeInterval) {
         self.event = event
-        self.text = "\(event.taskName), \(event.duration)"
+        self.text = event.description
         self.start = relativeStart(absoluteStart: absoluteStart,
                                    start: event.startDate,
                                    duration: totalDuration)

@@ -9,6 +9,13 @@ import QuartzCore
 import Interface
 
 class DependeciesLayer: ModulesLayer {
+   
+    var showLinks: Bool = true {
+        didSet {
+            criticalDependenciesLayer.isHidden = !showLinks
+            regularDependenciesLayer.isHidden = !showLinks
+        }
+    }
     
     var dependencies: [Dependency] = []
     
@@ -43,6 +50,7 @@ class DependeciesLayer: ModulesLayer {
         criticalPath = CGMutablePath()
         
         for dependency in dependencies {
+            // TODO: Calc indexes at models layer
             guard let fromIndex = events.index(name: dependency.target.target)
             else { continue }
             

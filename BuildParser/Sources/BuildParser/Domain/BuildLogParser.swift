@@ -1,7 +1,7 @@
 import Foundation
 import Interface
 
-public class BuildLogParser {
+public class XcodeBuildTimesParser {
     public init() {}
     
     public func parse(path: URL) throws -> [Event] {
@@ -16,7 +16,8 @@ public class BuildLogParser {
                 
                 events.append(Event(taskName: eventLog.taskName,
                                     startDate: eventLog.date,
-                                    endDate: end.date))
+                                    endDate: end.date,
+                                    steps: []))
                 // TODO: remove from buildLog.events for speedup
             }
         }
@@ -33,12 +34,20 @@ public class BuildLogParser {
 }
 
 extension DateFormatter {
-    static let iso8601Full: DateFormatter = {
+    public static let iso8601Full: DateFormatter = {
+        dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ") // TODO: what is SSS...
+    }()
+    
+    public static let iso8601Full_Z: DateFormatter = {
+        dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ")
+    }()
+    
+    static func dateFormatter(format: String) -> DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS" // TODO: what is SSS...
+        formatter.dateFormat = format
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
-    }()
+    }
 }

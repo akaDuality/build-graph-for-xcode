@@ -8,6 +8,7 @@
 import Cocoa
 import BuildParser
 import GraphParser
+import Interface
 
 class FlippedView: NSView {
     override var isFlipped: Bool {
@@ -19,6 +20,23 @@ class FlippedView: NSView {
 
 class ViewController: NSViewController {
 
+    @IBOutlet weak var subtaskVisibility: NSToolbarItem!
+    @IBOutlet weak var linkVisibility: NSToolbarItem!
+    
+    @IBOutlet weak var performanceVisibility: NSToolbarItem!
+    
+    @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
+        layer.showSubtask = sender.state == .on
+    }
+    
+    @IBAction func linkVisibilityDidChange(_ sender: NSSwitch) {
+        layer.showLinks = sender.state == .on
+    }
+    @IBAction func performanceVisibilityDidChange(_ sender: NSSwitch) {
+        layer.showPerformance = sender.state == .on
+    }
+    
+    @IBOutlet var toolbar: NSToolbar!
     var layer: AppLayer!
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
@@ -26,14 +44,23 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
-                                  withExtension: "json")!
-        let events = try! BuildLogParser().parse(path: url)
+//        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
+//                                  withExtension: "json")!
+//        let events = try! XcodeBuildTimesParser().parse(path: url)
+        
+        var events: [Event] = []
+        
+        do {
+            events = try RealBuildLogParser().parse()
+        } catch let error {
+            print(error)
+        }
+        
         layer = AppLayer(
             events: events,
             scale: NSScreen.main!.backingScaleFactor)
         
-        let depsURL = Bundle.main.url(forResource: "targetGraph", withExtension: "txt")!
+        let depsURL = Bundle.main.url(forResource: "targetGraph-Tuist", withExtension: "txt")!
         let depsContent = try! String(contentsOf: depsURL)
         layer.dependencies = DependencyParser().parseFile(depsContent)
         
@@ -42,12 +69,15 @@ class ViewController: NSViewController {
         
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
+//        scrollView.setMagnification(0, centeredAt: .zero)
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
         addMouseTracking()
+        
+        view.window!.toolbar = toolbar
     }
     
     override func viewDidLayout() {

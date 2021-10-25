@@ -27,8 +27,6 @@ extension Event {
         case tests
     }
     
-    
-    
     var domain: String {
         if taskName.hasSuffix(helpersSuffix) {
             return String(taskName.dropLast(helpersSuffix.count))
@@ -37,6 +35,10 @@ extension Event {
         } else {
             return taskName
         }
+    }
+    
+    public var description: String {
+        String(format: "\(taskName), %0.2f", duration)
     }
 }
 

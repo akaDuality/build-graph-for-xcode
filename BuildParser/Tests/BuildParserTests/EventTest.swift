@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import BuildParser
+import Interface
 
 final class EventTest: XCTestCase {
     func event(name: String) -> Event {

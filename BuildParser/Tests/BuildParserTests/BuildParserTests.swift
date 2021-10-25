@@ -1,12 +1,13 @@
 import XCTest
 @testable import BuildParser
+import Interface
 
 let appEventsPath = Bundle.module.url(forResource: "AppEvents", withExtension: "json")!
 let testEventsPath = Bundle.module.url(forResource: "TestEvents", withExtension: "json")!
 
 final class App_BuildParserTests: XCTestCase {
     
-    let parser = BuildLogParser()
+    let parser = XcodeBuildTimesParser()
     var events: [Event]!
    
     override func setUpWithError() throws {
@@ -53,7 +54,7 @@ final class App_BuildParserTests: XCTestCase {
 
 final class Test_BuildParserTests: XCTestCase {
     
-    let parser = BuildLogParser()
+    let parser = XcodeBuildTimesParser()
     var events: [Event]!
     override func setUpWithError() throws {
         events = try parser.parse(path: appEventsPath)

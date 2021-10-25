@@ -64,12 +64,14 @@ class PeriodsLayer: CALayer {
             let relativeDuration = relativeDuration(start: period.start,
                                                     end: period.end,
                                                     duration: totalDuration)
-            layer.frame = CGRect(x: relativeStart * self.frame.width,
-                                 y: 0,
-                                 width: relativeDuration * self.frame.width,
-                                 height: PeriodsLayer.periodsHeight)
-            // TODO: Expand height if user move cursore over period
+            layer.frame = CGRect(
+                x: relativeStart * self.frame.width,
+                y: 0,
+                width: relativeDuration * self.frame.width,
+                height: frame.height
+            )
         }
     }
+    
     static public let periodsHeight: CGFloat = 10
 }

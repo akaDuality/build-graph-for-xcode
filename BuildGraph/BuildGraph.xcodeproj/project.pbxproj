@@ -14,6 +14,7 @@
 		1E16961B27247AF1006D93CE /* targetGraph.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E16961A27247918006D93CE /* targetGraph.txt */; };
 		1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7106E7271F1C1600C292AA /* Tuist2.json */; };
 		1E71FE87271EC10000C292AA /* Tuist.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E71FE86271EC10000C292AA /* Tuist.json */; };
+		1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */; };
 		1EC72584271D436900352213 /* Drinkit.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72583271D436900352213 /* Drinkit.json */; };
 		1EC72E24271D4D3800352213 /* Doner 42.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72E23271D4D3800352213 /* Doner 42.json */; };
 		1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3427135F0000741EEF /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		1E16961A27247918006D93CE /* targetGraph.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = targetGraph.txt; sourceTree = "<group>"; };
 		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
+		1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "targetGraph-Tuist.txt"; sourceTree = "<group>"; };
 		1EC72583271D436900352213 /* Drinkit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Drinkit.json; sourceTree = "<group>"; };
 		1EC72E23271D4D3800352213 /* Doner 42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Doner 42.json"; sourceTree = "<group>"; };
 		1EDB5E3127135F0000741EEF /* BuildGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,7 @@
 				1E7106E7271F1C1600C292AA /* Tuist2.json */,
 				1EF2761D27207666000C95BA /* TuistIntel.json */,
 				1E16961A27247918006D93CE /* targetGraph.txt */,
+				1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */,
 			);
 			path = BuildGraph;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */,
 				1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */,
 				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
+				1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */,
 				1EDB5E3C27135F0100741EEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
