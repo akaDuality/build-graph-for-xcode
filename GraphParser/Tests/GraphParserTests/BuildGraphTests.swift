@@ -7,6 +7,7 @@
 
 import XCTest
 import CustomDump
+import Interface
 import SnapshotTesting
 
 @testable import GraphParser

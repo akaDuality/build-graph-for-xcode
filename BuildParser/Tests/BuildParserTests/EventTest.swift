@@ -13,7 +13,8 @@ final class EventTest: XCTestCase {
     func event(name: String) -> Event {
         Event(taskName: name,
               startDate: Date(),
-              endDate: Date())
+              endDate: Date(),
+              steps: [])
     }
     
     func test_ClearDomain() {
