@@ -70,6 +70,7 @@ public class AppLayer: CALayer {
         
         setup(scale: scale)
     }
+    
     public override init(layer: Any) {
         let layer = layer as! AppLayer
         
@@ -89,6 +90,15 @@ public class AppLayer: CALayer {
     }
    
     // MARK: - Actions
+    
+    public func event(at coordinate: CGPoint) -> Event? {
+        modulesLayer.eventLineContains(coordinate: coordinate)
+    }
+    
+    public func eventIndexInLine(coordinate: CGPoint) -> Int? {
+        modulesLayer.eventIndexInLine(coordinate: coordinate)
+    }
+    
     // MARK: Event
     public func highlightEvent(at coordinate: CGPoint) {
         modulesLayer.highlightEvent(at: coordinate)

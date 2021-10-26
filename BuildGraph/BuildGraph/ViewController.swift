@@ -9,6 +9,7 @@ import Cocoa
 import BuildParser
 import GraphParser
 import Interface
+import XCLogParser
 
 class FlippedView: NSView {
     override var isFlipped: Bool {
@@ -41,17 +42,40 @@ class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
+    let pizza = LogOptions(
+        projectName: "DodoPizza",
+        xcworkspacePath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcworkspace",
+        xcodeprojPath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcodeproj",
+        derivedDataPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData",
+        xcactivitylogPath: "",
+        strictProjectName: false)
+    
+    let tuist = LogOptions(
+        projectName: "DodoPizzaTuist",
+        xcworkspacePath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizzaTuist.xcworkspace",
+        xcodeprojPath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcodeproj",
+        derivedDataPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData",
+        xcactivitylogPath: "",
+        strictProjectName: false)
+    
+    let parser = RealBuildLogParser()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
 //                                  withExtension: "json")!
 //        let events = try! XcodeBuildTimesParser().parse(path: url)
+      
+        let pathFinder = PathFinder(logOptions: pizza)
+        
+        let depsURL = try! pathFinder.buildGraphURL()
+        let depsContent = try! String(contentsOf: depsURL)
         
         var events: [Event] = []
         
         do {
-            events = try RealBuildLogParser().parse()
+            events = try parser.parse(logURL: try pathFinder.activityLogURL())
         } catch let error {
             print(error)
         }
@@ -60,8 +84,6 @@ class ViewController: NSViewController {
             events: events,
             scale: NSScreen.main!.backingScaleFactor)
         
-        let depsURL = Bundle.main.url(forResource: "targetGraph-Tuist", withExtension: "txt")!
-        let depsContent = try! String(contentsOf: depsURL)
         layer.dependencies = DependencyParser().parseFile(depsContent)
         
         contentView.wantsLayer = true
@@ -69,7 +91,17 @@ class ViewController: NSViewController {
         
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
-//        scrollView.setMagnification(0, centeredAt: .zero)
+        
+        view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
+    }
+                                  
+    @objc func didClick(_ recognizer: NSClickGestureRecognizer) {
+        let coordinate = recognizer.location(in: contentView)
+        
+        guard let event = layer.event(at: coordinate)
+        else { return }
+              
+        parser.output(event: event)
     }
     
     override func viewDidAppear() {

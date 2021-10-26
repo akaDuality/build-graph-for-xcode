@@ -45,8 +45,7 @@ class PeriodsLayer: CALayer {
         for period in periods {
             let periodLayer = CALayer()
             let alpha: CGFloat = 1 / CGFloat(period.concurrency)
-            periodLayer.backgroundColor = .init(red: 1,
-                                                green: 0, blue: 0, alpha: alpha / 4)
+            periodLayer.backgroundColor = Colors.concurencyColor.copy(alpha: alpha / 4)
             periodsShapes.append(periodLayer)
             addSublayer(periodLayer)
         }

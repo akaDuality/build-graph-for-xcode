@@ -40,6 +40,17 @@ extension Event {
     public var description: String {
         String(format: "\(taskName), %0.2f", duration)
     }
+    
+    public var dateDescription: String {
+        String(format: "%0.2f, \(taskName)", duration)
+    }
+    
+    public func output() {
+        print("\n\(taskName)")
+        for step in steps {
+            print(step.dateDescription)
+        }
+    }
 }
 
 extension Array where Element == Event {
@@ -63,14 +74,16 @@ extension Array where Element == Event {
         first!.startDate
     }
     
+    private func date(from timeFromStart: TimeInterval) -> Date {
+        Date(timeInterval: timeFromStart, since: start())
+    }
+    
     func concurrency(at timeFromStart: TimeInterval) -> Int {
-        return events(at: timeFromStart).count
+        return concurrency(at: date(from: timeFromStart))
     }
     
     private func events(at timeFromStart: TimeInterval) -> [Event] {
-        let checkDate = Date(timeInterval: timeFromStart, since: start())
-        
-        return self.filter { $0.hit(time: checkDate) }
+        return events(at: date(from: timeFromStart))
     }
     
     func concurrency(at date: Date) -> Int {
@@ -78,7 +91,7 @@ extension Array where Element == Event {
     }
     
     private func events(at date: Date) -> [Event] {
-        return self.filter { $0.hit(time: date) }
+        return self.filter { $0.stepsHit(time: date) }
     }
     
     func periods(concurrency: Int) -> [Date] {
@@ -92,7 +105,15 @@ extension Array where Element == Event {
     }
     
     func allPeriods() -> [Period] {
-        let set: Set<Date> = Set(map(\.startDate) + map(\.endDate))
+        let set: Set<Date> = map(\.dates)
+            .reduce(Set()) { result, dates in
+            result.union(dates)
+        }
+        
+        guard set.count > 0 else {
+            return []
+        }
+        
         let allDates = set.sorted()
         
         var periods = [Period]()
@@ -124,6 +145,16 @@ extension Event {
     
     func hit(time: Date) -> Bool {
         (startDate...endDate).contains(time)
+    }
+    
+    func stepsHit(time: Date) -> Bool {
+        steps.first { step in
+            step.hit(time: time)
+        } != nil
+    }
+    
+    var dates: Set<Date> {
+        Set(steps.map(\.startDate) + steps.map(\.endDate))
     }
 }
 

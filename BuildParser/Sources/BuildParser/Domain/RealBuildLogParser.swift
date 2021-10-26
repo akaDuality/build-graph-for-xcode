@@ -10,64 +10,80 @@ import Interface
 import Foundation
 
 public class RealBuildLogParser {
-    let logFinder = LogFinder()
-    let activityLogParser = ActivityParser()
    
     public init() {}
     
-    public func parse() throws -> [Event] {
-        let logOptions = LogOptions(
-//            projectName: "DodoPizza",
-//            xcworkspacePath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcworkspace",
-//            xcodeprojPath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcodeproj",
-//            derivedDataPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData",
-            projectName: "DodoPizzaTuist",
-            xcworkspacePath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizzaTuist.xcworkspace",
-            xcodeprojPath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcodeproj",
-            derivedDataPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData",
-            xcactivitylogPath: "",
-            strictProjectName: false)
-        
-        let logURL = try logFinder.findLatestLogWithLogOptions(logOptions)
-        
+    let activityLogParser = ActivityParser()
+    let buildParser = ParserBuildSteps(
+        machineName: nil,
+        omitWarningsDetails: true,
+        omitNotesDetails: true)
+    
+    var buildSteps: BuildStep!
+    
+    public func parse(logURL: URL) throws -> [Event] {
         let activityLog = try activityLogParser.parseActivityLogInURL(
             logURL,
             redacted: false,
             withoutBuildSpecificInformation: false)
         
-        let buildParser = ParserBuildSteps(
-            machineName: nil,
-            omitWarningsDetails: true,
-            omitNotesDetails: true)
-        
-        let buildSteps = try buildParser.parse(activityLog: activityLog)
+        buildSteps = try buildParser.parse(activityLog: activityLog)
        
-        for (i, substep) in buildSteps.subSteps.enumerated() {
-            print("\(i) \(substep.title), \(substep.duration)")
-        }
+//        print(buildSteps)
         
+        let events = convertToEvents(buildSteps: buildSteps)
+        
+        return events
+    }
+    
+    public func output(event: Event) {
+        let step = buildSteps.subSteps.first { step in
+            step.title.hasSuffix(event.taskName)
+        }!
+        
+        print("n\(step.title)")
+        step.output()
+    }
+    
+//    private func print(_ buildSteps: BuildStep) {
+//        for (i, substep) in buildSteps.subSteps.enumerated() {
+//            print("\(i) \(substep.title), \(substep.duration)")
+//        }
+//    }
+    
+    private func convertToEvents(
+        buildSteps: BuildStep,
+        threeshold: TimeInterval = 0.1
+    ) -> [Event] {
         let dateFormatter = DateFormatter.iso8601Full
-        let events = buildSteps.subSteps.map { substep -> Event in
-            let startDate = (substep.subSteps
-                                .dropFirst(3).first // skip folder creation
-                             ?? substep.subSteps[0])
-                .startDate
-            
-            return Event(
-                taskName: substep.title.without_Build_target,
-                startDate: dateFormatter.date(from: startDate)!,
-                endDate: dateFormatter.date(from: substep.endDate)!,
-                steps: substep.subSteps
-                    .map { substep in
+        let events = buildSteps.subSteps
+            .compactMap { step -> Event? in
+                let substeps = step
+                    .subSteps
+                    .filter { substep in
+                        substep.duration > threeshold
+                    }
+                
+                guard let startDate = substeps.first?.startDate,
+                      let lastDate = substeps.last?.endDate else {
+                          return nil
+                      }
+                
+                return Event(
+                    taskName: step.title.without_Build_target,
+                    startDate: dateFormatter.date(from: startDate)!,
+                    endDate: dateFormatter.date(from: lastDate)!,
+                    steps: substeps.map { substep in
                         Event(taskName: substep.title,
                               startDate: dateFormatter.date(from: substep.startDate)!,
                               endDate: dateFormatter.date(from: substep.endDate)!,
                               steps: [])
                     }
-            )
-        }.sorted { lhsEvent, rhsEvent in
-            lhsEvent.startDate < rhsEvent.startDate
-        }
+                )
+            }
+            .sorted { lhsEvent, rhsEvent in
+                lhsEvent.startDate < rhsEvent.startDate
+            }
         
         return events
     }
@@ -83,6 +99,16 @@ extension String {
             return String(self.suffix(count - prefix.count))
         } else {
             return self
+        }
+    }
+}
+
+extension BuildStep {
+    func output() {
+        print("\(duration)\t\(title)")
+        
+        for substep in subSteps {
+            print("\t\t\(substep.duration)\t\(substep.title)")
         }
     }
 }

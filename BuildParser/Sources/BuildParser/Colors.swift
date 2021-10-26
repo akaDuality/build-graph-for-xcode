@@ -11,7 +11,7 @@ import AppKit
 struct Colors {
     static let textColor: CGColor = NSColor.labelColor.cgColor
     static let backColor: CGColor = NSColor.textBackgroundColor.cgColor
-    static let liftColor: CGColor = .init(gray: 0, alpha: 0.05)
+    static let liftColor: CGColor = NSColor.systemGray.withAlphaComponent(0.05).cgColor
     static let concurencyColor: CGColor = NSColor.systemRed.cgColor
     static let dimmingAlpha: CGFloat = 0.25
     static let timeColor: CGColor = NSColor.tertiaryLabelColor.cgColor

@@ -40,7 +40,7 @@ class ModulesLayer: CALayer {
     private let higlightedLift: CALayer
     
     public func highlightEvent(at coordinate: CGPoint) {
-        let event = event(at: coordinate)
+        let event = eventLineContains(coordinate: coordinate)
         highlightedEvent = event
     }
     
@@ -91,18 +91,35 @@ class ModulesLayer: CALayer {
         }
     }
     
-    private func event(at coordinate: CGPoint) -> Event? {
+    func eventLineContains(coordinate: CGPoint) -> Event? {
+        guard let eventIndexInLine = eventIndexInLine(coordinate: coordinate)
+        else { return nil }
+        
+        return events[eventIndexInLine]
+    }
+    
+    func eventIndexInLine(coordinate: CGPoint) -> Int? {
         for (i, shape) in shapes.enumerated() {
             if shape
                 .frame.insetBy(dx: 0, dy: -vSpace/2)
                 .inLine(
                     coordinate
                 ) {
-                return events[i]
+                return i
             }
         }
         return nil
     }
+    
+//    func eventFrameContains(coordinate: CGPoint) -> Event? {
+//        let index = shapes.firstIndex { shape in
+//            shape.frame.contains(coordinate)
+//        }
+//
+//        guard let index = index else { return nil }
+//
+//        return events[index]
+//    }
     
     override func layoutSublayers() {
         super.layoutSublayers()

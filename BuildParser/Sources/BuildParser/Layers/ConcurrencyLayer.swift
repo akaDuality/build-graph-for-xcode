@@ -63,7 +63,6 @@ class ConcurrencyLayer: CALayer {
         let time = events.duration() * relativeX
         let concurency = events.concurrency(at: time)
         concurrencyTitle.string = "\(concurency)"
-        print(concurency)
     }
     
     private func setup(scale: CGFloat) {
