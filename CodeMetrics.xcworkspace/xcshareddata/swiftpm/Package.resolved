@@ -83,15 +83,6 @@
         }
       },
       {
-        "package": "XCLogParser",
-        "repositoryURL": "https://github.com/MobileNativeFoundation/XCLogParser",
-        "state": {
-          "branch": null,
-          "revision": "e463154a481c2e8162dec482296aae852f474728",
-          "version": "0.2.28"
-        }
-      },
-      {
         "package": "xctest-dynamic-overlay",
         "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
         "state": {

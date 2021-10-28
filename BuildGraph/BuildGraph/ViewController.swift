@@ -21,23 +21,37 @@ class FlippedView: NSView {
 
 class ViewController: NSViewController {
 
-    @IBOutlet weak var subtaskVisibility: NSToolbarItem!
-    @IBOutlet weak var linkVisibility: NSToolbarItem!
-    
-    @IBOutlet weak var performanceVisibility: NSToolbarItem!
+    // MARK: - Toolbar
+    @IBOutlet var toolbar: NSToolbar!
+    @IBOutlet weak var subtaskVisibility: NSSwitch!
+    @IBOutlet weak var linkVisibility: NSSwitch!
+    @IBOutlet weak var performanceVisibility: NSSwitch!
     
     @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
         layer.showSubtask = sender.state == .on
+        uiSettings.showSubtask = layer.showSubtask
     }
     
     @IBAction func linkVisibilityDidChange(_ sender: NSSwitch) {
         layer.showLinks = sender.state == .on
+        uiSettings.showLinks = layer.showLinks
     }
     @IBAction func performanceVisibilityDidChange(_ sender: NSSwitch) {
         layer.showPerformance = sender.state == .on
+        uiSettings.showPerformance = layer.showPerformance
     }
     
-    @IBOutlet var toolbar: NSToolbar!
+    private func updateState() {
+        subtaskVisibility       .state = uiSettings.showSubtask ? .on: .off
+        linkVisibility          .state = uiSettings.showLinks ? .on: .off
+        performanceVisibility   .state = uiSettings.showPerformance ? .on: .off
+        
+        subtaskVisibilityDidChange(subtaskVisibility)
+        linkVisibilityDidChange(linkVisibility)
+        performanceVisibilityDidChange(performanceVisibility)
+    }
+    
+    // MARK: - Content
     var layer: AppLayer!
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
@@ -59,6 +73,7 @@ class ViewController: NSViewController {
         strictProjectName: false)
     
     let parser = RealBuildLogParser()
+    let uiSettings = UISettings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +108,8 @@ class ViewController: NSViewController {
         scrollView.allowsMagnification = true
         
         view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
+        
+        updateState()
     }
                                   
     @objc func didClick(_ recognizer: NSClickGestureRecognizer) {

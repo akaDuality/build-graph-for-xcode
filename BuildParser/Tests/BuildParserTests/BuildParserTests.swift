@@ -1,7 +1,7 @@
 import XCTest
 @testable import BuildParser
 import Interface
-
+import CustomDump
 let appEventsPath = Bundle.module.url(forResource: "AppEvents", withExtension: "json")!
 let testEventsPath = Bundle.module.url(forResource: "TestEvents", withExtension: "json")!
 
@@ -66,5 +66,30 @@ final class Test_BuildParserTests: XCTestCase {
         
         Analyzer().analyze(events: events)
         // TODO: nothing to check
+    }
+}
+
+import XCLogParser
+class PathFinderTests: XCTestCase {
+    let logOptions = LogOptions(
+        projectName: "",
+        xcworkspacePath: "",
+        xcodeprojPath: "",
+        derivedDataPath: "",
+        logManifestPath: "")
+    
+    func test_xx() throws {
+        let projectDir = URL(string: "/Users/rubanov/Library/Developer/Xcode/DerivedData")!
+        
+        let pathFinder = PathFinder(
+            logOptions: logOptions,
+            contentsOfDirectory: { path in ["hnthnt-targetGraph.txt"]}
+        )
+        
+        let path = try pathFinder.targetGraph(projectDir: projectDir)
+        
+        XCTAssertNoDifference(
+            URL(string: "/Users/rubanov/Library/Developer/Xcode/DerivedData/Build/Intermediates.noIndex/XCBuildData/hnthnt-targetGraph.txt"),
+            path)
     }
 }

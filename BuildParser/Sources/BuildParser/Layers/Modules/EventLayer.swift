@@ -67,10 +67,12 @@ class EventLayer: CALayer {
     private func layoutSubtasks() {
         for (i, step) in event.steps.enumerated() {
             let shape = stepShapes[i]
+           
+            guard event.duration != 0 else { continue }
             
             let relativeStartDate = step.startDate.timeIntervalSince(event.startDate) / event.duration
             let relativeDuration = step.duration / event.duration
-            
+           
             shape.frame = CGRect(x: CGFloat(relativeStartDate) * frame.width,
                                  y: 0,
                                  width: CGFloat(relativeDuration) * frame.width,

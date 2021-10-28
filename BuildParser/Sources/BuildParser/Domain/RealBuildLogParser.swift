@@ -52,17 +52,14 @@ public class RealBuildLogParser {
 //    }
     
     private func convertToEvents(
-        buildSteps: BuildStep,
-        threeshold: TimeInterval = 0.1
+        buildSteps: BuildStep
     ) -> [Event] {
         let dateFormatter = DateFormatter.iso8601Full
         let events = buildSteps.subSteps
             .compactMap { step -> Event? in
                 let substeps = step
                     .subSteps
-                    .filter { substep in
-                        substep.duration > threeshold
-                    }
+                    .filter { $0.isCompilationStep() }
                 
                 guard let startDate = substeps.first?.startDate,
                       let lastDate = substeps.last?.endDate else {
@@ -82,7 +79,11 @@ public class RealBuildLogParser {
                 )
             }
             .sorted { lhsEvent, rhsEvent in
-                lhsEvent.startDate < rhsEvent.startDate
+                if lhsEvent.startDate == rhsEvent.startDate {
+                    return lhsEvent.taskName < rhsEvent.taskName
+                } else {
+                    return lhsEvent.startDate < rhsEvent.startDate
+                }
             }
         
         return events
