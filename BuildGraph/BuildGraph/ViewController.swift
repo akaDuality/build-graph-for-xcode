@@ -28,17 +28,20 @@ class ViewController: NSViewController {
     @IBOutlet weak var performanceVisibility: NSSwitch!
     
     @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
-        layer.showSubtask = sender.state == .on
-        uiSettings.showSubtask = layer.showSubtask
+        let isOn = sender.state == .on
+        layer?.showSubtask = isOn
+        uiSettings.showSubtask = isOn
     }
     
     @IBAction func linkVisibilityDidChange(_ sender: NSSwitch) {
-        layer.showLinks = sender.state == .on
-        uiSettings.showLinks = layer.showLinks
+        let isOn = sender.state == .on
+        layer?.showLinks = isOn
+        uiSettings.showLinks = isOn
     }
     @IBAction func performanceVisibilityDidChange(_ sender: NSSwitch) {
-        layer.showPerformance = sender.state == .on
-        uiSettings.showPerformance = layer.showPerformance
+        let isOn = sender.state == .on
+        layer?.showPerformance = isOn
+        uiSettings.showPerformance = isOn
     }
     
     private func updateState() {
@@ -52,7 +55,7 @@ class ViewController: NSViewController {
     }
     
     // MARK: - Content
-    var layer: AppLayer!
+    var layer: AppLayer?
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
@@ -75,47 +78,67 @@ class ViewController: NSViewController {
     let parser = RealBuildLogParser()
     let uiSettings = UISettings()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-//        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
-//                                  withExtension: "json")!
-//        let events = try! XcodeBuildTimesParser().parse(path: url)
-      
-        let pathFinder = PathFinder(logOptions: pizza)
+    @IBOutlet weak var loadingIndicator: NSProgressIndicator!
+    @IBAction func refresh(_ sender: Any) {
+        layer?.removeFromSuperlayer()
+        loadAndInsert()
+    }
+    
+    func loadAndInsert() {
+        loadingIndicator.startAnimation(self)
         
-        let depsURL = try! pathFinder.buildGraphURL()
-        let depsContent = try! String(contentsOf: depsURL)
-        
-        var events: [Event] = []
-        
-        do {
-            events = try parser.parse(logURL: try pathFinder.activityLogURL())
-        } catch let error {
-            print(error)
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            //        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
+            //                                  withExtension: "json")!
+            //        let events = try! XcodeBuildTimesParser().parse(path: url)
+            
+            let pathFinder = PathFinder(logOptions: pizza)
+            
+            var events: [Event] = []
+            
+            do {
+                let activityLogURL = try pathFinder.activityLogURL()
+                //            let activityLogURL = URL(fileURLWithPath: "/Users/rubanov/Downloads/Logs 2/Build/4632A877-8B5B-437C-8DD9-B6C545839F13.xcactivitylog")
+                events = try parser.parse(logURL: activityLogURL)
+                
+                let depsURL = try pathFinder.buildGraphURL()
+                let depsContent = try String(contentsOf: depsURL)
+                let dependencies = DependencyParser().parseFile(depsContent)
+                
+                DispatchQueue.main.async {
+                    showEvents(events: events, deps: dependencies)
+                }
+                
+            } catch let error {
+                print(error)
+            }
         }
-        
+    }
+    
+    func showEvents(events: [Event], deps: [Dependency]) {
         layer = AppLayer(
             events: events,
             scale: NSScreen.main!.backingScaleFactor)
-        
-        layer.dependencies = DependencyParser().parseFile(depsContent)
+        layer!.dependencies = deps
+        view.needsLayout = true
         
         contentView.wantsLayer = true
-        contentView.layer?.addSublayer(layer)
+        contentView.layer?.addSublayer(layer!)
         
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
         
-        view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
-        
-        updateState()
+        loadingIndicator.stopAnimation(self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
                                   
     @objc func didClick(_ recognizer: NSClickGestureRecognizer) {
         let coordinate = recognizer.location(in: contentView)
         
-        guard let event = layer.event(at: coordinate)
+        guard let event = layer?.event(at: coordinate)
         else { return }
               
         parser.output(event: event)
@@ -124,21 +147,30 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        addMouseTracking()
-        
         view.window!.toolbar = toolbar
+        
+        loadAndInsert()
+        addMouseTracking()
+        view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
+        updateState()
     }
     
     override func viewDidLayout() {
         super.viewDidLayout()
+        
+        guard let layer = layer else {
+            return
+        }
+
         let contentHeight = layer.intrinsicContentSize.height
         
         let offset: CGFloat = 10
         
         layer.updateWithoutAnimation {
-            layer.frame = CGRect(x: 0, y: 0,
-                                 width: view.frame.width - offset,
-                                 height: max(contentHeight, view.frame.height))
+            layer.frame = CGRect(
+                x: 0, y: 0,
+                width: view.frame.width - offset,
+                height: max(contentHeight, view.frame.height))
             layer.layoutIfNeeded()
         }
         contentView.frame = layer.bounds
@@ -178,14 +210,14 @@ class ViewController: NSViewController {
             event.locationInWindow,
             from: nil)
         
-        layer.highlightEvent(at: coordinate)
-        layer.drawConcurrency(at: coordinate)
+        layer?.highlightEvent(at: coordinate)
+        layer?.drawConcurrency(at: coordinate)
     }
     
     override func mouseExited(with event: NSEvent) {
         view.window?.acceptsMouseMovedEvents = false
         
-        layer.clearHighlightedEvent()
-        layer.clearConcurrency()
+        layer?.clearHighlightedEvent()
+        layer?.clearConcurrency()
     }
 }

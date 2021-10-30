@@ -56,6 +56,8 @@
 		1E2D7A5427288521009ED389 /* UISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
 		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
+		1EB93615272BCECF00EF775B /* M1.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = M1.xcactivitylog; sourceTree = "<group>"; };
+		1EB93C09272BCF9D00EF775B /* Intel_i5.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intel_i5.xcactivitylog; sourceTree = "<group>"; };
 		1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "targetGraph-Tuist.txt"; sourceTree = "<group>"; };
 		1EC72583271D436900352213 /* Drinkit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Drinkit.json; sourceTree = "<group>"; };
 		1EC72E23271D4D3800352213 /* Doner 42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Doner 42.json"; sourceTree = "<group>"; };
@@ -144,6 +146,8 @@
 				1EF2761D27207666000C95BA /* TuistIntel.json */,
 				1E16961A27247918006D93CE /* targetGraph.txt */,
 				1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */,
+				1EB93615272BCECF00EF775B /* M1.xcactivitylog */,
+				1EB93C09272BCF9D00EF775B /* Intel_i5.xcactivitylog */,
 			);
 			path = BuildGraph;
 			sourceTree = "<group>";

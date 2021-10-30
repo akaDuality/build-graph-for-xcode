@@ -685,19 +685,12 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Build Graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                    <window key="window" title="Build Graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minFullScreenContentSize" type="size" width="480" height="270"/>
-                        <toolbar key="toolbar" implicitIdentifier="57A3C102-81FE-4D62-BBD9-DB5C0E958E8D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="rhP-We-AHH">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="4ty-gb-F8p"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Zst-Tw-KkC"/>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems/>
-                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -739,9 +732,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="SrJ-9q-GYb">
+                                <rect key="frame" x="224" y="119" width="32" height="32"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="SrJ-9q-GYb" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="3g0-IU-vu9"/>
                             <constraint firstItem="Y4h-Zb-19D" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="4Ps-q4-29t"/>
+                            <constraint firstItem="SrJ-9q-GYb" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="IXF-B8-yyn"/>
                             <constraint firstAttribute="bottom" secondItem="Y4h-Zb-19D" secondAttribute="bottom" id="WCi-ci-S56"/>
                             <constraint firstAttribute="trailing" secondItem="Y4h-Zb-19D" secondAttribute="trailing" id="oAQ-Py-ZFe"/>
                             <constraint firstItem="Y4h-Zb-19D" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="xAO-D8-uQS"/>
@@ -749,6 +747,7 @@
                     </view>
                     <connections>
                         <outlet property="linkVisibility" destination="3m1-MS-2nW" id="C3N-pJ-Y5r"/>
+                        <outlet property="loadingIndicator" destination="SrJ-9q-GYb" id="Gwl-KM-o3z"/>
                         <outlet property="performanceVisibility" destination="NQy-Rf-aX8" id="5ff-zj-KKV"/>
                         <outlet property="scrollView" destination="Y4h-Zb-19D" id="XRM-2P-Bh5"/>
                         <outlet property="subtaskVisibility" destination="XCs-rc-Xx1" id="mV3-Z7-TQP"/>
@@ -793,8 +792,24 @@
                                 <action selector="performanceVisibilityDidChange:" target="XfG-lQ-9wD" id="VBS-mu-HqV"/>
                             </connections>
                         </toolbarItem>
+                        <toolbarItem implicitItemIdentifier="778513B6-7AC6-4485-8C7E-323A843A2611" label="Refresh" paletteLabel="Refresh" image="NSTouchBarRefreshTemplate" title="Button" sizingBehavior="auto" id="Ds6-G6-PIC">
+                            <nil key="toolTip"/>
+                            <button key="view" verticalHuggingPriority="750" id="eJF-E8-wky">
+                                <rect key="frame" x="0.0" y="14" width="68.5" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" image="NSTouchBarRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vml-md-CXj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <connections>
+                                <action selector="refresh:" target="XfG-lQ-9wD" id="UQl-wc-IVW"/>
+                            </connections>
+                        </toolbarItem>
                     </allowedToolbarItems>
                     <defaultToolbarItems>
+                        <toolbarItem reference="Ds6-G6-PIC"/>
+                        <toolbarItem reference="Vr1-6i-JoI"/>
                         <toolbarItem reference="Qni-EK-jLf"/>
                         <toolbarItem reference="u4p-lU-68k"/>
                         <toolbarItem reference="qgd-MY-ac7"/>
@@ -804,4 +819,7 @@
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSTouchBarRefreshTemplate" width="14" height="16"/>
+    </resources>
 </document>
