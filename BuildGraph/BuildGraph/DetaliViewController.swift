@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DetaliViewController.swift
 //  BuildGraph
 //
 //  Created by Mikhail Rubanov on 10.10.2021.
@@ -19,7 +19,7 @@ class FlippedView: NSView {
     }
 }
 
-class ViewController: NSViewController {
+class DetaliViewController: NSViewController {
 
     // MARK: - Toolbar
     @IBOutlet var toolbar: NSToolbar!
@@ -59,21 +59,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
-    let pizza = LogOptions(
-        projectName: "DodoPizza",
-        xcworkspacePath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcworkspace",
-        xcodeprojPath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcodeproj",
-        derivedDataPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData",
-        xcactivitylogPath: "",
-        strictProjectName: false)
-    
-    let tuist = LogOptions(
-        projectName: "DodoPizzaTuist",
-        xcworkspacePath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizzaTuist.xcworkspace",
-        xcodeprojPath: "/Users/rubanov/Documents/Projects/dodo-mobile-ios/DodoPizza/DodoPizza.xcodeproj",
-        derivedDataPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData",
-        xcactivitylogPath: "",
-        strictProjectName: false)
+
     
     let parser = RealBuildLogParser()
     let uiSettings = UISettings()
@@ -81,27 +67,25 @@ class ViewController: NSViewController {
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBAction func refresh(_ sender: Any) {
         layer?.removeFromSuperlayer()
-        loadAndInsert()
+        
+        if let activityLogURL = activityLogURL, let depsURL = depsURL {
+            loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL)
+        }
     }
     
-    func loadAndInsert() {
+    private var activityLogURL: URL?
+    private var depsURL: URL?
+    
+    func loadAndInsert(activityLogURL: URL, depsURL: URL) {
+        self.activityLogURL = activityLogURL
+        self.depsURL = depsURL
+        
         loadingIndicator.startAnimation(self)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            //        let url = Bundle.main.url(forResource: "AppEventsMoveDataPerstance",
-            //                                  withExtension: "json")!
-            //        let events = try! XcodeBuildTimesParser().parse(path: url)
-            
-            let pathFinder = PathFinder(logOptions: pizza)
-            
-            var events: [Event] = []
-            
             do {
-                let activityLogURL = try pathFinder.activityLogURL()
-                //            let activityLogURL = URL(fileURLWithPath: "/Users/rubanov/Downloads/Logs 2/Build/4632A877-8B5B-437C-8DD9-B6C545839F13.xcactivitylog")
-                events = try parser.parse(logURL: activityLogURL)
+                let events = try parser.parse(logURL: activityLogURL)
                 
-                let depsURL = try pathFinder.buildGraphURL()
                 let depsContent = try String(contentsOf: depsURL)
                 let dependencies = DependencyParser().parseFile(depsContent)
                 
@@ -110,6 +94,7 @@ class ViewController: NSViewController {
                 }
                 
             } catch let error {
+                // TODO: Show on UI
                 print(error)
             }
         }
@@ -122,6 +107,8 @@ class ViewController: NSViewController {
         layer!.dependencies = deps
         view.needsLayout = true
         
+        view.window?.title = parser.title
+        
         contentView.wantsLayer = true
         contentView.layer?.addSublayer(layer!)
         
@@ -129,6 +116,7 @@ class ViewController: NSViewController {
         scrollView.allowsMagnification = true
         
         loadingIndicator.stopAnimation(self)
+        updateState()
     }
     
     override func viewDidLoad() {
@@ -149,7 +137,7 @@ class ViewController: NSViewController {
         
         view.window!.toolbar = toolbar
         
-        loadAndInsert()
+//        loadAndInsert()
         addMouseTracking()
         view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
         updateState()

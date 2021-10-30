@@ -20,6 +20,9 @@ public class RealBuildLogParser {
         omitNotesDetails: true)
     
     var buildSteps: BuildStep!
+    public var title: String {
+        buildSteps.title
+    }
     
     public func parse(logURL: URL) throws -> [Event] {
         let activityLog = try activityLogParser.parseActivityLogInURL(

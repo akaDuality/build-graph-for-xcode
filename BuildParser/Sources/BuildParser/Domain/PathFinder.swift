@@ -24,6 +24,20 @@ public class PathFinder {
     }
     
     let logFinder = LogFinder()
+   
+    public func projects() throws -> [String] {
+        guard let derivedData = logFinder.getDerivedDataDirWithLogOptions(logOptions) else {
+            // TODO: Throw exception
+            return []
+        }
+        
+        let contents = try FileManager.default.contentsOfDirectory(atPath: derivedData.path)
+        
+        return contents
+            .filter { $0.contains("-") }
+            .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
+            .map { $0.components(separatedBy: "-").dropLast().joined(separator: "-") }
+    }
     
     public func buildGraphURL() throws -> URL {
         let projectDir = try logFinder.getProjectDirWithLogOptions(logOptions)
