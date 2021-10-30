@@ -84,7 +84,7 @@ class ModulesLayer: CALayer {
         for (i, event) in events.enumerated() {
             let layer = EventLayer(
                 event: event,
-                isLast: i == events.count)
+                isLast: i == events.count - 1)
             layer.contentsScale = scale
             shapes.append(layer)
             addSublayer(layer)

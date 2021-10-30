@@ -43,10 +43,14 @@ extension SplitController: ProjectsViewControllerDelegate {
        
         let pathFinder = PathFinder(logOptions: options)
         
-        let activityLogURL = try! pathFinder.activityLogURL()
-        let depsURL = try! pathFinder.buildGraphURL()
-        
-        detail.loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL)
+        do {
+            let activityLogURL = try pathFinder.activityLogURL()
+            let depsURL = try? pathFinder.buildGraphURL()
+            
+            detail.loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL)
+        } catch let error {
+            // TODO: Handle
+        }
     }
 }
 

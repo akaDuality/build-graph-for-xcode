@@ -18,8 +18,6 @@ class EventLayer: CALayer {
         self.textLayer = CATextLayer()
         self.stepShapes = [CALayer]()
         super.init()
-        
-        addSublayer(textLayer)
             
         for _ in event.steps {
             let layer = CALayer()
@@ -27,6 +25,10 @@ class EventLayer: CALayer {
             addSublayer(layer)
             stepShapes.append(layer)
         }
+            
+        textLayer.foregroundColor = Colors.textColor
+        textLayer.fontSize = fontSize
+        addSublayer(textLayer)
     }
     
     required init?(coder: NSCoder) {
@@ -93,11 +95,10 @@ class EventLayer: CALayer {
         if isLast {
             textLayer.alignmentMode = .right
             textLayer.frame = bounds
-                .offsetBy(dx: -textWidth - textOffset*4,
+                .offsetBy(dx: -textOffset*4,
                           dy: 0)
+            textLayer.foregroundColor = Colors.backColor
         }
-        textLayer.foregroundColor = Colors.textColor
-        textLayer.fontSize = fontSize
     }
     
     let fontSize: CGFloat = 10

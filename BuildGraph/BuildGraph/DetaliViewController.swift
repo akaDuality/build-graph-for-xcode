@@ -66,9 +66,7 @@ class DetaliViewController: NSViewController {
     
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBAction func refresh(_ sender: Any) {
-        layer?.removeFromSuperlayer()
-        
-        if let activityLogURL = activityLogURL, let depsURL = depsURL {
+        if let activityLogURL = activityLogURL {
             loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL)
         }
     }
@@ -76,7 +74,9 @@ class DetaliViewController: NSViewController {
     private var activityLogURL: URL?
     private var depsURL: URL?
     
-    func loadAndInsert(activityLogURL: URL, depsURL: URL) {
+    func loadAndInsert(activityLogURL: URL, depsURL: URL?) {
+        layer?.removeFromSuperlayer()
+        
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL
         
@@ -86,8 +86,15 @@ class DetaliViewController: NSViewController {
             do {
                 let events = try parser.parse(logURL: activityLogURL)
                 
-                let depsContent = try String(contentsOf: depsURL)
-                let dependencies = DependencyParser().parseFile(depsContent)
+                var dependencies = [Dependency]()
+                
+                if let depsURL = depsURL {
+                    if let depsContent = try? String(contentsOf: depsURL) {
+                        dependencies = DependencyParser().parseFile(depsContent)
+                    } else {
+                        // TODO: Log
+                    }
+                }
                 
                 DispatchQueue.main.async {
                     showEvents(events: events, deps: dependencies)
