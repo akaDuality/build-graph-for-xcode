@@ -33,8 +33,6 @@ class PeriodsLayer: CALayer {
         self.totalDuration = layer.totalDuration
         
         super.init(layer: layer)
-        
-        setup()
     }
     
     required init?(coder: NSCoder) {
@@ -45,7 +43,7 @@ class PeriodsLayer: CALayer {
         for period in periods {
             let periodLayer = CALayer()
             let alpha: CGFloat = 1 / CGFloat(period.concurrency)
-            periodLayer.backgroundColor = Colors.concurencyColor.copy(alpha: alpha / 4)
+            periodLayer.backgroundColor = Colors.concurencyColor().copy(alpha: alpha / 4)
             periodsShapes.append(periodLayer)
             addSublayer(periodLayer)
         }
