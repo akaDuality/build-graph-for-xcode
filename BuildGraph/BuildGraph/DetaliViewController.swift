@@ -81,13 +81,23 @@ class DetaliViewController: NSViewController {
     
     private var activityLogURL: URL?
     private var depsURL: URL?
+   
+    private func removeLayer() {
+        for layer in (contentView.layer?.sublayers ?? []) {
+            layer.removeFromSuperlayer()
+        }
+        
+        layer?.removeFromSuperlayer()
+        self.layer = nil
+    }
     
     func loadAndInsert(
         activityLogURL: URL,
         depsURL: URL?,
         didLoad: @escaping () -> Void
     ) {
-        layer?.removeFromSuperlayer()
+        removeLayer()
+        
         shareButton.isEnabled = false
         
         self.activityLogURL = activityLogURL

@@ -790,13 +790,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhU-gY-8vG">
-                                <rect key="frame" x="0.0" y="0.0" width="149" height="1455"/>
+                                <rect key="frame" x="0.0" y="0.0" width="149" height="1565"/>
                                 <clipView key="contentView" drawsBackground="NO" id="GPP-R3-2Cb">
-                                    <rect key="frame" x="1" y="1" width="147" height="1453"/>
+                                    <rect key="frame" x="1" y="1" width="147" height="1563"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="dcg-t8-V2a">
-                                            <rect key="frame" x="0.0" y="0.0" width="147" height="1453"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="147" height="1563"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
