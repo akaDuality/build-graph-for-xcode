@@ -32,27 +32,17 @@ public class RealBuildLogParser {
         
         buildSteps = try buildParser.parse(activityLog: activityLog)
        
-//        print(buildSteps)
-        
         let events = convertToEvents(buildSteps: buildSteps)
-        
         return events
     }
     
-    public func output(event: Event) {
+    public func description(event: Event) -> String {
         let step = buildSteps.subSteps.first { step in
             step.title.hasSuffix(event.taskName)
         }!
         
-        print("n\(step.title)")
-        step.output()
+        return step.description
     }
-    
-//    private func print(_ buildSteps: BuildStep) {
-//        for (i, substep) in buildSteps.subSteps.enumerated() {
-//            print("\(i) \(substep.title), \(substep.duration)")
-//        }
-//    }
     
     private func convertToEvents(
         buildSteps: BuildStep
@@ -108,11 +98,17 @@ extension String {
 }
 
 extension BuildStep {
-    func output() {
-        print("\(duration)\t\(title)")
+    var description: String {
+        var description = "\(duration)\t\(title)\n\n"
         
         for substep in subSteps {
-            print("\t\t\(substep.duration)\t\(substep.title)")
+            description.append(String(format: "\t%0.2f\t\(substep.title)\n", substep.duration))
         }
+        
+        return description
+    }
+    
+    func output() {
+        print(description)
     }
 }

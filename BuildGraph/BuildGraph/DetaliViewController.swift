@@ -59,8 +59,6 @@ class DetaliViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
-
-    
     let parser = RealBuildLogParser()
     let uiSettings = UISettings()
     
@@ -136,7 +134,16 @@ class DetaliViewController: NSViewController {
         guard let event = layer?.event(at: coordinate)
         else { return }
               
-        parser.output(event: event)
+        let popover = NSStoryboard(name: "Main", bundle: nil)
+            .instantiateController(withIdentifier: "DetailPopover") as! DetailPopoverController
+        _ = popover.view
+        popover.text = parser.description(event: event)
+        
+        present(popover,
+                asPopoverRelativeTo: CGRect(x: coordinate.x, y: coordinate.y, width: 10, height: 10),
+                of: contentView,
+                preferredEdge: .maxX,
+                behavior: .transient)
     }
     
     override func viewDidAppear() {
@@ -144,7 +151,6 @@ class DetaliViewController: NSViewController {
         
         view.window!.toolbar = toolbar
         
-//        loadAndInsert()
         addMouseTracking()
         view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
         updateState()
