@@ -99,10 +99,10 @@ extension String {
 
 extension BuildStep {
     var description: String {
-        var description = "\(duration)\t\(title)\n\n"
+        var description = String(format: "%0.2f \(title)\n\n", duration)
         
         for substep in subSteps {
-            description.append(String(format: "\t%0.2f\t\(substep.title)\n", substep.duration))
+            description.append(String(format: "%0.2f\t\(substep.title)\n", substep.duration))
         }
         
         return description
