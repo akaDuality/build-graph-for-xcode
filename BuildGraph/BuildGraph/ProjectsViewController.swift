@@ -24,6 +24,14 @@ class ProjectsViewController: NSViewController {
         tableView.delegate = self
     }
     
+    func select(project: String) {
+        guard let row = projects.firstIndex(of: project) else {
+            return
+        }
+        tableView.selectRowIndexes(.init(integer: row), byExtendingSelection: false)
+        delegate?.didSelect(project: project)
+    }
+    
     var projects: [String] = [] {
         didSet {
             tableView.reloadData()

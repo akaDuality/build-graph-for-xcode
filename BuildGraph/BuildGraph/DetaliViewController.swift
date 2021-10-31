@@ -65,14 +65,18 @@ class DetaliViewController: NSViewController {
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBAction func refresh(_ sender: Any) {
         if let activityLogURL = activityLogURL {
-            loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL)
+            loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL, didLoad: {})
         }
     }
     
     private var activityLogURL: URL?
     private var depsURL: URL?
     
-    func loadAndInsert(activityLogURL: URL, depsURL: URL?) {
+    func loadAndInsert(
+        activityLogURL: URL,
+        depsURL: URL?,
+        didLoad: @escaping () -> Void
+    ) {
         layer?.removeFromSuperlayer()
         
         self.activityLogURL = activityLogURL
@@ -96,6 +100,7 @@ class DetaliViewController: NSViewController {
                 
                 DispatchQueue.main.async {
                     showEvents(events: events, deps: dependencies)
+                    didLoad()
                 }
                 
             } catch let error {

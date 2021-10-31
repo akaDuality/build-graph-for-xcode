@@ -13,6 +13,9 @@ import XCLogParser
 
 class SplitController: NSSplitViewController {
     
+    
+    private let uiSettings = UISettings()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +23,10 @@ class SplitController: NSSplitViewController {
         
         let pathFinder = PathFinder(logOptions: .empty)
         projects.projects = try! pathFinder.projects()
+        
+        if let selectedProject = uiSettings.selectedProject {
+            projects.select(project: selectedProject)
+        }
     }
     
     var projects: ProjectsViewController! {
@@ -47,7 +54,11 @@ extension SplitController: ProjectsViewControllerDelegate {
             let activityLogURL = try pathFinder.activityLogURL()
             let depsURL = try? pathFinder.buildGraphURL()
             
-            detail.loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL)
+            detail.loadAndInsert(
+                activityLogURL: activityLogURL,
+                depsURL: depsURL) {
+                    self.uiSettings.selectedProject = project // Save only after success parsing
+                }
         } catch let error {
             // TODO: Handle
         }

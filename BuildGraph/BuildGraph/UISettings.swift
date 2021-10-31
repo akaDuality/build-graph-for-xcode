@@ -16,6 +16,9 @@ class UISettings {
     
     @Storage(key: "showPerformance", defaultValue: false)
     var showPerformance: Bool
+    
+    @Storage(key: "selectedProject", defaultValue: nil)
+    var selectedProject: String?
 }
 
 @propertyWrapper
