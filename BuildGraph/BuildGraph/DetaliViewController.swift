@@ -27,6 +27,8 @@ class DetaliViewController: NSViewController {
     @IBOutlet weak var linkVisibility: NSSwitch!
     @IBOutlet weak var performanceVisibility: NSSwitch!
     
+    @IBOutlet weak var shareButton: NSToolbarItem!
+    
     @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
         let isOn = sender.state == .on
         layer?.showSubtask = isOn
@@ -61,12 +63,20 @@ class DetaliViewController: NSViewController {
     
     let parser = RealBuildLogParser()
     let uiSettings = UISettings()
+    let imageSaveService = ImageSaveService()
     
+    // MARK: - Actions
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBAction func refresh(_ sender: Any) {
         if let activityLogURL = activityLogURL {
             loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL, didLoad: {})
         }
+    }
+    
+    @IBAction func shareDidPressed(_ sender: Any) {
+        imageSaveService.saveImage(
+            name: "\(parser.title).png",
+            view: contentView)
     }
     
     private var activityLogURL: URL?
@@ -78,6 +88,7 @@ class DetaliViewController: NSViewController {
         didLoad: @escaping () -> Void
     ) {
         layer?.removeFromSuperlayer()
+        shareButton.isEnabled = false
         
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL
@@ -127,6 +138,7 @@ class DetaliViewController: NSViewController {
         
         loadingIndicator.stopAnimation(self)
         updateState()
+        shareButton.isEnabled = true
     }
     
     override func viewDidLoad() {

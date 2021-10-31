@@ -18,6 +18,7 @@
 		1EB1A8D6272DC1A500D31AB8 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D5272DC1A500D31AB8 /* ProjectsViewController.swift */; };
 		1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */; };
 		1EB1A8DA272E9EC300D31AB8 /* DetailPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */; };
+		1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */; };
 		1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */; };
 		1EC72584271D436900352213 /* Drinkit.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72583271D436900352213 /* Drinkit.json */; };
 		1EC72E24271D4D3800352213 /* Doner 42.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72E23271D4D3800352213 /* Doner 42.json */; };
@@ -62,6 +63,7 @@
 		1EB1A8D5272DC1A500D31AB8 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitController.swift; sourceTree = "<group>"; };
 		1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopoverController.swift; sourceTree = "<group>"; };
+		1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveService.swift; sourceTree = "<group>"; };
 		1EB93615272BCECF00EF775B /* M1.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = M1.xcactivitylog; sourceTree = "<group>"; };
 		1EB93C09272BCF9D00EF775B /* Intel_i5.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intel_i5.xcactivitylog; sourceTree = "<group>"; };
 		1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "targetGraph-Tuist.txt"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				1EDB5E3627135F0000741EEF /* DetaliViewController.swift */,
 				1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */,
 				1E2D7A5427288521009ED389 /* UISettings.swift */,
+				1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */,
 				1EDB5E3827135F0100741EEF /* Assets.xcassets */,
 				1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */,
 				1EB1A8D4272DC17100D31AB8 /* Samples */,
@@ -339,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */,
 				1EB1A8D6272DC1A500D31AB8 /* ProjectsViewController.swift in Sources */,
 				1EDB5E3727135F0000741EEF /* DetaliViewController.swift in Sources */,
 				1EB1A8DA272E9EC300D31AB8 /* DetailPopoverController.swift in Sources */,
