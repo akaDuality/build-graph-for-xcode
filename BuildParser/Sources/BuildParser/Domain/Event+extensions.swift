@@ -90,8 +90,14 @@ extension Array where Element == Event {
         return events(at: date).count
     }
     
-    private func events(at date: Date) -> [Event] {
-        return self.filter { $0.stepsHit(time: date) }
+    private func events(at time: Date) -> [Event] {
+        return filter { event in
+            if event.steps.count > 0 {
+                return event.stepsHit(time: time)
+            } else {
+                return event.hit(time: time)
+            }
+        }
     }
     
     func periods(concurrency: Int) -> [Date] {

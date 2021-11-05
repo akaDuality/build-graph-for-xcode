@@ -28,6 +28,10 @@ class DetailPopoverController: NSViewController {
         
         set {}
     }
+    
+    @IBAction func close(_ sender: Any) {
+        dismiss(self)
+    }
 }
 
 extension NSTextView {

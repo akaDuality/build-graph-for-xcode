@@ -11,10 +11,8 @@ import AppKit
 
 class EventLayer: CALayer {
     internal init(
-        event: Event,
-        isLast: Bool) {
+        event: Event) {
         self.event = event
-        self.isLast = isLast
         self.textLayer = CATextLayer()
         self.stepShapes = [CALayer]()
         super.init()
@@ -39,7 +37,7 @@ class EventLayer: CALayer {
         let layer = layer as! EventLayer
         
         self.event = layer.event
-        self.isLast = layer.isLast
+        self.spaceToRigth = layer.spaceToRigth
         self.textLayer = layer.textLayer
         self.stepShapes = layer.stepShapes
         
@@ -47,7 +45,11 @@ class EventLayer: CALayer {
     }
     
     let event: Event
-    let isLast: Bool
+    var spaceToRigth: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     let textLayer: CATextLayer
     var stepShapes: [CALayer]
    
@@ -83,7 +85,7 @@ class EventLayer: CALayer {
     }
     
     private func layoutText() {
-        let textWidth: CGFloat = 150 // TODO: calculate on fly
+        let textWidth: CGFloat = 200 // TODO: calculate on fly
         let textOffset: CGFloat = 2
         textLayer.string = event.description
         textLayer.frame = CGRect(
@@ -92,12 +94,19 @@ class EventLayer: CALayer {
             width: textWidth,
             height: bounds.height)
         
-        if isLast {
+        if spaceToRigth < textWidth {
             textLayer.alignmentMode = .right
-            textLayer.frame = bounds
-                .offsetBy(dx: -textOffset*4,
-                          dy: 0)
-            textLayer.foregroundColor = Colors.backColor
+            textLayer.foregroundColor = Colors.textInvertedColor()
+            
+            if self.frame.width < textWidth {
+                textLayer.frame = textLayer.frame
+                    .offsetBy(dx: -textOffset*4 - textWidth - self.frame.width,
+                              dy: 0)
+            } else {
+                textLayer.frame = textLayer.frame
+                    .offsetBy(dx: -textOffset*4 - textWidth,
+                              dy: 0)
+            }
         }
     }
     

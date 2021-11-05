@@ -763,9 +763,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hZc-VE-Nmg">
+                                <rect key="frame" x="256" y="353" width="44" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hZc-VE-Nmg" secondAttribute="height" multiplier="1:1" id="Mqf-NN-OKW"/>
+                                    <constraint firstAttribute="height" constant="44" id="anC-zn-sTd"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="xmark.circle.fill" catalog="system" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="jHv-dR-Dzy">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="close" target="GBZ-4I-UCW" id="ql4-wH-eAn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Tvf-QJ-feL" firstAttribute="bottom" secondItem="Rli-Je-9hO" secondAttribute="bottom" id="4U7-WT-AxX"/>
+                            <constraint firstAttribute="trailing" secondItem="hZc-VE-Nmg" secondAttribute="trailing" id="LjF-F1-Xcl"/>
+                            <constraint firstItem="hZc-VE-Nmg" firstAttribute="top" secondItem="Uwn-no-r9m" secondAttribute="top" id="QL6-yv-hC2"/>
                             <constraint firstItem="Rli-Je-9hO" firstAttribute="leading" secondItem="Tvf-QJ-feL" secondAttribute="leading" id="ZNG-Md-2Fu"/>
                             <constraint firstItem="Rli-Je-9hO" firstAttribute="trailing" secondItem="Tvf-QJ-feL" secondAttribute="trailing" id="wnU-Z2-xU1"/>
                             <constraint firstItem="Rli-Je-9hO" firstAttribute="top" secondItem="Tvf-QJ-feL" secondAttribute="top" id="yLb-8s-nfr"/>

@@ -19,6 +19,10 @@ class UISettings {
     
     @Storage(key: "selectedProject", defaultValue: nil)
     var selectedProject: String?
+    
+    func removeSelectedProject() {
+        UserDefaults.standard.removeObject(forKey: "selectedProject")
+    }
 }
 
 @propertyWrapper

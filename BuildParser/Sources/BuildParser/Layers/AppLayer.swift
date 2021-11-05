@@ -19,7 +19,7 @@ extension CALayer {
 }
 
 public class AppLayer: CALayer {
-    let events: [Event]
+    public let events: [Event]
     
     public var dependencies: [Dependency] = [] {
         didSet {

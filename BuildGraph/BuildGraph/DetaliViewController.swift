@@ -1,5 +1,5 @@
 //
-//  DetaliViewController.swift
+//  DetailViewController.swift
 //  BuildGraph
 //
 //  Created by Mikhail Rubanov on 10.10.2021.

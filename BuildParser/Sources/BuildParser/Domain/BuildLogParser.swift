@@ -35,7 +35,7 @@ public class XcodeBuildTimesParser {
 
 extension DateFormatter {
     public static let iso8601Full: DateFormatter = {
-        dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ") // TODO: what is SSS...
+        dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS") // TODO: what is SSS...
     }()
     
     public static let iso8601Full_Z: DateFormatter = {

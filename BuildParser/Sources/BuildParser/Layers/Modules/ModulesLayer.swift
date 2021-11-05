@@ -83,8 +83,7 @@ class ModulesLayer: CALayer {
         
         for (i, event) in events.enumerated() {
             let layer = EventLayer(
-                event: event,
-                isLast: i == events.count - 1)
+                event: event)
             layer.contentsScale = scale
             shapes.append(layer)
             addSublayer(layer)
@@ -128,6 +127,7 @@ class ModulesLayer: CALayer {
             let rect = rects[i]
             let frame = frame(for: i, rect: rect)
             shape.frame = frame
+            shape.spaceToRigth = self.frame.maxX - frame.maxX
             
             // TODO: Blockers should be detected by links
 //            let event = events[i]

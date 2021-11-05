@@ -24,7 +24,7 @@ public class RealBuildLogParser {
         buildSteps.title
     }
     
-    public func parse(logURL: URL) throws -> [Event] {
+    public func parse(logURL: URL, compilationOnly: Bool) throws -> [Event] {
         let activityLog = try activityLogParser.parseActivityLogInURL(
             logURL,
             redacted: false,
@@ -32,30 +32,34 @@ public class RealBuildLogParser {
         
         buildSteps = try buildParser.parse(activityLog: activityLog)
        
-        let events = convertToEvents(buildSteps: buildSteps)
+        let events = convertToEvents(buildSteps: buildSteps, compilationOnly: compilationOnly)
         return events
     }
     
-    public func description(event: Event) -> String {
+    public func step(for event: Event) -> BuildStep? {
         let step = buildSteps.subSteps.first { step in
             step.title.hasSuffix(event.taskName)
-        }!
+        }
         
-        return step.description
+        return step
     }
     
-    private func convertToEvents(
-        buildSteps: BuildStep
+    func convertToEvents(
+        buildSteps: BuildStep,
+        compilationOnly: Bool
     ) -> [Event] {
-        let dateFormatter = DateFormatter.iso8601Full
+        let dateFormatter = DateFormatter.iso8601Full_Z
         let events = buildSteps.subSteps
             .compactMap { step -> Event? in
-                let substeps = step
-                    .subSteps
-                    .filter { $0.isCompilationStep() }
+                var substeps = step.subSteps
+                
+                if compilationOnly {
+                    substeps = substeps.filter { $0.isCompilationStep() }
+                }
                 
                 guard let startDate = substeps.first?.startDate,
-                      let lastDate = substeps.last?.endDate else {
+                      let lastDate = substeps.last?.endDate
+                else {
                           return nil
                       }
                 
@@ -63,12 +67,31 @@ public class RealBuildLogParser {
                     taskName: step.title.without_Build_target,
                     startDate: dateFormatter.date(from: startDate)!,
                     endDate: dateFormatter.date(from: lastDate)!,
-                    steps: substeps.map { substep in
-                        Event(taskName: substep.title,
-                              startDate: dateFormatter.date(from: substep.startDate)!,
-                              endDate: dateFormatter.date(from: substep.endDate)!,
-                              steps: [])
-                    }
+                    steps: convertToEvents(subSteps: substeps)
+                )
+            }
+            .sorted { lhsEvent, rhsEvent in
+                if lhsEvent.startDate == rhsEvent.startDate {
+                    return lhsEvent.taskName < rhsEvent.taskName
+                } else {
+                    return lhsEvent.startDate < rhsEvent.startDate
+                }
+            }
+        
+        return events
+    }
+    
+    public func convertToEvents(
+        subSteps: [BuildStep]
+    ) -> [Event] {
+        let dateFormatter = DateFormatter.iso8601Full_Z
+        let events = subSteps
+            .map { step -> Event in
+                return Event(
+                    taskName: step.title.without_Build_target,
+                    startDate: dateFormatter.date(from: step.startDate)!,
+                    endDate: dateFormatter.date(from: step.endDate)!,
+                    steps: convertToEvents(subSteps: step.subSteps)
                 )
             }
             .sorted { lhsEvent, rhsEvent in

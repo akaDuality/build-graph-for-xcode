@@ -1,31 +1,37 @@
 {
   "images" : [
     {
+      "filename" : "Build Graph icon16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
+      "filename" : "Build Graph icon32-1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
+      "filename" : "Build Graph icon32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
+      "filename" : "Build Graph icon64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
+      "filename" : "Build Graph icon@2x.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
+      "filename" : "Build Graph icon256-1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
@@ -37,16 +43,19 @@
       "size" : "256x256"
     },
     {
+      "filename" : "Build Graph icon512-1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
+      "filename" : "Build Graph icon512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
+      "filename" : "Build Graph icon1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

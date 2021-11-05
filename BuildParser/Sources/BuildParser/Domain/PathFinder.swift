@@ -52,13 +52,40 @@ public class PathFinder {
        
         
         for filePath in try contentsOfDirectory(intemediates.path) {
-            // TODO: Select with proper ID
+            // TODO: Select with proper ID or latest
+            
             if filePath.hasSuffix("-targetGraph.txt") {
                 return intemediates.appendingPathComponent(filePath)
             }
         }
         
-        throw Error.graphNotFound
+        let graph = try findLatestForProject(inDir: intemediates, filter: { url in
+            url.path.hasSuffix("-targetGraph.txt")
+        })
+        return graph
+    }
+    
+    public func findLatestForProject(inDir directory: URL,
+                                     filter: (URL) -> Bool) throws -> URL {
+        
+        let fileManager = FileManager.default
+        
+        let files = try fileManager.contentsOfDirectory(at: directory,
+                                                        includingPropertiesForKeys: [.contentModificationDateKey],
+                                                        options: .skipsHiddenFiles)
+        let sorted = try files.filter(filter)
+            .sorted {
+                let lhv = try $0.resourceValues(forKeys: [.contentModificationDateKey])
+                let rhv = try $1.resourceValues(forKeys: [.contentModificationDateKey])
+                guard let lhDate = lhv.contentModificationDate, let rhDate = rhv.contentModificationDate else {
+                    return false
+                }
+                return lhDate.compare(rhDate) == .orderedDescending
+            }
+        guard let match = sorted.first else {
+            throw Error.graphNotFound
+        }
+        return match
     }
     
     public func activityLogURL() throws -> URL {

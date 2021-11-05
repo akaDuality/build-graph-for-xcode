@@ -84,6 +84,11 @@ class TimelineLayer: CALayer {
         let secondHeight: CGFloat = 10
         
         let secondWidth: CGFloat = frame.width / CGFloat(eventsDuration.seconds)
+       
+        guard eventsDuration.seconds > 1 else {
+            return // Drawing starts from seconds.
+            // TODO: Add milliseconds for this case
+        }
         
         for second in 1..<eventsDuration.seconds {
             let tickLayer = ticks[second]
