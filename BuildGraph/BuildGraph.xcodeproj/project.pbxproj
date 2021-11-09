@@ -69,7 +69,7 @@
 		1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "targetGraph-Tuist.txt"; sourceTree = "<group>"; };
 		1EC72583271D436900352213 /* Drinkit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Drinkit.json; sourceTree = "<group>"; };
 		1EC72E23271D4D3800352213 /* Doner 42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Doner 42.json"; sourceTree = "<group>"; };
-		1EDB5E3127135F0000741EEF /* BuildGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EDB5E3127135F0000741EEF /* BuildDeps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildDeps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E3427135F0000741EEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDB5E3627135F0000741EEF /* DetaliViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetaliViewController.swift; sourceTree = "<group>"; };
 		1EDB5E3827135F0100741EEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		1EDB5E3227135F0000741EEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EDB5E3127135F0000741EEF /* BuildGraph.app */,
+				1EDB5E3127135F0000741EEF /* BuildDeps.app */,
 				1EDB5E4227135F0100741EEF /* BuildGraphTests.xctest */,
 				1EDB5E4C27135F0100741EEF /* BuildGraphUITests.xctest */,
 			);
@@ -199,9 +199,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1EDB5E3027135F0000741EEF /* BuildGraph */ = {
+		1EDB5E3027135F0000741EEF /* BuildDeps */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraph" */;
+			buildConfigurationList = 1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildDeps" */;
 			buildPhases = (
 				1EDB5E2D27135F0000741EEF /* Sources */,
 				1EDB5E2E27135F0000741EEF /* Frameworks */,
@@ -211,13 +211,13 @@
 			);
 			dependencies = (
 			);
-			name = BuildGraph;
+			name = BuildDeps;
 			packageProductDependencies = (
 				1EDB5E6027135F1600741EEF /* BuildParser */,
 				1E16961727246EC5006D93CE /* GraphParser */,
 			);
 			productName = BuildGraph;
-			productReference = 1EDB5E3127135F0000741EEF /* BuildGraph.app */;
+			productReference = 1EDB5E3127135F0000741EEF /* BuildDeps.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1EDB5E4127135F0100741EEF /* BuildGraphTests */ = {
@@ -292,7 +292,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1EDB5E3027135F0000741EEF /* BuildGraph */,
+				1EDB5E3027135F0000741EEF /* BuildDeps */,
 				1EDB5E4127135F0100741EEF /* BuildGraphTests */,
 				1EDB5E4B27135F0100741EEF /* BuildGraphUITests */,
 			);
@@ -374,12 +374,12 @@
 /* Begin PBXTargetDependency section */
 		1EDB5E4427135F0100741EEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1EDB5E3027135F0000741EEF /* BuildGraph */;
+			target = 1EDB5E3027135F0000741EEF /* BuildDeps */;
 			targetProxy = 1EDB5E4327135F0100741EEF /* PBXContainerItemProxy */;
 		};
 		1EDB5E4E27135F0100741EEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1EDB5E3027135F0000741EEF /* BuildGraph */;
+			target = 1EDB5E3027135F0000741EEF /* BuildDeps */;
 			targetProxy = 1EDB5E4D27135F0100741EEF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -673,7 +673,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraph" */ = {
+		1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildDeps" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1EDB5E5727135F0100741EEF /* Debug */,
