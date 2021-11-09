@@ -136,6 +136,7 @@ Crypto in Crypto (explicit)
     }
     
     func test_wholeFile() throws {
+        throw XCTSkip("Periods calculates from subtask")
         let url = Bundle.module.url(forResource: "targetGraph", withExtension: "txt")!
         let string = try String(contentsOf: url, encoding: .utf8)
         let dependencies = parseFile(string)
