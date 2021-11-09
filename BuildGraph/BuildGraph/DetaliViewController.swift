@@ -19,7 +19,79 @@ class FlippedView: NSView {
     }
 }
 
-class DetaliViewController: NSViewController {
+class DetailView: NSView {
+    var modulesLayer: AppLayer?
+    
+    @IBOutlet weak var scrollView: NSScrollView!
+    let contentView = FlippedView()
+    
+    @IBOutlet weak var loadingIndicator: NSProgressIndicator!
+    func showEvents(events: [Event]) {
+        modulesLayer = AppLayer(
+            events: events,
+            scale: NSScreen.main!.backingScaleFactor)
+        needsLayout = true
+        
+        contentView.wantsLayer = true
+        contentView.layer?.addSublayer(modulesLayer!)
+        
+        scrollView.documentView = contentView
+        scrollView.allowsMagnification = true
+        
+        loadingIndicator.stopAnimation(self)
+    }
+    
+    override func updateLayer() {
+        super.updateLayer()
+        
+//        guard let events = modulesLayer?.events,
+//              let dependencies = modulesLayer?.dependencies
+//        else {
+//            return
+//        }
+        
+        modulesLayer?.setNeedsLayout()
+        
+//        removeLayer()
+        
+//        modulesLayer = AppLayer(
+//            events: events,
+//            scale: NSScreen.main!.backingScaleFactor)
+//        modulesLayer!.dependencies = dependencies
+    }
+    
+    override func viewDidChangeEffectiveAppearance() {
+        super.viewDidChangeEffectiveAppearance()
+        
+        guard let events = modulesLayer?.events else {
+            return
+        }
+        
+        removeLayer()
+        showEvents(events: events)
+        updateSettings()
+    }
+    
+    func removeLayer() {
+        for layer in (contentView.layer?.sublayers ?? []) {
+            layer.removeFromSuperlayer()
+        }
+        
+        layer?.removeFromSuperlayer()
+        self.layer = nil
+        contentView.layer?.addSublayer(modulesLayer!)
+    }
+    
+    // TODO: Move setting to layer initialization
+    let uiSettings = UISettings()
+    private func updateSettings() {
+        modulesLayer?.showPerformance = uiSettings.showPerformance
+        modulesLayer?.showLinks = uiSettings.showLinks
+        modulesLayer?.showSubtask = uiSettings.showSubtask
+    }
+}
+
+class DetailViewController: NSViewController {
 
     // MARK: - Toolbar
     @IBOutlet var toolbar: NSToolbar!
@@ -31,18 +103,18 @@ class DetaliViewController: NSViewController {
     
     @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
         let isOn = sender.state == .on
-        layer?.showSubtask = isOn
+        view().modulesLayer?.showSubtask = isOn
         uiSettings.showSubtask = isOn
     }
     
     @IBAction func linkVisibilityDidChange(_ sender: NSSwitch) {
         let isOn = sender.state == .on
-        layer?.showLinks = isOn
+        view().modulesLayer?.showLinks = isOn
         uiSettings.showLinks = isOn
     }
     @IBAction func performanceVisibilityDidChange(_ sender: NSSwitch) {
         let isOn = sender.state == .on
-        layer?.showPerformance = isOn
+        view().modulesLayer?.showPerformance = isOn
         uiSettings.showPerformance = isOn
     }
     
@@ -57,16 +129,15 @@ class DetaliViewController: NSViewController {
     }
     
     // MARK: - Content
-    var layer: AppLayer?
-    @IBOutlet weak var scrollView: NSScrollView!
-    let contentView = FlippedView()
-    
     let parser = RealBuildLogParser()
     let uiSettings = UISettings()
     let imageSaveService = ImageSaveService()
     
+    func view() -> DetailView {
+        view as! DetailView
+    }
+    
     // MARK: - Actions
-    @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     @IBAction func refresh(_ sender: Any) {
         if let activityLogURL = activityLogURL {
             loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL, didLoad: {})
@@ -76,19 +147,15 @@ class DetaliViewController: NSViewController {
     @IBAction func shareDidPressed(_ sender: Any) {
         imageSaveService.saveImage(
             name: "\(parser.title).png",
-            view: contentView)
+            view: view().contentView)
     }
     
     private var activityLogURL: URL?
     private var depsURL: URL?
    
-    private func removeLayer() {
-        for layer in (contentView.layer?.sublayers ?? []) {
-            layer.removeFromSuperlayer()
-        }
-        
-        layer?.removeFromSuperlayer()
-        self.layer = nil
+    func clear() {
+        view().removeLayer()
+        shareButton.isEnabled = false
     }
     
     func loadAndInsert(
@@ -96,18 +163,16 @@ class DetaliViewController: NSViewController {
         depsURL: URL?,
         didLoad: @escaping () -> Void
     ) {
-        removeLayer()
-        
-        shareButton.isEnabled = false
+        clear()
         
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL
         
-        loadingIndicator.startAnimation(self)
+        view().loadingIndicator.startAnimation(self)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             do {
-                let events = try parser.parse(logURL: activityLogURL)
+                let events = try parser.parse(logURL: activityLogURL, compilationOnly: true)
                 
                 var dependencies = [Dependency]()
                 
@@ -119,8 +184,10 @@ class DetaliViewController: NSViewController {
                     }
                 }
                 
+                events.connect(by: dependencies)
+                
                 DispatchQueue.main.async {
-                    showEvents(events: events, deps: dependencies)
+                    self.show(events: events, deps: dependencies, title: self.parser.title)
                     didLoad()
                 }
                 
@@ -131,22 +198,9 @@ class DetaliViewController: NSViewController {
         }
     }
     
-    func showEvents(events: [Event], deps: [Dependency]) {
-        layer = AppLayer(
-            events: events,
-            scale: NSScreen.main!.backingScaleFactor)
-        layer!.dependencies = deps
-        view.needsLayout = true
-        
-        view.window?.title = parser.title
-        
-        contentView.wantsLayer = true
-        contentView.layer?.addSublayer(layer!)
-        
-        scrollView.documentView = contentView
-        scrollView.allowsMagnification = true
-        
-        loadingIndicator.stopAnimation(self)
+    func show(events: [Event], deps: [Dependency], title: String) {
+        view().showEvents(events: events)
+        view.window?.title = title
         updateState()
         shareButton.isEnabled = true
     }
@@ -156,28 +210,52 @@ class DetaliViewController: NSViewController {
     }
                                   
     @objc func didClick(_ recognizer: NSClickGestureRecognizer) {
-        let coordinate = recognizer.location(in: contentView)
+        let coordinate = recognizer.location(in: view().contentView)
         
-        guard let event = layer?.event(at: coordinate)
+        guard let event = view().modulesLayer?.event(at: coordinate)
         else { return }
               
-        let popover = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "DetailPopover") as! DetailPopoverController
-        _ = popover.view
-        popover.text = parser.description(event: event)
+//        guard let step = parser.step(for: event)
+//        else { return }
+//        let events = parser.convertToEvents(subSteps: step.subSteps) // complation files has type other, that dosn't path filter
+        let events = event.steps
+       
+        guard events.count > 0 else {
+            return // TODO: Give feedback
+        }
+        let child = controllerForDetailsPopover(events: events, title: event.taskName)
         
-        present(popover,
+        child.preferredContentSize = CGSize(width: 1000, height: 500)
+        present(child,
                 asPopoverRelativeTo: CGRect(x: coordinate.x, y: coordinate.y, width: 10, height: 10),
-                of: contentView,
+                of: view().contentView,
                 preferredEdge: .maxX,
                 behavior: .transient)
     }
     
+//    private func controllerForDetailsPopover(step: BuildStep) -> NSViewController {
+//        let popover = NSStoryboard(name: "Main", bundle: nil)
+//            .instantiateController(withIdentifier: "DetailPopover") as! DetailPopoverController
+//        _ = popover.view
+//        popover.text = step.description()
+//        return popover
+//    }
+    
+    private func controllerForDetailsPopover(events: [Event], title: String) -> NSViewController {
+        let popover = NSStoryboard(name: "Main", bundle: nil)
+            .instantiateController(withIdentifier: "Detail") as! DetailViewController
+        _ = popover.view
+        
+        popover.show(events: events,
+                     deps: [],
+                     title: title)
+        return popover
+    }
+    
+    
     override func viewDidAppear() {
         super.viewDidAppear()
-        
-        view.window!.toolbar = toolbar
-        
+
         addMouseTracking()
         view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
         updateState()
@@ -186,7 +264,7 @@ class DetaliViewController: NSViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         
-        guard let layer = layer else {
+        guard let layer = view().modulesLayer else {
             return
         }
 
@@ -201,12 +279,12 @@ class DetaliViewController: NSViewController {
                 height: max(contentHeight, view.frame.height))
             layer.layoutIfNeeded()
         }
-        contentView.frame = layer.bounds
-        contentView.bounds = layer.frame
+        view().contentView.frame = layer.bounds
+        view().contentView.bounds = layer.frame
         
-        view.window?.contentMinSize = NSSize(
-            width: 500,
-            height: min(400, contentHeight))
+//        view.window?.contentMinSize = NSSize(
+//            width: 500,
+//            height: min(400, contentHeight))
     }
     
     var trackingArea: NSTrackingArea!
@@ -234,18 +312,18 @@ class DetaliViewController: NSViewController {
     }
     
     override func mouseMoved(with event: NSEvent) {
-        let coordinate = contentView.convert(
+        let coordinate = view().contentView.convert(
             event.locationInWindow,
             from: nil)
         
-        layer?.highlightEvent(at: coordinate)
-        layer?.drawConcurrency(at: coordinate)
+        view().modulesLayer?.highlightEvent(at: coordinate)
+        view().modulesLayer?.drawConcurrency(at: coordinate)
     }
     
     override func mouseExited(with event: NSEvent) {
         view.window?.acceptsMouseMovedEvents = false
         
-        layer?.clearHighlightedEvent()
-        layer?.clearConcurrency()
+        view().modulesLayer?.clearHighlightedEvent()
+        view().modulesLayer?.clearConcurrency()
     }
 }

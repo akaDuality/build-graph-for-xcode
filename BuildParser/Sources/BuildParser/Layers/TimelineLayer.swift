@@ -54,7 +54,7 @@ class TimelineLayer: CALayer {
     private func setup(scale: CGFloat) {
         for _ in 0..<eventsDuration.seconds {
             let tickLayer = CALayer()
-            tickLayer.backgroundColor = Colors.timeColor
+            tickLayer.backgroundColor = Colors.timeColor()
             addSublayer(tickLayer)
             
             ticks.append(tickLayer)
@@ -62,7 +62,7 @@ class TimelineLayer: CALayer {
         
         for _ in 0...eventsDuration.minutes {
             let titleLayer = CATextLayer()
-            titleLayer.foregroundColor = Colors.timeColor
+            titleLayer.foregroundColor = Colors.timeColor()
             titleLayer.fontSize = 20
             
             addSublayer(titleLayer)
@@ -70,7 +70,7 @@ class TimelineLayer: CALayer {
             minuteTitles.append(titleLayer)
         }
         
-        currentTime.foregroundColor = Colors.timeColor
+        currentTime.foregroundColor = Colors.timeColor()
         currentTime.fontSize = 20
         
         addSublayer(currentTime)

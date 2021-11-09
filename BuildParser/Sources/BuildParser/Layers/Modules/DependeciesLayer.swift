@@ -17,13 +17,12 @@ class DependeciesLayer: ModulesLayer {
         }
     }
     
-    var dependencies: [Dependency] = []
-    
     lazy var criticalDependenciesLayer: CAShapeLayer = {
         let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = Colors.criticalDependencyColor
-        bezierLayer.fillColor = Colors.clear
+        bezierLayer.strokeColor = Colors.criticalDependencyColor()
+        bezierLayer.fillColor = Colors.clear()
         bezierLayer.lineWidth = 1
+        bezierLayer.contentsScale = contentsScale
         addSublayer(bezierLayer)
         
         return bezierLayer
@@ -31,9 +30,10 @@ class DependeciesLayer: ModulesLayer {
     
     lazy var regularDependenciesLayer: CAShapeLayer = {
         let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = Colors.regularDependencyColor
-        bezierLayer.fillColor = Colors.clear
+        bezierLayer.strokeColor = Colors.regularDependencyColor()
+        bezierLayer.fillColor = Colors.clear()
         bezierLayer.lineWidth = 1
+        bezierLayer.contentsScale = contentsScale
         addSublayer(bezierLayer)
         
         return bezierLayer
@@ -45,34 +45,71 @@ class DependeciesLayer: ModulesLayer {
         drawConnections(for: highlightedEvent)
     }
     
-    func drawConnections(for event: Event?) {
-        regularPath = CGMutablePath()
-        criticalPath = CGMutablePath()
-        
-        for dependency in dependencies {
-            
-            // TODO: Calc indexes at models layer
-            guard let fromIndex = events.index(name: dependency.target.target)
+    private func drawConnectionsToParents(for event: Event, drawParents: Bool) {
+        for parent in event.parents {
+            guard let fromIndex = events.index(name: event.taskName)
             else { continue }
             
-            for target in dependency.dependencies {
-                
-                let isHighlightedModule = target.target == event?.taskName
-                || dependency.target.target == event?.taskName
-                
-                guard let toIndex = events.index(name: target.target)
-                else { continue }
-                
-                guard fromIndex != toIndex
-                else { continue }
-                
+            let showChild = parent.taskName == highlightedEvent?.taskName
+            let showParent = event.taskName == highlightedEvent?.taskName
+            let isHighlightedModule = showChild || showParent
+            
+            guard let toIndex = events.index(name: parent.taskName)
+            else { continue }
+            
+            guard fromIndex != toIndex
+            else { continue }
+            
+            let isBlockerDependency = event.isBlocked(by: parent)
+            
+            let showBlockersOnly = isBlockerDependency && highlightedEvent == nil
+            if showBlockersOnly || isHighlightedModule {
                 connectModules(
                     from: shapes[toIndex],
                     to: shapes[fromIndex],
-                    on: regularPath,
-                    isHighlightedModule: isHighlightedModule
+                    isBlockerDependency: isBlockerDependency
                 )
             }
+            
+            if drawParents {
+                drawConnectionsToParents(for: parent, drawParents: false)
+            }
+        }
+    }
+    
+    private func connectModules(
+        from: CALayer,
+        to: CALayer,
+        isBlockerDependency: Bool)
+    {
+        connect(from: from.frame.rightCenter,
+                to: to.frame.leftCenter,
+                on: isBlockerDependency ? criticalPath : regularPath)
+    }
+    
+    private func connect(
+        from: CGPoint,
+        to: CGPoint,
+        on path: CGMutablePath)
+    {
+        let yOffset: CGFloat = (to.y - from.y) / 3 // max(10, to.x - from.x)
+        let xOffset: CGFloat = (to.x - from.x)
+        
+        path.move(to: from)
+        path.addCurve(to: to,
+                      control1: from.offset(x: yOffset * 4, y: yOffset / 2),
+                      control2: to.offset(x: -max(60, xOffset/2), y: 0),
+                      transform: .identity)
+    }
+    
+    func drawConnections(for event: Event?) {
+        regularPath = CGMutablePath()
+        criticalPath = CGMutablePath()
+       
+        for event in events {
+            // TODO: Draw parents after some user action. Press Alt for e.g.
+            let drawParents = true // event.parents.count < 20
+            drawConnectionsToParents(for: event, drawParents: drawParents)
         }
         
         regularDependenciesLayer.frame = bounds
@@ -84,37 +121,6 @@ class DependeciesLayer: ModulesLayer {
     
     var regularPath = CGMutablePath()
     var criticalPath = CGMutablePath()
-    
-    func connectModules(
-        from: CALayer,
-        to: CALayer,
-        on path: CGMutablePath,
-        isHighlightedModule: Bool)
-    {
-        let isBlockerDependency = (to.frame.minX - from.frame.maxX) / bounds.width < 0.05
-        
-        guard (isBlockerDependency && highlightedEvent == nil)
-                || isHighlightedModule else {
-                    return
-                }
-        
-        connect(from: from.frame.rightBottom,
-                to: to.frame.leftCenter,
-                on: isBlockerDependency ? criticalPath : regularPath)
-    }
-    
-    func connect(
-        from: CGPoint,
-        to: CGPoint,
-        on path: CGMutablePath)
-    {
-        let offset: CGFloat = max(10, to.x - from.x)
-        path.move(to: from)
-        path.addCurve(to: to,
-                      control1: from.offset(x: 0, y: 0),
-                      control2: to.offset(x: -offset, y: 0),
-                      transform: .identity)
-    }
 }
 
 extension CGRect {

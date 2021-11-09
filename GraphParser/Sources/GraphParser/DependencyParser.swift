@@ -61,7 +61,8 @@ public class DependencyParser {
     
     func parseTarget(_ input: String) -> Target {
         let regex = try! NSRegularExpression(
-            pattern: "(\\w*) in (\\w*)")
+            pattern: "(\\w*-?\\w*) in (\\w*)"
+        )
         
         let matche = regex
             .matches(in: input,

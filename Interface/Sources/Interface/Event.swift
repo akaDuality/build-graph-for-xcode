@@ -1,6 +1,8 @@
 import Foundation
 
-public struct Event: Equatable {
+public class Event: Equatable {
+    
+    
     public init(taskName: String,
                 startDate: Date,
                 endDate: Date,
@@ -15,4 +17,11 @@ public struct Event: Equatable {
     public let startDate: Date
     public let endDate: Date
     public let steps: [Event]
+    
+    public var parents: [Event] = []
+    
+    public static func == (lhs: Event, rhs: Event) -> Bool {
+        lhs.taskName == rhs.taskName
+        // TODO: Add data
+    }
 }

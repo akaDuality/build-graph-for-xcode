@@ -121,11 +121,15 @@ extension String {
 }
 
 extension BuildStep {
-    var description: String {
-        var description = String(format: "%0.2f \(title)\n\n", duration)
+    func description(prefixString: String = "") -> String {
+        var description = String(format: "%0.2f \(title)\n", duration)
         
         for substep in subSteps {
-            description.append(String(format: "%0.2f\t\(substep.title)\n", substep.duration))
+            if substep.subSteps.count > 0 {
+                description.append(substep.description(prefixString: prefixString + "\t"))
+            } else {
+                description.append(String(format: "\(prefixString)%0.2f\t\(substep.title)\n", substep.duration))
+            }
         }
         
         return description

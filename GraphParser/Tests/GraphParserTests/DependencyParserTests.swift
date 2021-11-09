@@ -12,6 +12,10 @@ import SnapshotTesting
 
 @testable import GraphParser
 
+// Use https://regex101.com to validate regex
+// HCaptcha-HCaptcha in HCaptcha, no dependencies
+// Crypto in Crypto, no dependencies
+// Crypto in Crypto (explicit)
 class BuildGraphTests: XCTestCase {
     
     let Crypto = Target(target: "Crypto",
@@ -88,6 +92,29 @@ nanopb in nanopb (implicit dependency via options '-framework nanopb' in build s
                        dependencies: [nanopb]))
     }
     
+    func test_circleDependency() throws {
+        let HCaptcha_HCaptcha = Target(target: "HCaptcha-HCaptcha", project: "HCaptcha")
+        let HCaptcha = Target(target: "HCaptcha", project: "HCaptcha")
+        
+        let dependencies = parseFile(
+"""
+Target dependency graph (2 targets)
+HCaptcha-HCaptcha in HCaptcha, no dependencies
+HCaptcha in HCaptcha, depends on:
+HCaptcha-HCaptcha in HCaptcha (explicit)
+"""
+        )
+        
+        XCTAssertNoDifference(
+            dependencies,
+            [
+                Dependency(target: HCaptcha_HCaptcha,
+                           dependencies: []),
+                Dependency(target: HCaptcha,
+                           dependencies: [HCaptcha_HCaptcha])
+            ])
+    }
+    
     func test_file() {
         let dependencies = parseFile(
 """
@@ -113,7 +140,10 @@ Crypto in Crypto (explicit)
         let string = try String(contentsOf: url, encoding: .utf8)
         let dependencies = parseFile(string)
 
-        assertSnapshot(matching: dependencies, as: .description)
+        assertSnapshot(matching: dependencies,
+                       as: .description
+//                       , record: true
+        )
     }
     
     func parse(_ input: String) -> Dependency {

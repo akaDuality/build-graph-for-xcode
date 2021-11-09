@@ -77,14 +77,14 @@ class ModulesLayer: CALayer {
     }
     
     private func setup(scale: CGFloat) {
-        higlightedLift.backgroundColor = Colors.liftColor
+        higlightedLift.backgroundColor = Colors.liftColor()
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
         
-        for (i, event) in events.enumerated() {
+        for (_, event) in events.enumerated() {
             let layer = EventLayer(
-                event: event)
-            layer.contentsScale = scale
+                event: event,
+                scale: scale)
             shapes.append(layer)
             addSublayer(layer)
         }
@@ -126,8 +126,7 @@ class ModulesLayer: CALayer {
         for (i, shape) in shapes.enumerated() {
             let rect = rects[i]
             let frame = frame(for: i, rect: rect)
-            shape.frame = frame
-            shape.spaceToRigth = self.frame.maxX - frame.maxX
+            shape.frame = frame 
             
             // TODO: Blockers should be detected by links
 //            let event = events[i]
@@ -135,9 +134,11 @@ class ModulesLayer: CALayer {
 //                shape.backgroundColor = .init(red: 1, green: 0, blue: 0, alpha: 1)
 //                    .copy(alpha: alpha(for: rect))
 //            } else {
-                shape.backgroundColor = rect.backgroundColor
-                    .copy(alpha: alpha(for: rect))
+//                shape.backgroundColor = rect.backgroundColor
+//                    .copy(alpha: alpha(for: rect))
 //            }
+            
+            shape.opacity = alpha(for: rect)
             
             if rect.event.taskName == highlightedEvent?.taskName {
                 higlightedLift.frame = CGRect(x: frame.minX,
@@ -159,15 +160,17 @@ class ModulesLayer: CALayer {
     
     public var intrinsicContentSize: CGSize {
         return CGSize(width: 5000,
-                      height: CGFloat(rects.count) * (height + vSpace) + PeriodsLayer.periodsHeight)
+                      height: CGFloat(rects.count) * (height + vSpace) + PeriodsLayer.periodsHeight + 100)
     }
     
     var height: CGFloat = 14
     let vSpace: CGFloat = 1
     
-    private func alpha(for rect: EventRelativeRect) -> CGFloat {
+    private func alpha(for rect: EventRelativeRect) -> Float {
+        // TODO: Draw all connections
         if let highlightedEvent = highlightedEvent {
-            if rect.event.domain == highlightedEvent.domain {
+            if rect.event.domain == highlightedEvent.domain
+                || highlightedEvent.parentsContains(rect.event.taskName) {
                 return 1
             } else {
                 return Colors.dimmingAlpha

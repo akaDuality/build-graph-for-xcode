@@ -21,12 +21,6 @@ extension CALayer {
 public class AppLayer: CALayer {
     public let events: [Event]
     
-    public var dependencies: [Dependency] = [] {
-        didSet {
-            modulesLayer.dependencies = dependencies
-        }
-    }
-    
     private let modulesLayer: DependeciesLayer
     private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
@@ -80,7 +74,6 @@ public class AppLayer: CALayer {
         self.periodsLayer = layer.periodsLayer
         self.fullframes = layer.fullframes
         self.timelineLayer = layer.timelineLayer
-        self.dependencies = layer.dependencies
         
         super.init(layer: layer)
     }
@@ -124,7 +117,7 @@ public class AppLayer: CALayer {
             addSublayer(layer)
         }
     
-        backgroundColor = Colors.backColor
+        backgroundColor = Colors.backColor()
     }
     
     public override func layoutSublayers() {

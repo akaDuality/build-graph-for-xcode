@@ -142,6 +142,27 @@ extension Array where Element == Event {
         let concAfter  = concurrency(at: event.endDate.addingTimeInterval(0.01))
         return concAfter > concBefore
     }
+    
+    public func connect(by deps: [Dependency]) {
+        for dep in deps {
+            for tagret in dep.dependencies {
+                let child = event(with: dep.target.target)
+                let parent = event(with: tagret.target)
+                
+                guard let parent = parent,
+                      let child = child
+                else { continue }
+                
+                child.parents.append(parent)
+            }
+        }
+    }
+    
+    func event(with name: String) -> Event? {
+        first { event in
+            event.taskName == name
+        }
+    }
 }
 
 extension Event {
@@ -161,6 +182,25 @@ extension Event {
     
     var dates: Set<Date> {
         Set(steps.map(\.startDate) + steps.map(\.endDate))
+    }
+    
+    func parentsContains(_ domain: String) -> Bool {
+        for parent in parents {
+            if parent.taskName == domain {
+                return true
+            }
+            
+            if parent.parentsContains(domain) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func isBlocked(by event: Event) -> Bool {
+        startDate.timeIntervalSince(event.endDate)
+        < 1
     }
 }
 

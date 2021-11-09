@@ -66,11 +66,11 @@ class ConcurrencyLayer: CALayer {
     }
     
     private func setup(scale: CGFloat) {
-        concurrencyLine.backgroundColor = Colors.concurencyColor
+        concurrencyLine.backgroundColor = Colors.concurencyColor()
         addSublayer(concurrencyLine)
         
         concurrencyTitle.contentsScale = scale
-        concurrencyTitle.foregroundColor = Colors.concurencyColor
+        concurrencyTitle.foregroundColor = Colors.concurencyColor()
         concurrencyTitle.fontSize = 20
         addSublayer(concurrencyTitle)
     }

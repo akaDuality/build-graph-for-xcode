@@ -80,3 +80,15 @@ extension LogOptions {
             strictProjectName: false)
     }
 }
+
+extension LogOptions {
+    static func with(projectName: String) -> Self {
+        LogOptions(
+            projectName: projectName,
+            xcworkspacePath: "",
+            xcodeprojPath: "",
+            derivedDataPath: "",
+            xcactivitylogPath: "",
+            strictProjectName: false)
+    }
+}

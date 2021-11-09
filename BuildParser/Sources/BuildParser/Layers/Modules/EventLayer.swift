@@ -11,20 +11,27 @@ import AppKit
 
 class EventLayer: CALayer {
     internal init(
-        event: Event) {
+        event: Event,
+        scale: CGFloat)
+    {
         self.event = event
         self.textLayer = CATextLayer()
         self.stepShapes = [CALayer]()
         super.init()
-            
+        self.contentsScale = scale
+        
+        backgroundColor = event.backgroundColor
+        
         for _ in event.steps {
             let layer = CALayer()
-            layer.backgroundColor = NSColor.systemOrange.cgColor
+            layer.backgroundColor = Colors.subtaskColor()
+            layer.contentsScale = scale
             addSublayer(layer)
             stepShapes.append(layer)
         }
-            
-        textLayer.foregroundColor = Colors.textColor
+        
+        textLayer.foregroundColor = Colors.textColor()
+        textLayer.contentsScale = scale
         textLayer.fontSize = fontSize
         addSublayer(textLayer)
     }
@@ -37,7 +44,6 @@ class EventLayer: CALayer {
         let layer = layer as! EventLayer
         
         self.event = layer.event
-        self.spaceToRigth = layer.spaceToRigth
         self.textLayer = layer.textLayer
         self.stepShapes = layer.stepShapes
         
@@ -45,10 +51,8 @@ class EventLayer: CALayer {
     }
     
     let event: Event
-    var spaceToRigth: CGFloat = 0 {
-        didSet {
-            setNeedsLayout()
-        }
+    var spaceToLeft: CGFloat {
+        frame.minX
     }
     let textLayer: CATextLayer
     var stepShapes: [CALayer]
@@ -85,30 +89,45 @@ class EventLayer: CALayer {
     }
     
     private func layoutText() {
-        let textWidth: CGFloat = 200 // TODO: calculate on fly
-        let textOffset: CGFloat = 2
         textLayer.string = event.description
+        
+        if spaceToLeft < textWidth {
+            textLayer.foregroundColor = Colors.textInvertedColor()
+            layoutRight()
+        } else {
+            layoutLeft()
+        }
+    }
+    
+    let textWidth: CGFloat = 200 // TODO: calculate on fly
+    let textOffset: CGFloat = 4
+    
+    func layoutRight() {
+        textLayer.alignmentMode = .left
         textLayer.frame = CGRect(
             x: bounds.maxX + textOffset,
             y: bounds.minY + 1,
             width: textWidth,
             height: bounds.height)
-        
-        if spaceToRigth < textWidth {
-            textLayer.alignmentMode = .right
-            textLayer.foregroundColor = Colors.textInvertedColor()
-            
-            if self.frame.width < textWidth {
-                textLayer.frame = textLayer.frame
-                    .offsetBy(dx: -textOffset*4 - textWidth - self.frame.width,
-                              dy: 0)
-            } else {
-                textLayer.frame = textLayer.frame
-                    .offsetBy(dx: -textOffset*4 - textWidth,
-                              dy: 0)
-            }
-        }
     }
+    
+    func layoutLeft() {
+        textLayer.alignmentMode = .right
+        textLayer.frame = CGRect(
+            x: bounds.minX - textOffset - textWidth,
+            y: bounds.minY + 1,
+            width: textWidth,
+            height: bounds.height)
+    }
+    
+//    func layoutInside() {
+//        textLayer.alignmentMode = .right
+//        textLayer.frame = CGRect(
+//            x: bounds.maxX - textOffset - textWidth,
+//            y: bounds.minY + 1,
+//            width: textWidth,
+//            height: bounds.height)
+//    }
     
     let fontSize: CGFloat = 10
 }
