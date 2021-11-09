@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1EDB5E4127135F0100741EEF"
@@ -47,6 +47,11 @@
                BlueprintName = "BuildParserTests"
                ReferencedContainer = "container:../BuildParser">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "GraphTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">

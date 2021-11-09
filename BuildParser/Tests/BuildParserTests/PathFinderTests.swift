@@ -41,6 +41,7 @@ class PathFinderTests: XCTestCase {
             "DemoAppTemplateWorkspace",
             "Prep_Station",
             "PaymentSDK",
+            "AccessibilityTask",
             "DemoAppTemplate",
         ])
     }
