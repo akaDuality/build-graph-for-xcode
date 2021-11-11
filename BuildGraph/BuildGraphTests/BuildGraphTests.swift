@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BuildGraph
+@testable import BuildDeps
 
 class BuildGraphTests: XCTestCase {
 

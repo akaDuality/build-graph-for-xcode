@@ -190,6 +190,12 @@ extension Event {
                 return true
             }
             
+            guard parents.first?.taskName != taskName else {
+                // TODO: Remove on parsing
+                print("cycle depnedency \(taskName), skip")
+                return false
+            }
+            
             if parent.parentsContains(domain) {
                 return true
             }

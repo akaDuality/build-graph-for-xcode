@@ -15,9 +15,10 @@ public class DependencyParser {
     public func parseFile(_ input: String) -> [Dependency] {
         let strings = input.components(separatedBy: "\n")
             .dropFirst() // No need in "Target dependency graph ..."
-        
-        return deps(Array(strings))
+       
+        let deps = deps(Array(strings))
             .map(dependency(from:))
+        return deps
     }
     
     func deps(_ strings: [String]) -> [[String]] {
@@ -61,7 +62,7 @@ public class DependencyParser {
     
     func parseTarget(_ input: String) -> Target {
         let regex = try! NSRegularExpression(
-            pattern: "(\\w*-?\\w*) in (\\w*)"
+            pattern: "(\\w*-?\\w*) in (\\w*-?\\w*)"
         )
         
         let matche = regex

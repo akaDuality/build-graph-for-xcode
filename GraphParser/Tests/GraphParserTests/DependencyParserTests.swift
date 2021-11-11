@@ -24,6 +24,9 @@ class BuildGraphTests: XCTestCase {
     let Acquirers = Target(target: "Acquirers",
                            project: "Acquirers")
     
+    let libPhoneNumber_iOS = Target(target: "libPhoneNumber-iOS",
+                                    project: "libPhoneNumber-iOS")
+    
     func test_noDependency_Crypto() {
         let dependency = parse("Crypto in Crypto, no dependencies")
         
@@ -92,7 +95,7 @@ nanopb in nanopb (implicit dependency via options '-framework nanopb' in build s
                        dependencies: [nanopb]))
     }
     
-    func test_circleDependency() throws {
+    func test_dashFirstDependency() throws {
         let HCaptcha_HCaptcha = Target(target: "HCaptcha-HCaptcha", project: "HCaptcha")
         let HCaptcha = Target(target: "HCaptcha", project: "HCaptcha")
         
@@ -113,6 +116,19 @@ HCaptcha-HCaptcha in HCaptcha (explicit)
                 Dependency(target: HCaptcha,
                            dependencies: [HCaptcha_HCaptcha])
             ])
+    }
+    
+    func test_dashBothDependency() throws {
+        let dependency = parse(
+"""
+libPhoneNumber-iOS in libPhoneNumber-iOS, no dependencies
+"""
+        )
+        
+        XCTAssertNoDifference(
+            dependency,
+            Dependency(target: libPhoneNumber_iOS,
+                       dependencies: []))
     }
     
     func test_file() {
