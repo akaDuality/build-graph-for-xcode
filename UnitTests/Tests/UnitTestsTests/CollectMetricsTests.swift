@@ -24,13 +24,20 @@ final class TestReportSeekerTests: XCTestCase {
      
     
     func test_collectNumberOfUnitTest() {
-        let reportModel = Collector().collectUnitTestMetrics(projectPath: dodoPizzaFolder)
+        let reportModel = Collector().extractLastReport(from: dodoPizzaFolder)
         
         do {
             print(try XCTUnwrap(reportModel))
         } catch {
             XCTFail("Metrics is nil")
         }
+    }
+    
+    func test_diffTwoTestResultFiles() {
+        let reportModel1 = Collector().extractReport(from: URL(string: "/Users/yaroslavbredikhin/Library/Developer/Xcode/DerivedData/DodoPizza-gywhgqgvgbkrhpcdhsseznxsokbp/Logs/Test/Test-AllTests-2021.11.15_13-01-52-+0300.xcresult")!)
+        let reportModel2 = Collector().extractReport(from: URL(string: "/Users/yaroslavbredikhin/Library/Developer/Xcode/DerivedData/DodoPizza-gywhgqgvgbkrhpcdhsseznxsokbp/Logs/Test/Test-AllTests-2021.11.18_12-27-08-+0300.xcresult")!)
+        
+        XCTAssertEqual(reportModel1?.testNames, reportModel2?.testNames)
     }
 }
 

@@ -3,17 +3,13 @@ import Foundation
 struct Collector {
     let converter = XCResultToJSONConverter()
     
-    func collectUnitTestMetrics(projectPath: String) -> Report? {
-        let settingsParser = BuildSettingsParser(projectURL: URL(string: projectPath)!)
-        
-        guard let derivedDataURL = getDerivedDataPath(parser: settingsParser),
-              let projectName = getProjectName(parser: settingsParser),
-              let lastTestReport = getLastTestReport(for: projectName,
-                                                     derivedDataURL: derivedDataURL) else {
-            return nil
-        }
-        
-        let reportJSONURL = converter.getReportJSON(xcResultPath: lastTestReport)
+    func extractLastReport(from projectPath: String) -> Report? {
+        guard let lastTestReport = getLastTestReport(projectPath: projectPath) else { return nil }
+        return extractReport(from: lastTestReport)
+    }
+    
+    func extractReport(from xcTestReportPath: URL) -> Report? {
+        let reportJSONURL = converter.getReportJSON(xcResultPath: xcTestReportPath)
         var reportModel: Report?
         
         do {
@@ -23,10 +19,20 @@ struct Collector {
             print(error)
         }
         
-        let allTestNames = findAllTests(path: lastTestReport, id: reportModel?.testsRefId() ?? "")
+        let allTestNames = findAllTests(path: xcTestReportPath, id: reportModel?.testsRefId() ?? "")
         reportModel?.testNames = allTestNames
         
         return reportModel
+    }
+    
+    func getLastTestReport(projectPath: String) -> URL? {
+        let settingsParser = BuildSettingsParser(projectURL: URL(string: projectPath)!)
+        
+        guard let derivedDataURL = getDerivedDataPath(parser: settingsParser),
+              let projectName = getProjectName(parser: settingsParser),
+              let lastTestReport = getLastTestReport(for: projectName,
+                                                        derivedDataURL: derivedDataURL) else { return nil }
+        return lastTestReport
     }
     
     private func getDerivedDataPath(parser settingsParser: BuildSettingsParser) -> URL? {
