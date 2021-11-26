@@ -31,7 +31,7 @@ class BuildTimeParser {
         }
         return Build(
             userName: userName,
-            date: parts[0],
+            date: String(parts[0].split(separator: "T").first!),
             duration: Int(parts[1])!,
             result: Build.Result(rawValue: parts[2])!,
             workspace: parts[3].removing(suffix: ".xcworkspace"),

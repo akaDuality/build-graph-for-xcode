@@ -11,14 +11,6 @@ public class XCResultParser {
     }
     
     public func parse() throws -> URL {
-//        guard filePath.startAccessingSecurityScopedResource() else {
-//            // Handle the failure here.
-//            throw Error.noAccess
-//        }
-//
-//        // Make sure you release the security-scoped resource when you are done.
-//        defer { filePath.stopAccessingSecurityScopedResource() }
-        
         let reportFileName = "report.json"
         let reportPath = filePath.deletingLastPathComponent().appendingPathComponent(reportFileName)
         

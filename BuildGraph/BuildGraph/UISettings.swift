@@ -35,12 +35,16 @@ struct Storage<T> {
         self.defaultValue = defaultValue
     }
     
+    let userDefaults = UserDefaults.standard
+    
     var wrappedValue: T {
         get {
-            return UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
+            return userDefaults
+                .object(forKey: key) as? T ?? defaultValue
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: key)
+            userDefaults
+                .set(newValue, forKey: key)
         }
     }
 }

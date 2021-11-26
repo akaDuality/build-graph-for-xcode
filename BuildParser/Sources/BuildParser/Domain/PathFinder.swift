@@ -29,16 +29,34 @@ public class PathFinder {
     }
     
     let logFinder = LogFinder()
-    let fileManager = FileManager.default
-   
+    let fileAccess = FileAccess()
+    
     public func projects() throws -> [String] {
-        guard let derivedData = logFinder.getDerivedDataDirWithLogOptions(logOptions) else {
+        let derivedDataContents = try derivedDataContents(logOptions)
+        return filter(derivedDataContents)
+    }
+    
+    public func derivedDataContents(
+        _ logOptions: LogOptions
+    ) throws -> [String] {
+        guard let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions) else {
             return []
         }
         
-        let contents = try fileManager.contentsOfDirectory(atPath: derivedData.path)
+        // TODO: Handle file deprecation
+        let derivedDataAccessURL = try fileAccess.promptForWorkingDirectoryPermission(directoryURL: derivedDataURL)!
         
-        return filter(contents)
+        let hasAccess = derivedDataAccessURL.startAccessingSecurityScopedResource()
+        if !hasAccess {
+            print("This directory might not need it, or this URL might not be a security scoped URL, or maybe something's wrong?")
+        }
+        defer {
+            derivedDataAccessURL.stopAccessingSecurityScopedResource()
+        }
+        
+        let contents = try FileManager.default
+            .contentsOfDirectory(atPath: derivedDataAccessURL.path)
+        return contents
     }
     
     func filter(_ urls: [String]) -> [String] {
@@ -66,7 +84,14 @@ public class PathFinder {
     }
     
     public func activityLogURL() throws -> URL {
-        try logFinder.findLatestLogWithLogOptions(logOptions)
+        // TODO: Handle optional
+        let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions)!
+        
+        return try logFinder.findLatestLogWithLogOptions(logOptions)
+    }
+    
+    enum Error: Swift.Error {
+        case cantAccessResourceInScope
     }
 }
 
@@ -109,6 +134,7 @@ class LatestFileScanner: LatestFileScannerProtocol {
     
     enum Error: Swift.Error {
         case graphNotFound
+        case cantAccessResourceInScope
     }
 }
 

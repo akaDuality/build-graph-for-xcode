@@ -30,7 +30,7 @@ let package = Package(
             ],
             resources: [
                 .process("buildTimes.csv"),
-                .process("buildTimes1.csv"),
+                .process("buildTimes1_M1.csv"),
                 .process("buildTimes2.csv"),
                 .process("buildTimes3.csv"),
                 .process("buildTimes4.csv"),

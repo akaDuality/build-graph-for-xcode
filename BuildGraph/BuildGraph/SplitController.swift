@@ -46,20 +46,24 @@ class SplitController: NSSplitViewController {
 
 extension SplitController: ProjectsViewControllerDelegate {
     func didSelect(project: String) {
-        // Remove current project in case if I wouldn't open selected.
-        // In case of crash, next time user will select another one
         
-        let options = LogOptions.with(projectName: project)
-        let pathFinder = PathFinder(logOptions: options)
+        let pathFinder = FileAccess().pathFinder(for: project)
         
         do {
+            let derivedData = FileAccess().accessedDerivedDataURL()
+            derivedData?.startAccessingSecurityScopedResource()
+            
             let activityLogURL = try pathFinder.activityLogURL()
             let depsURL = try? pathFinder.buildGraphURL()
             
+            // Remove current project in case if I wouldn't open selected.
+            // In case of crash, next time user will select another one
             self.uiSettings.removeSelectedProject()
+            
             detail.loadAndInsert(
                 activityLogURL: activityLogURL,
                 depsURL: depsURL) {
+                    derivedData?.stopAccessingSecurityScopedResource()
                     self.uiSettings.selectedProject = project // Save only after success parsing
                 }
         } catch let error {
@@ -75,20 +79,20 @@ extension LogOptions {
             projectName: "",
             xcworkspacePath: "",
             xcodeprojPath: "",
-            derivedDataPath: "",
+            derivedDataPath: nil,
             xcactivitylogPath: "",
             strictProjectName: false)
     }
 }
 
-extension LogOptions {
-    static func with(projectName: String) -> Self {
-        LogOptions(
-            projectName: projectName,
-            xcworkspacePath: "",
-            xcodeprojPath: "",
-            derivedDataPath: "",
-            xcactivitylogPath: "",
-            strictProjectName: false)
-    }
-}
+//extension LogOptions {
+//    static func with(projectName: String) -> Self {
+//        LogOptions(
+//            projectName: projectName,
+//            xcworkspacePath: "",
+//            xcodeprojPath: "",
+//            derivedDataPath: "",
+//            xcactivitylogPath: "",
+//            strictProjectName: false)
+//    }
+//}
