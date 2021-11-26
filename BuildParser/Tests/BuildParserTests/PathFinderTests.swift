@@ -13,12 +13,6 @@ import CustomDump
 @testable import BuildParser
 
 class PathFinderTests: XCTestCase {
-    let logOptions = LogOptions(
-        projectName: "",
-        xcworkspacePath: "",
-        xcodeprojPath: "",
-        derivedDataPath: "",
-        logManifestPath: "")
     
     var sut: PathFinder!
     
