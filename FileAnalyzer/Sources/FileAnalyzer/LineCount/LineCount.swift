@@ -36,7 +36,7 @@ class LineCount {
     /// in format
     /// find . -name "*.swift" -print0 | xargs -0 wc -l
     private func shellCommand(path: String) -> String {
-        "find \(path) -name \"*.\(fileExtension)\" -print0 | xargs -0 wc -l"
+        "find \(path) -name \"*\(fileExtension)\" -print0 | xargs -0 wc -l"
     }
     
     private func outputAlphabetically(stats: Stats) {
@@ -78,7 +78,7 @@ class LineCount {
 //        }
     }
     
-    init(folder: URL, fileExtension: String = "swift") {
+    init(folder: URL, fileExtension: String = ".swift") {
         self.foldersService = FoldersService(folder: folder)
         self.fileExtension = fileExtension
     }
@@ -157,6 +157,7 @@ extension Project {
                             "OrderTracking",
                             "Payment",
                             "ParallaxEditor",
+                            "Prizoteka",
                             "Product",
                             "Rate",
                             "Stories",
