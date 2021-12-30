@@ -25,6 +25,12 @@ class ProjectsViewController: NSViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        reloadProjetcs()
+        
+        addContextMenu()
+    }
+    
+    private func reloadProjetcs() {
         let pathFinder = PathFinder(logOptions: .empty)
         projects = try! pathFinder.projects()
         
@@ -34,7 +40,7 @@ class ProjectsViewController: NSViewController {
     }
     
     func select(project: String) {
-        guard let row = projects.firstIndex(of: project) else {
+        guard let row = projects.firstIndex(where: { $0.name == project }) else {
             return
         }
         tableView.selectRowIndexes(.init(integer: row), byExtendingSelection: false)
@@ -42,11 +48,31 @@ class ProjectsViewController: NSViewController {
     }
     
     @IBAction func refreshDidPressed(_ sender: Any) {
-        
+        reloadProjetcs()
     }
-    var projects: [String] = [] {
+    
+    var projects: [ProjectReference] = [] {
         didSet {
             tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Context menu
+    
+    private func addContextMenu() {
+        let menu = NSMenu()
+        menu.addItem(withTitle: "Show in Finder", action: #selector(showInFinder), keyEquivalent: "")
+        tableView.menu = menu
+    }
+    
+    @objc func showInFinder() {
+        let project = projects[tableView.selectedRow]
+        
+        let workspace = NSWorkspace.shared
+        let selected = workspace.selectFile(project.url.path, inFileViewerRootedAtPath: "")
+        if !selected {
+            // TODO: Handle errors
+//            showError()
         }
     }
 }
@@ -62,7 +88,7 @@ extension ProjectsViewController: NSTableViewDataSource {
             withIdentifier: id,
             owner: nil) as! ProjectCell
         
-        cell.title = projects[row]
+        cell.title = projects[row].name
         return cell
     }
 }
@@ -72,7 +98,7 @@ extension ProjectsViewController: NSTableViewDelegate {
         
         let project = projects[tableView.selectedRow]
         
-        delegate?.didSelect(project: project)
+        delegate?.didSelect(project: project.url.absoluteString)
     }
 }
 

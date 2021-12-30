@@ -9,6 +9,16 @@ import Foundation
 import XCLogParser
 import Foundation
 
+public struct ProjectReference {
+    public let url: URL
+    public let name: String
+    
+    init(url: URL, fullName: String) {
+        self.url = url.appendingPathComponent(fullName)
+        self.name = fullName.components(separatedBy: "-").dropLast().joined(separator: "-")
+    }
+}
+
 public class PathFinder {
     
     public typealias ContentsOfDirectory = (_ path: String) throws -> [String]
@@ -31,20 +41,26 @@ public class PathFinder {
     let logFinder = LogFinder()
     let fileAccess = FileAccess()
     
-    public func projects() throws -> [String] {
-        let derivedDataContents = try derivedDataContents(logOptions)
-        return filter(derivedDataContents)
+    public func projects() throws -> [ProjectReference] {
+        let path = try derivedDataPath(logOptions)
+        let derivedDataContents = try derivedDataContents(derivedDataAccessURL: path)
+        let result = filter(derivedDataContents, url: path)
+        return result
     }
     
-    public func derivedDataContents(
-        _ logOptions: LogOptions
-    ) throws -> [String] {
+    public func derivedDataPath(_ logOptions: LogOptions) throws -> URL {
         guard let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions) else {
-            return []
+            throw Error.noDerivedData
         }
         
         // TODO: Handle file deprecation
         let derivedDataAccessURL = try fileAccess.promptForWorkingDirectoryPermission(directoryURL: derivedDataURL)!
+        return derivedDataAccessURL
+    }
+    
+    public func derivedDataContents(
+        derivedDataAccessURL: URL
+    ) throws -> [String] {
         
         let hasAccess = derivedDataAccessURL.startAccessingSecurityScopedResource()
         if !hasAccess {
@@ -59,11 +75,11 @@ public class PathFinder {
         return contents
     }
     
-    func filter(_ urls: [String]) -> [String] {
-        urls
+    func filter(_ names: [String], url: URL) -> [ProjectReference] {
+        names
             .filter { $0.contains("-") }
             .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
-            .map { $0.components(separatedBy: "-").dropLast().joined(separator: "-") }
+            .map { ProjectReference(url: url, fullName: $0) }
     }
     
     public func buildGraphURL() throws -> URL {
@@ -85,12 +101,13 @@ public class PathFinder {
     
     public func activityLogURL() throws -> URL {
         // TODO: Handle optional
-        let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions)!
+//        let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions)!
         
         return try logFinder.findLatestLogWithLogOptions(logOptions)
     }
     
     enum Error: Swift.Error {
+        case noDerivedData
         case cantAccessResourceInScope
     }
 }
