@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit
+import BuildParser
 
 protocol ProjectsViewControllerDelegate: AnyObject {
     func didSelect(project: String)
@@ -16,12 +17,20 @@ class ProjectsViewController: NSViewController {
     @IBOutlet weak var tableView: NSTableView!
     
     weak var delegate: ProjectsViewControllerDelegate?
+    private let uiSettings = UISettings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        let pathFinder = PathFinder(logOptions: .empty)
+        projects = try! pathFinder.projects()
+        
+        if let selectedProject = uiSettings.selectedProject {
+            select(project: selectedProject)
+        }
     }
     
     func select(project: String) {
@@ -32,6 +41,9 @@ class ProjectsViewController: NSViewController {
         delegate?.didSelect(project: project)
     }
     
+    @IBAction func refreshDidPressed(_ sender: Any) {
+        
+    }
     var projects: [String] = [] {
         didSet {
             tableView.reloadData()

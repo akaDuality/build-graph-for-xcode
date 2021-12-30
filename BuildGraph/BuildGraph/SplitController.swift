@@ -13,26 +13,14 @@ import XCLogParser
 
 class SplitController: NSSplitViewController {
     
-    
     private let uiSettings = UISettings()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        projects.delegate = self
-        
-        let pathFinder = PathFinder(logOptions: .empty)
-        projects.projects = try! pathFinder.projects()
-        
-        if let selectedProject = uiSettings.selectedProject {
-            projects.select(project: selectedProject)
-        }
-    }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
         view.window?.toolbar = detail.toolbar
+        
+        projects.delegate = self
     }
     
     var projects: ProjectsViewController! {
