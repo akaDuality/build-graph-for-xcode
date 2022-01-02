@@ -12,10 +12,23 @@ import Foundation
 public struct ProjectReference {
     public let url: URL
     public let name: String
+    public let activityLogURL: URL
+    public let depsURL: URL?
     
-    init(url: URL, fullName: String) {
+    init?(url: URL, fullName: String) {
         self.url = url.appendingPathComponent(fullName)
-        self.name = fullName.components(separatedBy: "-").dropLast().joined(separator: "-")
+        let shortName = fullName.components(separatedBy: "-").dropLast().joined(separator: "-")
+        self.name = shortName
+        
+        let pathFinder = FileAccess().pathFinder(for: shortName)
+        
+        do {
+            self.activityLogURL = try pathFinder.activityLogURL()
+            self.depsURL = try? pathFinder.buildGraphURL()
+        } catch {
+            print("skip \(self.url), can't find .activityLog with build information")
+            return nil
+        }
     }
 }
 
@@ -43,6 +56,14 @@ public class PathFinder {
     
     public func projects() throws -> [ProjectReference] {
         let path = try derivedDataPath(logOptions)
+        let hasAccess = path.startAccessingSecurityScopedResource()
+        if !hasAccess {
+            print("This directory might not need it, or this URL might not be a security scoped URL, or maybe something's wrong?")
+        }
+        defer {
+            path.stopAccessingSecurityScopedResource()
+        }
+        
         let derivedDataContents = try derivedDataContents(derivedDataAccessURL: path)
         let result = filter(derivedDataContents, url: path)
         return result
@@ -61,25 +82,16 @@ public class PathFinder {
     public func derivedDataContents(
         derivedDataAccessURL: URL
     ) throws -> [String] {
-        
-        let hasAccess = derivedDataAccessURL.startAccessingSecurityScopedResource()
-        if !hasAccess {
-            print("This directory might not need it, or this URL might not be a security scoped URL, or maybe something's wrong?")
-        }
-        defer {
-            derivedDataAccessURL.stopAccessingSecurityScopedResource()
-        }
-        
         let contents = try FileManager.default
             .contentsOfDirectory(atPath: derivedDataAccessURL.path)
         return contents
     }
     
     func filter(_ names: [String], url: URL) -> [ProjectReference] {
-        names
+        return names
             .filter { $0.contains("-") }
             .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
-            .map { ProjectReference(url: url, fullName: $0) }
+            .compactMap { ProjectReference(url: url, fullName: $0) }
     }
     
     public func buildGraphURL() throws -> URL {

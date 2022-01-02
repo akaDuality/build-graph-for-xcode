@@ -60,8 +60,8 @@ public class RealBuildLogParser {
                 guard let startDate = substeps.first?.startDate,
                       let lastDate = substeps.last?.endDate
                 else {
-                          return nil
-                      }
+                    return nil // Empty array
+                }
                 
                 return Event(
                     taskName: step.title.without_Build_target,

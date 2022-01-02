@@ -33,31 +33,20 @@ class SplitController: NSSplitViewController {
 }
 
 extension SplitController: ProjectsViewControllerDelegate {
-    func didSelect(project: String) {
+    func didSelect(project: ProjectReference) {
+        let derivedData = FileAccess().accessedDerivedDataURL()
+        derivedData?.startAccessingSecurityScopedResource()
         
-        let pathFinder = FileAccess().pathFinder(for: project)
+        // Remove current project in case if I wouldn't open selected.
+        // In case of crash, next time user will select another one
+        self.uiSettings.removeSelectedProject()
         
-        do {
-            let derivedData = FileAccess().accessedDerivedDataURL()
-            derivedData?.startAccessingSecurityScopedResource()
-            
-            let activityLogURL = try pathFinder.activityLogURL()
-            let depsURL = try? pathFinder.buildGraphURL()
-            
-            // Remove current project in case if I wouldn't open selected.
-            // In case of crash, next time user will select another one
-            self.uiSettings.removeSelectedProject()
-            
-            detail.loadAndInsert(
-                activityLogURL: activityLogURL,
-                depsURL: depsURL) {
-                    derivedData?.stopAccessingSecurityScopedResource()
-                    self.uiSettings.selectedProject = project // Save only after success parsing
-                }
-        } catch let error {
-            // TODO: Show error
-            detail.clear()
-        }
+        detail.loadAndInsert(
+            activityLogURL: project.activityLogURL,
+            depsURL: project.depsURL) {
+                derivedData?.stopAccessingSecurityScopedResource()
+                self.uiSettings.selectedProject = project.name // Save only after success parsing
+            }
     }
 }
 

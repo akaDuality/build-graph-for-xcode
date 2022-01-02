@@ -10,7 +10,7 @@ import AppKit
 import BuildParser
 
 protocol ProjectsViewControllerDelegate: AnyObject {
-    func didSelect(project: String)
+    func didSelect(project: ProjectReference)
 }
 
 class ProjectsViewController: NSViewController {
@@ -44,7 +44,7 @@ class ProjectsViewController: NSViewController {
             return
         }
         tableView.selectRowIndexes(.init(integer: row), byExtendingSelection: false)
-        delegate?.didSelect(project: project)
+        delegate?.didSelect(project: projects[row])
     }
     
     @IBAction func refreshDidPressed(_ sender: Any) {
@@ -67,9 +67,10 @@ class ProjectsViewController: NSViewController {
     
     @objc func showInFinder() {
         let project = projects[tableView.selectedRow]
+        let path = project.activityLogURL.path
         
         let workspace = NSWorkspace.shared
-        let selected = workspace.selectFile(project.url.path, inFileViewerRootedAtPath: "")
+        let selected = workspace.selectFile(path, inFileViewerRootedAtPath: "")
         if !selected {
             // TODO: Handle errors
 //            showError()
@@ -95,10 +96,8 @@ extension ProjectsViewController: NSTableViewDataSource {
 
 extension ProjectsViewController: NSTableViewDelegate {
     func tableViewSelectionDidChange(_ notification: Notification) {
-        
         let project = projects[tableView.selectedRow]
-        
-        delegate?.didSelect(project: project.url.absoluteString)
+        delegate?.didSelect(project: project)
     }
 }
 

@@ -25,3 +25,9 @@ public class Event: Equatable {
         // TODO: Add data
     }
 }
+
+extension Event: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        "\(taskName) with \(steps.count) steps"
+    }
+}
