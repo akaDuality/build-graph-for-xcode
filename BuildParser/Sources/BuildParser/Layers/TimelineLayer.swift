@@ -123,7 +123,8 @@ class TimelineLayer: CALayer {
         
         // MARK: Pointer
         let coordinate = coordinate ?? CGPoint(x: frame.maxX, y: 0)
-        let textWidth: CGFloat = 60
+        // TODO: Size text to fit
+        let textWidth: CGFloat = 100
         let time = TimeInterval(coordinate.x / frame.width) * eventsDuration
         
         currentTime.updateWithoutAnimation {
@@ -146,7 +147,6 @@ class TimelineLayer: CALayer {
     
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-//        dateFormatter.timeStyle = .short
         dateFormatter.dateFormat = "m:ss"
         return dateFormatter
     }()

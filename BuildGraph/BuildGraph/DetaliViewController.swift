@@ -172,7 +172,15 @@ class DetailViewController: NSViewController {
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             do {
-                let events = try parser.parse(logURL: activityLogURL, compilationOnly: true)
+                let events = try parser.parse(
+                    logURL: activityLogURL,
+                    compilationOnly: true) // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
+                
+                guard events.count > 0 else {
+                    print("No events found")
+                    // TODO: show error to user
+                    return
+                }
                 
                 var dependencies = [Dependency]()
                 
