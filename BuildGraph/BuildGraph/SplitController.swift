@@ -39,7 +39,7 @@ class SplitController: NSSplitViewController {
 extension SplitController: ProjectsViewControllerDelegate {
     func didSelect(project: ProjectReference) {
         let derivedData = FileAccess().accessedDerivedDataURL()
-        derivedData?.startAccessingSecurityScopedResource()
+        _ = derivedData?.startAccessingSecurityScopedResource()
         
         // Remove current project in case if I wouldn't open selected.
         // In case of crash, next time user will select another one
@@ -65,15 +65,3 @@ extension LogOptions {
             strictProjectName: false)
     }
 }
-
-//extension LogOptions {
-//    static func with(projectName: String) -> Self {
-//        LogOptions(
-//            projectName: projectName,
-//            xcworkspacePath: "",
-//            xcodeprojPath: "",
-//            derivedDataPath: "",
-//            xcactivitylogPath: "",
-//            strictProjectName: false)
-//    }
-//}

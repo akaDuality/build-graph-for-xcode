@@ -128,9 +128,25 @@ class DetailViewController: NSViewController {
     
     func show(events: [Event], deps: [Dependency], title: String) {
         view().showEvents(events: events)
+        layoutModules() // calc intrinsic content size
+        resizeWindowHeight()
+        
         view.window?.title = title
         updateState()
         shareButton.isEnabled = true
+    }
+    
+    func resizeWindowHeight() {
+        guard let window = view.window else { return }
+        
+        let contentSize = contentSize(appLayer: view().modulesLayer!)
+        let newHeight = contentSize.height + view.safeAreaInsets.top
+        let frame = CGRect(x: window.frame.minX,
+                           y: window.frame.midY - newHeight/2,
+                           width: window.frame.width,
+                           height: newHeight)
+        
+        window.setFrame(frame, display: true, animate: true)
     }
     
     override func viewDidLoad() {
@@ -191,28 +207,33 @@ class DetailViewController: NSViewController {
     
     override func viewDidLayout() {
         super.viewDidLayout()
-        
-        guard let layer = view().modulesLayer else {
-            return
-        }
 
-        let contentHeight = layer.intrinsicContentSize.height
+        layoutModules() // on window resize
+    }
+    
+    private func contentSize(appLayer: AppLayer) -> CGSize {
+        let contentHeight = appLayer.intrinsicContentSize.height
         
         let offset: CGFloat = 10
+        let toolbarInset: CGFloat = view.safeAreaInsets.top
         
-        layer.updateWithoutAnimation {
-            layer.frame = CGRect(
+        return CGSize(width: max(500, view.frame.width - offset),
+                      height: max(500, contentHeight)) // TODO: Define max as height of projects view
+    }
+    
+    private func layoutModules() {
+        guard let modulesLayer = view().modulesLayer else { return }
+        
+        let contentSize = contentSize(appLayer: modulesLayer)
+        
+        modulesLayer.updateWithoutAnimation {
+            modulesLayer.frame = CGRect(
                 x: 0, y: 0,
-                width: view.frame.width - offset,
-                height: max(contentHeight, view.frame.height))
-            layer.layoutIfNeeded()
+                width: contentSize.width,
+                height: contentSize.height)
+            modulesLayer.layoutIfNeeded()
         }
-        view().contentView.frame = layer.bounds
-        view().contentView.bounds = layer.frame
-        
-//        view.window?.contentMinSize = NSSize(
-//            width: 500,
-//            height: min(400, contentHeight))
+        view().contentView.frame = modulesLayer.bounds
     }
     
     var trackingArea: NSTrackingArea!

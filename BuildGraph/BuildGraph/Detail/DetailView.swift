@@ -36,6 +36,7 @@ class DetailView: NSView {
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
         scrollView.layer?.addSublayer(hudLayer!)
+        scrollView.automaticallyAdjustsContentInsets = false
         
         loadingIndicator.stopAnimation(self)
     }
@@ -49,21 +50,8 @@ class DetailView: NSView {
     override func updateLayer() {
         super.updateLayer()
         
-        //        guard let events = modulesLayer?.events,
-        //              let dependencies = modulesLayer?.dependencies
-        //        else {
-        //            return
-        //        }
-        
         modulesLayer?.setNeedsLayout()
         hudLayer?.setNeedsLayout()
-        
-        //        removeLayer()
-        
-        //        modulesLayer = AppLayer(
-        //            events: events,
-        //            scale: NSScreen.main!.backingScaleFactor)
-        //        modulesLayer!.dependencies = dependencies
     }
     
     override func viewDidChangeEffectiveAppearance() {
