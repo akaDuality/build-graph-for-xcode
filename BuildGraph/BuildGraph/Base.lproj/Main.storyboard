@@ -806,13 +806,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhU-gY-8vG">
-                                <rect key="frame" x="0.0" y="40" width="149" height="3105"/>
+                                <rect key="frame" x="0.0" y="40" width="149" height="3215"/>
                                 <clipView key="contentView" drawsBackground="NO" id="GPP-R3-2Cb">
-                                    <rect key="frame" x="1" y="1" width="147" height="3103"/>
+                                    <rect key="frame" x="1" y="1" width="147" height="3213"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="dcg-t8-V2a">
-                                            <rect key="frame" x="0.0" y="0.0" width="147" height="3103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="147" height="3213"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -857,7 +857,7 @@
                                     <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="xAQ-UA-PXb">
-                                    <rect key="frame" x="1" y="2758" width="147" height="16"/>
+                                    <rect key="frame" x="1" y="3088" width="147" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="q7k-B9-r5R">
@@ -986,20 +986,6 @@
                                 <action selector="performanceVisibilityDidChange:" target="XfG-lQ-9wD" id="VBS-mu-HqV"/>
                             </connections>
                         </toolbarItem>
-                        <toolbarItem implicitItemIdentifier="778513B6-7AC6-4485-8C7E-323A843A2611" label="Refresh" paletteLabel="Refresh" image="NSTouchBarRefreshTemplate" title="Button" sizingBehavior="auto" id="Ds6-G6-PIC">
-                            <nil key="toolTip"/>
-                            <button key="view" verticalHuggingPriority="750" id="eJF-E8-wky">
-                                <rect key="frame" x="17" y="14.5" width="14.5" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" image="NSTouchBarRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vml-md-CXj">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <connections>
-                                <action selector="refresh:" target="XfG-lQ-9wD" id="UQl-wc-IVW"/>
-                            </connections>
-                        </toolbarItem>
                         <toolbarItem implicitItemIdentifier="38F8A84F-D4D2-4C68-9A62-4FE7D0F036E4" label="Share" paletteLabel="Share" image="NSShareTemplate" sizingBehavior="auto" id="C59-vz-7AE">
                             <nil key="toolTip"/>
                             <button key="view" verticalHuggingPriority="750" id="tbL-y2-vEg">
@@ -1018,7 +1004,6 @@
                     <defaultToolbarItems>
                         <toolbarItem reference="Vr1-6i-JoI"/>
                         <toolbarItem reference="C59-vz-7AE"/>
-                        <toolbarItem reference="Ds6-G6-PIC"/>
                         <toolbarItem reference="Vr1-6i-JoI"/>
                         <toolbarItem reference="Qni-EK-jLf"/>
                         <toolbarItem reference="u4p-lU-68k"/>
@@ -1031,7 +1016,6 @@
     </scenes>
     <resources>
         <image name="NSShareTemplate" width="15" height="17"/>
-        <image name="NSTouchBarRefreshTemplate" width="14" height="16"/>
         <image name="xmark.circle.fill" catalog="system" width="15" height="15"/>
     </resources>
 </document>

@@ -58,12 +58,6 @@ class DetailViewController: NSViewController {
     }
     
     // MARK: - Actions
-    @IBAction func refresh(_ sender: Any) {
-        if let activityLogURL = activityLogURL {
-            loadAndInsert(activityLogURL: activityLogURL, depsURL: depsURL, didLoad: {})
-        }
-    }
-    
     @IBAction func shareDidPressed(_ sender: Any) {
         imageSaveService.saveImage(
             name: "\(parser.title).png",
@@ -81,9 +75,12 @@ class DetailViewController: NSViewController {
     func loadAndInsert(
         activityLogURL: URL,
         depsURL: URL?,
-        didLoad: @escaping () -> Void
+        didLoad: @escaping () -> Void,
+        didFail: @escaping (_ error: String) -> Void
     ) {
         clear()
+        
+        print("will read \(activityLogURL), depsURL \(depsURL)")
         
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL
@@ -94,11 +91,11 @@ class DetailViewController: NSViewController {
             do {
                 let events = try parser.parse(
                     logURL: activityLogURL,
-                    compilationOnly: true) // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
+                    compilationOnly: false) // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
                 
                 guard events.count > 0 else {
-                    print("No events found")
                     // TODO: show error to user
+                    didFail("No events found")
                     return
                 }
                 
@@ -120,8 +117,7 @@ class DetailViewController: NSViewController {
                 }
                 
             } catch let error {
-                // TODO: Show on UI
-                print(error)
+                didFail(error.localizedDescription)
             }
         }
     }
@@ -215,7 +211,6 @@ class DetailViewController: NSViewController {
         let contentHeight = appLayer.intrinsicContentSize.height
         
         let offset: CGFloat = 10
-        let toolbarInset: CGFloat = view.safeAreaInsets.top
         
         return CGSize(width: max(500, view.frame.width - offset),
                       height: max(500, contentHeight)) // TODO: Define max as height of projects view

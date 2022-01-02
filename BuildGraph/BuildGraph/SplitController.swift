@@ -45,12 +45,18 @@ extension SplitController: ProjectsViewControllerDelegate {
         // In case of crash, next time user will select another one
         self.uiSettings.removeSelectedProject()
         
+//        let activityLogURL = URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Logs/Build/F9642A7B-23C1-4302-A2FC-37DCFB73E0C5.xcactivitylog")
+        
         detail.loadAndInsert(
             activityLogURL: project.activityLogURL,
-            depsURL: project.depsURL) {
+            depsURL: project.depsURL,
+            didLoad: {
                 derivedData?.stopAccessingSecurityScopedResource()
                 self.uiSettings.selectedProject = project.name // Save only after success parsing
-            }
+            },
+            didFail: {
+                derivedData?.stopAccessingSecurityScopedResource()
+            })
     }
 }
 
