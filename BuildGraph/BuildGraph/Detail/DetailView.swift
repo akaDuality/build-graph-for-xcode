@@ -83,9 +83,7 @@ class DetailView: NSView {
             layer.removeFromSuperlayer()
         }
         
-        layer?.removeFromSuperlayer()
-        self.layer = nil
-        contentView.layer?.addSublayer(modulesLayer!)
+        modulesLayer = nil
     }
     
     // TODO: Move setting to layer initialization
