@@ -11,86 +11,6 @@ import GraphParser
 import Interface
 import XCLogParser
 
-class FlippedView: NSView {
-    override var isFlipped: Bool {
-        get {
-            true
-        }
-    }
-}
-
-class DetailView: NSView {
-    var modulesLayer: AppLayer?
-    
-    @IBOutlet weak var scrollView: NSScrollView!
-    let contentView = FlippedView()
-    
-    @IBOutlet weak var loadingIndicator: NSProgressIndicator!
-    func showEvents(events: [Event]) {
-        modulesLayer = AppLayer(
-            events: events,
-            scale: NSScreen.main!.backingScaleFactor)
-        needsLayout = true
-        
-        contentView.wantsLayer = true
-        contentView.layer?.addSublayer(modulesLayer!)
-        
-        scrollView.documentView = contentView
-        scrollView.allowsMagnification = true
-        
-        loadingIndicator.stopAnimation(self)
-    }
-    
-    override func updateLayer() {
-        super.updateLayer()
-        
-//        guard let events = modulesLayer?.events,
-//              let dependencies = modulesLayer?.dependencies
-//        else {
-//            return
-//        }
-        
-        modulesLayer?.setNeedsLayout()
-        
-//        removeLayer()
-        
-//        modulesLayer = AppLayer(
-//            events: events,
-//            scale: NSScreen.main!.backingScaleFactor)
-//        modulesLayer!.dependencies = dependencies
-    }
-    
-    override func viewDidChangeEffectiveAppearance() {
-        super.viewDidChangeEffectiveAppearance()
-        
-        guard let events = modulesLayer?.events else {
-            return
-        }
-        
-        removeLayer()
-        showEvents(events: events)
-        updateSettings()
-    }
-    
-    func removeLayer() {
-        for layer in (contentView.layer?.sublayers ?? []) {
-            layer.removeFromSuperlayer()
-        }
-        
-        layer?.removeFromSuperlayer()
-        self.layer = nil
-        contentView.layer?.addSublayer(modulesLayer!)
-    }
-    
-    // TODO: Move setting to layer initialization
-    let uiSettings = UISettings()
-    private func updateSettings() {
-        modulesLayer?.showPerformance = uiSettings.showPerformance
-        modulesLayer?.showLinks = uiSettings.showLinks
-        modulesLayer?.showSubtask = uiSettings.showSubtask
-    }
-}
-
 class DetailViewController: NSViewController {
 
     // MARK: - Toolbar
@@ -326,6 +246,7 @@ class DetailViewController: NSViewController {
         
         view().modulesLayer?.highlightEvent(at: coordinate)
         view().modulesLayer?.drawConcurrency(at: coordinate)
+        view().hudLayer?.drawConcurrency(at: coordinate)
     }
     
     override func mouseExited(with event: NSEvent) {
@@ -333,5 +254,6 @@ class DetailViewController: NSViewController {
         
         view().modulesLayer?.clearHighlightedEvent()
         view().modulesLayer?.clearConcurrency()
+        view().hudLayer?.clearConcurrency()
     }
 }

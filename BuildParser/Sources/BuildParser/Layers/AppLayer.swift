@@ -24,7 +24,6 @@ public class AppLayer: CALayer {
     private let modulesLayer: DependeciesLayer
     private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
-    private let timelineLayer: TimelineLayer
     
     private let fullframes: [CALayer]
     
@@ -55,9 +54,8 @@ public class AppLayer: CALayer {
         self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
                                          start: events.start(),
                                          totalDuration: events.duration())
-        self.timelineLayer = TimelineLayer(eventsDuration: events.duration(), scale: scale)
         
-        fullframes = [periodsLayer, modulesLayer, concurrencyLayer, timelineLayer]
+        fullframes = [periodsLayer, modulesLayer, concurrencyLayer]
         
         // Time Layer
         super.init()
@@ -73,7 +71,6 @@ public class AppLayer: CALayer {
         self.concurrencyLayer = layer.concurrencyLayer
         self.periodsLayer = layer.periodsLayer
         self.fullframes = layer.fullframes
-        self.timelineLayer = layer.timelineLayer
         
         super.init(layer: layer)
     }
@@ -99,12 +96,10 @@ public class AppLayer: CALayer {
     
     // MARK: Concurrency
     public func drawConcurrency(at coordinate: CGPoint) {
-        timelineLayer.coordinate = coordinate
         concurrencyLayer.drawConcurrency(at: coordinate)
     }
     
     public func clearConcurrency() {
-        timelineLayer.coordinate = nil
         concurrencyLayer.coordinate = nil
     }
     
