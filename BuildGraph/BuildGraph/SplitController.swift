@@ -15,12 +15,16 @@ class SplitController: NSSplitViewController {
     
     private let uiSettings = UISettings()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        projects.delegate = self
+    }
+    
     override func viewDidAppear() {
         super.viewDidAppear()
         
         view.window?.toolbar = detail.toolbar
-        
-        projects.delegate = self
     }
     
     var projects: ProjectsViewController! {
