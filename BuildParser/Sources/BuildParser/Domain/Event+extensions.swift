@@ -153,6 +153,19 @@ extension Array where Element == Event {
                       let child = child
                 else { continue }
                 
+                // TODO: Can be removed as I understand
+                guard child.parents.first?.taskName != parent.taskName else {
+                    // TODO: Remove on parsing
+                    print("cycle dependency \(parent.taskName), skip")
+                    continue
+                }
+                
+                guard child.parents.first?.taskName != parent.taskName else {
+                    // TODO: Remove on parsing
+                    print("cycle dependency \(parent.taskName), skip")
+                    continue
+                }
+                
                 child.parents.append(parent)
             }
         }
@@ -188,18 +201,6 @@ extension Event {
         for parent in parents {
             if parent.taskName == domain {
                 return true
-            }
-            
-            guard parents.first?.taskName != taskName else {
-                // TODO: Remove on parsing
-                print("cycle depnedency \(taskName), skip")
-                return false
-            }
-            
-            guard parents.first?.taskName != parent.taskName else {
-                // TODO: Remove on parsing
-                print("cycle depnedency \(taskName), skip")
-                return false
             }
             
             if parent.parentsContains(domain) {

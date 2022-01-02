@@ -17,7 +17,7 @@ public class DependencyParser {
             .dropFirst() // No need in "Target dependency graph ..."
        
         let deps = deps(Array(strings))
-            .map(dependency(from:))
+            .compactMap(dependency(from:))
         return deps
     }
     
@@ -43,20 +43,26 @@ public class DependencyParser {
         return result
     }
     
-    func parse(_ input: String) -> Dependency {
+    func parse(_ input: String) -> Dependency? {
         let strings = input.components(separatedBy: "\n")
         
         return dependency(from: strings)
     }
     
-    private func dependency(from strings: [String]) -> Dependency {
+    private func dependency(from strings: [String]) -> Dependency? {
         var deps: [Target] = []
         if strings[0].hasSuffix(", depends on:") {
             deps = strings.dropFirst().map(parseTarget(_:))
         }
         
+        let target = parseTarget(strings[0])
+        
+        guard !deps.hasRecursiveDependencies(to: target) else {
+            return nil
+        }
+                
         return Dependency(
-            target: parseTarget(strings[0]),
+            target: target,
             dependencies: deps)
     }
     
@@ -71,18 +77,25 @@ public class DependencyParser {
                      range: input.fullRange)
             .first!
         
-        
-        return Target(target: matche.xx(at: 1, in: input),
-                      project: matche.xx(at: 2, in: input))
+        return Target(target: matche.range(at: 1, in: input),
+                      project: matche.range(at: 2, in: input))
     }
 }
 
 extension NSTextCheckingResult {
-    func xx(at index: Int, in content: String) -> String {
+    func range(at index: Int, in content: String) -> String {
         let rangeInContent = Range(range(at: index),
                                    in: content)!
         
         return String(content[rangeInContent])
+    }
+}
+
+extension Array where Element == Target {
+    func hasRecursiveDependencies(to target: Element) -> Bool {
+        contains(where: { depTarget in
+            return depTarget.target == target.target
+        })
     }
 }
 

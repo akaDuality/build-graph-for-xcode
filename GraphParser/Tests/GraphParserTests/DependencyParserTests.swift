@@ -21,6 +21,9 @@ class BuildGraphTests: XCTestCase {
     let Crypto = Target(target: "Crypto",
                         project: "Crypto")
     
+    let CryptoSwift = Target(target: "CryptoSwift",
+                             project: "CryptoSwift")
+    
     let Acquirers = Target(target: "Acquirers",
                            project: "Acquirers")
     
@@ -163,8 +166,40 @@ Crypto in Crypto (explicit)
         )
     }
     
+    func test_recursiveDependency() {
+        let dependencies = parseFile(
+"""
+//Target dependency graph (14 targets)
+//CryptoSwift in CryptoSwift, no dependencies
+//CryptoSwift in CryptoSwift, depends on:
+//CryptoSwift in CryptoSwift (explicit)
+"""
+        )
+        
+        XCTAssertNoDifference(
+            dependencies,
+            [
+                Dependency(target: CryptoSwift,
+                           dependencies: []),
+            ])
+    }
+    
+    func test_recursiveDependency2Times() throws {
+        throw XCTSkip("Insert any text to analyze")
+        let dependencies = parseFile(
+"""
+"""
+        )
+        
+        XCTAssertNoDifference(
+            dependencies,
+            [
+                
+            ])
+    }
+    
     func parse(_ input: String) -> Dependency {
-        DependencyParser().parse(input)
+        DependencyParser().parse(input)!
     }
     
     func parseFile(_ input: String) -> [Dependency] {

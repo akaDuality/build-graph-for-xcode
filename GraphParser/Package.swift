@@ -14,7 +14,7 @@ let package = Package(
         .package(name: "Interface", path: "Interface"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing",
                  from: "1.9.0"),
-        .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.2.0")
+        .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "0.3.0")
     ],
     targets: [
         .target(
