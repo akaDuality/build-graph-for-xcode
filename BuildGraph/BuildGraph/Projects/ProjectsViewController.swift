@@ -30,7 +30,7 @@ class ProjectsViewController: NSViewController {
         addContextMenu()
     }
     
-    private func reloadProjetcs() {
+    func reloadProjetcs() {
         let pathFinder = PathFinder(logOptions: .empty)
         projects = try! pathFinder.projects()
         

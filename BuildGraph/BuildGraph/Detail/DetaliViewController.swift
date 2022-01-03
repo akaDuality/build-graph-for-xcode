@@ -75,27 +75,34 @@ class DetailViewController: NSViewController {
     func loadAndInsert(
         activityLogURL: URL,
         depsURL: URL?,
+        compilationOnly: Bool,
         didLoad: @escaping () -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
         clear()
         
-        print("will read \(activityLogURL), depsURL \(depsURL)")
+        print("will read \(activityLogURL), depsURL \(String(describing: depsURL))")
         
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL
         
         view().loadingIndicator.startAnimation(self)
         
+        let didFailOnMainThread: (String)->Void = { message in
+            DispatchQueue.main.async {
+                didFail(message)
+            }
+        }
+        
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             do {
                 let events = try parser.parse(
                     logURL: activityLogURL,
-                    compilationOnly: false) // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
+                    compilationOnly: compilationOnly)
                 
                 guard events.count > 0 else {
-                    // TODO: show error to user
-                    didFail("No events found")
+                    // TODO: depends on compilationOnly flag
+                    didFailOnMainThread(NSLocalizedString("No compilation data found", comment: ""))
                     return
                 }
                 
@@ -117,7 +124,7 @@ class DetailViewController: NSViewController {
                 }
                 
             } catch let error {
-                didFail(error.localizedDescription)
+                didFailOnMainThread(error.localizedDescription)
             }
         }
     }
