@@ -18,8 +18,6 @@ class DetailView: NSView {
     @IBOutlet weak var scrollView: NSScrollView!
     let contentView = FlippedView()
     
-    @IBOutlet weak var loadingIndicator: NSProgressIndicator!
-    
     func showEvents(events: [Event]) {
         let scale = NSScreen.main!.backingScaleFactor
         
@@ -37,8 +35,6 @@ class DetailView: NSView {
         scrollView.allowsMagnification = true
         scrollView.layer?.addSublayer(hudLayer!)
         scrollView.automaticallyAdjustsContentInsets = false
-        
-        loadingIndicator.stopAnimation(self)
     }
     
     override func layout() {

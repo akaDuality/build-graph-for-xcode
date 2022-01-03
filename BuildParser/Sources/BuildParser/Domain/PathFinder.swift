@@ -9,7 +9,7 @@ import Foundation
 import XCLogParser
 import Foundation
 
-public struct ProjectReference {
+public struct ProjectReference: Equatable {
     public let url: URL
     public let name: String
     public let activityLogURL: URL

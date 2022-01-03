@@ -23,6 +23,11 @@
 		1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */; };
 		1EC72584271D436900352213 /* Drinkit.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72583271D436900352213 /* Drinkit.json */; };
 		1EC72E24271D4D3800352213 /* Doner 42.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72E23271D4D3800352213 /* Doner 42.json */; };
+		1ED7AD352783198700BA74F9 /* StateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7AD342783198700BA74F9 /* StateViewController.swift */; };
+		1ED7AD3727831D0600BA74F9 /* DetailsStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7AD3627831D0600BA74F9 /* DetailsStateViewController.swift */; };
+		1ED7AD3B278328D600BA74F9 /* Details.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ED7AD3A278328D600BA74F9 /* Details.storyboard */; };
+		1ED7AD3D2783295800BA74F9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7AD3C2783295800BA74F9 /* LoadingViewController.swift */; };
+		1ED7AD3F27832F6400BA74F9 /* RetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED7AD3E27832F6400BA74F9 /* RetryViewController.swift */; };
 		1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3427135F0000741EEF /* AppDelegate.swift */; };
 		1EDB5E3727135F0000741EEF /* DetaliViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3627135F0000741EEF /* DetaliViewController.swift */; };
 		1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3827135F0100741EEF /* Assets.xcassets */; };
@@ -71,6 +76,11 @@
 		1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "targetGraph-Tuist.txt"; sourceTree = "<group>"; };
 		1EC72583271D436900352213 /* Drinkit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Drinkit.json; sourceTree = "<group>"; };
 		1EC72E23271D4D3800352213 /* Doner 42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Doner 42.json"; sourceTree = "<group>"; };
+		1ED7AD342783198700BA74F9 /* StateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateViewController.swift; sourceTree = "<group>"; };
+		1ED7AD3627831D0600BA74F9 /* DetailsStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsStateViewController.swift; sourceTree = "<group>"; };
+		1ED7AD3A278328D600BA74F9 /* Details.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Details.storyboard; sourceTree = "<group>"; };
+		1ED7AD3C2783295800BA74F9 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		1ED7AD3E27832F6400BA74F9 /* RetryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryViewController.swift; sourceTree = "<group>"; };
 		1EDB5E3127135F0000741EEF /* BuildDeps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildDeps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E3427135F0000741EEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDB5E3627135F0000741EEF /* DetaliViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetaliViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +127,11 @@
 		1EAD77FE2781EA0000C65AC5 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				1ED7AD3A278328D600BA74F9 /* Details.storyboard */,
+				1ED7AD3627831D0600BA74F9 /* DetailsStateViewController.swift */,
+				1ED7AD342783198700BA74F9 /* StateViewController.swift */,
+				1ED7AD3C2783295800BA74F9 /* LoadingViewController.swift */,
+				1ED7AD3E27832F6400BA74F9 /* RetryViewController.swift */,
 				1EDB5E3627135F0000741EEF /* DetaliViewController.swift */,
 				1EAD77FC2781E9E500C65AC5 /* DetailView.swift */,
 				1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */,
@@ -333,6 +348,7 @@
 				1EC72E24271D4D3800352213 /* Doner 42.json in Resources */,
 				1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */,
 				1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */,
+				1ED7AD3B278328D600BA74F9 /* Details.storyboard in Resources */,
 				1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */,
 				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
 				1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */,
@@ -361,12 +377,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED7AD3727831D0600BA74F9 /* DetailsStateViewController.swift in Sources */,
 				1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */,
 				1EAD77FD2781E9E500C65AC5 /* DetailView.swift in Sources */,
 				1EB1A8D6272DC1A500D31AB8 /* ProjectsViewController.swift in Sources */,
+				1ED7AD352783198700BA74F9 /* StateViewController.swift in Sources */,
+				1ED7AD3F27832F6400BA74F9 /* RetryViewController.swift in Sources */,
 				1EDB5E3727135F0000741EEF /* DetaliViewController.swift in Sources */,
 				1EB1A8DA272E9EC300D31AB8 /* DetailPopoverController.swift in Sources */,
 				1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */,
+				1ED7AD3D2783295800BA74F9 /* LoadingViewController.swift in Sources */,
 				1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */,
 				1E2D7A5527288521009ED389 /* UISettings.swift in Sources */,
 			);

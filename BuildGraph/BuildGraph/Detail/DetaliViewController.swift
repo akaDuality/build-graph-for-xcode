@@ -12,7 +12,43 @@ import Interface
 import XCLogParser
 
 class DetailViewController: NSViewController {
-
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        if embeddInWindow {
+            view.window?.toolbar = toolbar
+            resizeWindowHeight()
+            view.window?.title = title!
+        }
+        
+        addMouseTracking()
+        view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
+        updateState()
+    }
+    
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        
+        layoutModules() // on window resize
+    }
+    
+    private var embeddInWindow: Bool = true
+    public func show(
+        events: [Event],
+        deps: [Dependency],
+        title: String,
+        embeddInWindow: Bool
+    ) {
+        self.title = title
+        self.embeddInWindow = embeddInWindow
+        view().showEvents(events: events)
+        layoutModules() // calc intrinsic content size
+        
+        updateState()
+        shareButton.isEnabled = true
+    }
+    
     // MARK: - Toolbar
     @IBOutlet var toolbar: NSToolbar!
     @IBOutlet weak var subtaskVisibility: NSSwitch!
@@ -49,7 +85,6 @@ class DetailViewController: NSViewController {
     }
     
     // MARK: - Content
-    let parser = RealBuildLogParser()
     let uiSettings = UISettings()
     let imageSaveService = ImageSaveService()
     
@@ -60,83 +95,13 @@ class DetailViewController: NSViewController {
     // MARK: - Actions
     @IBAction func shareDidPressed(_ sender: Any) {
         imageSaveService.saveImage(
-            name: "\(parser.title).png",
+            name: "\(title).png",
             view: view().contentView)
     }
-    
-    private var activityLogURL: URL?
-    private var depsURL: URL?
    
     func clear() {
         view().removeLayer()
         shareButton.isEnabled = false
-    }
-    
-    func loadAndInsert(
-        activityLogURL: URL,
-        depsURL: URL?,
-        compilationOnly: Bool,
-        didLoad: @escaping () -> Void,
-        didFail: @escaping (_ error: String) -> Void
-    ) {
-        clear()
-        
-        print("will read \(activityLogURL), depsURL \(String(describing: depsURL))")
-        
-        self.activityLogURL = activityLogURL
-        self.depsURL = depsURL
-        
-        view().loadingIndicator.startAnimation(self)
-        
-        let didFailOnMainThread: (String)->Void = { message in
-            DispatchQueue.main.async {
-                didFail(message)
-            }
-        }
-        
-        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            do {
-                let events = try parser.parse(
-                    logURL: activityLogURL,
-                    compilationOnly: compilationOnly)
-                
-                guard events.count > 0 else {
-                    // TODO: depends on compilationOnly flag
-                    didFailOnMainThread(NSLocalizedString("No compilation data found", comment: ""))
-                    return
-                }
-                
-                var dependencies = [Dependency]()
-                
-                if let depsURL = depsURL {
-                    if let depsContent = try? String(contentsOf: depsURL) {
-                        dependencies = DependencyParser().parseFile(depsContent)
-                    } else {
-                        // TODO: Log
-                    }
-                }
-                
-                events.connect(by: dependencies)
-                
-                DispatchQueue.main.async {
-                    self.show(events: events, deps: dependencies, title: self.parser.title)
-                    didLoad()
-                }
-                
-            } catch let error {
-                didFailOnMainThread(error.localizedDescription)
-            }
-        }
-    }
-    
-    func show(events: [Event], deps: [Dependency], title: String) {
-        view().showEvents(events: events)
-        layoutModules() // calc intrinsic content size
-        resizeWindowHeight()
-        
-        view.window?.title = title
-        updateState()
-        shareButton.isEnabled = true
     }
     
     func resizeWindowHeight() {
@@ -151,10 +116,6 @@ class DetailViewController: NSViewController {
         
         window.setFrame(frame, display: true, animate: true)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
                                   
     @objc func didClick(_ recognizer: NSClickGestureRecognizer) {
         let coordinate = recognizer.location(in: view().contentView)
@@ -162,14 +123,12 @@ class DetailViewController: NSViewController {
         guard let event = view().modulesLayer?.event(at: coordinate)
         else { return }
               
-//        guard let step = parser.step(for: event)
-//        else { return }
-//        let events = parser.convertToEvents(subSteps: step.subSteps) // complation files has type other, that dosn't path filter
         let events = event.steps
        
         guard events.count > 0 else {
             return // TODO: Give feedback
         }
+        
         let child = controllerForDetailsPopover(events: events, title: event.taskName)
         
         child.preferredContentSize = CGSize(width: 1000, height: 500)
@@ -189,29 +148,15 @@ class DetailViewController: NSViewController {
 //    }
     
     private func controllerForDetailsPopover(events: [Event], title: String) -> NSViewController {
-        let popover = NSStoryboard(name: "Main", bundle: nil)
-            .instantiateController(withIdentifier: "Detail") as! DetailViewController
+        let popover = NSStoryboard(name: "Details", bundle: nil)
+            .instantiateController(withIdentifier: "data") as! DetailViewController
         _ = popover.view
         
         popover.show(events: events,
                      deps: [],
-                     title: title)
+                     title: title,
+                     embeddInWindow: false)
         return popover
-    }
-    
-    
-    override func viewDidAppear() {
-        super.viewDidAppear()
-
-        addMouseTracking()
-        view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
-        updateState()
-    }
-    
-    override func viewDidLayout() {
-        super.viewDidLayout()
-
-        layoutModules() // on window resize
     }
     
     private func contentSize(appLayer: AppLayer) -> CGSize {
