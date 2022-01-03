@@ -95,7 +95,7 @@ class DetailViewController: NSViewController {
     // MARK: - Actions
     @IBAction func shareDidPressed(_ sender: Any) {
         imageSaveService.saveImage(
-            name: "\(title).png",
+            name: "\(title ?? Date().description).png",
             view: view().contentView)
     }
    

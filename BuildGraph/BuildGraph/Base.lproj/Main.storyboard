@@ -732,12 +732,12 @@
         <scene sceneID="mMR-YW-bmC">
             <objects>
                 <viewController title="Projects" id="UVZ-bf-hOg" customClass="ProjectsViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="3ih-p3-D1w">
-                        <rect key="frame" x="0.0" y="0.0" width="149" height="452"/>
+                    <view key="view" misplaced="YES" id="3ih-p3-D1w">
+                        <rect key="frame" x="0.0" y="0.0" width="149" height="518"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nA8-Pc-4mB">
-                                <rect key="frame" x="9" y="346" width="131" height="40"/>
+                                <rect key="frame" x="9" y="434" width="131" height="40"/>
                                 <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VXn-as-VWD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -747,13 +747,13 @@
                                 </connections>
                             </button>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhU-gY-8vG">
-                                <rect key="frame" x="0.0" y="0.0" width="149" height="344"/>
+                                <rect key="frame" x="0.0" y="0.0" width="149" height="432"/>
                                 <clipView key="contentView" drawsBackground="NO" id="GPP-R3-2Cb">
-                                    <rect key="frame" x="0.0" y="0.0" width="149" height="344"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="149" height="432"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="dcg-t8-V2a">
-                                            <rect key="frame" x="0.0" y="0.0" width="149" height="344"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="149" height="432"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -818,7 +818,7 @@
                             <constraint firstItem="nA8-Pc-4mB" firstAttribute="bottom" secondItem="lhU-gY-8vG" secondAttribute="top" constant="-8" id="MOE-cf-hcp"/>
                             <constraint firstItem="lhU-gY-8vG" firstAttribute="bottom" secondItem="YLG-cE-1yI" secondAttribute="bottom" id="Wcu-Ih-Fp6"/>
                             <constraint firstItem="lhU-gY-8vG" firstAttribute="trailing" secondItem="YLG-cE-1yI" secondAttribute="trailing" id="jSZ-WU-gXr"/>
-                            <constraint firstItem="YZC-At-8ta" firstAttribute="top" secondItem="nA8-Pc-4mB" secondAttribute="top" id="rpa-wi-LJ8"/>
+                            <constraint firstAttribute="top" secondItem="nA8-Pc-4mB" secondAttribute="top" constant="-40" id="rpa-wi-LJ8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YLG-cE-1yI"/>
                         <viewLayoutGuide key="layoutMargins" id="YZC-At-8ta"/>
@@ -829,7 +829,7 @@
                 </viewController>
                 <customObject id="1nV-Z7-H2f" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-200" y="1221"/>
+            <point key="canvasLocation" x="-201" y="1221"/>
         </scene>
         <!--Details State View Controller-->
         <scene sceneID="pAW-rV-PZr">
@@ -838,6 +838,8 @@
                     <view key="view" id="me5-j8-t6X">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <viewLayoutGuide key="safeArea" id="CHf-vl-hzA"/>
+                        <viewLayoutGuide key="layoutMargins" id="G0l-Kj-Bed"/>
                     </view>
                 </viewController>
                 <customObject id="HQR-2l-vGl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

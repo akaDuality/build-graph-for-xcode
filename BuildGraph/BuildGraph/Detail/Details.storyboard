@@ -85,23 +85,23 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
                                 <clipView key="contentView" id="kmJ-xz-3Wv">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view id="vMu-dF-XQW">
-                                            <rect key="frame" x="0.0" y="0.0" width="465" height="255"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="465" height="203"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="7Aa-Zl-exb">
-                                    <rect key="frame" x="0.0" y="254" width="480" height="16"/>
+                                    <rect key="frame" x="0.0" y="202" width="480" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="vah-yU-LBv">
-                                    <rect key="frame" x="464" y="0.0" width="16" height="270"/>
+                                    <rect key="frame" x="464" y="0.0" width="16" height="218"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -109,7 +109,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zGP-rt-v5D" secondAttribute="trailing" id="8Zq-A4-rVc"/>
                             <constraint firstAttribute="bottom" secondItem="zGP-rt-v5D" secondAttribute="bottom" id="Bpv-wq-o4r"/>
-                            <constraint firstItem="zGP-rt-v5D" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" id="j8j-lI-w5M"/>
+                            <constraint firstItem="zGP-rt-v5D" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="52" id="j8j-lI-w5M"/>
                             <constraint firstItem="zGP-rt-v5D" firstAttribute="leading" secondItem="Iu8-Pp-pFO" secondAttribute="leading" id="nG8-y7-lIL"/>
                         </constraints>
                         <connections>
@@ -163,12 +163,12 @@
                                 <action selector="performanceVisibilityDidChange:" target="mdS-38-uT0" id="YG8-gD-Tsa"/>
                             </connections>
                         </toolbarItem>
-                        <toolbarItem implicitItemIdentifier="38F8A84F-D4D2-4C68-9A62-4FE7D0F036E4" label="Share" paletteLabel="Share" image="NSShareTemplate" sizingBehavior="auto" id="x9b-ck-wMB">
+                        <toolbarItem implicitItemIdentifier="38F8A84F-D4D2-4C68-9A62-4FE7D0F036E4" label="Image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="x9b-ck-wMB">
                             <nil key="toolTip"/>
                             <button key="view" verticalHuggingPriority="750" id="oiT-Ba-5Du">
-                                <rect key="frame" x="11" y="14" width="15.5" height="17"/>
+                                <rect key="frame" x="11" y="14.5" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSShareTemplate" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="tl1-ty-gAK">
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="paperplane.fill" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="tl1-ty-gAK">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -180,11 +180,11 @@
                     </allowedToolbarItems>
                     <defaultToolbarItems>
                         <toolbarItem reference="fjS-lg-MnO"/>
-                        <toolbarItem reference="x9b-ck-wMB"/>
-                        <toolbarItem reference="fjS-lg-MnO"/>
                         <toolbarItem reference="OTH-SO-gnu"/>
                         <toolbarItem reference="H2x-Eb-nMX"/>
                         <toolbarItem reference="NHc-Gt-GNs"/>
+                        <toolbarItem reference="fjS-lg-MnO"/>
+                        <toolbarItem reference="x9b-ck-wMB"/>
                     </defaultToolbarItems>
                 </toolbar>
             </objects>
@@ -199,10 +199,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0AU-P7-nif">
-                                <rect key="frame" x="18" y="197" width="414" height="31"/>
+                                <rect key="frame" x="18" y="157" width="414" height="31"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="← select a project to show build data" id="DnH-nK-C8f">
                                     <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -210,7 +210,7 @@
                         <constraints>
                             <constraint firstItem="0AU-P7-nif" firstAttribute="leading" secondItem="ddu-g0-LqC" secondAttribute="leading" id="O7l-Qg-240"/>
                             <constraint firstItem="0AU-P7-nif" firstAttribute="centerX" secondItem="ddu-g0-LqC" secondAttribute="centerX" id="agq-JG-3XR"/>
-                            <constraint firstItem="0AU-P7-nif" firstAttribute="top" secondItem="ddu-g0-LqC" secondAttribute="top" id="b0O-UD-32A"/>
+                            <constraint firstItem="0AU-P7-nif" firstAttribute="top" secondItem="ddu-g0-LqC" secondAttribute="top" constant="40" id="b0O-UD-32A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Lii-Xy-ETY"/>
                         <viewLayoutGuide key="layoutMargins" id="ddu-g0-LqC"/>
@@ -224,9 +224,8 @@
         <scene sceneID="5RB-OX-ktn">
             <objects>
                 <viewController storyboardIdentifier="loading" id="4EO-VF-8Wl" customClass="LoadingViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="exb-51-eaO">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="exb-51-eaO">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="M52-Qa-0Ks">
                                 <rect key="frame" x="209" y="134" width="32" height="32"/>
@@ -254,7 +253,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5OI-Dk-aTi">
-                                <rect key="frame" x="18" y="157" width="298" height="31"/>
+                                <rect key="frame" x="18" y="161" width="298" height="31"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="No compilation data found" id="Nvf-tS-ows">
                                     <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -262,7 +261,7 @@
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-vu-roe">
-                                <rect key="frame" x="20" y="121" width="200" height="28"/>
+                                <rect key="frame" x="20" y="125" width="200" height="28"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q5Z-RO-6N7">
                                         <rect key="frame" x="-6" y="-6" width="212" height="40"/>
@@ -283,7 +282,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uu4-1j-utS">
-                                <rect key="frame" x="18" y="212" width="146" height="16"/>
+                                <rect key="frame" x="18" y="216" width="146" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="← refresh also can help" id="LZG-eO-GSB">
                                     <font key="font" textStyle="body" name=".SFNS-Regular"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -293,7 +292,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="uu4-1j-utS" firstAttribute="leading" secondItem="9Xc-mZ-syu" secondAttribute="leading" constant="20" symbolic="YES" id="Dne-Cy-4Yy"/>
-                            <constraint firstItem="T5W-2y-A0w" firstAttribute="top" secondItem="uu4-1j-utS" secondAttribute="top" id="TDA-bJ-LwF"/>
+                            <constraint firstItem="T5W-2y-A0w" firstAttribute="top" secondItem="uu4-1j-utS" secondAttribute="top" constant="4" id="TDA-bJ-LwF"/>
                             <constraint firstItem="hJ6-vu-roe" firstAttribute="leading" secondItem="5OI-Dk-aTi" secondAttribute="leading" id="grS-pV-t11"/>
                             <constraint firstItem="hJ6-vu-roe" firstAttribute="top" secondItem="5OI-Dk-aTi" secondAttribute="bottom" constant="8" symbolic="YES" id="gtE-Ev-Rli"/>
                             <constraint firstItem="5OI-Dk-aTi" firstAttribute="top" secondItem="uu4-1j-utS" secondAttribute="bottom" constant="24" id="muz-g3-jur"/>
@@ -312,7 +311,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSShareTemplate" width="15" height="17"/>
+        <image name="paperplane.fill" catalog="system" width="16" height="16"/>
         <image name="xmark.circle.fill" catalog="system" width="15" height="15"/>
     </resources>
 </document>
