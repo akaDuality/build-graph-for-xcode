@@ -685,7 +685,7 @@
         <!--Window Controller-->
         <scene sceneID="8s9-m6-HQ8">
             <objects>
-                <windowController id="LFf-Ro-PN7" sceneMemberID="viewController">
+                <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -695,6 +695,15 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
+                        <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="0Qa-Qa-ok0"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aNr-aQ-u4z"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="aNr-aQ-u4z"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="LFf-Ro-PN7" id="ui6-5g-a1j"/>
                         </connections>
@@ -713,7 +722,7 @@
                 <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="bDS-xd-pgm"/>
-                        <splitViewItem id="Zgb-65-7dU"/>
+                        <splitViewItem holdingPriority="255" behavior="contentList" id="Zgb-65-7dU"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="2qE-Y4-Bj2">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -733,19 +742,9 @@
             <objects>
                 <viewController title="Projects" id="UVZ-bf-hOg" customClass="ProjectsViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="3ih-p3-D1w">
-                        <rect key="frame" x="0.0" y="0.0" width="149" height="518"/>
+                        <rect key="frame" x="0.0" y="0.0" width="149" height="484"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nA8-Pc-4mB">
-                                <rect key="frame" x="9" y="434" width="131" height="40"/>
-                                <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VXn-as-VWD">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="refreshDidPressed:" target="UVZ-bf-hOg" id="9UT-Uf-875"/>
-                                </connections>
-                            </button>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhU-gY-8vG">
                                 <rect key="frame" x="0.0" y="0.0" width="149" height="432"/>
                                 <clipView key="contentView" drawsBackground="NO" id="GPP-R3-2Cb">
@@ -813,12 +812,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="lhU-gY-8vG" firstAttribute="leading" secondItem="YLG-cE-1yI" secondAttribute="leading" id="2XU-qs-uys"/>
-                            <constraint firstItem="YZC-At-8ta" firstAttribute="leading" secondItem="nA8-Pc-4mB" secondAttribute="leading" constant="5" id="G8I-9S-dWL"/>
-                            <constraint firstItem="nA8-Pc-4mB" firstAttribute="centerX" secondItem="YZC-At-8ta" secondAttribute="centerX" id="Gij-iy-F1j"/>
-                            <constraint firstItem="nA8-Pc-4mB" firstAttribute="bottom" secondItem="lhU-gY-8vG" secondAttribute="top" constant="-8" id="MOE-cf-hcp"/>
                             <constraint firstItem="lhU-gY-8vG" firstAttribute="bottom" secondItem="YLG-cE-1yI" secondAttribute="bottom" id="Wcu-Ih-Fp6"/>
                             <constraint firstItem="lhU-gY-8vG" firstAttribute="trailing" secondItem="YLG-cE-1yI" secondAttribute="trailing" id="jSZ-WU-gXr"/>
-                            <constraint firstAttribute="top" secondItem="nA8-Pc-4mB" secondAttribute="top" constant="-40" id="rpa-wi-LJ8"/>
+                            <constraint firstItem="lhU-gY-8vG" firstAttribute="top" secondItem="YLG-cE-1yI" secondAttribute="top" id="wD1-tr-SbG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YLG-cE-1yI"/>
                         <viewLayoutGuide key="layoutMargins" id="YZC-At-8ta"/>

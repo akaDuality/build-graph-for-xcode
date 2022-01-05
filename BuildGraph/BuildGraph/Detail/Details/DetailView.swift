@@ -33,8 +33,10 @@ class DetailView: NSView {
         
         scrollView.documentView = contentView
         scrollView.allowsMagnification = true
-        scrollView.layer?.addSublayer(hudLayer!)
         scrollView.automaticallyAdjustsContentInsets = false
+        
+        modulesLayer?.addSublayer(hudLayer!)
+//        layer?.addSublayer(hudLayer!)
     }
     
     override func layout() {

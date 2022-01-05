@@ -39,6 +39,7 @@
 		1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E6227136DBE00741EEF /* TestEvents.json */; };
 		1EDB6A242714183500741EEF /* AppEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A232714182600741EEF /* AppEvents.json */; };
 		1EF2761E27207666000C95BA /* TuistIntel.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EF2761D27207666000C95BA /* TuistIntel.json */; };
+		1EF5609627844D2700001935 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5609527844D2700001935 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		1EDB5E6227136DBE00741EEF /* TestEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TestEvents.json; sourceTree = "<group>"; };
 		1EDB6A232714182600741EEF /* AppEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppEvents.json; sourceTree = "<group>"; };
 		1EF2761D27207666000C95BA /* TuistIntel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TuistIntel.json; sourceTree = "<group>"; };
+		1EF5609527844D2700001935 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,17 +126,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1EAD77FE2781EA0000C65AC5 /* Detail */ = {
+		1E63E43227861C5600382CCC /* States */ = {
 			isa = PBXGroup;
 			children = (
-				1ED7AD3A278328D600BA74F9 /* Details.storyboard */,
 				1ED7AD3627831D0600BA74F9 /* DetailsStateViewController.swift */,
 				1ED7AD342783198700BA74F9 /* StateViewController.swift */,
 				1ED7AD3C2783295800BA74F9 /* LoadingViewController.swift */,
 				1ED7AD3E27832F6400BA74F9 /* RetryViewController.swift */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		1E63E43327861C5F00382CCC /* Details */ = {
+			isa = PBXGroup;
+			children = (
 				1EDB5E3627135F0000741EEF /* DetaliViewController.swift */,
 				1EAD77FC2781E9E500C65AC5 /* DetailView.swift */,
 				1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		1EAD77FE2781EA0000C65AC5 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				1ED7AD3A278328D600BA74F9 /* Details.storyboard */,
+				1E63E43227861C5600382CCC /* States */,
+				1E63E43327861C5F00382CCC /* Details */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -194,6 +212,7 @@
 			children = (
 				1EDB5E3427135F0000741EEF /* AppDelegate.swift */,
 				1EDB5E3A27135F0100741EEF /* Main.storyboard */,
+				1EF5609527844D2700001935 /* WindowController.swift */,
 				1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */,
 				1EAD77FF2781EC9400C65AC5 /* Projects */,
 				1EAD77FE2781EA0000C65AC5 /* Detail */,
@@ -385,6 +404,7 @@
 				1ED7AD3F27832F6400BA74F9 /* RetryViewController.swift in Sources */,
 				1EDB5E3727135F0000741EEF /* DetaliViewController.swift in Sources */,
 				1EB1A8DA272E9EC300D31AB8 /* DetailPopoverController.swift in Sources */,
+				1EF5609627844D2700001935 /* WindowController.swift in Sources */,
 				1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */,
 				1ED7AD3D2783295800BA74F9 /* LoadingViewController.swift in Sources */,
 				1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */,

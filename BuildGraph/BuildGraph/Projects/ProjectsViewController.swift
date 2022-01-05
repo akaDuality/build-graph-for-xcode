@@ -30,7 +30,7 @@ class ProjectsViewController: NSViewController {
         addContextMenu()
     }
     
-    func reloadProjetcs() {
+    @objc func reloadProjetcs() {
         let pathFinder = PathFinder(logOptions: .empty)
         projects = try! pathFinder.projects()
         
@@ -45,10 +45,6 @@ class ProjectsViewController: NSViewController {
         }
         tableView.selectRowIndexes(.init(integer: row), byExtendingSelection: false)
         delegate?.didSelect(project: projects[row])
-    }
-    
-    @IBAction func refreshDidPressed(_ sender: Any) {
-        reloadProjetcs()
     }
     
     var projects: [ProjectReference] = [] {

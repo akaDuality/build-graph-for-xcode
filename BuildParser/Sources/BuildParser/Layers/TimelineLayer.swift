@@ -90,6 +90,8 @@ class TimelineLayer: CALayer {
             // TODO: Add milliseconds for this case
         }
         
+        let toolbarHeight: CGFloat = 52
+        
         for second in 1..<eventsDuration.seconds {
             let tickLayer = ticks[second]
             
@@ -103,7 +105,7 @@ class TimelineLayer: CALayer {
                 tickLayer.isHidden = second % 5 != 0
             }
             
-            let y: CGFloat = frame.height - height
+            let y: CGFloat = frame.height - height - toolbarHeight // TODO: refactor magic number
             let frame = CGRect(x: secondWidth * CGFloat(second),
                                y: y,
                                width: 1,
@@ -132,7 +134,7 @@ class TimelineLayer: CALayer {
         }
         
         let frame = CGRect(x: coordinate.x + 5,
-                           y: frame.height - minuteHeight * 2,
+                           y: frame.height - minuteHeight * 2 - toolbarHeight,
                            width: textWidth,
                            height: minuteHeight)
         

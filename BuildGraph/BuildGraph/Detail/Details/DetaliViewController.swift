@@ -17,7 +17,7 @@ class DetailViewController: NSViewController {
         super.viewDidAppear()
         
         if embeddInWindow {
-            view.window?.toolbar = toolbar
+//            view.window?.toolbar = toolbar
             resizeWindowHeight()
             view.window?.title = title!
         }
@@ -110,7 +110,7 @@ class DetailViewController: NSViewController {
         let contentSize = contentSize(appLayer: view().modulesLayer!)
         let newHeight = contentSize.height + view.safeAreaInsets.top
         let frame = CGRect(x: window.frame.minX,
-                           y: window.frame.midY - newHeight/2,
+                           y: max(0, window.frame.midY - newHeight/2),
                            width: window.frame.width,
                            height: newHeight)
         
