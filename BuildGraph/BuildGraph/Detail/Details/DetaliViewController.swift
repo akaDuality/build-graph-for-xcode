@@ -30,7 +30,7 @@ class DetailViewController: NSViewController {
     override func viewDidLayout() {
         super.viewDidLayout()
         
-        layoutModules() // on window resize
+        setModules(size: view.bounds.size)
     }
     
     private var embeddInWindow: Bool = true
@@ -173,13 +173,21 @@ class DetailViewController: NSViewController {
         
         let contentSize = contentSize(appLayer: modulesLayer)
         
+        setModules(size: contentSize)
+        
+    }
+    
+    private func setModules(size: CGSize) {
+        guard let modulesLayer = view().modulesLayer else { return }
+        
         modulesLayer.updateWithoutAnimation {
             modulesLayer.frame = CGRect(
                 x: 0, y: 0,
-                width: contentSize.width,
-                height: contentSize.height)
+                width: size.width,
+                height: size.height)
             modulesLayer.layoutIfNeeded()
         }
+        
         view().contentView.frame = modulesLayer.bounds
     }
     
