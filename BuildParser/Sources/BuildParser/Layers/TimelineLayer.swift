@@ -63,7 +63,7 @@ class TimelineLayer: CALayer {
         for _ in 0...eventsDuration.minutes {
             let titleLayer = CATextLayer()
             titleLayer.foregroundColor = Colors.timeColor()
-            titleLayer.fontSize = 20
+            titleLayer.fontSize = 18
             
             addSublayer(titleLayer)
             
@@ -78,19 +78,25 @@ class TimelineLayer: CALayer {
     
     public override func layoutSublayers() {
         super.layoutSublayers()
-        
-        let minuteHeight: CGFloat = 30
-        let quarterHeight: CGFloat = 20
-        let secondHeight: CGFloat = 10
-        
-        let secondWidth: CGFloat = frame.width / CGFloat(eventsDuration.seconds)
        
         guard eventsDuration.seconds > 1 else {
             return // Drawing starts from seconds.
             // TODO: Add milliseconds for this case
         }
         
-        let toolbarHeight: CGFloat = 52
+        layoutSeconds()
+        
+        layoutCurrentTime()
+    }
+    
+    private let toolbarHeight: CGFloat = 52
+    private let minuteHeight: CGFloat = 30
+    private let quarterHeight: CGFloat = 15
+    private let secondHeight: CGFloat = 10
+    
+    private func layoutSeconds() {
+        let secondWidth: CGFloat = frame.width / CGFloat(eventsDuration.seconds)
+        let minutesWidth: CGFloat = frame.width / CGFloat(eventsDuration.minutes)
         
         for second in 1..<eventsDuration.seconds {
             let tickLayer = ticks[second]
@@ -100,9 +106,11 @@ class TimelineLayer: CALayer {
                 height = minuteHeight
             } else if second.isMinuteQuart {
                 height = quarterHeight
+                tickLayer.isHidden = minutesWidth < 10 // can't draw 3 tick in minutes
             } else {
+                // just seconds
                 height = secondHeight
-                tickLayer.isHidden = second % 5 != 0
+                tickLayer.isHidden = second % 5 != 0 || minutesWidth < 20 // can't draw even qurter tick
             }
             
             let y: CGFloat = frame.height - height - toolbarHeight // TODO: refactor magic number
@@ -113,16 +121,22 @@ class TimelineLayer: CALayer {
             tickLayer.frame = frame
             
             if second.isMinuteStart {
-                let width: CGFloat = 20
+                let width: CGFloat = 30
                 let title = minuteTitles[second.minute]
                 title.string = "\(second.minute)"
-                title.frame = CGRect(x: frame.minX - width + 5,
+                title.frame = CGRect(x: frame.minX - width - 2,
                                      y: frame.minY - 6,
                                      width: width,
                                      height: minuteHeight)
+                title.alignmentMode = .right
+                
+                title.isHidden = minutesWidth < 30
+                && second % (60*5) != 0 // every 5 is shown
             }
         }
-        
+    }
+    
+    private func layoutCurrentTime() {
         // MARK: Pointer
         let coordinate = coordinate ?? CGPoint(x: frame.maxX, y: 0)
         // TODO: Size text to fit

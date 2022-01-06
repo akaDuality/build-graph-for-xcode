@@ -29,7 +29,13 @@ extension NSColor {
     ///
     ///     let cgColor = aView.performWithEffectiveAppearanceAsDrawingAppearance { aColor.cgColor }
     var effectiveCGColor: CGColor {
-        NSApp.performWithEffectiveAppearanceAsDrawingAppearance {
+#if DEBUG
+        let isTesting = NSClassFromString("XCTest")  != nil
+        if isTesting {
+            return cgColor
+        }
+#endif
+        return NSApp.performWithEffectiveAppearanceAsDrawingAppearance {
             self.cgColor
         }
     }
