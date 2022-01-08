@@ -67,6 +67,7 @@
 		1E2D7A5427288521009ED389 /* UISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
 		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
+		1E9690092789C0280010FF04 /* BuildDeps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BuildDeps-Info.plist"; sourceTree = "<group>"; };
 		1EAD77FC2781E9E500C65AC5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1EB1A8D5272DC1A500D31AB8 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitController.swift; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		1EDB5E2827135F0000741EEF = {
 			isa = PBXGroup;
 			children = (
+				1E9690092789C0280010FF04 /* BuildDeps-Info.plist */,
 				1EDB5E3327135F0000741EEF /* BuildGraph */,
 				1EDB5E4527135F0100741EEF /* BuildGraphTests */,
 				1EDB5E4F27135F0100741EEF /* BuildGraphUITests */,
@@ -583,6 +585,7 @@
 				DEVELOPMENT_TEAM = AVGCX5Z5VU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BuildDeps-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Mikhail Rubanov";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -611,6 +614,7 @@
 				DEVELOPMENT_TEAM = AVGCX5Z5VU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "BuildDeps-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Mikhail Rubanov";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
