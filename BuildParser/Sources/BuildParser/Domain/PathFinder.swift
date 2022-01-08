@@ -65,7 +65,10 @@ public class PathFinder {
         }
         
         let derivedDataContents = try derivedDataContents(derivedDataAccessURL: path)
-        let result = filter(derivedDataContents, url: path)
+        
+        let result = filter(derivedDataContents)
+            .compactMap { ProjectReference(url: path, fullName: $0) }
+        
         return result
     }
     
@@ -87,11 +90,10 @@ public class PathFinder {
         return contents
     }
     
-    func filter(_ names: [String], url: URL) -> [ProjectReference] {
+    func filter(_ names: [String]) -> [String] {
         return names
             .filter { $0.contains("-") }
             .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
-            .compactMap { ProjectReference(url: url, fullName: $0) }
     }
     
     public func buildGraphURL() throws -> URL {
