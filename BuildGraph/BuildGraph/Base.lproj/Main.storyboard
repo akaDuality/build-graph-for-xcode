@@ -686,7 +686,7 @@
         <scene sceneID="8s9-m6-HQ8">
             <objects>
                 <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt">
+                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildDeps" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="425" y="462" width="480" height="270"/>
@@ -699,13 +699,30 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="0Qa-Qa-ok0"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aNr-aQ-u4z"/>
+                                <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="XyR-33-egz">
+                                        <rect key="frame" x="12" y="14.5" width="16" height="16"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="paperplane.fill" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="KpE-aU-vrh">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <action selector="makeScreenshotOfGraph:" target="LFf-Ro-PN7" id="8P3-1G-gVq"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="aNr-aQ-u4z"/>
+                                <toolbarItem reference="0Qa-Qa-ok0"/>
+                                <toolbarItem reference="tOZ-ba-ewD"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="LFf-Ro-PN7" id="ui6-5g-a1j"/>
+                            <outlet property="sendImageToolbarItem" destination="tOZ-ba-ewD" id="T9v-x7-2c3"/>
                         </connections>
                     </window>
                     <connections>
@@ -741,7 +758,7 @@
         <scene sceneID="mMR-YW-bmC">
             <objects>
                 <viewController title="Projects" id="UVZ-bf-hOg" customClass="ProjectsViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="3ih-p3-D1w">
+                    <view key="view" id="3ih-p3-D1w">
                         <rect key="frame" x="0.0" y="0.0" width="149" height="484"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -843,4 +860,7 @@
             <point key="canvasLocation" x="134" y="1145"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="paperplane.fill" catalog="system" width="16" height="16"/>
+    </resources>
 </document>

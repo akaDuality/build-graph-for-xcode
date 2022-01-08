@@ -23,6 +23,7 @@ class ImageSaveService {
         }
     }
     
+    // TODO: Add background color
     func save(url: URL, view: NSView) {
         let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds)!
         view.cacheDisplay(in: view.bounds, to: rep)

@@ -13,7 +13,7 @@ struct Colors {
     static var textColor: () -> CGColor = { NSColor.labelColor.effectiveCGColor }
     static var textOverModuleColor: () -> CGColor = { NSColor.black.effectiveCGColor }
     static var textInvertedColor: () -> CGColor = { NSColor.labelColor.effectiveCGColor }
-    static var backColor: () -> CGColor = { NSColor.textBackgroundColor.effectiveCGColor }
+    static var backColor: () -> CGColor = { NSColor.clear.effectiveCGColor }
     static var subtaskColor: () -> CGColor = {NSColor.systemBlue.effectiveCGColor }
     
     static var liftColor: () -> CGColor = { NSColor.systemGray.withAlphaComponent(0.05).effectiveCGColor }

@@ -15,8 +15,9 @@ class SplitController: NSSplitViewController {
         super.viewDidLoad()
         
         projects.delegate = self
+        detail.delegate = self
     }
-    
+
     var projects: ProjectsViewController! {
         (splitViewItems[0].viewController as! ProjectsViewController)
     }
@@ -29,5 +30,19 @@ class SplitController: NSSplitViewController {
 extension SplitController: ProjectsViewControllerDelegate {
     func didSelect(project: ProjectReference) {
         detail.selectProject(project: project)
+    }
+}
+
+extension SplitController: DetailsDelegate {
+    func mainWindow() -> MainWindow {
+        view.window as! MainWindow
+    }
+    
+    func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
+        mainWindow().sendImageToolbarItem.isEnabled = true
+    }
+    
+    func willLoadProject(project: ProjectReference) {
+        mainWindow().sendImageToolbarItem.isEnabled = false
     }
 }

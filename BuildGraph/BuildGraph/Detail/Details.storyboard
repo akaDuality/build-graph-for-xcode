@@ -84,7 +84,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D">
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D" customClass="HUDScrollView" customModule="BuildDeps" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
                                 <clipView key="contentView" id="kmJ-xz-3Wv">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
@@ -166,7 +166,7 @@
                         <toolbarItem implicitItemIdentifier="38F8A84F-D4D2-4C68-9A62-4FE7D0F036E4" label="Image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="x9b-ck-wMB">
                             <nil key="toolTip"/>
                             <button key="view" verticalHuggingPriority="750" id="oiT-Ba-5Du">
-                                <rect key="frame" x="11" y="14.5" width="16" height="16"/>
+                                <rect key="frame" x="12" y="14.5" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="paperplane.fill" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="tl1-ty-gAK">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -253,18 +253,26 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5OI-Dk-aTi">
-                                <rect key="frame" x="18" y="161" width="298" height="31"/>
+                                <rect key="frame" x="18" y="193" width="298" height="31"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="No compilation data found" id="Nvf-tS-ows">
                                     <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-vu-roe">
-                                <rect key="frame" x="20" y="125" width="200" height="28"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-vu-roe">
+                                <rect key="frame" x="20" y="157" width="271" height="28"/>
                                 <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uu4-1j-utS">
+                                        <rect key="frame" x="-2" y="7" width="67" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Refresh or" id="LZG-eO-GSB">
+                                            <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q5Z-RO-6N7">
-                                        <rect key="frame" x="-6" y="-6" width="212" height="40"/>
+                                        <rect key="frame" x="65" y="-6" width="212" height="40"/>
                                         <buttonCell key="cell" type="push" title="Show non-compilation events" bezelStyle="rounded" alignment="center" controlSize="large" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7y9-71-vbx">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                             <font key="font" textStyle="body" name=".SFNS-Regular"/>
@@ -274,28 +282,23 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="uu4-1j-utS" firstAttribute="firstBaseline" secondItem="Q5Z-RO-6N7" secondAttribute="firstBaseline" id="HRB-Bz-id1"/>
+                                </constraints>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
                                     <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uu4-1j-utS">
-                                <rect key="frame" x="18" y="216" width="146" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="← refresh also can help" id="LZG-eO-GSB">
-                                    <font key="font" textStyle="body" name=".SFNS-Regular"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="uu4-1j-utS" firstAttribute="leading" secondItem="9Xc-mZ-syu" secondAttribute="leading" constant="20" symbolic="YES" id="Dne-Cy-4Yy"/>
-                            <constraint firstItem="T5W-2y-A0w" firstAttribute="top" secondItem="uu4-1j-utS" secondAttribute="top" constant="4" id="TDA-bJ-LwF"/>
+                            <constraint firstItem="5OI-Dk-aTi" firstAttribute="top" secondItem="T5W-2y-A0w" secondAttribute="top" constant="4" id="RJC-Ao-sR9"/>
                             <constraint firstItem="hJ6-vu-roe" firstAttribute="leading" secondItem="5OI-Dk-aTi" secondAttribute="leading" id="grS-pV-t11"/>
                             <constraint firstItem="hJ6-vu-roe" firstAttribute="top" secondItem="5OI-Dk-aTi" secondAttribute="bottom" constant="8" symbolic="YES" id="gtE-Ev-Rli"/>
-                            <constraint firstItem="5OI-Dk-aTi" firstAttribute="top" secondItem="uu4-1j-utS" secondAttribute="bottom" constant="24" id="muz-g3-jur"/>
                             <constraint firstItem="5OI-Dk-aTi" firstAttribute="leading" secondItem="T5W-2y-A0w" secondAttribute="leading" id="wFv-6Y-CPN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VAf-nW-4dx"/>

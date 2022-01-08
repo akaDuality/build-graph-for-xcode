@@ -19,10 +19,10 @@ final class GraphTests: XCTestCase {
         let events = try parser.parse(path: appEventsPath)
         let view = AppLayer(events: events, scale: 3)
         
-        view.frame = .init(x: 0,
-                           y: 0,
-                           width: view.intrinsicContentSize.width,
-                           height: view.intrinsicContentSize.height)
+        view.frame = CGRect(x: 0,
+                            y: 0,
+                            width: view.intrinsicContentSize.width,
+                            height: view.intrinsicContentSize.height)
         let layer: CALayer = view
         assertSnapshot(matching: layer,
                        as: .image,
@@ -32,13 +32,13 @@ final class GraphTests: XCTestCase {
     func test_drawingTestEvents() throws {
         let events = try parser.parse(path: testEventsPath)
         let view = AppLayer(events: events, scale: 3)
-//        view.highlightedEvent = events[100]
-//        view.highlightEvent(at: <#T##CGPoint#>)
+        //        view.highlightedEvent = events[100]
+        //        view.highlightEvent(at: <#T##CGPoint#>)
         
-        view.frame = .init(x: 0,
-                           y: 0,
-                           width: view.intrinsicContentSize.width,
-                           height: view.intrinsicContentSize.height)
+        view.frame = CGRect(x: 0,
+                            y: 0,
+                            width: view.intrinsicContentSize.width,
+                            height: view.intrinsicContentSize.height)
         let layer: CALayer = view
         assertSnapshot(matching: layer,
                        as: .image,

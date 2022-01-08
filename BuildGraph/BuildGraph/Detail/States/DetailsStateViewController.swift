@@ -20,9 +20,16 @@ enum DetailsState: StateProtocol {
     static var `default`: DetailsState = .empty
 }
 
+protocol DetailsDelegate: AnyObject {
+    func didLoadProject(project: ProjectReference, detailsController: DetailViewController)
+    func willLoadProject(project: ProjectReference)
+}
+
 class DetailsStateViewController: StateViewController<DetailsState> {
     
     private let uiSettings = UISettings()
+    
+    var delegate: DetailsDelegate?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -60,6 +67,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         self.uiSettings.removeSelectedProject()
         
         self.state = .loading
+        delegate?.willLoadProject(project: project)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             loadAndInsert(
@@ -71,6 +79,8 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                         
                         derivedData?.stopAccessingSecurityScopedResource()
                         self.uiSettings.selectedProject = project.name // Save only after success parsing
+                        
+                        delegate?.didLoadProject(project: project, detailsController: self.currentController as! DetailViewController)
                     }
                 },
                 didFail: { message in

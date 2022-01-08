@@ -7,22 +7,40 @@
 
 import AppKit
 
-class WindowController: NSWindowController {
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        
-        setupToolbar(window!.toolbar!)
-    }
+class MainWindow: NSWindow {
+    @IBOutlet weak var sendImageToolbarItem: NSToolbarItem!
     
     func setupToolbar(_ toolbar: NSToolbar) {
-        toolbar.delegate = self
-        
         toolbar.insertItem(withItemIdentifier: .refresh, at: 0)
         toolbar.insertItem(withItemIdentifier: .toggleSidebar, at: 1)
         toolbar.insertItem(withItemIdentifier: .sidebarTrackingSeparator, at: 2)
         
         toolbar.sizeMode = .regular
         toolbar.displayMode = .iconOnly
+        
+        sendImageToolbarItem.isEnabled = false
+    }
+}
+
+class WindowController: NSWindowController {
+    
+    func window() -> MainWindow {
+        window as! MainWindow
+    }
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        
+        window().setupToolbar(window!.toolbar!)
+        window!.toolbar!.delegate = self
+    }
+    
+    @IBAction func makeScreenshotOfGraph(_ sender: Any) {
+        guard let detailController = splitViewController().detail.currentController as? DetailViewController else {
+            return
+        }
+        
+        detailController.shareImage()
     }
     
     private func splitViewController() -> SplitController {
