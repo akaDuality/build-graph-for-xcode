@@ -28,10 +28,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
         
+        let activityLogURL = URL(fileURLWithPath: filename)
+        
+        // TODO: File can be outside of default derived data
         let derivedData = FileAccess().accessedDerivedDataURL()
         _ = derivedData?.startAccessingSecurityScopedResource()
     
-        let project = ProjectReference(path: filename)
+        let projectReferenceFactory = ProjectReferenceFactory()
+        
+        let project = projectReferenceFactory.projectReference(
+            activityLogURL: activityLogURL,
+            accessedDerivedDataURL: derivedData!)
         
         derivedData?.stopAccessingSecurityScopedResource()
         

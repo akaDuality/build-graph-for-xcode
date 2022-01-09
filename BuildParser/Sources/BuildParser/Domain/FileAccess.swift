@@ -41,6 +41,7 @@ public class FileAccess: FileAccessProtocol {
     }
     
     func promptForWorkingDirectoryPermission(directoryURL: URL) throws -> URL? {
+        // TODO: accessedDerivedDataURL can be different to directoryURL
         if let url = accessedDerivedDataURL() {
             print("Restore access to \(url)")
             return url

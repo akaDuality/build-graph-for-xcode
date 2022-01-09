@@ -50,21 +50,27 @@ public class PathFinder {
     
     let logFinder: LogFinder
     let fileAccess = FileAccess()
+    let projectReferenceFactory = ProjectReferenceFactory()
     
     public func projects() throws -> [ProjectReference] {
-        let path = try derivedDataPath(logOptions)
-        let hasAccess = path.startAccessingSecurityScopedResource()
+        let derivedDataPath = try derivedDataPath(logOptions)
+        let hasAccess = derivedDataPath.startAccessingSecurityScopedResource()
         if !hasAccess {
             print("This directory might not need it, or this URL might not be a security scoped URL, or maybe something's wrong?")
         }
         defer {
-            path.stopAccessingSecurityScopedResource()
+            derivedDataPath.stopAccessingSecurityScopedResource()
         }
         
-        let derivedDataContents = try derivedDataContents(derivedDataAccessURL: path)
+        let derivedDataContents = try derivedDataContents(derivedDataAccessURL: derivedDataPath)
         
         let result = filter(derivedDataContents)
-            .compactMap { ProjectReference(url: path, fullName: $0) }
+            .compactMap {
+                projectReferenceFactory
+                    .projectReference(
+                        accessedDerivedDataURL: derivedDataPath,
+                        fullName: $0)
+            }
         
         return result
     }
