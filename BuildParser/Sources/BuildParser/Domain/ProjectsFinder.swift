@@ -9,20 +9,15 @@ import Foundation
 import XCLogParser
 import Foundation
 
-public class PathFinder {
+public class ProjectsFinder {
     
     public typealias ContentsOfDirectory = (_ path: String) throws -> [String]
     let logOptions: LogOptions
-    let fileScanner: LatestFileScannerProtocol
     
     public static func pathFinder(
         for project: String,
-        derivedDataPath: URL) -> PathFinder {
-        let options = LogOptions(
-            projectName: project)
-        let pathFinder = PathFinder(logOptions: options,
-                                    fileScanner: LatestFileScanner(),
-                                    logFinder: LogFinder(derivedDataDir: derivedDataPath))
+        derivedDataPath: URL) -> ProjectsFinder {
+        let pathFinder = ProjectsFinder(logOptions: .empty)
         return pathFinder
     }
     
@@ -30,20 +25,15 @@ public class PathFinder {
         logOptions: LogOptions
     ) {
         self.init(logOptions: logOptions,
-                  fileScanner: LatestFileScanner(),
                   logFinder: LogFinder(derivedDataDir: FileAccess().accessedDerivedDataURL()!))
     }
     
     init(logOptions: LogOptions,
-         fileScanner: LatestFileScannerProtocol,
          logFinder: LogFinder
     ) {
         self.logOptions = logOptions
-        self.fileScanner = fileScanner
-        self.logFinder = logFinder
     }
     
-    let logFinder: LogFinder
     let fileAccess = FileAccess()
     let projectReferenceFactory = ProjectReferenceFactory()
     let defaultDerivedData = DefaultDerivedData()
@@ -93,31 +83,6 @@ public class PathFinder {
         return names
             .filter { $0.contains("-") }
             .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
-    }
-    
-    public func buildGraphURL(derivedDataPath: URL) throws -> URL {
-        let projectDir = try logFinder.getProjectDir(withLogOptions: logOptions,
-                                                     andDerivedDataDir: derivedDataPath)
-        return try targetGraph(projectDir: projectDir)
-    }
-    
-    func targetGraph(projectDir: URL) throws -> URL {
-        let intemediates = projectDir
-            .appendingPathComponent("Build")
-            .appendingPathComponent("Intermediates.noIndex")
-            .appendingPathComponent("XCBuildData")
-        
-        let graph = try fileScanner.findLatestForProject(inDir: intemediates, filter: { url in
-            url.path.hasSuffix("-targetGraph.txt")
-        })
-        return graph
-    }
-    
-    public func activityLogURL() throws -> URL {
-        // TODO: Handle optional
-//        let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions)!
-        
-        return try logFinder.findLatestLogWithLogOptions(logOptions)
     }
     
     enum Error: Swift.Error {

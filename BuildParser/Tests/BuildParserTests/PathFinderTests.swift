@@ -20,7 +20,7 @@ class PathFinderTests: XCTestCase {
         derivedDataPath: nil,
         logManifestPath: "")
     
-    var sut: PathFinder!
+    var sut: ProjectsFinder!
     
     func test_searchProjects() throws {
         let files = [
@@ -60,7 +60,7 @@ class PathFinderTests: XCTestCase {
         let url = URL(string: "/Users/rubanov/Library/Developer/Xcode/DerivedData/Build/Intermediates.noIndex/XCBuildData/hnthnt-targetGraph.txt")!
         scannerFake.files = [url]
         
-        sut = PathFinder(
+        sut = ProjectsFinder(
             logOptions: logOptions,
             fileScanner: scannerFake,
             logFinder: LogFinder(fileManager: FileManager.default)

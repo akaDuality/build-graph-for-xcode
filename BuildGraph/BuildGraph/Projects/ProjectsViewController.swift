@@ -31,7 +31,7 @@ class ProjectsViewController: NSViewController {
     }
     
     @objc func reloadProjetcs() {
-        let pathFinder = PathFinder(logOptions: .empty)
+        let pathFinder = ProjectsFinder(logOptions: .empty)
         projects = try! pathFinder.projects()
         
         if let selectedProject = uiSettings.selectedProject {

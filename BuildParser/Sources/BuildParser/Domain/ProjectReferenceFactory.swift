@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import XCLogParser
 
 public class ProjectReferenceFactory {
     public init() {}
@@ -14,16 +15,22 @@ public class ProjectReferenceFactory {
         activityLogURL: URL,
         accessedDerivedDataURL: URL // TODO: Can be ommited?
     ) -> ProjectReference {
+    
         let folderWithName = activityLogURL.pathComponents[activityLogURL.pathComponents.count - 4]
         let name = ProjectReference.shortName(from: folderWithName)
+
         
-        let pathFinder = PathFinder.pathFinder(
-            for: name,
-            derivedDataPath: accessedDerivedDataURL)
+        let rootPathForProject = activityLogURL
+            .deletingLastPathComponent() // Skip Name of file
+            .deletingLastPathComponent() // Skip Build folder
+            .deletingLastPathComponent() // Skip Logs folder
         
-        return ProjectReference(name: ProjectReference.shortName(from: folderWithName),
+        let logFinder = LogFinder(
+            derivedDataDir: rootPathForProject)
+
+        return ProjectReference(name: name,
                                 activityLogURL: activityLogURL,
-                                depsURL: try? pathFinder.buildGraphURL(derivedDataPath: accessedDerivedDataURL))
+                                depsURL: try? logFinder.buildGraphURL())
     }
     
     public func projectReference(
@@ -32,14 +39,12 @@ public class ProjectReferenceFactory {
     ) -> ProjectReference? {
         let shortName = ProjectReference.shortName(from: fullName)
         
-        let pathFinder = PathFinder.pathFinder(
-            for: shortName,
-               derivedDataPath: accessedDerivedDataURL.appendingPathComponent(fullName))
+        let logFinder = LogFinder(derivedDataDir: accessedDerivedDataURL.appendingPathComponent(fullName))
         
         do {
             return ProjectReference(name: shortName,
-                                    activityLogURL: try pathFinder.activityLogURL(),
-                                    depsURL: try? pathFinder.buildGraphURL(derivedDataPath: accessedDerivedDataURL))
+                                    activityLogURL: try logFinder.latestActivityLog(),
+                                    depsURL: try? logFinder.buildGraphURL())
         } catch {
             print("skip \(shortName), can't find .activityLog with build information")
             return nil

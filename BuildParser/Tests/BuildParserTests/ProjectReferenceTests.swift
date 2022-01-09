@@ -55,8 +55,8 @@ class ProjectReferenceTests: XCTestCase {
 
 import XCLogParser
 class FileAccessMock: FileAccessProtocol {
-    func pathFinder(for project: String, derivedDataPath: URL) -> PathFinder {
-        PathFinder(
+    func pathFinder(for project: String, derivedDataPath: URL) -> ProjectsFinder {
+        ProjectsFinder(
             logOptions: .empty,
             logFinder: LogFinder(fileManager: FileManagerMock()))
     }
