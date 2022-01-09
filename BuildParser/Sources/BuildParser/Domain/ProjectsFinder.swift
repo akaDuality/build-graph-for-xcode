@@ -11,28 +11,7 @@ import Foundation
 
 public class ProjectsFinder {
     
-    public typealias ContentsOfDirectory = (_ path: String) throws -> [String]
-    let logOptions: LogOptions
-    
-    public static func pathFinder(
-        for project: String,
-        derivedDataPath: URL) -> ProjectsFinder {
-        let pathFinder = ProjectsFinder(logOptions: .empty)
-        return pathFinder
-    }
-    
-    public convenience init(
-        logOptions: LogOptions
-    ) {
-        self.init(logOptions: logOptions,
-                  logFinder: LogFinder(derivedDataDir: FileAccess().accessedDerivedDataURL()!))
-    }
-    
-    init(logOptions: LogOptions,
-         logFinder: LogFinder
-    ) {
-        self.logOptions = logOptions
-    }
+    public init() {}
     
     let fileAccess = FileAccess()
     let projectReferenceFactory = ProjectReferenceFactory()
