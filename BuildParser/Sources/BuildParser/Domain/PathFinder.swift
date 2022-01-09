@@ -17,26 +17,21 @@ public class PathFinder {
     
     public static func pathFinder(
         for project: String,
-        derivedDataPath: URL,
-        logFinder: LogFinder = LogFinder()) -> PathFinder {
+        derivedDataPath: URL) -> PathFinder {
         let options = LogOptions(
-            projectName: project,
-            xcworkspacePath: "",
-            xcodeprojPath: "",
-            derivedDataPath: derivedDataPath,
-            logManifestPath: "")
+            projectName: project)
         let pathFinder = PathFinder(logOptions: options,
-                                    logFinder: logFinder)
+                                    fileScanner: LatestFileScanner(),
+                                    logFinder: LogFinder(derivedDataDir: derivedDataPath))
         return pathFinder
     }
     
     public convenience init(
-        logOptions: LogOptions,
-        logFinder: LogFinder = LogFinder()
+        logOptions: LogOptions
     ) {
         self.init(logOptions: logOptions,
                   fileScanner: LatestFileScanner(),
-                  logFinder: logFinder)
+                  logFinder: LogFinder(derivedDataDir: FileAccess().accessedDerivedDataURL()!))
     }
     
     init(logOptions: LogOptions,
@@ -51,9 +46,10 @@ public class PathFinder {
     let logFinder: LogFinder
     let fileAccess = FileAccess()
     let projectReferenceFactory = ProjectReferenceFactory()
+    let defaultDerivedData = DefaultDerivedData()
     
     public func projects() throws -> [ProjectReference] {
-        let derivedDataPath = try derivedDataPath(logOptions)
+        let derivedDataPath = try derivedDataPath()
         let hasAccess = derivedDataPath.startAccessingSecurityScopedResource()
         if !hasAccess {
             print("This directory might not need it, or this URL might not be a security scoped URL, or maybe something's wrong?")
@@ -75,8 +71,8 @@ public class PathFinder {
         return result
     }
     
-    public func derivedDataPath(_ logOptions: LogOptions) throws -> URL {
-        guard let derivedDataURL = logFinder.getDerivedDataDirWithLogOptions(logOptions) else {
+    public func derivedDataPath() throws -> URL {
+        guard let derivedDataURL = defaultDerivedData.getDerivedDataDir() else {
             throw Error.noDerivedData
         }
         
@@ -99,8 +95,9 @@ public class PathFinder {
             .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
     }
     
-    public func buildGraphURL() throws -> URL {
-        let projectDir = try logFinder.getProjectDirWithLogOptions(logOptions)
+    public func buildGraphURL(derivedDataPath: URL) throws -> URL {
+        let projectDir = try logFinder.getProjectDir(withLogOptions: logOptions,
+                                                     andDerivedDataDir: derivedDataPath)
         return try targetGraph(projectDir: projectDir)
     }
     

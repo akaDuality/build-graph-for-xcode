@@ -23,7 +23,7 @@ public class ProjectReferenceFactory {
         
         return ProjectReference(name: ProjectReference.shortName(from: folderWithName),
                                 activityLogURL: activityLogURL,
-                                depsURL: try? pathFinder.buildGraphURL())
+                                depsURL: try? pathFinder.buildGraphURL(derivedDataPath: accessedDerivedDataURL))
     }
     
     public func projectReference(
@@ -34,12 +34,12 @@ public class ProjectReferenceFactory {
         
         let pathFinder = PathFinder.pathFinder(
             for: shortName,
-            derivedDataPath: accessedDerivedDataURL)
+               derivedDataPath: accessedDerivedDataURL.appendingPathComponent(fullName))
         
         do {
             return ProjectReference(name: shortName,
                                     activityLogURL: try pathFinder.activityLogURL(),
-                                    depsURL: try? pathFinder.buildGraphURL())
+                                    depsURL: try? pathFinder.buildGraphURL(derivedDataPath: accessedDerivedDataURL))
         } catch {
             print("skip \(shortName), can't find .activityLog with build information")
             return nil
