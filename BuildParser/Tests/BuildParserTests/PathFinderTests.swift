@@ -62,7 +62,8 @@ class PathFinderTests: XCTestCase {
         
         sut = PathFinder(
             logOptions: logOptions,
-            fileScanner: scannerFake
+            fileScanner: scannerFake,
+            logFinder: LogFinder(fileManager: FileManager.default)
         )
     }
     

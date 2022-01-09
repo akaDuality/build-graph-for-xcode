@@ -106,16 +106,3 @@ class ProjectCell: NSTableCellView {
         }
     }
 }
-
-import XCLogParser
-extension LogOptions {
-    static var empty: LogOptions {
-        LogOptions(
-            projectName: "",
-            xcworkspacePath: "",
-            xcodeprojPath: "",
-            derivedDataPath: nil,
-            xcactivitylogPath: "",
-            strictProjectName: false)
-    }
-}

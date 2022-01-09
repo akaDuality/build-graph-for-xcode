@@ -23,20 +23,13 @@ class BookmarkSaver {
     // TODO: Union with UISettings
 }
 
-public class FileAccess {
+public protocol FileAccessProtocol {
+    func accessedDerivedDataURL() -> URL?
+}
+
+public class FileAccess: FileAccessProtocol {
     
     public init() {}
-    
-    public func pathFinder(for project: String) -> PathFinder {
-        let options = LogOptions(
-            projectName: project,
-            xcworkspacePath: "",
-            xcodeprojPath: "",
-            derivedDataPath: FileAccess().accessedDerivedDataURL()!,
-            logManifestPath: "")
-        let pathFinder = PathFinder(logOptions: options)
-        return pathFinder
-    }
     
     public func accessedDerivedDataURL() -> URL? {
         guard let previousSessionURLData = bookmarkSaver.derivedDataBookmark() else {

@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import BuildParser
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -19,6 +20,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+        return true
+    }
+    
+    func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+        guard let windowController = NSApplication.shared.windows.first?.windowController as? WindowController else {
+            return false
+        }
+        
+        let project = ProjectReference(path: filename)
+        
+        windowController.splitViewController().detail.selectProject(project: project)
+        
         return true
     }
 }

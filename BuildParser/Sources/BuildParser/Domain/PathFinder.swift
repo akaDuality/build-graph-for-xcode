@@ -10,25 +10,48 @@ import XCLogParser
 import Foundation
 
 public struct ProjectReference: Equatable {
-    public let url: URL
     public let name: String
     public let activityLogURL: URL
     public let depsURL: URL?
     
-    init?(url: URL, fullName: String) {
-        self.url = url.appendingPathComponent(fullName)
-        let shortName = fullName.components(separatedBy: "-").dropLast().joined(separator: "-")
+    public init(path: String,
+                fileAccess: FileAccessProtocol = FileAccess()) {
+        let pathURL = URL(fileURLWithPath: path)
+        self.activityLogURL = pathURL
+        
+        let folderWithName = pathURL.pathComponents[pathURL.pathComponents.count - 4]
+        self.name = Self.shortName(from: folderWithName)
+        
+        let pathFinder = PathFinder.pathFinder(
+            for: self.name,
+            derivedDataPath: fileAccess.accessedDerivedDataURL()!)
+        
+        self.depsURL = try? pathFinder.buildGraphURL()
+    }
+    
+    public init?(
+        url: URL,
+        fullName: String,
+        fileAccess: FileAccessProtocol = FileAccess()
+    ) {
+        let shortName = Self.shortName(from: fullName)
         self.name = shortName
         
-        let pathFinder = FileAccess().pathFinder(for: shortName)
+        let pathFinder = PathFinder.pathFinder(
+            for: shortName,
+               derivedDataPath: fileAccess.accessedDerivedDataURL()!)
         
         do {
             self.activityLogURL = try pathFinder.activityLogURL()
             self.depsURL = try? pathFinder.buildGraphURL()
         } catch {
-            print("skip \(self.url), can't find .activityLog with build information")
+            print("skip \(self.name), can't find .activityLog with build information")
             return nil
         }
+    }
+    
+    static func shortName(from fileName: String) -> String {
+        fileName.components(separatedBy: "-").dropLast().joined(separator: "-")
     }
 }
 
@@ -38,20 +61,40 @@ public class PathFinder {
     let logOptions: LogOptions
     let fileScanner: LatestFileScannerProtocol
     
+    public static func pathFinder(
+        for project: String,
+        derivedDataPath: URL,
+        logFinder: LogFinder = LogFinder()) -> PathFinder {
+        let options = LogOptions(
+            projectName: project,
+            xcworkspacePath: "",
+            xcodeprojPath: "",
+            derivedDataPath: derivedDataPath,
+            logManifestPath: "")
+        let pathFinder = PathFinder(logOptions: options,
+                                    logFinder: logFinder)
+        return pathFinder
+    }
+    
     public convenience init(
-        logOptions: LogOptions)
-    {
+        logOptions: LogOptions,
+        logFinder: LogFinder = LogFinder()
+    ) {
         self.init(logOptions: logOptions,
-                  fileScanner: LatestFileScanner())
+                  fileScanner: LatestFileScanner(),
+                  logFinder: logFinder)
     }
     
     init(logOptions: LogOptions,
-         fileScanner: LatestFileScannerProtocol) {
-            self.logOptions = logOptions
-            self.fileScanner = fileScanner
+         fileScanner: LatestFileScannerProtocol,
+         logFinder: LogFinder
+    ) {
+        self.logOptions = logOptions
+        self.fileScanner = fileScanner
+        self.logFinder = logFinder
     }
     
-    let logFinder = LogFinder()
+    let logFinder: LogFinder
     let fileAccess = FileAccess()
     
     public func projects() throws -> [ProjectReference] {

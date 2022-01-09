@@ -43,7 +43,7 @@ class WindowController: NSWindowController {
         detailController.shareImage()
     }
     
-    private func splitViewController() -> SplitController {
+    func splitViewController() -> SplitController {
         return self.contentViewController as! SplitController
     }
 }
