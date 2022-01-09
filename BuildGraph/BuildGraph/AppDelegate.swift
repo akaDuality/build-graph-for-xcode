@@ -28,7 +28,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
         
+        let derivedData = FileAccess().accessedDerivedDataURL()
+        _ = derivedData?.startAccessingSecurityScopedResource()
+    
         let project = ProjectReference(path: filename)
+        
+        derivedData?.stopAccessingSecurityScopedResource()
         
         windowController.splitViewController().detail.selectProject(project: project)
         
