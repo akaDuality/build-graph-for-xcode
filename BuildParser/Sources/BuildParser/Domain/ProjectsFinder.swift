@@ -27,7 +27,8 @@ public class ProjectsFinder {
             derivedDataPath.stopAccessingSecurityScopedResource()
         }
         
-        let derivedDataContents = try derivedDataContents(derivedDataAccessURL: derivedDataPath)
+        let derivedDataContents = try FileManager.default
+            .contentsOfDirectory(atPath: derivedDataPath.path)
         
         let result = filter(derivedDataContents)
             .compactMap {
@@ -48,14 +49,6 @@ public class ProjectsFinder {
         // TODO: Handle file deprecation
         let derivedDataAccessURL = try fileAccess.promptForWorkingDirectoryPermission(directoryURL: derivedDataURL)!
         return derivedDataAccessURL
-    }
-    
-    public func derivedDataContents(
-        derivedDataAccessURL: URL
-    ) throws -> [String] {
-        let contents = try FileManager.default
-            .contentsOfDirectory(atPath: derivedDataAccessURL.path)
-        return contents
     }
     
     func filter(_ names: [String]) -> [String] {
