@@ -8,6 +8,10 @@
 import AppKit
 
 class MainWindow: NSWindow {
+   
+    @IBOutlet weak var previousButton: NSToolbarItem!
+    @IBOutlet weak var nextButton: NSToolbarItem!
+    
     @IBOutlet weak var sendImageToolbarItem: NSToolbarItem!
     
     func setupToolbar(_ toolbar: NSToolbar) {
@@ -42,6 +46,14 @@ class WindowController: NSWindowController {
         }
         
         detailController.shareImage()
+    }
+    
+    @IBAction func previousProjectDidPress(_ sender: Any) {
+        splitViewController().detail.previousFile()
+    }
+    
+    @IBAction func nextProjectDidPress(_ sender: Any) {
+        splitViewController().detail.nextFile()
     }
     
     func splitViewController() -> SplitController {

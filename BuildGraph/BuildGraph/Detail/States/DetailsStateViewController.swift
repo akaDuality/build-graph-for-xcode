@@ -57,8 +57,32 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         }
     }
     
+    func previousFile() {
+        guard
+            var currentProject = currentProject,
+            currentProject.canDecreaseFile()
+        else { return }
+        
+        currentProject.selectPreviousFile()
+        selectProject(project: currentProject)
+    }
+    
+    func nextFile() {
+        guard
+            var currentProject = currentProject,
+            currentProject.canIncreaseFile()
+        else { return }
+        
+        currentProject.selectNextFile()
+        selectProject(project: currentProject)
+    }
+    
+    var currentProject: ProjectReference?
+    
     // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
     func selectProject(project: ProjectReference, compilationOnly: Bool = true) {
+        self.currentProject = project
+        
         let derivedData = FileAccess().accessedDerivedDataURL()
         _ = derivedData?.startAccessingSecurityScopedResource()
         

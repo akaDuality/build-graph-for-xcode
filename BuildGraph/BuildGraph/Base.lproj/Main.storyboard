@@ -689,10 +689,10 @@
                     <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildDeps" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="425" y="462" width="480" height="270"/>
+                        <rect key="contentRect" x="425" y="462" width="600" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
                         <view key="contentView" id="I9F-zK-pE3">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
@@ -713,8 +713,38 @@
                                         <action selector="makeScreenshotOfGraph:" target="LFf-Ro-PN7" id="8P3-1G-gVq"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="06A17433-761A-4FAA-870C-E43E386009CF" label="Previous" paletteLabel="Previous" title="←" sizingBehavior="auto" navigational="YES" id="NRJ-yX-oB1">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="MbD-P4-3hp">
+                                        <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="←" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cnx-tP-RiD">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="previousProjectDidPress:" target="LFf-Ro-PN7" id="ZPo-F8-RJk"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="9DF2521C-B084-4E27-9B51-83003952E12F" label="Next" paletteLabel="Next" bordered="YES" title="→" sizingBehavior="auto" navigational="YES" id="pZ8-K6-ajH">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="pqk-tx-Gkb">
+                                        <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="→" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tY4-Ty-hDd">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="nextProjectDidPress:" target="LFf-Ro-PN7" id="6t3-Z9-elE"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="NRJ-yX-oB1"/>
+                                <toolbarItem reference="pZ8-K6-ajH"/>
                                 <toolbarItem reference="aNr-aQ-u4z"/>
                                 <toolbarItem reference="0Qa-Qa-ok0"/>
                                 <toolbarItem reference="tOZ-ba-ewD"/>
@@ -722,6 +752,8 @@
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="LFf-Ro-PN7" id="ui6-5g-a1j"/>
+                            <outlet property="nextButton" destination="pZ8-K6-ajH" id="eNh-Tx-xmF"/>
+                            <outlet property="previousButton" destination="NRJ-yX-oB1" id="e3m-xG-uKC"/>
                             <outlet property="sendImageToolbarItem" destination="tOZ-ba-ewD" id="T9v-x7-2c3"/>
                         </connections>
                     </window>

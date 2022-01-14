@@ -24,9 +24,31 @@ public struct ProjectReference: Equatable {
     public let name: String
     public let activityLogURL: [URL]
     
-    public var currentActivityLogIndex: Int
+    public private(set) var currentActivityLogIndex: Int
     public var currentActivityLog: URL {
         activityLogURL[currentActivityLogIndex]
+    }
+    
+    // MARK: - Previous file
+    public func canDecreaseFile() -> Bool {
+        currentActivityLogIndex > 0
+    }
+    
+    public mutating func selectPreviousFile() {
+        precondition(canDecreaseFile())
+        
+        self.currentActivityLogIndex -= 1
+    }
+    
+    // MARK: - Next file
+    public func canIncreaseFile() -> Bool {
+        currentActivityLogIndex < activityLogURL.count - 1
+    }
+    
+    public mutating func selectNextFile() {
+        precondition(canIncreaseFile())
+        
+        self.currentActivityLogIndex += 1
     }
     
     public let depsURL: URL?

@@ -38,11 +38,14 @@ extension SplitController: DetailsDelegate {
         view.window as! MainWindow
     }
     
-    func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
-        mainWindow().sendImageToolbarItem.isEnabled = true
-    }
-    
     func willLoadProject(project: ProjectReference) {
         mainWindow().sendImageToolbarItem.isEnabled = false
+    }
+    
+    func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
+        mainWindow().sendImageToolbarItem.isEnabled = true
+        
+        mainWindow().previousButton.isEnabled = project.canDecreaseFile()
+        mainWindow().nextButton.isEnabled = project.canIncreaseFile()
     }
 }
