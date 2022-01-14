@@ -40,12 +40,18 @@ extension SplitController: DetailsDelegate {
     
     func willLoadProject(project: ProjectReference) {
         mainWindow().sendImageToolbarItem.isEnabled = false
+        
+        updateNavigationButtons(for: project)
     }
     
     func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
         mainWindow().sendImageToolbarItem.isEnabled = true
-        
+    }
+    
+    func updateNavigationButtons(for project: ProjectReference) {
         mainWindow().previousButton.isEnabled = project.canDecreaseFile()
         mainWindow().nextButton.isEnabled = project.canIncreaseFile()
+        
+        mainWindow().subtitle = project.indexDescription
     }
 }
