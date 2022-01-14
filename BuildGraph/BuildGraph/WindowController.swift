@@ -31,8 +31,9 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        window().setupToolbar(window!.toolbar!)
         window!.toolbar!.delegate = self
+        window().setupToolbar(window!.toolbar!)
+
     }
     
     @IBAction func makeScreenshotOfGraph(_ sender: Any) {
