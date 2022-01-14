@@ -16,6 +16,7 @@
             try LineCount(folder: srcRoot.appendingPathComponent("DodoPizza/")).read()
             try LineCount(folder: srcRoot.appendingPathComponent("DodoPizza/Domain/")).read()
             try LineCount(folder: srcRoot.appendingPathComponent("DodoPizza/Module/")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Pods/")).read()
         }
         
         func testDoner() throws {
