@@ -29,7 +29,7 @@ public class ProjectReferenceFactory {
             derivedDataDir: rootPathForProject)
 
         return ProjectReference(name: name,
-                                activityLogURL: activityLogURL,
+                                activityLogURL: [activityLogURL],
                                 depsURL: try? logFinder.buildGraphURL())
     }
     
@@ -42,8 +42,13 @@ public class ProjectReferenceFactory {
         let logFinder = LogFinder(derivedDataDir: accessedDerivedDataURL.appendingPathComponent(fullName))
         
         do {
+            let activityLogURL = try logFinder.activityLogs()
+            guard activityLogURL.count > 0 else {
+                return nil
+            }
+            
             return ProjectReference(name: shortName,
-                                    activityLogURL: try logFinder.latestActivityLog(),
+                                    activityLogURL: activityLogURL,
                                     depsURL: try? logFinder.buildGraphURL())
         } catch {
             print("skip \(shortName), can't find .activityLog with build information")

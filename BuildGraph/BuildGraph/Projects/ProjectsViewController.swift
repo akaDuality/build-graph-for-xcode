@@ -63,7 +63,7 @@ class ProjectsViewController: NSViewController {
     
     @objc func showInFinder() {
         let project = projects[tableView.selectedRow]
-        let path = project.activityLogURL.path
+        let path = project.currentActivityLog.path
         
         let workspace = NSWorkspace.shared
         let selected = workspace.selectFile(path, inFileViewerRootedAtPath: "")

@@ -105,7 +105,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         
         do {
             let events = try parser.parse(
-                logURL: project.activityLogURL,
+                logURL: project.currentActivityLog,
                 compilationOnly: compilationOnly)
             
             guard events.count > 0 else {
