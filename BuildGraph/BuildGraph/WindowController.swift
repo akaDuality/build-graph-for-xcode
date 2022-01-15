@@ -49,8 +49,11 @@ class WindowController: NSWindowController {
     }
     
     @IBAction func searchDidChange(_ sender: NSSearchField) {
-//        let text = sender.textStorage?.string
+        let text = sender.stringValue
+     
+        guard let detailController = splitViewController().detail.currentController as? DetailViewController else { return }
         
+        detailController.search(text: text)
     }
     
     @IBAction func previousProjectDidPress(_ sender: Any) {

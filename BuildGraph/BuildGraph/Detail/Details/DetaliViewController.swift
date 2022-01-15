@@ -128,8 +128,8 @@ class DetailViewController: NSViewController {
                 behavior: .transient)
     }
     
-    func didSearch(text: String?) {
-        
+    func search(text: String?) {
+        view().modulesLayer?.highlightEvent(with: text)
     }
     
 //    private func controllerForDetailsPopover(step: BuildStep) -> NSViewController {

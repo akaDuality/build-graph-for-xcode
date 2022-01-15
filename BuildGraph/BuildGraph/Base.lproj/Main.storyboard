@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -700,7 +700,7 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="0Qa-Qa-ok0"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aNr-aQ-u4z"/>
-                                <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
+                                <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Save image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="XyR-33-egz">
                                         <rect key="frame" x="12" y="14.5" width="16" height="16"/>

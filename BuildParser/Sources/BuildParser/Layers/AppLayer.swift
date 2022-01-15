@@ -93,6 +93,19 @@ public class AppLayer: CALayer {
         modulesLayer.highlightEvent(at: coordinate)
     }
     
+    public func highlightEvent(with name: String?) {
+        guard let name = name else {
+            modulesLayer.highlightedEvent = nil
+            return
+        }
+        
+        let event = modulesLayer.events.first { event in
+            event.taskName.localizedStandardContains(name)
+        }
+        
+        modulesLayer.highlightedEvent = event
+    }
+    
     // MARK: Concurrency
     public func drawConcurrency(at coordinate: CGPoint) {
         concurrencyLayer.drawConcurrency(at: coordinate)
