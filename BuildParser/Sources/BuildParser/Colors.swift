@@ -7,7 +7,6 @@
 
 import CoreGraphics
 import AppKit
-import Interface
 
 struct Colors {
     static var textColor: () -> CGColor = { NSColor.labelColor.effectiveCGColor }

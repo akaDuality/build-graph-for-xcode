@@ -8,7 +8,6 @@
 import AppKit
 
 import BuildParser
-import Interface
 import GraphParser
 
 enum DetailsState: StateProtocol {

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Interface
+import GraphParser
 
 let helpersSuffix = "TestHelpers"
 let testsSuffix = "TestHelpers-Unit-Tests"

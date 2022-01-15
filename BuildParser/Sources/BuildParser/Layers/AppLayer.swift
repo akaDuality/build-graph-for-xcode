@@ -7,7 +7,6 @@
 
 import QuartzCore
 import AppKit
-import Interface
 
 extension CALayer {
     public func updateWithoutAnimation(_ block: () -> Void) {

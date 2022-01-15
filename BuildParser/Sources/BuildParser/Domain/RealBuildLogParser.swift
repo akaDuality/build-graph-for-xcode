@@ -6,7 +6,6 @@
 //
 
 import XCLogParser
-import Interface
 import Foundation
 
 public class RealBuildLogParser {

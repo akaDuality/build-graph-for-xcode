@@ -88,7 +88,6 @@ class EventDepsTests: XCTestCase {
     }
 }
 
-import Interface
 extension Event {
     static func testMake(
         taskName: String = "",

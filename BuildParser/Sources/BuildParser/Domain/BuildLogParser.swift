@@ -1,5 +1,4 @@
 import Foundation
-import Interface
 
 public class XcodeBuildTimesParser {
     public init() {}

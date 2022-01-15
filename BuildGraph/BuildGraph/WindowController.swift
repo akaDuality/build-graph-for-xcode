@@ -49,7 +49,7 @@ class WindowController: NSWindowController {
     }
     
     @IBAction func searchDidChange(_ sender: NSSearchField) {
-        let text = sender.textStorage?.string
+//        let text = sender.textStorage?.string
         
     }
     

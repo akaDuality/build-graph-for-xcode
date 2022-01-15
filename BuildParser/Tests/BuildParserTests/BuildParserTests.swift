@@ -1,7 +1,7 @@
 import XCTest
 @testable import BuildParser
-import Interface
 import CustomDump
+
 let appEventsPath = Bundle.module.url(forResource: "AppEvents", withExtension: "json")!
 let testEventsPath = Bundle.module.url(forResource: "TestEvents", withExtension: "json")!
 

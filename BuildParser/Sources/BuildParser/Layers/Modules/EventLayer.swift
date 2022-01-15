@@ -6,7 +6,6 @@
 //
 
 import QuartzCore
-import Interface
 import AppKit
 
 class EventLayer: CALayer {

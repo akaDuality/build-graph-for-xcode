@@ -8,7 +8,6 @@
 import Cocoa
 import BuildParser
 import GraphParser
-import Interface
 import XCLogParser
 
 class HUDScrollView: NSScrollView {

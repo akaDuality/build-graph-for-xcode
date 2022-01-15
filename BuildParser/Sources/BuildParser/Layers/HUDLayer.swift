@@ -6,7 +6,6 @@
 //
 
 import QuartzCore
-import Interface
 
 public class HUDLayer: CALayer {
     private let timelineLayer: TimelineLayer

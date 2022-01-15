@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Interface
 
 public class DependencyParser {
     
@@ -37,6 +36,8 @@ public class DependencyParser {
             let depsDescription = strings[range]
             result.append(Array(depsDescription))
         }
+        
+        guard indices.count > 0 else { return [] }
         
         result.append(Array(strings[indices.last!...(strings.count - 1)]))
         

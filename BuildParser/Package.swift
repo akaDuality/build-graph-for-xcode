@@ -7,13 +7,15 @@ let package = Package(
     name: "BuildParser",
     platforms: [.iOS("13.0"), .macOS("10.13")],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "BuildParser",
             targets: ["BuildParser"]),
+        
+        .library(
+            name: "GraphParser",
+            targets: ["BuildParser"]),
     ],
     dependencies: [
-        .package(name: "Interface", path: "Interface"),
         .package(name: "XCLogParser", path: "./../XCLogParser"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing",
                  from: "1.9.0"),
@@ -26,11 +28,12 @@ let package = Package(
         .target(
             name: "BuildParser",
             dependencies: [
-                "Interface",
+                "GraphParser",
                 .product(name: "XCLogParser",
                          package: "XCLogParser",
                          condition: nil)
             ]),
+        
         .testTarget(
             name: "BuildParserTests",
             dependencies: [
@@ -44,5 +47,25 @@ let package = Package(
             ],
             resources: [.process("Samples/AppEvents.json"),
                         .process("Samples/TestEvents.json")]),
+        
+        .target(
+            name: "GraphParser",
+            dependencies: []),
+        
+        .testTarget(
+            name: "GraphParserTests",
+            dependencies: [
+                "GraphParser",
+                .product(name: "SnapshotTesting",
+                         package: "swift-snapshot-testing",
+                         condition: nil),
+                .product(name: "CustomDump",
+                         package: "swift-custom-dump",
+                         condition: nil)
+            ],
+            resources: [
+                .process("targetGraph.txt")
+            ]
+        )
     ]
 )
