@@ -19,7 +19,6 @@ public class ProjectReferenceFactory {
         let folderWithName = activityLogURL.pathComponents[activityLogURL.pathComponents.count - 4]
         let name = ProjectReference.shortName(from: folderWithName)
 
-        
         let rootPathForProject = activityLogURL
             .deletingLastPathComponent() // Skip Name of file
             .deletingLastPathComponent() // Skip Build folder

@@ -10,6 +10,7 @@ import XCTest
 import CustomDump
 
 @testable import BuildParser
+import GraphParser
 
 class EventDepsTests: XCTestCase {
     

@@ -10,45 +10,60 @@ import BuildParser
 
 class ProjectReferenceTests: XCTestCase {
     
-    let derivedData = URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData")
-
+    let derivedData = URL(fileURLWithPath: Bundle.module.resourcePath!)
+        .appendingPathComponent("DerivedData")
+    
     func testConstructorWithProjectFolder() throws {
-        let project = ProjectReference(
-            url: derivedData,
-            fullName: "CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu",
-            fileAccess: FileAccessMock())
+        let sut = ProjectReferenceFactory()
         
-        XCTAssertEqual(
-            project?.name,
-            "CodeMetrics")
-        
-        XCTAssertEqual(
-            project?.activityLogURL,
-            URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Logs/Build/66C2880B-2FCD-4258-8E15-E3FC44E6150F.xcactivitylog"))
-        
-        XCTAssertEqual(
-            project?.depsURL,
-            URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Build/Intermediates.noindex/XCBuildData/689fa20537462d0bb083fe9757e30717-targetGraph.txt"))
-    }
-    
-    // TODO: Test failable initializer
-    
-    func testConstructorWithDirectPath() {
-        let project = ProjectReference(
-            path: "/Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Logs/Build/66C2880B-2FCD-4258-8E15-E3FC44E6150F.xcactivitylog",
-            fileAccess: FileAccessMock())
+        let project = try XCTUnwrap(
+            sut.projectReference(
+                    accessedDerivedDataURL: derivedData,
+                    fullName: "CodeMetrics-dycvocfpyegeqgbmavxjkihheltm")
+        )
         
         XCTAssertEqual(
             project.name,
             "CodeMetrics")
         
         XCTAssertEqual(
-            project.activityLogURL,
-            URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Logs/Build/66C2880B-2FCD-4258-8E15-E3FC44E6150F.xcactivitylog"))
+           project.activityLogURL,
+           [derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
+            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/0F14C80C-80E0-4798-B970-5956D7A6D8BC.xcactivitylog")
+           ])
         
         XCTAssertEqual(
             project.depsURL,
-            URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Build/Intermediates.noindex/XCBuildData/689fa20537462d0bb083fe9757e30717-targetGraph.txt")
+            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Build/Intermediates.noindex/XCBuildData/6dc3c5f17f0bf003046e94e4e0f7185b-targetGraph.txt")
+            )
+    }
+    
+    // TODO: Test failable initializer
+    
+    func testConstructorWithDirectPath() throws {
+        let sut = ProjectReferenceFactory()
+        
+        let project = try XCTUnwrap(
+            sut.projectReference(
+                activityLogURL:
+                    derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
+                accessedDerivedDataURL: derivedData)
+        )
+
+        XCTAssertEqual(
+            project.name,
+            "CodeMetrics")
+
+        XCTAssertEqual(
+            project.activityLogURL,
+            
+            [derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
+            ])
+        // TODO: should I find all files?
+
+        XCTAssertEqual(
+            project.depsURL,
+            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Build/Intermediates.noindex/XCBuildData/6dc3c5f17f0bf003046e94e4e0f7185b-targetGraph.txt")
         )
     }
 }

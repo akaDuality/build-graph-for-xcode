@@ -16,6 +16,7 @@ final class GraphTests: XCTestCase {
     let parser = XcodeBuildTimesParser()
     
     func test_drawingAppEvents() throws {
+        throw XCTSkip("too slow")
         let events = try parser.parse(path: appEventsPath)
         let view = AppLayer(events: events, scale: 3)
         
@@ -30,6 +31,7 @@ final class GraphTests: XCTestCase {
     }
     
     func test_drawingTestEvents() throws {
+        throw XCTSkip("too slow")
         let events = try parser.parse(path: testEventsPath)
         let view = AppLayer(events: events, scale: 3)
         //        view.highlightedEvent = events[100]

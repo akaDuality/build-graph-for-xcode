@@ -46,7 +46,9 @@ let package = Package(
                          condition: nil),
             ],
             resources: [.process("Samples/AppEvents.json"),
-                        .process("Samples/TestEvents.json")]),
+                        .process("Samples/TestEvents.json"),
+                        .copy("Samples/DerivedData"),
+                       ]),
         
         .target(
             name: "GraphParser",
@@ -64,7 +66,7 @@ let package = Package(
                          condition: nil)
             ],
             resources: [
-                .process("targetGraph.txt")
+                .process("targetGraph.txt"),
             ]
         )
     ]
