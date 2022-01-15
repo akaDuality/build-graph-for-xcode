@@ -11,6 +11,8 @@ import BuildParser
 
 class SplitController: NSSplitViewController {
     
+    private let uiSettings = UISettings()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,8 +20,8 @@ class SplitController: NSSplitViewController {
         detail.delegate = self
     }
 
-    var projects: ProjectsViewController! {
-        (splitViewItems[0].viewController as! ProjectsViewController)
+    var projects: ProjectsOutlineViewController! {
+        (splitViewItems[0].viewController as! ProjectsOutlineViewController)
     }
     
     var detail: DetailsStateViewController! {
@@ -27,7 +29,7 @@ class SplitController: NSSplitViewController {
     }
 }
 
-extension SplitController: ProjectsViewControllerDelegate {
+extension SplitController: ProjectsSelectionDelegate {
     func didSelect(project: ProjectReference) {
         detail.selectProject(project: project)
     }
@@ -39,12 +41,16 @@ extension SplitController: DetailsDelegate {
     }
     
     func willLoadProject(project: ProjectReference) {
+        // Remove current project in case if I wouldn't open selected.
+        // In case of crash, next time user will select another one
+        uiSettings.removeSelectedProject()
         mainWindow().sendImageToolbarItem.isEnabled = false
         
         updateNavigationButtons(for: project)
     }
     
     func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
+        self.uiSettings.selectedProject = project.name // Save only after success parsing
         mainWindow().sendImageToolbarItem.isEnabled = true
     }
     

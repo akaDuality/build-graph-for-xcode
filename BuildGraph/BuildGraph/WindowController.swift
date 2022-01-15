@@ -57,11 +57,11 @@ class WindowController: NSWindowController {
     }
     
     @IBAction func previousProjectDidPress(_ sender: Any) {
-        splitViewController().detail.previousFile()
+        splitViewController().projects.selectPreviousFile()
     }
     
     @IBAction func nextProjectDidPress(_ sender: Any) {
-        splitViewController().detail.nextFile()
+        splitViewController().projects.selectNextFile()
     }
     
     func splitViewController() -> SplitController {
@@ -80,11 +80,15 @@ extension WindowController: NSToolbarDelegate {
                                     accessibilityDescription: NSLocalizedString("Refresh projects", comment: "Toolbar button"))
             refresh.label = NSLocalizedString("Refresh", comment: "Toolbar button")
             refresh.target = splitViewController().projects
-            refresh.action = #selector(splitViewController().projects.reloadProjetcs)
+            refresh.action = #selector(self.refresh)
             return refresh
         default:
             fatalError()
         }
+    }
+    
+    @objc func refresh() {
+        splitViewController().projects.presenter.reloadProjetcs()
     }
 }
 

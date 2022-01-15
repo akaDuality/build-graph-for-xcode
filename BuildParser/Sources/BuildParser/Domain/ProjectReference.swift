@@ -7,7 +7,13 @@
 
 import Foundation
 
-public struct ProjectReference: Equatable {
+public class ProjectReference: Equatable {
+    public static func == (lhs: ProjectReference, rhs: ProjectReference) -> Bool {
+        lhs.name == rhs.name
+        && lhs.activityLogURL == rhs.activityLogURL
+        && lhs.depsURL == rhs.depsURL
+    }
+    
     public init(
         name: String,
         activityLogURL: [URL],
@@ -25,7 +31,7 @@ public struct ProjectReference: Equatable {
     public let activityLogURL: [URL]
     
     // MARK:  - Current File
-    public private(set) var currentActivityLogIndex: Int
+    public var currentActivityLogIndex: Int
     public var currentActivityLog: URL {
         activityLogURL[currentActivityLogIndex]
     }
@@ -39,7 +45,7 @@ public struct ProjectReference: Equatable {
         currentActivityLogIndex > 0
     }
     
-    public mutating func selectPreviousFile() {
+    public func selectPreviousFile() {
         precondition(canDecreaseFile())
         
         self.currentActivityLogIndex -= 1
@@ -50,7 +56,7 @@ public struct ProjectReference: Equatable {
         currentActivityLogIndex < activityLogURL.count - 1
     }
     
-    public mutating func selectNextFile() {
+    public func selectNextFile() {
         precondition(canIncreaseFile())
         
         self.currentActivityLogIndex += 1

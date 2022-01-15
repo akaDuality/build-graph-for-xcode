@@ -26,8 +26,6 @@ protocol DetailsDelegate: AnyObject {
 
 class DetailsStateViewController: StateViewController<DetailsState> {
     
-    private let uiSettings = UISettings()
-    
     var delegate: DetailsDelegate?
     
     required init?(coder: NSCoder) {
@@ -56,26 +54,6 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         }
     }
     
-    func previousFile() {
-        guard
-            var currentProject = currentProject,
-            currentProject.canDecreaseFile()
-        else { return }
-        
-        currentProject.selectPreviousFile()
-        selectProject(project: currentProject)
-    }
-    
-    func nextFile() {
-        guard
-            var currentProject = currentProject,
-            currentProject.canIncreaseFile()
-        else { return }
-        
-        currentProject.selectNextFile()
-        selectProject(project: currentProject)
-    }
-    
     var currentProject: ProjectReference?
     
     // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
@@ -84,10 +62,6 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         
         let derivedData = FileAccess().accessedDerivedDataURL()
         _ = derivedData?.startAccessingSecurityScopedResource()
-        
-        // Remove current project in case if I wouldn't open selected.
-        // In case of crash, next time user will select another one
-        self.uiSettings.removeSelectedProject()
         
         self.state = .loading
         delegate?.willLoadProject(project: project)
@@ -101,7 +75,6 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                         self.state = .data(events, deps, title)
                         
                         derivedData?.stopAccessingSecurityScopedResource()
-                        self.uiSettings.selectedProject = project.name // Save only after success parsing
                         
                         delegate?.didLoadProject(project: project, detailsController: self.currentController as! DetailViewController)
                     }

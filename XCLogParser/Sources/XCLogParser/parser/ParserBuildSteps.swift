@@ -379,7 +379,6 @@ public final class ParserBuildSteps {
             return section.wasFetchedFromCache
         }
         return parent?.fetchedFromCache ?? false
-        return false
     }
 
 //    func addCompilationTimes(step: BuildStep) -> BuildStep {

@@ -16,7 +16,6 @@
 		1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7106E7271F1C1600C292AA /* Tuist2.json */; };
 		1E71FE87271EC10000C292AA /* Tuist.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E71FE86271EC10000C292AA /* Tuist.json */; };
 		1EAD77FD2781E9E500C65AC5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAD77FC2781E9E500C65AC5 /* DetailView.swift */; };
-		1EB1A8D6272DC1A500D31AB8 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D5272DC1A500D31AB8 /* ProjectsViewController.swift */; };
 		1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */; };
 		1EB1A8DA272E9EC300D31AB8 /* DetailPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */; };
 		1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */; };
@@ -39,6 +38,8 @@
 		1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E6227136DBE00741EEF /* TestEvents.json */; };
 		1EDB6A242714183500741EEF /* AppEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A232714182600741EEF /* AppEvents.json */; };
 		1EF2761E27207666000C95BA /* TuistIntel.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EF2761D27207666000C95BA /* TuistIntel.json */; };
+		1EF535BC279342CE00035D70 /* ProjectsOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF535BB279342CD00035D70 /* ProjectsOutlineViewController.swift */; };
+		1EF535BE2793463500035D70 /* ProjectsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF535BD2793463500035D70 /* ProjectsPresenter.swift */; };
 		1EF5609627844D2700001935 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5609527844D2700001935 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +70,6 @@
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
 		1E9690092789C0280010FF04 /* BuildDeps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BuildDeps-Info.plist"; sourceTree = "<group>"; };
 		1EAD77FC2781E9E500C65AC5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		1EB1A8D5272DC1A500D31AB8 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitController.swift; sourceTree = "<group>"; };
 		1EB1A8D9272E9EC300D31AB8 /* DetailPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopoverController.swift; sourceTree = "<group>"; };
 		1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveService.swift; sourceTree = "<group>"; };
@@ -97,6 +97,8 @@
 		1EDB5E6227136DBE00741EEF /* TestEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TestEvents.json; sourceTree = "<group>"; };
 		1EDB6A232714182600741EEF /* AppEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppEvents.json; sourceTree = "<group>"; };
 		1EF2761D27207666000C95BA /* TuistIntel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TuistIntel.json; sourceTree = "<group>"; };
+		1EF535BB279342CD00035D70 /* ProjectsOutlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsOutlineViewController.swift; sourceTree = "<group>"; };
+		1EF535BD2793463500035D70 /* ProjectsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsPresenter.swift; sourceTree = "<group>"; };
 		1EF5609527844D2700001935 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,7 +163,8 @@
 		1EAD77FF2781EC9400C65AC5 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				1EB1A8D5272DC1A500D31AB8 /* ProjectsViewController.swift */,
+				1EF535BB279342CD00035D70 /* ProjectsOutlineViewController.swift */,
+				1EF535BD2793463500035D70 /* ProjectsPresenter.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -399,9 +402,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ED7AD3727831D0600BA74F9 /* DetailsStateViewController.swift in Sources */,
+				1EF535BC279342CE00035D70 /* ProjectsOutlineViewController.swift in Sources */,
 				1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */,
 				1EAD77FD2781E9E500C65AC5 /* DetailView.swift in Sources */,
-				1EB1A8D6272DC1A500D31AB8 /* ProjectsViewController.swift in Sources */,
+				1EF535BE2793463500035D70 /* ProjectsPresenter.swift in Sources */,
 				1ED7AD352783198700BA74F9 /* StateViewController.swift in Sources */,
 				1ED7AD3F27832F6400BA74F9 /* RetryViewController.swift in Sources */,
 				1EDB5E3727135F0000741EEF /* DetaliViewController.swift in Sources */,
