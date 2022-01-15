@@ -57,8 +57,8 @@ import XCLogParser
 class FileAccessMock: FileAccessProtocol {
     func pathFinder(for project: String, derivedDataPath: URL) -> ProjectsFinder {
         ProjectsFinder(
-            logOptions: .empty,
-            logFinder: LogFinder(fileManager: FileManagerMock()))
+//            logFinder: LogFinder(fileManager: FileManagerMock())
+        )
     }
     func accessedDerivedDataURL() -> URL? {
         return URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData/")

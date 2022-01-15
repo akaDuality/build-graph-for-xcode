@@ -48,6 +48,11 @@ class WindowController: NSWindowController {
         detailController.shareImage()
     }
     
+    @IBAction func searchDidChange(_ sender: NSSearchField) {
+        let text = sender.textStorage?.string
+        
+    }
+    
     @IBAction func previousProjectDidPress(_ sender: Any) {
         splitViewController().detail.previousFile()
     }

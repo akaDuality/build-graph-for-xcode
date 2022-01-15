@@ -129,6 +129,10 @@ class DetailViewController: NSViewController {
                 behavior: .transient)
     }
     
+    func didSearch(text: String?) {
+        
+    }
+    
 //    private func controllerForDetailsPopover(step: BuildStep) -> NSViewController {
 //        let popover = NSStoryboard(name: "Main", bundle: nil)
 //            .instantiateController(withIdentifier: "DetailPopover") as! DetailPopoverController
