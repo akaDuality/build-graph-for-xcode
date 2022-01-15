@@ -112,11 +112,12 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         } else if let url = outlineView.item(atRow: outlineView.selectedRow) as? URL,
                   let project = outlineView.parent(forItem: url) as? ProjectReference {
             
-            project.currentActivityLogIndex = outlineView.selectedRow - 1
+            project.currentActivityLogIndex = outlineView.selectedRow - 1 // selectedRow counts from 1
             presenter.select(project: project)
         }
     }
     
+    /// Разворачивая проект выделяю текущий УРЛ
     func outlineViewItemDidExpand(_ notification: Notification) {
         guard let outlineView = notification.object as? NSOutlineView else { return }
         
@@ -125,8 +126,9 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         }
     }
     
+    /// Сворачивая  выделяю текущий проект
     func outlineViewItemDidCollapse(_ notification: Notification) {
-        guard _ = notification.object as? NSOutlineView else { return }
+        guard let _ = notification.object as? NSOutlineView else { return }
         
         if let project = notification.userInfo?["NSObject"] as? ProjectReference {
             view().select(project: project)
