@@ -185,7 +185,7 @@ public final class ParserBuildSteps {
 //                                 errors: errors,
 //                                 notes: omitNotesDetails ? [] : notes,
 //                                 swiftFunctionTimes: nil,
-//                                 fetchedFromCache: wasFetchedFromCache(parent: parentSection, section: logSection),
+                                 fetchedFromCache: wasFetchedFromCache(parent: parentSection, section: logSection),
                                  compilationEndTimestamp: 0,
                                  compilationDuration: 0
 //                                 clangTimeTraceFile: nil,
@@ -375,10 +375,10 @@ public final class ParserBuildSteps {
     }
 
     private func wasFetchedFromCache(parent: BuildStep?, section: IDEActivityLogSection) -> Bool {
-//        if section.wasFetchedFromCache {
-//            return section.wasFetchedFromCache
-//        }
-//        return parent?.fetchedFromCache ?? false
+        if section.wasFetchedFromCache {
+            return section.wasFetchedFromCache
+        }
+        return parent?.fetchedFromCache ?? false
         return false
     }
 

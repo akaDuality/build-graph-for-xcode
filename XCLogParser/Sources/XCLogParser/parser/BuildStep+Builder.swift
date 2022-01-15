@@ -221,7 +221,7 @@ extension BuildStep {
 //                         errors: errors,
 //                         notes: notes,
 //                         swiftFunctionTimes: swiftFunctionTimes,
-//                         fetchedFromCache: fetchedFromCache,
+                         fetchedFromCache: fetchedFromCache,
                          compilationEndTimestamp: compilationEndTimestamp,
                          compilationDuration: compilationDuration
 //                         clangTimeTraceFile: clangTimeTraceFile,

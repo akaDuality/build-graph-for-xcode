@@ -229,7 +229,7 @@ public struct BuildStep: Encodable {
     /// Indicated if the step was actually processed / compiled or just fetched from Xcode's cache.
     /// In a compilation step this will be false only if the file was actually compiled.
     /// in a `target` or `main` step it will be false if at least one sub step wasn't fetched from cache.
-//    public let fetchedFromCache: Bool
+    public let fetchedFromCache: Bool
 
     /// Actual compilation end time of the Step. With the new Build System, sometimes linking happens minutes
     /// after compilation finishes. This is specially visible in Targets, where the files can be compiled
@@ -276,7 +276,7 @@ public struct BuildStep: Encodable {
 //                errors: [Notice]?,
 //                notes: [Notice]?,
 //                swiftFunctionTimes: [SwiftFunctionTime]?,
-//                fetchedFromCache: Bool,
+                fetchedFromCache: Bool,
                 compilationEndTimestamp: Double,
                 compilationDuration: Double
 //                clangTimeTraceFile: String?,
@@ -308,7 +308,7 @@ public struct BuildStep: Encodable {
 //        self.errors = errors
 //        self.notes = notes
 //        self.swiftFunctionTimes = swiftFunctionTimes
-//        self.fetchedFromCache = fetchedFromCache
+        self.fetchedFromCache = fetchedFromCache
         self.compilationEndTimestamp = compilationEndTimestamp
         self.compilationDuration = compilationDuration
 //        self.clangTimeTraceFile = clangTimeTraceFile
