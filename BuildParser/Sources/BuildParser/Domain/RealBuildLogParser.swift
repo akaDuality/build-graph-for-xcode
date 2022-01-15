@@ -26,8 +26,8 @@ public class RealBuildLogParser {
     public func parse(logURL: URL, compilationOnly: Bool) throws -> [Event] {
         let activityLog = try activityLogParser.parseActivityLogInURL(
             logURL,
-            redacted: false,
-            withoutBuildSpecificInformation: false)
+            redacted: false, // Parameter is not important, code was comment out
+            withoutBuildSpecificInformation: false) // Parameter is not important, code was comment out
         
         buildSteps = try buildParser.parse(activityLog: activityLog)
        
