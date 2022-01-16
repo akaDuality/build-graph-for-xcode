@@ -42,7 +42,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         derivedData?.stopAccessingSecurityScopedResource()
         
-        windowController.splitViewController().detail.selectProject(project: project)
+        // TODO: Pass correct filter settings
+        windowController.splitViewController().detail.selectProject(
+            project: project,
+            filter: .shared)
         
         return true
     }

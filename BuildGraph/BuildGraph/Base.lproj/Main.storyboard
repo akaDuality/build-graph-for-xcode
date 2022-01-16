@@ -703,7 +703,7 @@
                                 <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Save image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="XyR-33-egz">
-                                        <rect key="frame" x="12" y="14.5" width="16" height="16"/>
+                                        <rect key="frame" x="12" y="14" width="16" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="paperplane.fill" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="KpE-aU-vrh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -714,12 +714,12 @@
                                         <action selector="makeScreenshotOfGraph:" target="LFf-Ro-PN7" id="8P3-1G-gVq"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="06A17433-761A-4FAA-870C-E43E386009CF" label="Previous" paletteLabel="Previous" title="←" sizingBehavior="auto" navigational="YES" id="NRJ-yX-oB1">
+                                <toolbarItem implicitItemIdentifier="06A17433-761A-4FAA-870C-E43E386009CF" label="Previous" paletteLabel="Previous" image="NSGoLeftTemplate" sizingBehavior="auto" navigational="YES" id="NRJ-yX-oB1">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="MbD-P4-3hp">
-                                        <rect key="frame" x="4" y="14" width="46" height="32"/>
+                                        <rect key="frame" x="22" y="14" width="10" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <buttonCell key="cell" type="push" title="←" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cnx-tP-RiD">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSGoLeftTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="cnx-tP-RiD">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -728,12 +728,12 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="9DF2521C-B084-4E27-9B51-83003952E12F" label="Next" paletteLabel="Next" bordered="YES" title="→" sizingBehavior="auto" navigational="YES" id="pZ8-K6-ajH">
+                                <toolbarItem implicitItemIdentifier="9DF2521C-B084-4E27-9B51-83003952E12F" label="Next" paletteLabel="Next" image="NSGoRightTemplate" sizingBehavior="auto" navigational="YES" id="pZ8-K6-ajH">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="pqk-tx-Gkb">
-                                        <rect key="frame" x="0.0" y="14" width="46" height="32"/>
+                                        <rect key="frame" x="11" y="14" width="10" height="14"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <buttonCell key="cell" type="push" title="→" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tY4-Ty-hDd">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="tY4-Ty-hDd">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -757,12 +757,18 @@
                                         </connections>
                                     </searchField>
                                 </searchToolbarItem>
+                                <toolbarItem implicitItemIdentifier="36985640-83C1-4EE8-94D7-20C5849E041A" label="Events" paletteLabel="Events" tag="-1" image="puzzlepiece.fill" catalog="system" sizingBehavior="auto" id="b83-4x-o6p">
+                                    <connections>
+                                        <segue destination="AVJ-kY-T3V" kind="popover" popoverAnchorView="b83-4x-o6p" popoverBehavior="t" preferredEdge="maxY" id="Eah-DU-Cox"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="NRJ-yX-oB1"/>
                                 <toolbarItem reference="pZ8-K6-ajH"/>
-                                <toolbarItem reference="aNr-aQ-u4z"/>
                                 <toolbarItem reference="0Qa-Qa-ok0"/>
+                                <toolbarItem reference="aNr-aQ-u4z"/>
+                                <toolbarItem reference="b83-4x-o6p"/>
                                 <toolbarItem reference="tOZ-ba-ewD"/>
                                 <searchToolbarItem reference="ZhZ-nU-lfr"/>
                             </defaultToolbarItems>
@@ -781,6 +787,86 @@
                 <customObject id="CAu-ly-QRq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-759" y="647"/>
+        </scene>
+        <!--Settings Popover View Controller-->
+        <scene sceneID="mob-fX-uiP">
+            <objects>
+                <viewController id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="3qk-xS-avz">
+                        <rect key="frame" x="0.0" y="0.0" width="292" height="571"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="8Il-EF-1Tf">
+                                <rect key="frame" x="15" y="472" width="262" height="44"/>
+                                <view key="contentView" id="1y2-Zw-aiW">
+                                    <rect key="frame" x="3" y="3" width="256" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JVm-vu-Bbo">
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                            <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="JVm-vu-Bbo" secondAttribute="trailing" id="516-jt-8Nl"/>
+                                        <constraint firstItem="JVm-vu-Bbo" firstAttribute="leading" secondItem="1y2-Zw-aiW" secondAttribute="leading" id="Als-gc-NLm"/>
+                                        <constraint firstItem="JVm-vu-Bbo" firstAttribute="top" secondItem="1y2-Zw-aiW" secondAttribute="top" id="MPb-Lq-dMo"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JVm-vu-Bbo" secondAttribute="bottom" id="vv0-oA-y4j"/>
+                                    </constraints>
+                                </view>
+                                <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
+                            </box>
+                            <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="qGp-Tb-uz5">
+                                <rect key="frame" x="15" y="408" width="262" height="44"/>
+                                <view key="contentView" id="2Z4-Sr-azM">
+                                    <rect key="frame" x="3" y="3" width="256" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7JE-3f-E71">
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                            <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7JE-3f-E71" firstAttribute="leading" secondItem="2Z4-Sr-azM" secondAttribute="leading" id="7NQ-Fh-mlA"/>
+                                        <constraint firstAttribute="bottom" secondItem="7JE-3f-E71" secondAttribute="bottom" id="Ctj-4a-teR"/>
+                                        <constraint firstItem="7JE-3f-E71" firstAttribute="top" secondItem="2Z4-Sr-azM" secondAttribute="top" id="eym-mk-lVM"/>
+                                        <constraint firstAttribute="trailing" secondItem="7JE-3f-E71" secondAttribute="trailing" id="vcQ-6h-WLb"/>
+                                    </constraints>
+                                </view>
+                                <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
+                            </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
+                                <rect key="frame" x="28" y="530" width="234" height="18"/>
+                                <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dS6-NU-oEH">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showCachedModulesDidChagne:" target="AVJ-kY-T3V" id="mrH-6y-mv4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="24" id="J7I-b4-JZP"/>
+                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="KUp-Ar-oZO"/>
+                            <constraint firstItem="8Il-EF-1Tf" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="SfL-Oe-TMc"/>
+                            <constraint firstItem="8Il-EF-1Tf" firstAttribute="leading" secondItem="3qk-xS-avz" secondAttribute="leading" constant="18" id="dQS-jW-BDk"/>
+                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="leading" secondItem="8Il-EF-1Tf" secondAttribute="leading" id="ftg-Mh-aSi"/>
+                            <constraint firstItem="JVm-vu-Bbo" firstAttribute="top" secondItem="vfY-Tw-Ngg" secondAttribute="bottom" constant="32" id="g3l-M4-qbM"/>
+                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="centerX" secondItem="8Il-EF-1Tf" secondAttribute="centerX" id="pIn-SD-QrH"/>
+                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="leading" secondItem="8Il-EF-1Tf" secondAttribute="leading" constant="12" id="raG-Ga-Aa9"/>
+                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="24" id="wTE-cT-LRt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="compilationStackView" destination="JVm-vu-Bbo" id="Jax-gg-dfn"/>
+                        <outlet property="otherStackView" destination="7JE-3f-E71" id="Dt3-2G-Bw4"/>
+                    </connections>
+                </viewController>
+                <customObject id="BtL-W5-DHq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-759" y="1169.5"/>
         </scene>
         <!--Split Controller-->
         <scene sceneID="6Af-iS-TkZ">
@@ -903,6 +989,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSGoLeftTemplate" width="10" height="14"/>
+        <image name="NSGoRightTemplate" width="10" height="14"/>
         <image name="paperplane.fill" catalog="system" width="16" height="16"/>
+        <image name="puzzlepiece.fill" catalog="system" width="22" height="15"/>
     </resources>
 </document>

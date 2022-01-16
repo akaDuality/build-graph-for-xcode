@@ -32,7 +32,7 @@ public enum BuildStepType: String, Encodable {
 }
 
 /// Categories for different kind of build steps
-public enum DetailStepType: String, Encodable {
+public enum DetailStepType: String, Encodable, CaseIterable, Equatable {
 
     /// clang compilation step
     case cCompilation
@@ -120,6 +120,16 @@ public enum DetailStepType: String, Encodable {
             return .precompileBridgingHeader
         default:
             return .other
+        }
+    }
+    
+    public func isCompilationStep() -> Bool {
+        switch self {
+        case .cCompilation, .swiftCompilation, .compileStoryboard, .XIBCompilation, .compileAssetsCatalog, .swiftAggregatedCompilation:
+            return true
+            
+        default:
+            return false
         }
     }
 }
@@ -358,10 +368,6 @@ public extension BuildStep {
     }
 
     func isCompilationStep() -> Bool {
-        return detailStepType == .cCompilation
-        || detailStepType == .swiftCompilation
-        || detailStepType == .compileStoryboard
-        || detailStepType == .compileAssetsCatalog
-        || detailStepType == .swiftAggregatedCompilation
+        detailStepType.isCompilationStep()
     }
 }

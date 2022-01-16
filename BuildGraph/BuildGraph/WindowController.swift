@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import BuildParser
 
 class MainWindow: NSWindow {
    
@@ -37,6 +38,15 @@ class WindowController: NSWindowController {
         
         window!.toolbar!.delegate = self
         window().setupToolbar(window!.toolbar!)
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let filterSettingsController = segue.destinationController as? SettingsPopoverViewController {
+            filterSettingsController.delegate = splitViewController()
+            filterSettingsController.settings = splitViewController().filter
+        }
     }
     
     @IBAction func makeScreenshotOfGraph(_ sender: Any) {

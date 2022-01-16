@@ -47,7 +47,8 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 // TODO: Pass message to controller
                 let retryViewController = storyboard.instantiateController(withIdentifier: "retry") as! RetryViewController
                 retryViewController.showNonCompilationEvents = { [unowned self] in
-                    self.selectProject(project: project, compilationOnly: false)
+                    // TODO: Update settings for one project
+                    self.selectProject(project: project, filter: .shared)
                 }
                 return retryViewController
             }
@@ -57,7 +58,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     var currentProject: ProjectReference?
     
     // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
-    func selectProject(project: ProjectReference, compilationOnly: Bool = true) {
+    func selectProject(project: ProjectReference, filter: FilterSettings) {
         self.currentProject = project
         
         let derivedData = FileAccess().accessedDerivedDataURL()
@@ -69,7 +70,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             loadAndInsert(
                 project: project,
-                compilationOnly: compilationOnly,
+                filter: filter,
                 didLoad: { events, deps, title in
                     DispatchQueue.main.async {
                         self.state = .data(events, deps, title)
@@ -93,7 +94,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     
     func loadAndInsert(
         project: ProjectReference,
-        compilationOnly: Bool,
+        filter: FilterSettings,
         didLoad: @escaping (_ events: [Event], _ deps: [Dependency], _ title: String) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
@@ -102,7 +103,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         do {
             let events = try parser.parse(
                 logURL: project.currentActivityLog,
-                compilationOnly: compilationOnly)
+                filter: filter)
             
             guard events.count > 0 else {
                 // TODO: depends on compilationOnly flag

@@ -12,6 +12,7 @@ import BuildParser
 class SplitController: NSSplitViewController {
     
     private let uiSettings = UISettings()
+    var filter = FilterSettings.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class SplitController: NSSplitViewController {
 
 extension SplitController: ProjectsSelectionDelegate {
     func didSelect(project: ProjectReference) {
-        detail.selectProject(project: project)
+        detail.selectProject(project: project, filter: filter)
     }
 }
 
@@ -59,5 +60,14 @@ extension SplitController: DetailsDelegate {
         mainWindow().nextButton.isEnabled = project.canDecreaseFile()
         
         mainWindow().subtitle = project.indexDescription
+    }
+}
+
+extension SplitController: FilterSettingsDelegate {
+    func didUpdateFilter(_ filterSettings: FilterSettings) {
+        guard let currentProject = detail.currentProject else { return }
+        
+        // TODO: Can be speed up if non analyze raw files
+        detail.selectProject(project: currentProject, filter: filterSettings)
     }
 }

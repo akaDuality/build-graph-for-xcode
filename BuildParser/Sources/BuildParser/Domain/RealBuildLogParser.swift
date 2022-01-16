@@ -8,6 +8,31 @@
 import XCLogParser
 import Foundation
 
+public class FilterSettings {
+    public static var shared = FilterSettings()
+    
+    public init() {}
+    
+    public var showCached: Bool = true
+    
+    public var allowedTypes: [DetailStepType] = DetailStepType.compilationSteps
+    
+    public func add(stepType: DetailStepType) {
+        allowedTypes.append(stepType)
+    }
+    
+    public func remove(stepType: DetailStepType) {
+        allowedTypes.remove(at: allowedTypes.firstIndex(of: stepType)!)
+    }
+}
+
+extension DetailStepType {
+    static var compilationSteps: [Self] {
+        Self.allCases
+            .filter { $0.isCompilationStep() }
+    }
+}
+
 public class RealBuildLogParser {
    
     public init() {}
@@ -23,7 +48,7 @@ public class RealBuildLogParser {
         buildSteps.title
     }
     
-    public func parse(logURL: URL, compilationOnly: Bool) throws -> [Event] {
+    public func parse(logURL: URL, filter: FilterSettings) throws -> [Event] {
         let activityLog = try activityLogParser.parseActivityLogInURL(
             logURL,
             redacted: false, // Parameter is not important, code was comment out
@@ -31,7 +56,7 @@ public class RealBuildLogParser {
         
         buildSteps = try buildParser.parse(activityLog: activityLog)
        
-        let events = convertToEvents(buildSteps: buildSteps, compilationOnly: compilationOnly)
+        let events = convertToEvents(buildSteps: buildSteps, filter: filter)
         return events
     }
     
@@ -45,15 +70,16 @@ public class RealBuildLogParser {
     
     func convertToEvents(
         buildSteps: BuildStep,
-        compilationOnly: Bool
+        filter: FilterSettings
     ) -> [Event] {
         let dateFormatter = DateFormatter.iso8601Full_Z
         let events = buildSteps.subSteps
             .compactMap { step -> Event? in
                 var substeps = step.subSteps
                 
-                if compilationOnly {
-                    substeps = substeps.filter { $0.isCompilationStep() }
+                // TODO: Speedup if all or none settings are enabled
+                substeps = substeps.filter { substep in
+                    filter.allowedTypes.contains(substep.detailStepType)
                 }
                 
                 guard let startDate = substeps.first?.startDate,
@@ -62,9 +88,9 @@ public class RealBuildLogParser {
                     return nil // Empty array
                 }
                 
-//                guard !step.fetchedFromCache else {
-//                    return nil
-//                }
+                if !filter.showCached && step.fetchedFromCache {
+                    return nil
+                }
                 
                 return Event(
                     taskName: step.title.without_Build_target,
