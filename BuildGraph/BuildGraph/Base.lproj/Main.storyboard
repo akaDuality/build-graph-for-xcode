@@ -681,7 +681,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-590" y="416"/>
+            <point key="canvasLocation" x="-739" y="445"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="8s9-m6-HQ8">
@@ -690,10 +690,10 @@
                     <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildDeps" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="425" y="462" width="600" height="270"/>
+                        <rect key="contentRect" x="425" y="462" width="800" height="200"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
                         <view key="contentView" id="I9F-zK-pE3">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="800" height="200"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
@@ -780,7 +780,7 @@
                 </windowController>
                 <customObject id="CAu-ly-QRq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-595" y="654"/>
+            <point key="canvasLocation" x="-759" y="647"/>
         </scene>
         <!--Split Controller-->
         <scene sceneID="6Af-iS-TkZ">
@@ -788,7 +788,7 @@
                 <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="ZgH-Hi-WZV"/>
-                        <splitViewItem id="jKq-M2-0H1"/>
+                        <splitViewItem holdingPriority="255" behavior="contentList" id="jKq-M2-0H1"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="2qE-Y4-Bj2">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -859,7 +859,7 @@
                                             </tableColumns>
                                         </outlineView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="DgP-g7-3gl">
                                     <rect key="frame" x="1" y="283" width="198" height="16"/>
@@ -884,7 +884,7 @@
                 </viewController>
                 <customObject id="kyX-qs-5m3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-520" y="1145"/>
+            <point key="canvasLocation" x="-215" y="1145"/>
         </scene>
         <!--Details State View Controller-->
         <scene sceneID="pAW-rV-PZr">

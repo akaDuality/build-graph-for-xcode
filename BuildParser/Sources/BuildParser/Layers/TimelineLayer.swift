@@ -52,6 +52,11 @@ class TimelineLayer: CALayer {
     }
     
     private func setup(scale: CGFloat) {
+        guard eventsDuration.seconds > 0 else {
+            return // Sometimes duration is negative for cached modules
+            // TODO: Rework to optional constructor
+        }
+        
         for _ in 0..<eventsDuration.seconds {
             let tickLayer = CALayer()
             tickLayer.backgroundColor = Colors.timeColor()

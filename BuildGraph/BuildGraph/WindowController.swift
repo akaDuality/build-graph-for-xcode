@@ -37,7 +37,6 @@ class WindowController: NSWindowController {
         
         window!.toolbar!.delegate = self
         window().setupToolbar(window!.toolbar!)
-
     }
     
     @IBAction func makeScreenshotOfGraph(_ sender: Any) {
@@ -80,7 +79,8 @@ extension WindowController: NSToolbarDelegate {
                                     accessibilityDescription: NSLocalizedString("Refresh projects", comment: "Toolbar button"))
             refresh.label = NSLocalizedString("Refresh", comment: "Toolbar button")
             refresh.target = splitViewController().projects
-            refresh.action = #selector(self.refresh)
+            refresh.action = #selector(splitViewController().projects.presenter.reloadProjetcs)
+            refresh.isEnabled = true
             return refresh
         default:
             fatalError()

@@ -62,6 +62,10 @@ public class RealBuildLogParser {
                     return nil // Empty array
                 }
                 
+//                guard !step.fetchedFromCache else {
+//                    return nil
+//                }
+                
                 return Event(
                     taskName: step.title.without_Build_target,
                     startDate: dateFormatter.date(from: startDate)!,

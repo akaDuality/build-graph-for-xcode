@@ -28,7 +28,7 @@ class ProjectsPresenter {
     
     private let uiSettings = UISettings()
     
-    func reloadProjetcs() {
+    @objc func reloadProjetcs() {
         let pathFinder = ProjectsFinder()
         projects = try! pathFinder.projects()
         
