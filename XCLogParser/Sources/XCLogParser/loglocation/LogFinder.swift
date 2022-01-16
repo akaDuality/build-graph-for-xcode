@@ -160,7 +160,7 @@ public func getLogsInDir(_ dir: URL, fileManager: FileManagerProtocol) throws ->
         guard let lhDate = lhv.creationDate, let rhDate = rhv.creationDate else {
             return false
         }
-        return lhDate.compare(rhDate) == .orderedAscending
+        return lhDate.compare(rhDate) == .orderedDescending
     }
 
     return sorted

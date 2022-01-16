@@ -56,11 +56,11 @@ class WindowController: NSWindowController {
     }
     
     @IBAction func previousProjectDidPress(_ sender: Any) {
-        splitViewController().projects.selectPreviousFile()
+        splitViewController().projects.selectNextFile()
     }
     
     @IBAction func nextProjectDidPress(_ sender: Any) {
-        splitViewController().projects.selectNextFile()
+        splitViewController().projects.selectPreviousFile()
     }
     
     func splitViewController() -> SplitController {

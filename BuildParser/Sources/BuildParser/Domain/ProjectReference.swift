@@ -21,7 +21,7 @@ public class ProjectReference: Equatable {
     ) {
         precondition(activityLogURL.count > 0)
         
-        self.currentActivityLogIndex = activityLogURL.count - 1
+        self.currentActivityLogIndex = 0
         self.name = name
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL

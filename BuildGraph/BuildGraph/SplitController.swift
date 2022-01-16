@@ -55,8 +55,8 @@ extension SplitController: DetailsDelegate {
     }
     
     func updateNavigationButtons(for project: ProjectReference) {
-        mainWindow().previousButton.isEnabled = project.canDecreaseFile()
-        mainWindow().nextButton.isEnabled = project.canIncreaseFile()
+        mainWindow().previousButton.isEnabled = project.canIncreaseFile()
+        mainWindow().nextButton.isEnabled = project.canDecreaseFile()
         
         mainWindow().subtitle = project.indexDescription
     }
