@@ -23,7 +23,7 @@ class EventLayer: CALayer {
         
         for _ in event.steps {
             let layer = CALayer()
-            layer.backgroundColor = Colors.subtaskColor()
+            layer.backgroundColor = event.subtaskColor
             layer.contentsScale = scale
             addSublayer(layer)
             stepShapes.append(layer)

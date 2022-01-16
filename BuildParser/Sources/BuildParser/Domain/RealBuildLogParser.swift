@@ -70,6 +70,7 @@ public class RealBuildLogParser {
                     taskName: step.title.without_Build_target,
                     startDate: dateFormatter.date(from: startDate)!,
                     endDate: dateFormatter.date(from: lastDate)!,
+                    fetchedFromCache: step.fetchedFromCache,
                     steps: convertToEvents(subSteps: substeps)
                 )
             }
@@ -94,6 +95,7 @@ public class RealBuildLogParser {
                     taskName: step.title.without_Build_target,
                     startDate: dateFormatter.date(from: step.startDate)!,
                     endDate: dateFormatter.date(from: step.endDate)!,
+                    fetchedFromCache: step.fetchedFromCache,
                     steps: convertToEvents(subSteps: step.subSteps)
                 )
             }

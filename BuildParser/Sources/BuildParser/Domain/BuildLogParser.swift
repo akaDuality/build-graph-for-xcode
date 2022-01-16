@@ -16,6 +16,7 @@ public class XcodeBuildTimesParser {
                 events.append(Event(taskName: eventLog.taskName,
                                     startDate: eventLog.date,
                                     endDate: end.date,
+                                    fetchedFromCache: false,
                                     steps: []))
                 // TODO: remove from buildLog.events for speedup
             }

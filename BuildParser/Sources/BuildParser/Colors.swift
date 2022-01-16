@@ -35,19 +35,14 @@ extension Event {
         
         let defaultColor: NSColor = .systemOrange
         return defaultColor.effectiveCGColor// .init(gray: 0.7, alpha: 1)
+    }
+    
+    var subtaskColor: CGColor {
+        if fetchedFromCache {
+            return NSColor.systemGreen.effectiveCGColor
+        }
         
-//        switch event.type {
-//        case .framework:
-//            if isPod(name: event.taskName) {
-//                return .init(gray: 0.3, alpha: 1)
-//            } else {
-//                return .init(gray: 0.7, alpha: 1)
-//            }
-//        case .helpers:
-//            return .init(red: 1, green: 0, blue: 0, alpha: 0.5)
-//        case .tests:
-//            return .init(red: 0, green: 0, blue: 1, alpha: 0.5)
-//        }
+        return Colors.subtaskColor()
     }
 }
 
