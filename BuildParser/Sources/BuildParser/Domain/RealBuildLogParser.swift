@@ -22,7 +22,10 @@ public class FilterSettings {
     }
     
     public func remove(stepType: DetailStepType) {
-        allowedTypes.remove(at: allowedTypes.firstIndex(of: stepType)!)
+        guard let indexToRemove = allowedTypes.firstIndex(of: stepType) else {
+            return
+        }
+        allowedTypes.remove(at: indexToRemove)
     }
 }
 
@@ -58,6 +61,10 @@ public class RealBuildLogParser {
        
         let events = convertToEvents(buildSteps: buildSteps, filter: filter)
         return events
+    }
+    
+    public func update(with filter: FilterSettings) -> [Event] {
+        convertToEvents(buildSteps: buildSteps, filter: filter)
     }
     
     public func step(for event: Event) -> BuildStep? {

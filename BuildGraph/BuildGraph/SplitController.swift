@@ -65,9 +65,6 @@ extension SplitController: DetailsDelegate {
 
 extension SplitController: FilterSettingsDelegate {
     func didUpdateFilter(_ filterSettings: FilterSettings) {
-        guard let currentProject = detail.currentProject else { return }
-        
-        // TODO: Can be speed up if non analyze raw files
-        detail.selectProject(project: currentProject, filter: filterSettings)
+        detail.updateFilterForCurrentProject(filterSettings)
     }
 }

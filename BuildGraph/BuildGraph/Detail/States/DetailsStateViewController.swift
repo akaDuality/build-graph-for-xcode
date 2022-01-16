@@ -56,6 +56,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     }
     
     var currentProject: ProjectReference?
+    let parser = RealBuildLogParser()
     
     // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
     func selectProject(project: ProjectReference, filter: FilterSettings) {
@@ -90,9 +91,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         }
     }
     
-    let parser = RealBuildLogParser()
-    
-    func loadAndInsert(
+    private func loadAndInsert(
         project: ProjectReference,
         filter: FilterSettings,
         didLoad: @escaping (_ events: [Event], _ deps: [Dependency], _ title: String) -> Void,
@@ -111,21 +110,67 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 return
             }
             
-            var dependencies = [Dependency]()
-            
-            if let depsURL = project.depsURL {
-                if let depsContent = try? String(contentsOf: depsURL) {
-                    dependencies = DependencyParser().parseFile(depsContent)
-                } else {
-                    // TODO: Log
-                }
-            }
-            
-            events.connect(by: dependencies)
+            let dependencies = connectWithDependencies(events: events,
+                                                       depsURL: project.depsURL)
             
             didLoad(events, dependencies, self.parser.title)
         } catch let error {
             didFail(error.localizedDescription)
         }
+    }
+    
+    private func connectWithDependencies(events: [Event], depsURL: URL?) -> [Dependency] {
+        var dependencies = [Dependency]()
+        
+        if let depsURL = depsURL {
+            if let depsContent = try? String(contentsOf: depsURL) {
+                dependencies = DependencyParser().parseFile(depsContent)
+            } else {
+                // TODO: Log
+            }
+        }
+        
+        events.connect(by: dependencies)
+        
+        return dependencies
+    }
+    
+    // MARK: - Update filter
+    func updateFilterForCurrentProject(_ filter: FilterSettings) {
+        guard let project = currentProject else {
+            return
+        }
+        
+        self.state = .loading
+        delegate?.willLoadProject(project: project)
+        
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            updateWithFilter(project: project, filter: filter) { events, deps, title in
+                DispatchQueue.main.async {
+                    guard events.count > 0 else {
+                        self.state = .error("No data for current filter", project)
+                        return
+                    }
+                    
+                    self.state = .data(events, deps, title)
+                    
+                    delegate?.didLoadProject(
+                        project: project,
+                        detailsController: self.currentController as! DetailViewController)
+                }
+            }
+        }
+    }
+    
+    private func updateWithFilter(
+        project: ProjectReference,
+        filter: FilterSettings,
+        didLoad: @escaping (_ events: [Event], _ deps: [Dependency], _ title: String) -> Void
+    ) {
+        let events = parser.update(with: filter)
+        
+        let dependencies = connectWithDependencies(events: events, depsURL: project.depsURL)
+        
+        didLoad(events, dependencies, parser.title)
     }
 }

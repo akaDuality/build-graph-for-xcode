@@ -793,11 +793,11 @@
             <objects>
                 <viewController id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="3qk-xS-avz">
-                        <rect key="frame" x="0.0" y="0.0" width="292" height="571"/>
+                        <rect key="frame" x="0.0" y="0.0" width="292" height="617"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="8Il-EF-1Tf">
-                                <rect key="frame" x="15" y="472" width="262" height="44"/>
+                                <rect key="frame" x="15" y="518" width="262" height="44"/>
                                 <view key="contentView" id="1y2-Zw-aiW">
                                     <rect key="frame" x="3" y="3" width="256" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -817,7 +817,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="qGp-Tb-uz5">
-                                <rect key="frame" x="15" y="408" width="262" height="44"/>
+                                <rect key="frame" x="15" y="428" width="262" height="44"/>
                                 <view key="contentView" id="2Z4-Sr-azM">
                                     <rect key="frame" x="3" y="3" width="256" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -837,7 +837,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
-                                <rect key="frame" x="28" y="530" width="234" height="18"/>
+                                <rect key="frame" x="28" y="576" width="234" height="18"/>
                                 <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dS6-NU-oEH">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -846,15 +846,41 @@
                                     <action selector="showCachedModulesDidChagne:" target="AVJ-kY-T3V" id="mrH-6y-mv4"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVY-Z9-SCE">
+                                <rect key="frame" x="18" y="496" width="77" height="18"/>
+                                <buttonCell key="cell" type="inline" title="Select all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pzG-Wd-z2G">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectAllCompilationFlags:" target="AVJ-kY-T3V" id="NED-jH-vef"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="07F-ks-YDb">
+                                <rect key="frame" x="200" y="406" width="74" height="18"/>
+                                <buttonCell key="cell" type="inline" title="Deselect all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kwD-I7-TUL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deselectAllOtherFlags:" target="AVJ-kY-T3V" id="1dK-2a-Svn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="24" id="J7I-b4-JZP"/>
+                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="50" id="J7I-b4-JZP"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="KUp-Ar-oZO"/>
+                            <constraint firstItem="07F-ks-YDb" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="7" id="O4T-67-Rxv"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="SfL-Oe-TMc"/>
+                            <constraint firstItem="07F-ks-YDb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7JE-3f-E71" secondAttribute="leading" id="YTE-Br-7ww"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="leading" secondItem="3qk-xS-avz" secondAttribute="leading" constant="18" id="dQS-jW-BDk"/>
+                            <constraint firstItem="07F-ks-YDb" firstAttribute="trailing" secondItem="7JE-3f-E71" secondAttribute="trailing" id="fcc-zR-0gM"/>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="leading" secondItem="8Il-EF-1Tf" secondAttribute="leading" id="ftg-Mh-aSi"/>
                             <constraint firstItem="JVm-vu-Bbo" firstAttribute="top" secondItem="vfY-Tw-Ngg" secondAttribute="bottom" constant="32" id="g3l-M4-qbM"/>
+                            <constraint firstItem="AVY-Z9-SCE" firstAttribute="leading" secondItem="JVm-vu-Bbo" secondAttribute="leading" id="kwu-sm-18R"/>
+                            <constraint firstItem="AVY-Z9-SCE" firstAttribute="top" secondItem="JVm-vu-Bbo" secondAttribute="bottom" constant="7" id="l7t-aA-KMU"/>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="centerX" secondItem="8Il-EF-1Tf" secondAttribute="centerX" id="pIn-SD-QrH"/>
+                            <constraint firstItem="JVm-vu-Bbo" firstAttribute="leading" secondItem="AVY-Z9-SCE" secondAttribute="trailing" constant="-77" id="pyv-IU-Too"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="leading" secondItem="8Il-EF-1Tf" secondAttribute="leading" constant="12" id="raG-Ga-Aa9"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="24" id="wTE-cT-LRt"/>
                         </constraints>
@@ -866,7 +892,7 @@
                 </viewController>
                 <customObject id="BtL-W5-DHq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-759" y="1169.5"/>
+            <point key="canvasLocation" x="-759" y="1192.5"/>
         </scene>
         <!--Split Controller-->
         <scene sceneID="6Af-iS-TkZ">

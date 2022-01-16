@@ -35,6 +35,24 @@ class SettingsPopoverViewController: NSViewController {
             }
         }
     }
+    @IBAction func selectAllCompilationFlags(_ sender: Any) {
+        setAllCheckbox(in: compilationStackView, to: .on)
+    }
+    
+    @IBAction func deselectAllOtherFlags(_ sender: Any) {
+        setAllCheckbox(in: otherStackView, to: .off)
+    }
+    
+    private func setAllCheckbox(in stackView: NSStackView, to state: NSControl.StateValue) {
+        for subview in stackView.arrangedSubviews {
+            guard let checkbox = subview as? DetailStepCheckBox else { continue }
+            
+            checkbox.state = state
+            updateSettings(stepType: checkbox.stepType, isOn: state == .on)
+        }
+        
+        delegate?.didUpdateFilter(settings)
+    }
     
     @IBAction func showCachedModulesDidChagne(_ sender: NSButton) {
         let isOn = sender.state == .on
@@ -59,13 +77,17 @@ class SettingsPopoverViewController: NSViewController {
         let stepType = sender.stepType!
         let isOn = sender.state == .on
         
+        updateSettings(stepType: stepType, isOn: isOn)
+        
+        delegate?.didUpdateFilter(settings)
+    }
+    
+    func updateSettings(stepType: DetailStepType, isOn: Bool) {
         if isOn {
             settings.add(stepType: stepType)
         } else {
             settings.remove(stepType: stepType)
         }
-        
-        delegate?.didUpdateFilter(settings)
     }
 }
 
