@@ -116,8 +116,8 @@ class LatestFileScanner {
                 let lhv = try $0.resourceValues(forKeys: [.contentModificationDateKey])
                 let rhv = try $1.resourceValues(forKeys: [.contentModificationDateKey])
                 
-                guard let lhDate = lhv.contentModificationDate,
-                      let rhDate = rhv.contentModificationDate
+                guard let lhDate = lhv.creationDate,
+                      let rhDate = rhv.creationDate
                 else {
                     return false
                 }
@@ -150,15 +150,14 @@ public func getLatestLogInDir(_ dir: URL, fileManager: FileManagerProtocol) thro
     return logPath
 }
 
-
 public func getLogsInDir(_ dir: URL, fileManager: FileManagerProtocol) throws -> [URL] {
     let files = try fileManager.contentsOfDirectory(at: dir,
-                                                    includingPropertiesForKeys: [.contentModificationDateKey],
+                                                    includingPropertiesForKeys: [.creationDateKey],
                                                     options: .skipsHiddenFiles)
     let sorted = try files.filter { $0.path.hasSuffix(".xcactivitylog") }.sorted {
-        let lhv = try $0.resourceValues(forKeys: [.contentModificationDateKey])
-        let rhv = try $1.resourceValues(forKeys: [.contentModificationDateKey])
-        guard let lhDate = lhv.contentModificationDate, let rhDate = rhv.contentModificationDate else {
+        let lhv = try $0.resourceValues(forKeys: [.creationDateKey])
+        let rhv = try $1.resourceValues(forKeys: [.creationDateKey])
+        guard let lhDate = lhv.creationDate, let rhDate = rhv.creationDate else {
             return false
         }
         return lhDate.compare(rhDate) == .orderedAscending

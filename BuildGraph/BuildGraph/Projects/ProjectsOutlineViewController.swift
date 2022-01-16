@@ -97,7 +97,8 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         if let project = item as? ProjectReference {
             view?.textField?.stringValue = project.name
         } else if let url = item as? URL {
-            view?.textField?.stringValue = url.lastPathComponent
+            view?.textField?.stringValue = presenter.description(for: url)
+            view?.toolTip = presenter.tooltip(for: url)
         }
         
         return view
@@ -112,7 +113,7 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         } else if let url = outlineView.item(atRow: outlineView.selectedRow) as? URL,
                   let project = outlineView.parent(forItem: url) as? ProjectReference {
             
-            project.currentActivityLogIndex = outlineView.selectedRow - 1 // selectedRow counts from 1
+            project.currentActivityLogIndex = outlineView.childIndex(forItem: url)
             presenter.select(project: project)
         }
     }
@@ -131,6 +132,7 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         guard let _ = notification.object as? NSOutlineView else { return }
         
         if let project = notification.userInfo?["NSObject"] as? ProjectReference {
+            // TODO: Select only if same project is selected already
             view().select(project: project)
         }
     }
@@ -192,7 +194,8 @@ class ProjectsOutlineView: NSView {
     
     private func select(_ any: Any) {
         let row = outlineView.row(forItem: any)
-        outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        outlineView.selectRowIndexes(IndexSet(integer: row),
+                                     byExtendingSelection: false)
     }
 }
 

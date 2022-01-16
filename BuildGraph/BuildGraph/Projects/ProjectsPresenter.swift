@@ -62,4 +62,22 @@ class ProjectsPresenter {
         let project = projects[index]
         delegate?.didSelect(project: project)
     }
+    
+    func description(for url: URL) -> String {
+        guard let creationDate = try? url.resourceValues(forKeys: [.creationDateKey]).creationDate
+        else { return url.lastPathComponent }
+        
+        return dateFormatter.string(from: creationDate)
+    }
+    
+    func tooltip(for url: URL) -> String {
+        url.lastPathComponent.components(separatedBy: ".").first ?? url.lastPathComponent
+    }
+    
+    lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }
