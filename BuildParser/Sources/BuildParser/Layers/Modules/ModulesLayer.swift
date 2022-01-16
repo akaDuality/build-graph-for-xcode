@@ -11,7 +11,7 @@ class ModulesLayer: CALayer {
     
     var showSubtask: Bool = true {
         didSet {
-            for shape in shapes {
+            for shape in eventShapes {
                 shape.showSubtask = showSubtask
             }
         }
@@ -19,7 +19,7 @@ class ModulesLayer: CALayer {
     
     let events: [Event]
     private let rects: [EventRelativeRect]
-    private(set) var shapes: [EventLayer]
+    private(set) var eventShapes: [EventLayer]
     
     public var highlightedEvent: Event? = nil {
         didSet {
@@ -51,7 +51,7 @@ class ModulesLayer: CALayer {
                               absoluteStart: events.start(),
                               totalDuration: events.duration())
         }
-        self.shapes = .init()
+        self.eventShapes = .init()
         self.higlightedLift = .init()
         
         super.init()
@@ -63,7 +63,7 @@ class ModulesLayer: CALayer {
         let layer = layer as! ModulesLayer
         
         self.events = layer.events
-        self.shapes = layer.shapes
+        self.eventShapes = layer.eventShapes
         self.highlightedEvent = layer.highlightedEvent
         self.rects = layer.rects
         self.higlightedLift = layer.higlightedLift
@@ -84,7 +84,7 @@ class ModulesLayer: CALayer {
             let layer = EventLayer(
                 event: event,
                 scale: scale)
-            shapes.append(layer)
+            eventShapes.append(layer)
             addSublayer(layer)
         }
     }
@@ -97,7 +97,7 @@ class ModulesLayer: CALayer {
     }
     
     func eventIndexInLine(coordinate: CGPoint) -> Int? {
-        for (i, shape) in shapes.enumerated() {
+        for (i, shape) in eventShapes.enumerated() {
             if shape
                 .frame.insetBy(dx: 0, dy: -vSpace/2)
                 .inLine(
@@ -122,10 +122,13 @@ class ModulesLayer: CALayer {
     override func layoutSublayers() {
         super.layoutSublayers()
         
-        for (i, shape) in shapes.enumerated() {
+        for (i, event) in eventShapes.enumerated() {
             let rect = rects[i]
             let frame = frame(for: i, rect: rect)
-            shape.frame = frame 
+            event.frame = frame
+            event.layoutText(
+                spaceToLeft: frame.minX,
+                spaceToRight: self.frame.width - frame.maxX)
             
             // TODO: Blockers should be detected by links
 //            let event = events[i]
@@ -137,7 +140,7 @@ class ModulesLayer: CALayer {
 //                    .copy(alpha: alpha(for: rect))
 //            }
             
-            shape.opacity = alpha(for: rect)
+            event.opacity = alpha(for: rect)
             
             if rect.event.taskName == highlightedEvent?.taskName {
                 higlightedLift.frame = CGRect(x: frame.minX,

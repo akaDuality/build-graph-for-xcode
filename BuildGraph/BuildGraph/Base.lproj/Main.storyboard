@@ -775,6 +775,7 @@
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="LFf-Ro-PN7" id="ui6-5g-a1j"/>
+                            <outlet property="eventsButton" destination="b83-4x-o6p" id="JNO-7J-5Jo"/>
                             <outlet property="nextButton" destination="pZ8-K6-ajH" id="eNh-Tx-xmF"/>
                             <outlet property="previousButton" destination="NRJ-yX-oB1" id="e3m-xG-uKC"/>
                             <outlet property="sendImageToolbarItem" destination="tOZ-ba-ewD" id="T9v-x7-2c3"/>

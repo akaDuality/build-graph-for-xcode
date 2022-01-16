@@ -41,6 +41,8 @@ class DetailView: NSView {
     var hudLayer: HUDLayer?
     
     @IBOutlet weak var scrollView: HUDScrollView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
     let contentView = FlippedView()
     
     func showEvents(events: [Event]) {

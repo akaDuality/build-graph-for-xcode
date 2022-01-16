@@ -13,6 +13,7 @@ class MainWindow: NSWindow {
     @IBOutlet weak var previousButton: NSToolbarItem!
     @IBOutlet weak var nextButton: NSToolbarItem!
     
+    @IBOutlet weak var eventsButton: NSToolbarItem!
     @IBOutlet weak var sendImageToolbarItem: NSToolbarItem!
     
     func setupToolbar(_ toolbar: NSToolbar) {
@@ -23,7 +24,24 @@ class MainWindow: NSWindow {
         toolbar.sizeMode = .regular
         toolbar.displayMode = .iconOnly
         
+        disableButtons()
+    }
+    
+    func disableButtons() {
         sendImageToolbarItem.isEnabled = false
+        eventsButton.isEnabled = false
+    }
+    
+    func enableButtons() {
+        sendImageToolbarItem.isEnabled = true
+        eventsButton.isEnabled = true
+    }
+    
+    func updateNavigationButtons(for project: ProjectReference) {
+        previousButton.isEnabled = project.canIncreaseFile()
+        nextButton.isEnabled = project.canDecreaseFile()
+        
+        subtitle = project.indexDescription
     }
 }
 

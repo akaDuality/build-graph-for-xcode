@@ -64,8 +64,8 @@ class DependeciesLayer: ModulesLayer {
             let showBlockersOnly = isBlockerDependency && highlightedEvent == nil
             if showBlockersOnly || isHighlightedModule {
                 connectModules(
-                    from: shapes[toIndex],
-                    to: shapes[fromIndex],
+                    from: eventShapes[toIndex],
+                    to: eventShapes[fromIndex],
                     isBlockerDependency: isBlockerDependency
                 )
             }

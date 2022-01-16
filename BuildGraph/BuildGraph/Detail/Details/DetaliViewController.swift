@@ -132,14 +132,6 @@ class DetailViewController: NSViewController {
         view().modulesLayer?.highlightEvent(with: text)
     }
     
-//    private func controllerForDetailsPopover(step: BuildStep) -> NSViewController {
-//        let popover = NSStoryboard(name: "Main", bundle: nil)
-//            .instantiateController(withIdentifier: "DetailPopover") as! DetailPopoverController
-//        _ = popover.view
-//        popover.text = step.description()
-//        return popover
-//    }
-    
     private func controllerForDetailsPopover(events: [Event], title: String) -> NSViewController {
         let popover = NSStoryboard(name: "Details", bundle: nil)
             .instantiateController(withIdentifier: "data") as! DetailViewController

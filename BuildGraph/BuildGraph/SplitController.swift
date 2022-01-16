@@ -45,21 +45,14 @@ extension SplitController: DetailsDelegate {
         // Remove current project in case if I wouldn't open selected.
         // In case of crash, next time user will select another one
         uiSettings.removeSelectedProject()
-        mainWindow().sendImageToolbarItem.isEnabled = false
         
-        updateNavigationButtons(for: project)
+        mainWindow().disableButtons()
+        mainWindow().updateNavigationButtons(for: project)
     }
     
     func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
         self.uiSettings.selectedProject = project.name // Save only after success parsing
-        mainWindow().sendImageToolbarItem.isEnabled = true
-    }
-    
-    func updateNavigationButtons(for project: ProjectReference) {
-        mainWindow().previousButton.isEnabled = project.canIncreaseFile()
-        mainWindow().nextButton.isEnabled = project.canDecreaseFile()
-        
-        mainWindow().subtitle = project.indexDescription
+        mainWindow().enableButtons()
     }
 }
 

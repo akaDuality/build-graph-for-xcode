@@ -68,7 +68,6 @@ class EventLayer: CALayer {
         super.layoutSublayers()
         
         layoutSubtasks()
-        layoutText()
     }
     
     private func layoutSubtasks() {
@@ -87,21 +86,25 @@ class EventLayer: CALayer {
         }
     }
     
-    private func layoutText() {
+    func layoutText(spaceToLeft: CGFloat, spaceToRight: CGFloat) {
         textLayer.string = event.description
         
-        if spaceToLeft < textWidth {
+        if spaceToLeft > textWidth {
+            textLayer.foregroundColor = Colors.textInvertedColor()
+            layoutLeft()
+        } else if textWidth < frame.width {
+            textLayer.foregroundColor = Colors.textOverModuleColor()
+            layoutInside()
+        } else {
             textLayer.foregroundColor = Colors.textInvertedColor()
             layoutRight()
-        } else {
-            layoutLeft()
         }
     }
     
     let textWidth: CGFloat = 200 // TODO: calculate on fly
     let textOffset: CGFloat = 4
     
-    func layoutRight() {
+    private func layoutRight() {
         textLayer.alignmentMode = .left
         textLayer.frame = CGRect(
             x: bounds.maxX + textOffset,
@@ -110,7 +113,7 @@ class EventLayer: CALayer {
             height: bounds.height)
     }
     
-    func layoutLeft() {
+    private func layoutLeft() {
         textLayer.alignmentMode = .right
         textLayer.frame = CGRect(
             x: bounds.minX - textOffset - textWidth,
@@ -119,14 +122,15 @@ class EventLayer: CALayer {
             height: bounds.height)
     }
     
-//    func layoutInside() {
-//        textLayer.alignmentMode = .right
-//        textLayer.frame = CGRect(
-//            x: bounds.maxX - textOffset - textWidth,
-//            y: bounds.minY + 1,
-//            width: textWidth,
-//            height: bounds.height)
-//    }
+    private func layoutInside() {
+        textLayer.alignmentMode = .right
+        textLayer.frame = CGRect(
+            x: bounds.minX + textOffset,
+            y: bounds.minY + 1,
+            width: textWidth,
+            height: bounds.height)
+        textLayer.alignmentMode = .left
+    }
     
     let fontSize: CGFloat = 10
 }
