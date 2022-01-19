@@ -703,7 +703,7 @@
                                 <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Save image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="XyR-33-egz">
-                                        <rect key="frame" x="12" y="14" width="16" height="16"/>
+                                        <rect key="frame" x="12" y="14.5" width="16" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="paperplane.fill" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="KpE-aU-vrh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -887,6 +887,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cachedModulesCheckbox" destination="vfY-Tw-Ngg" id="plJ-u4-qO3"/>
                         <outlet property="compilationStackView" destination="JVm-vu-Bbo" id="Jax-gg-dfn"/>
                         <outlet property="otherStackView" destination="7JE-3f-E71" id="Dt3-2G-Bw4"/>
                     </connections>

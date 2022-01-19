@@ -17,6 +17,8 @@ class SettingsPopoverViewController: NSViewController {
     @IBOutlet weak var compilationStackView: NSStackView!
     @IBOutlet weak var otherStackView: NSStackView!
     
+    @IBOutlet weak var cachedModulesCheckbox: NSButton!
+    
     var settings: FilterSettings!
     weak var delegate: FilterSettingsDelegate?
     
@@ -24,6 +26,8 @@ class SettingsPopoverViewController: NSViewController {
         super.viewDidLoad()
         
         // TODO: Add settings restoration
+        
+        cachedModulesCheckbox.state = settings.showCached ? .on: .off
         
         for stepType in DetailStepType.allCases {
             let button = checkBox(for: stepType)
