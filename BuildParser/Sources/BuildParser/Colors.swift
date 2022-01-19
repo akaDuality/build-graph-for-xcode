@@ -39,7 +39,7 @@ struct Colors {
         static var legend: [ColorDescription] {
             [
                 ("Subtasks", subtask()),
-                ("No subtasks", noSubtasks()),
+                ("No parent tasks", noSubtasks()),
                 ("No visible subtasks", background()),
                 ("Cached", cached()),
             ]
