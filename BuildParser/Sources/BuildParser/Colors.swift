@@ -31,7 +31,7 @@ struct Colors {
         static var noSubtasks: () -> CGColor = { NSColor.systemBrown.effectiveCGColor }
         static var cached: () -> CGColor = { NSColor.systemGreen.effectiveCGColor }
         static var subtask: () -> CGColor = { NSColor.systemBlue.effectiveCGColor }
-        static var background: () -> CGColor = { NSColor.systemGray.effectiveCGColor }
+        static var background: () -> CGColor = { NSColor.systemGray.effectiveCGColor.copy(alpha: 0.25)! }
         
         static var legendBackground: () -> CGColor = { NSColor.systemGray.effectiveCGColor }
         
@@ -52,10 +52,10 @@ typealias ColorDescription = (desc: String, color: CGColor)
 extension Event {
     var backgroundColor: CGColor {
         if parents.count == 0 {
-            return Colors.Events.noSubtasks().copy(alpha: 0.25)!
+            return Colors.Events.noSubtasks()
         }
         
-        return Colors.Events.background().copy(alpha: 0.25)!
+        return Colors.Events.background()
     }
     
     var subtaskColor: CGColor {
