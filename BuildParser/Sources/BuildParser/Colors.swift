@@ -10,7 +10,7 @@ import AppKit
 
 struct Colors {
     static var textColor: () -> CGColor = { NSColor.labelColor.effectiveCGColor }
-    static var textOverModuleColor: () -> CGColor = { NSColor.black.effectiveCGColor }
+    static var textOverModuleColor: () -> CGColor = { NSColor.labelColor.effectiveCGColor }
     static var textInvertedColor: () -> CGColor = { NSColor.labelColor.effectiveCGColor }
     static var backColor: () -> CGColor = { NSColor.clear.effectiveCGColor }
     
@@ -28,28 +28,42 @@ struct Colors {
     }
     
     struct Events {
-        static var nothingToImprove: () -> CGColor = { NSColor.systemPurple.effectiveCGColor }
-        static var cacheCorol: () -> CGColor = { NSColor.systemGreen.effectiveCGColor }
-        static var subtaskColor: () -> CGColor = { NSColor.systemBlue.effectiveCGColor }
+        static var noSubtasks: () -> CGColor = { NSColor.systemBrown.effectiveCGColor }
+        static var cached: () -> CGColor = { NSColor.systemGreen.effectiveCGColor }
+        static var subtask: () -> CGColor = { NSColor.systemBlue.effectiveCGColor }
         static var background: () -> CGColor = { NSColor.systemGray.effectiveCGColor }
+        
+        static var legendBackground: () -> CGColor = { NSColor.systemGray.effectiveCGColor }
+        
+        
+        static var legend: [ColorDescription] {
+            [
+                ("Subtasks", subtask()),
+                ("No subtasks", noSubtasks()),
+                ("No visible subtasks", background()),
+                ("Cached", cached()),
+            ]
+        }
     }
 }
+
+typealias ColorDescription = (desc: String, color: CGColor)
 
 extension Event {
     var backgroundColor: CGColor {
         if parents.count == 0 {
-            return Colors.Events.nothingToImprove()
+            return Colors.Events.noSubtasks().copy(alpha: 0.25)!
         }
         
-        return Colors.Events.background()
+        return Colors.Events.background().copy(alpha: 0.25)!
     }
     
     var subtaskColor: CGColor {
         if fetchedFromCache {
-            return Colors.Events.cacheCorol()
+            return Colors.Events.cached()
         }
         
-        return Colors.Events.subtaskColor ()
+        return Colors.Events.subtask ()
     }
 }
 

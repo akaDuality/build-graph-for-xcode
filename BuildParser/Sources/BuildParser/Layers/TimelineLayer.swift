@@ -52,6 +52,7 @@ class TimelineLayer: CALayer {
     }
     
     private func setup(scale: CGFloat) {
+        self.contentsScale = scale
         guard eventsDuration.seconds > 0 else {
             return // Sometimes duration is negative for cached modules
             // TODO: Rework to optional constructor
