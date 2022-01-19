@@ -18,7 +18,7 @@ class DependeciesLayer: ModulesLayer {
     
     lazy var criticalDependenciesLayer: CAShapeLayer = {
         let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = Colors.criticalDependencyColor()
+        bezierLayer.strokeColor = Colors.Dependency.critical()
         bezierLayer.fillColor = Colors.clear()
         bezierLayer.lineWidth = 1
         bezierLayer.contentsScale = contentsScale
@@ -29,7 +29,7 @@ class DependeciesLayer: ModulesLayer {
     
     lazy var regularDependenciesLayer: CAShapeLayer = {
         let bezierLayer = CAShapeLayer()
-        bezierLayer.strokeColor = Colors.regularDependencyColor()
+        bezierLayer.strokeColor = Colors.Dependency.regular()
         bezierLayer.fillColor = Colors.clear()
         bezierLayer.lineWidth = 1
         bezierLayer.contentsScale = contentsScale
