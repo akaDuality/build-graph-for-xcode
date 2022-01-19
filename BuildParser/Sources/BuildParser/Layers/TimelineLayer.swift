@@ -57,6 +57,21 @@ class TimelineLayer: CALayer {
             // TODO: Rework to optional constructor
         }
         
+        addTicks()
+        
+        currentTime.foregroundColor = Colors.timeColor()
+        currentTime.fontSize = 20
+        
+        addSublayer(currentTime)
+    }
+    
+    private var drawTicks: Bool {
+        eventsDuration.seconds < 3600 // 1 hour
+    }
+    
+    private func addTicks() {
+        guard drawTicks else { return }
+        
         for _ in 0..<eventsDuration.seconds {
             let tickLayer = CALayer()
             tickLayer.backgroundColor = Colors.timeColor()
@@ -74,11 +89,6 @@ class TimelineLayer: CALayer {
             
             minuteTitles.append(titleLayer)
         }
-        
-        currentTime.foregroundColor = Colors.timeColor()
-        currentTime.fontSize = 20
-        
-        addSublayer(currentTime)
     }
     
     public override func layoutSublayers() {
@@ -100,6 +110,8 @@ class TimelineLayer: CALayer {
     private let secondHeight: CGFloat = 10
     
     private func layoutSeconds() {
+        guard drawTicks else { return }
+        
         let secondWidth: CGFloat = frame.width / CGFloat(eventsDuration.seconds)
         let minutesWidth: CGFloat = frame.width / CGFloat(eventsDuration.minutes)
         
