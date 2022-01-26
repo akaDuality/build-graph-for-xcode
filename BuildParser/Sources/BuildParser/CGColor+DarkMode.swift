@@ -28,7 +28,7 @@ extension NSColor {
     /// If you need per-view accurate appearance, prefer this instead:
     ///
     ///     let cgColor = aView.performWithEffectiveAppearanceAsDrawingAppearance { aColor.cgColor }
-    var effectiveCGColor: CGColor {
+    public var effectiveCGColor: CGColor {
 #if DEBUG
         let isTesting = NSClassFromString("XCTest")  != nil
         if isTesting {

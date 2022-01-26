@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit
+import BuildParser
 
 class ImageSaveService {
     func saveImage(name: String, view: NSView) {
@@ -17,14 +18,26 @@ class ImageSaveService {
         savePanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
         savePanel.begin { (result) in
             if result == .OK {
-                self.save(url: savePanel.url!,
-                          view: view)
+                self.setBackColorAndSave(
+                    url: savePanel.url!,
+                    view: view)
             }
         }
     }
     
     // TODO: Add background color
-    func save(url: URL, view: NSView) {
+    private func setBackColorAndSave(url: URL, view: NSView) {
+        let previousColor = view.layer?.backgroundColor
+        defer {
+            view.layer?.backgroundColor = previousColor
+        }
+        
+        view.layer?.backgroundColor = NSColor.textBackgroundColor.effectiveCGColor
+        
+        writeToFile(url: url, view: view)
+    }
+    
+    private func writeToFile(url: URL, view: NSView) {
         let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds)!
         view.cacheDisplay(in: view.bounds, to: rep)
         
