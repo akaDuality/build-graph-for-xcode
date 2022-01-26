@@ -33,14 +33,17 @@ class DetailViewController: NSViewController {
     }
     
     private var embeddInWindow: Bool = true
+    private var project: ProjectReference?
     public func show(
         events: [Event],
         deps: [Dependency],
         title: String,
-        embeddInWindow: Bool
+        embeddInWindow: Bool,
+        project: ProjectReference?
     ) {
         self.title = title
         self.embeddInWindow = embeddInWindow
+        self.project = project
         view().showEvents(events: events)
     
         updateState()
@@ -84,7 +87,6 @@ class DetailViewController: NSViewController {
     
     // MARK: - Content
     let uiSettings = UISettings()
-    let imageSaveService = ImageSaveService()
     
     func view() -> DetailView {
         view as! DetailView
@@ -96,8 +98,9 @@ class DetailViewController: NSViewController {
     }
     
     func shareImage() {
-        imageSaveService.saveImage(
-            name: "\(title ?? Date().description).png",
+        ImageSaveService().saveImage(
+            project: project,
+            title: title,
             view: view().contentView)
     }
    
@@ -133,7 +136,7 @@ class DetailViewController: NSViewController {
     private var isPopoverPresented: Bool {
         presentedViewControllers?.contains(where: { controller in
             controller is DetailViewController
-        }) ?? false 
+        }) ?? false
     }
     
     func search(text: String?) {
@@ -148,7 +151,8 @@ class DetailViewController: NSViewController {
         popover.show(events: events,
                      deps: [],
                      title: title,
-                     embeddInWindow: false)
+                     embeddInWindow: false,
+                     project: nil)
         return popover
     }
     

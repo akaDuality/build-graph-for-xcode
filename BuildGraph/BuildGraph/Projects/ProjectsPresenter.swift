@@ -27,6 +27,7 @@ class ProjectsPresenter {
     weak var ui: ProjectsUI?
     
     private let uiSettings = UISettings()
+    private let projectDescriptionService = ProjectDescriptionService()
     
     @objc func reloadProjetcs() {
         let pathFinder = ProjectsFinder()
@@ -64,14 +65,24 @@ class ProjectsPresenter {
     }
     
     func description(for url: URL) -> String {
-        guard let creationDate = try? url.resourceValues(forKeys: [.creationDateKey]).creationDate
-        else { return url.lastPathComponent }
-        
-        return dateFormatter.string(from: creationDate)
+        projectDescriptionService.dateDescription(for: url)
     }
     
     func tooltip(for url: URL) -> String {
         url.lastPathComponent.components(separatedBy: ".").first ?? url.lastPathComponent
+    }
+}
+
+class ProjectDescriptionService {
+    func description(for project: ProjectReference) -> String {
+        "\(project.name), \(dateDescription(for: project.currentActivityLog))"
+    }
+        
+    func dateDescription(for url: URL) -> String {
+        guard let creationDate = try? url.resourceValues(forKeys: [.creationDateKey]).creationDate
+        else { return url.lastPathComponent }
+        
+        return dateFormatter.string(from: creationDate)
     }
     
     lazy var dateFormatter: DateFormatter = {

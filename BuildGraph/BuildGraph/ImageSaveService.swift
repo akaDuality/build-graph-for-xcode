@@ -10,11 +10,11 @@ import AppKit
 import BuildParser
 
 class ImageSaveService {
-    func saveImage(name: String, view: NSView) {
+    func saveImage(project: ProjectReference?, title: String?, view: NSView) {
         let savePanel = NSSavePanel()
         savePanel.canCreateDirectories = true
         savePanel.showsTagField = false
-        savePanel.nameFieldStringValue = name
+        savePanel.nameFieldStringValue = fileName(for: project, title: title)
         savePanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
         savePanel.begin { (result) in
             if result == .OK {
@@ -23,6 +23,14 @@ class ImageSaveService {
                     view: view)
             }
         }
+    }
+    
+    private func fileName(for project: ProjectReference?, title: String?) -> String {
+        guard let project = project else {
+            return "\(title ?? Date().description).png"
+        }
+        
+        return ProjectDescriptionService().description(for: project)
     }
     
     // TODO: Add background color

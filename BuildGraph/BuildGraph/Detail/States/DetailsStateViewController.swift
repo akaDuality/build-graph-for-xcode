@@ -13,7 +13,7 @@ import GraphParser
 enum DetailsState: StateProtocol {
     case empty
     case loading
-    case data(_ events: [Event], _ deps: [Dependency], _ title: String)
+    case data(_ events: [Event], _ deps: [Dependency], _ title: String, _ project: ProjectReference)
     case error(_ message: String, _ project: ProjectReference)
     
     static var `default`: DetailsState = .empty
@@ -39,9 +39,13 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 return storyboard.instantiateController(withIdentifier: "empty") as! ViewController
             case .loading:
                 return storyboard.instantiateController(withIdentifier: "loading") as! ViewController
-            case .data(let events, let deps, let title):
+            case .data(let events, let deps, let title, let project):
                 let dataController = storyboard.instantiateController(withIdentifier: "data") as! DetailViewController
-                dataController.show(events: events, deps: deps, title: title, embeddInWindow: true)
+                dataController.show(events: events,
+                                    deps: deps,
+                                    title: title,
+                                    embeddInWindow: true,
+                                    project: project)
                 return dataController
             case .error(let message, let project):
                 // TODO: Pass message to controller
@@ -72,9 +76,9 @@ class DetailsStateViewController: StateViewController<DetailsState> {
             loadAndInsert(
                 project: project,
                 filter: filter,
-                didLoad: { events, deps, title in
+                didLoad: { events, deps, title, project in
                     DispatchQueue.main.async {
-                        self.state = .data(events, deps, title)
+                        self.state = .data(events, deps, title, project)
                         
                         derivedData?.stopAccessingSecurityScopedResource()
                         
@@ -94,7 +98,10 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     private func loadAndInsert(
         project: ProjectReference,
         filter: FilterSettings,
-        didLoad: @escaping (_ events: [Event], _ deps: [Dependency], _ title: String) -> Void,
+        didLoad: @escaping (_ events: [Event],
+                            _ deps: [Dependency],
+                            _ title: String,
+                            _ project: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
         print("will read \(project.activityLogURL), depsURL \(String(describing: project.depsURL))")
@@ -113,7 +120,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
             let dependencies = connectWithDependencies(events: events,
                                                        depsURL: project.depsURL)
             
-            didLoad(events, dependencies, self.parser.title)
+            didLoad(events, dependencies, self.parser.title, project)
         } catch let error {
             didFail(error.localizedDescription)
         }
@@ -152,7 +159,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                         return
                     }
                     
-                    self.state = .data(events, deps, title)
+                    self.state = .data(events, deps, title, project)
                     
                     delegate?.didLoadProject(
                         project: project,
