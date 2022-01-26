@@ -107,6 +107,8 @@ class DetailViewController: NSViewController {
     }
                                   
     @objc func didClick(_ recognizer: NSClickGestureRecognizer) {
+        guard !isPopoverPresented else { return } // Click will dismith previous one
+        
         let coordinate = recognizer.location(in: view().contentView)
         
         guard let event = view().modulesLayer?.event(at: coordinate)
@@ -126,6 +128,12 @@ class DetailViewController: NSViewController {
                 of: view().contentView,
                 preferredEdge: .maxX,
                 behavior: .transient)
+    }
+    
+    private var isPopoverPresented: Bool {
+        presentedViewControllers?.contains(where: { controller in
+            controller is DetailViewController
+        }) ?? false 
     }
     
     func search(text: String?) {
