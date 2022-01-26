@@ -106,8 +106,8 @@ extension WindowController: NSToolbarDelegate {
             refresh.image = NSImage(systemSymbolName: "arrow.clockwise",
                                     accessibilityDescription: NSLocalizedString("Refresh projects", comment: "Toolbar button"))
             refresh.label = NSLocalizedString("Refresh", comment: "Toolbar button")
-            refresh.target = splitViewController().projects
-            refresh.action = #selector(splitViewController().projects.presenter.reloadProjetcs)
+            refresh.target = self
+            refresh.action = #selector(self.refresh)
             refresh.isEnabled = true
             return refresh
         default:
