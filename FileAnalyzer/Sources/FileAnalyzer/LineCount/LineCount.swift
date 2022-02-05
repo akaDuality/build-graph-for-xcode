@@ -118,6 +118,7 @@ extension Project {
                             "DPushNotifications",
                             "DUIKit",
                             "Geolocation",
+                            "FeatureToggles",
                             "ServicePush"
                           ]),
             Project.Layer(name: "domain",
@@ -152,6 +153,7 @@ extension Project {
                             "MapAddressSelection",
                             "Menu",
                             "MenuSearch",
+                            "Missions",
                             "OrderHistory",
                             "OrderHistoryDomain",
                             "OrderTracking",

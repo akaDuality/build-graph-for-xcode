@@ -32,12 +32,13 @@
             let srcRoot: URL = projectsFolder.drinkit
             
             try LineCount(folder: srcRoot).read()
-            try LineCount(folder: srcRoot.appendingPathComponent("Core/")).read()
             
-            try LineCount(folder: srcRoot.appendingPathComponent("Sources/")).read()
-            try LineCount(folder: srcRoot.appendingPathComponent("Sources/Screens")).read()
-            
-            try LineCount(folder: srcRoot.appendingPathComponent("Pods/")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Project/Internal")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Project/Private")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Project/Public")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Project/Sources")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Project/UnitTests")).read()
+            try LineCount(folder: srcRoot.appendingPathComponent("Project/Sources/Screens")).read()
         }
     }
     
