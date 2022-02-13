@@ -42,6 +42,8 @@ class DetailView: NSView {
     
     @IBOutlet weak var scrollView: HUDScrollView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var zoomInButton: NSButton!
+    @IBOutlet weak var zoomOutButton: NSButton!
     
     let contentView = FlippedView()
     

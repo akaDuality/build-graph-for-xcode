@@ -12,6 +12,8 @@ import XCLogParser
 
 class DetailViewController: NSViewController {
     
+    var zoomController: ZoomController!
+    
     override func viewDidAppear() {
         super.viewDidAppear()
         
@@ -22,8 +24,16 @@ class DetailViewController: NSViewController {
         }
         
         addMouseTracking()
-        view.addGestureRecognizer(NSClickGestureRecognizer(target: self, action: #selector(didClick(_:))))
+        let clickRecognizer = NSClickGestureRecognizer(
+            target: self,
+            action: #selector(didClick(_:))
+        )
+        view().contentView.addGestureRecognizer(clickRecognizer)
         updateState()
+        
+        zoomController = ZoomController(
+            scrollView: view().scrollView
+        )
     }
     
     override func viewDidLayout() {
@@ -196,5 +206,29 @@ class DetailViewController: NSViewController {
         view().modulesLayer?.clearHighlightedEvent()
         view().modulesLayer?.clearConcurrency()
         view().hudLayer?.clearConcurrency()
+    }
+    
+    // MARK: - Zoom
+
+    @IBAction func zoomIn(_ sender: Any) {
+        zoomController.zoomIn()
+    }
+    
+    @IBAction func zoomOut(_ sender: Any) {
+        zoomController.zoomOut()
+    }
+}
+
+extension CALayer {
+    func updateScale(to scale: CGFloat) {
+        contentsScale = scale
+        
+        updateSublayers(to: scale)
+    }
+    
+    private func updateSublayers(to scale: CGFloat) {
+        for layer in sublayers ?? [] {
+            layer.updateScale(to: scale)
+        }
     }
 }

@@ -36,17 +36,60 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ">
+                                <rect key="frame" x="392" y="182" width="72" height="20"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EQ9-O4-CcC">
+                                        <rect key="frame" x="-7" y="-7" width="46" height="32"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="minus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t6J-bq-t5z">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent">-</string>
+                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                        </buttonCell>
+                                        <accessibility description="Zoom out"/>
+                                        <connections>
+                                            <action selector="zoomOut:" target="mdS-38-uT0" id="raZ-zx-gld"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="irs-zY-n9e">
+                                        <rect key="frame" x="33" y="-7" width="46" height="32"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="plus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wjy-SY-bRc">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent">=</string>
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                        </buttonCell>
+                                        <accessibility description="Zoom in"/>
+                                        <connections>
+                                            <action selector="zoomIn:" target="mdS-38-uT0" id="6qQ-q9-mrN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zGP-rt-v5D" secondAttribute="trailing" id="8Zq-A4-rVc"/>
                             <constraint firstAttribute="bottom" secondItem="zGP-rt-v5D" secondAttribute="bottom" id="Bpv-wq-o4r"/>
+                            <constraint firstItem="CvU-A5-cDZ" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="68" id="VEy-cY-qae"/>
                             <constraint firstItem="zGP-rt-v5D" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="52" id="j8j-lI-w5M"/>
                             <constraint firstItem="zGP-rt-v5D" firstAttribute="leading" secondItem="Iu8-Pp-pFO" secondAttribute="leading" id="nG8-y7-lIL"/>
+                            <constraint firstAttribute="trailing" secondItem="CvU-A5-cDZ" secondAttribute="trailing" constant="16" id="wWv-Om-qkf"/>
                         </constraints>
                         <connections>
                             <outlet property="loadingIndicator" destination="M52-Qa-0Ks" id="lHP-VV-m0c"/>
                             <outlet property="scrollView" destination="zGP-rt-v5D" id="2tI-Ux-qEb"/>
                             <outlet property="topConstraint" destination="j8j-lI-w5M" id="avM-xG-qIp"/>
+                            <outlet property="zoomInButton" destination="irs-zY-n9e" id="SWh-7r-Zgk"/>
+                            <outlet property="zoomOutButton" destination="EQ9-O4-CcC" id="V8b-Xd-Twl"/>
                         </connections>
                     </view>
                     <connections>
@@ -246,6 +289,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="paperplane.fill" catalog="system" width="16" height="16"/>
+        <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
     </resources>
 </document>
