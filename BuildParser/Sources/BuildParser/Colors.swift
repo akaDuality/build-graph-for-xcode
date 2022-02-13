@@ -28,7 +28,7 @@ struct Colors {
     }
     
     struct Events {
-        static var noSubtasks: () -> CGColor = { NSColor.systemBrown.effectiveCGColor }
+        static var step: () -> CGColor = { NSColor.systemBrown.effectiveCGColor }
         static var cached: () -> CGColor = { NSColor.systemGreen.effectiveCGColor }
         static var subtask: () -> CGColor = { NSColor.systemBlue.effectiveCGColor }
         static var background: () -> CGColor = { NSColor.systemGray.effectiveCGColor.copy(alpha: 0.25)! }
@@ -38,10 +38,10 @@ struct Colors {
         
         static var legend: [ColorDescription] {
             [
-                ("Subtasks", subtask()),
-                ("No parent tasks", noSubtasks()),
-                ("No visible subtasks", background()),
-                ("Cached", cached()),
+                (NSLocalizedString("Has subtasks", comment: ""),    subtask()),
+                (NSLocalizedString("Task", comment: ""),            step()),
+                (NSLocalizedString("Waiting", comment: ""),         background()),
+                (NSLocalizedString("Cached", comment: ""),          cached()),
             ]
         }
     }
@@ -51,10 +51,11 @@ typealias ColorDescription = (desc: String, color: CGColor)
 
 extension Event {
     var backgroundColor: CGColor {
-        if parents.count == 0 {
-            return Colors.Events.noSubtasks()
+        if steps.count == 0 {
+            return Colors.Events.step()
         }
         
+        // waiting
         return Colors.Events.background()
     }
     
