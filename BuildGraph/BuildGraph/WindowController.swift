@@ -43,6 +43,15 @@ class MainWindow: NSWindow {
         
         subtitle = project.indexDescription
     }
+    
+    func resizeWindowHeight(to newHeight: CGFloat) {
+        let frame = CGRect(x: frame.minX,
+                           y: max(0, frame.midY - newHeight/2),
+                           width: frame.width,
+                           height: newHeight)
+        
+        setFrame(frame, display: true, animate: true)
+    }
 }
 
 class WindowController: NSWindowController {

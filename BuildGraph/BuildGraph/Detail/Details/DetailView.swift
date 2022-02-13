@@ -154,20 +154,17 @@ class DetailView: NSView {
                                    height: size.height - 52)
     }
     
-    func resizeWindowHeight() {
-        guard let window = window else { return }
+    func resizeWindowHeightIfPossible() {
+        let isFullscreen = NSApplication.shared.presentationOptions.contains(.fullScreen)
+        guard !isFullscreen else { return }
+        guard let window = window as? MainWindow else { return }
         
         let contentSize = contentSize(appLayer: modulesLayer!)
         let newHeight = contentSize.height + safeAreaInsets.top
-        let frame = CGRect(x: window.frame.minX,
-                           y: max(0, window.frame.midY - newHeight/2),
-                           width: window.frame.width,
-                           height: newHeight)
         
-        window.setFrame(frame, display: true, animate: true)
+        window.resizeWindowHeight(to: newHeight)
     }
 }
-
 
 class FlippedView: NSView {
     override var isFlipped: Bool {

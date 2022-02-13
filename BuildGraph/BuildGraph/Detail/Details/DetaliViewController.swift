@@ -17,7 +17,7 @@ class DetailViewController: NSViewController {
         
         if embeddInWindow {
 //            view.window?.toolbar = toolbar
-            view().resizeWindowHeight()
+            view().resizeWindowHeightIfPossible()
             view.window?.title = title!
         }
         
