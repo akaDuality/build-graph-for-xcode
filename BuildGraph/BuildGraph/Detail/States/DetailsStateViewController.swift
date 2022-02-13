@@ -27,6 +27,7 @@ protocol DetailsDelegate: AnyObject {
 class DetailsStateViewController: StateViewController<DetailsState> {
     
     var delegate: DetailsDelegate?
+    let presenter = DetailsStatePresenter()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -52,6 +53,8 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 let retryViewController = storyboard.instantiateController(withIdentifier: "retry") as! RetryViewController
                 retryViewController.showNonCompilationEvents = { [unowned self] in
                     // TODO: Update settings for one project
+                    FilterSettings.shared.enableAll()
+                    
                     self.selectProject(project: project, filter: .shared)
                 }
                 return retryViewController
@@ -60,9 +63,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     }
     
     var currentProject: ProjectReference?
-    let parser = RealBuildLogParser()
     
-    // TODO: compilationOnly should be customizable parameter. Best: allows to choose file types
     func selectProject(project: ProjectReference, filter: FilterSettings) {
         self.currentProject = project
         
@@ -73,7 +74,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         delegate?.willLoadProject(project: project)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            loadAndInsert(
+            presenter.loadAndInsert(
                 project: project,
                 filter: filter,
                 didLoad: { events, deps, title, project in
@@ -95,53 +96,6 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         }
     }
     
-    private func loadAndInsert(
-        project: ProjectReference,
-        filter: FilterSettings,
-        didLoad: @escaping (_ events: [Event],
-                            _ deps: [Dependency],
-                            _ title: String,
-                            _ project: ProjectReference) -> Void,
-        didFail: @escaping (_ error: String) -> Void
-    ) {
-        print("will read \(project.activityLogURL), depsURL \(String(describing: project.depsURL))")
-        
-        do {
-            let events = try parser.parse(
-                logURL: project.currentActivityLog,
-                filter: filter)
-            
-            guard events.count > 0 else {
-                // TODO: depends on compilationOnly flag
-                didFail(NSLocalizedString("No compilation data found", comment: ""))
-                return
-            }
-            
-            let dependencies = connectWithDependencies(events: events,
-                                                       depsURL: project.depsURL)
-            
-            didLoad(events, dependencies, self.parser.title, project)
-        } catch let error {
-            didFail(error.localizedDescription)
-        }
-    }
-    
-    private func connectWithDependencies(events: [Event], depsURL: URL?) -> [Dependency] {
-        var dependencies = [Dependency]()
-        
-        if let depsURL = depsURL {
-            if let depsContent = try? String(contentsOf: depsURL) {
-                dependencies = DependencyParser().parseFile(depsContent)
-            } else {
-                // TODO: Log
-            }
-        }
-        
-        events.connect(by: dependencies)
-        
-        return dependencies
-    }
-    
     // MARK: - Update filter
     func updateFilterForCurrentProject(_ filter: FilterSettings) {
         guard let project = currentProject else {
@@ -152,7 +106,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         delegate?.willLoadProject(project: project)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            updateWithFilter(project: project, filter: filter) { events, deps, title in
+            presenter.updateWithFilter(project: project, filter: filter) { events, deps, title in
                 DispatchQueue.main.async {
                     guard events.count > 0 else {
                         self.state = .error("No data for current filter", project)
@@ -167,17 +121,5 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 }
             }
         }
-    }
-    
-    private func updateWithFilter(
-        project: ProjectReference,
-        filter: FilterSettings,
-        didLoad: @escaping (_ events: [Event], _ deps: [Dependency], _ title: String) -> Void
-    ) {
-        let events = parser.update(with: filter)
-        
-        let dependencies = connectWithDependencies(events: events, depsURL: project.depsURL)
-        
-        didLoad(events, dependencies, parser.title)
     }
 }

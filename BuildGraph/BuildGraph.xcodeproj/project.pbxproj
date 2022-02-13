@@ -14,6 +14,7 @@
 		1E16961B27247AF1006D93CE /* targetGraph.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E16961A27247918006D93CE /* targetGraph.txt */; };
 		1E2D7A5527288521009ED389 /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2D7A5427288521009ED389 /* UISettings.swift */; };
 		1E538BD727B9550100136F82 /* ZoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E538BD627B9550100136F82 /* ZoomController.swift */; };
+		1E538BD927B956A400136F82 /* DetailsStatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E538BD827B956A400136F82 /* DetailsStatePresenter.swift */; };
 		1E61EC6F2794543500208FDB /* SettingsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */; };
 		1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7106E7271F1C1600C292AA /* Tuist2.json */; };
 		1E71FE87271EC10000C292AA /* Tuist.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E71FE86271EC10000C292AA /* Tuist.json */; };
@@ -68,6 +69,7 @@
 		1E16961A27247918006D93CE /* targetGraph.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = targetGraph.txt; sourceTree = "<group>"; };
 		1E2D7A5427288521009ED389 /* UISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
 		1E538BD627B9550100136F82 /* ZoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomController.swift; sourceTree = "<group>"; };
+		1E538BD827B956A400136F82 /* DetailsStatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsStatePresenter.swift; sourceTree = "<group>"; };
 		1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopoverViewController.swift; sourceTree = "<group>"; };
 		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				1ED7AD3627831D0600BA74F9 /* DetailsStateViewController.swift */,
+				1E538BD827B956A400136F82 /* DetailsStatePresenter.swift */,
 				1ED7AD342783198700BA74F9 /* StateViewController.swift */,
 				1ED7AD3C2783295800BA74F9 /* LoadingViewController.swift */,
 				1ED7AD3E27832F6400BA74F9 /* RetryViewController.swift */,
@@ -417,6 +420,7 @@
 				1EF535BC279342CE00035D70 /* ProjectsOutlineViewController.swift in Sources */,
 				1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */,
 				1EAD77FD2781E9E500C65AC5 /* DetailView.swift in Sources */,
+				1E538BD927B956A400136F82 /* DetailsStatePresenter.swift in Sources */,
 				1EF535BE2793463500035D70 /* ProjectsPresenter.swift in Sources */,
 				1ED7AD352783198700BA74F9 /* StateViewController.swift in Sources */,
 				1ED7AD3F27832F6400BA74F9 /* RetryViewController.swift in Sources */,
