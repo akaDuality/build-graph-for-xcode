@@ -924,7 +924,7 @@
             <objects>
                 <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem id="DCf-W7-ceh"/>
+                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="DCf-W7-ceh"/>
                         <splitViewItem id="z34-W5-asi"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="2qE-Y4-Bj2">
