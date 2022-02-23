@@ -11,12 +11,13 @@ import BuildParser
 import GraphParser
 
 enum DetailsState: StateProtocol {
-    case empty
+    case blank
+    case noProject
     case loading
     case data(_ events: [Event], _ deps: [Dependency], _ title: String, _ project: ProjectReference)
     case error(_ message: String, _ project: ProjectReference)
     
-    static var `default`: Self = .empty
+    static var `default`: Self = .blank
 }
 
 protocol DetailsDelegate: AnyObject {
@@ -36,8 +37,10 @@ class DetailsStateViewController: StateViewController<DetailsState> {
             let storyboard = NSStoryboard(name: "Details", bundle: nil)
             
             switch state {
-            case .empty:
-                return storyboard.instantiateController(withIdentifier: "empty") as! ViewController
+            case .blank:
+                return storyboard.instantiateController(withIdentifier: "blank") as! ViewController
+            case .noProject:
+                return storyboard.instantiateController(withIdentifier: "noProject") as! ViewController
             case .loading:
                 return storyboard.instantiateController(withIdentifier: "loading") as! ViewController
             case .data(let events, let deps, let title, let project):
@@ -52,7 +55,7 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 // TODO: Pass message to controller
                 let retryViewController = storyboard.instantiateController(withIdentifier: "retry") as! RetryViewController
                 retryViewController.showNonCompilationEvents = { [unowned self] in
-                    // TODO: Update settings for one project
+                    // TODO: Update settings just for one project
                     FilterSettings.shared.enableAll()
                     
                     self.selectProject(project: project, filter: .shared)
@@ -64,8 +67,13 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     
     var currentProject: ProjectReference?
     
-    func selectProject(project: ProjectReference, filter: FilterSettings) {
+    func selectProject(project: ProjectReference?, filter: FilterSettings) {
         self.currentProject = project
+        
+        guard let project = project else {
+            self.state = .noProject
+            return
+        }
         
         let derivedData = FileAccess().accessedDerivedDataURL()
         _ = derivedData?.startAccessingSecurityScopedResource()

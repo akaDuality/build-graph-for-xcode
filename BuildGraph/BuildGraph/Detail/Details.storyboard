@@ -166,9 +166,22 @@
             <point key="canvasLocation" x="149" y="1866"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="3tU-Gl-Abu">
+            <objects>
+                <viewController storyboardIdentifier="blank" id="gvL-16-e6A" sceneMemberID="viewController">
+                    <view key="view" id="iDK-Tm-Qwp">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="e1J-BW-1LT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-841" y="1866"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="KU1-Nd-bet">
             <objects>
-                <viewController storyboardIdentifier="empty" id="rZM-ID-TvK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="noProject" id="rZM-ID-TvK" sceneMemberID="viewController">
                     <view key="view" id="ImN-pI-RX6">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

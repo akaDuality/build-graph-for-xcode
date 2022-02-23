@@ -53,6 +53,7 @@ class DetailView: NSView {
         modulesLayer = AppLayer(
             events: events,
             scale: scale)
+        modulesLayer?.masksToBounds = false
         
         hudLayer = HUDLayer(events: events, scale: scale)
         needsLayout = true

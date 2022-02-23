@@ -9,7 +9,7 @@ import Foundation
 import BuildParser
 
 protocol ProjectsSelectionDelegate: AnyObject {
-    func didSelect(project: ProjectReference)
+    func didSelect(project: ProjectReference?)
 }
 
 protocol ProjectsUI: AnyObject {
@@ -40,9 +40,7 @@ class ProjectsPresenter {
         let selectedProject = selectedProject(in: projects)
         ui?.state = .projects(selectedProject)
         
-        if let selectedProject = selectedProject {
-            delegate?.didSelect(project: selectedProject)
-        }
+        delegate?.didSelect(project: selectedProject)
     }
     
     func reloadProjetcs(ui: ProjectsUI) {
