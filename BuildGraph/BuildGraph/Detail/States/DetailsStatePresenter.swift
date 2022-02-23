@@ -18,6 +18,8 @@ class DetailsStatePresenter {
     
     let parser = RealBuildLogParser()
     
+    private var cachedDependencies: [Dependency]?
+    
     func loadAndInsert(
         project: ProjectReference,
         filter: FilterSettings,
@@ -42,6 +44,7 @@ class DetailsStatePresenter {
             
             let dependencies = connectWithDependencies(events: events,
                                                        depsURL: project.depsURL)
+            cachedDependencies = dependencies
             
             didLoad(events, dependencies, self.parser.title, project)
         } catch let error {
@@ -56,9 +59,12 @@ class DetailsStatePresenter {
     ) {
         let events = parser.update(with: filter)
         
-        let dependencies = connectWithDependencies(events: events, depsURL: project.depsURL)
+        if let dependencies = cachedDependencies {
+            events.connect(by: dependencies)
+        }
+//        let dependencies = connectWithDependencies(events: events, depsURL: project.depsURL)
         
-        didLoad(events, dependencies, parser.title)
+        didLoad(events, cachedDependencies ?? [], parser.title)
     }
     
     private func connectWithDependencies(events: [Event], depsURL: URL?) -> [Dependency] {
