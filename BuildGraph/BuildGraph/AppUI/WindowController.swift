@@ -25,6 +25,7 @@ class WindowController: NSWindowController {
         super.prepare(for: segue, sender: sender)
         
         if let filterSettingsController = segue.destinationController as? SettingsPopoverViewController {
+            filterSettingsController.counter = splitViewController().detail.presenter.parser.makeCounter()
             filterSettingsController.delegate = splitViewController()
             filterSettingsController.settings = splitViewController().filter
         }

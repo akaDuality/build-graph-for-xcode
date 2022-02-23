@@ -11,6 +11,9 @@ import GraphParser
 let helpersSuffix = "TestHelpers"
 let testsSuffix = "TestHelpers-Unit-Tests"
 
+// TODO: Remove global access
+private let eventDescriptionFormatter  = DurationFormatter()
+
 extension Event {
     var type: EventType {
         if taskName.hasSuffix(helpersSuffix) {
@@ -38,19 +41,19 @@ extension Event {
     }
     
     public var description: String {
-        String(format: "\(taskName), %0.2f", duration)
+        "\(taskName), \(eventDescriptionFormatter.string(from: duration))"
     }
     
-    public var dateDescription: String {
-        String(format: "%0.2f, \(taskName)", duration)
-    }
-    
-    public func output() {
-        print("\n\(taskName)")
-        for step in steps {
-            print(step.dateDescription)
-        }
-    }
+//    public var dateDescription: String {
+//        String(format: "%0.2f, \(taskName)", duration)
+//    }
+//
+//    public func output() {
+//        print("\n\(taskName)")
+//        for step in steps {
+//            print(step.dateDescription)
+//        }
+//    }
 }
 
 extension Array where Element == Event {

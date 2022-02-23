@@ -794,17 +794,17 @@
             <objects>
                 <viewController id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="3qk-xS-avz">
-                        <rect key="frame" x="0.0" y="0.0" width="292" height="617"/>
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="617"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="8Il-EF-1Tf">
-                                <rect key="frame" x="15" y="518" width="262" height="44"/>
+                                <rect key="frame" x="15" y="518" width="310" height="44"/>
                                 <view key="contentView" id="1y2-Zw-aiW">
-                                    <rect key="frame" x="3" y="3" width="256" height="24"/>
+                                    <rect key="frame" x="3" y="3" width="304" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JVm-vu-Bbo">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>
@@ -818,13 +818,13 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="qGp-Tb-uz5">
-                                <rect key="frame" x="15" y="428" width="262" height="44"/>
+                                <rect key="frame" x="15" y="428" width="310" height="44"/>
                                 <view key="contentView" id="2Z4-Sr-azM">
-                                    <rect key="frame" x="3" y="3" width="256" height="24"/>
+                                    <rect key="frame" x="3" y="3" width="304" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7JE-3f-E71">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>
@@ -838,7 +838,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
-                                <rect key="frame" x="28" y="576" width="234" height="18"/>
+                                <rect key="frame" x="28" y="576" width="282" height="18"/>
                                 <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dS6-NU-oEH">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -849,7 +849,7 @@
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVY-Z9-SCE">
                                 <rect key="frame" x="18" y="496" width="77" height="18"/>
-                                <buttonCell key="cell" type="inline" title="Select all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pzG-Wd-z2G">
+                                <buttonCell key="cell" type="inline" title="Check all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pzG-Wd-z2G">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
                                 </buttonCell>
@@ -858,8 +858,8 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="07F-ks-YDb">
-                                <rect key="frame" x="200" y="406" width="74" height="18"/>
-                                <buttonCell key="cell" type="inline" title="Deselect all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kwD-I7-TUL">
+                                <rect key="frame" x="248" y="406" width="74" height="18"/>
+                                <buttonCell key="cell" type="inline" title="Uncheck all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kwD-I7-TUL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
                                 </buttonCell>
@@ -868,13 +868,13 @@
                                 </connections>
                             </button>
                             <box title="Interactions" translatesAutoresizingMaskIntoConstraints="NO" id="1ft-Dh-qKL">
-                                <rect key="frame" x="15" y="327" width="262" height="44"/>
+                                <rect key="frame" x="15" y="327" width="310" height="44"/>
                                 <view key="contentView" id="wRt-Zr-Vmy">
-                                    <rect key="frame" x="3" y="3" width="256" height="24"/>
+                                    <rect key="frame" x="3" y="3" width="304" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TjK-oj-tQt">
-                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>

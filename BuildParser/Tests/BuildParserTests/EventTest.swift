@@ -13,6 +13,7 @@ final class EventTest: XCTestCase {
         Event(taskName: name,
               startDate: Date(),
               endDate: Date(),
+              fetchedFromCache: false,
               steps: [])
     }
     

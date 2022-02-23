@@ -21,6 +21,7 @@ class SettingsPopoverViewController: NSViewController {
     
     var settings: FilterSettings!
     weak var delegate: FilterSettingsDelegate?
+    var counter: BuildStepCounter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,16 +66,30 @@ class SettingsPopoverViewController: NSViewController {
         delegate?.didUpdateFilter(settings)
     }
     
-    func checkBox(for type: DetailStepType) -> NSButton {
+    let durationFormatter = DurationFormatter()
+    
+    func checkBox(for type: DetailStepType) -> NSView {
         let button = DetailStepCheckBox(
             checkboxWithTitle: type.title,
             target: self,
             action: #selector(didCheck(sender:)))
-        
         button.state = settings.allowedTypes.contains(type) ? .on: .off
         button.stepType = type
         
-        return button
+        let duration = counter.duration(of: type)
+        let isZero = duration == 0
+        button.isEnabled = !isZero
+        
+        let durationString = durationFormatter.string(from: duration)
+        let label = NSTextField(string: durationString)
+        label.alignment = .right
+        label.isBordered = false
+        label.isEnabled = false
+        label.drawsBackground = false
+        
+        let stack = NSStackView(views: [button, label])
+        
+        return stack
     }
     
     @objc func didCheck(sender: DetailStepCheckBox) {
@@ -97,47 +112,4 @@ class SettingsPopoverViewController: NSViewController {
 
 class DetailStepCheckBox: NSButton {
     var stepType: DetailStepType!
-}
-
-extension DetailStepType {
-    var title: String {
-        switch self {
-        // Compile
-        case .cCompilation: return "C"
-             
-        case .swiftCompilation: return "Swift"
-            
-        case .compileAssetsCatalog: return "Asset catalogs"
-            
-        case .compileStoryboard: return "Storyboard"
-            
-        case .XIBCompilation: return "Xib"
-            
-        case .swiftAggregatedCompilation: return "Swift Aggregated Compilation"
-           
-        // Non-compile
-        case .scriptExecution: return "Script execution"
-            
-        case .createStaticLibrary: return "Create static library"
-            
-        case .linker: return "Linker"
-            
-        case .copySwiftLibs: return "Copy Swift Libs"
-            
-        case .writeAuxiliaryFile: return "Write auxiliary file"
-            
-        case .linkStoryboards: return "Link storyboards"
-            
-        case .copyResourceFile: return "Copy resourve files"
-            
-        case .mergeSwiftModule: return "Merge Swift module"
-            
-        case .precompileBridgingHeader: return "Precompile Bridging Header"
-            
-        case .other: return "Other"
-            
-        case .none: return "Unknown"
-        
-        }
-    }
 }

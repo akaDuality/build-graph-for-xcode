@@ -50,9 +50,13 @@ public class RealBuildLogParser {
         omitWarningsDetails: true,
         omitNotesDetails: true)
     
-    var buildSteps: BuildStep!
+    var buildStep: BuildStep!
+    public func makeCounter() -> BuildStepCounter {
+        BuildStepCounter(buildStep: buildStep)
+    }
+    
     public var title: String {
-        buildSteps.title
+        buildStep.title
     }
     
     public func parse(logURL: URL, filter: FilterSettings) throws -> [Event] {
@@ -61,18 +65,18 @@ public class RealBuildLogParser {
             redacted: false, // Parameter is not important, code was comment out
             withoutBuildSpecificInformation: false) // Parameter is not important, code was comment out
         
-        buildSteps = try buildParser.parse(activityLog: activityLog)
+        buildStep = try buildParser.parse(activityLog: activityLog)
        
-        let events = convertToEvents(buildSteps: buildSteps, filter: filter)
+        let events = convertToEvents(buildStep: buildStep, filter: filter)
         return events
     }
     
     public func update(with filter: FilterSettings) -> [Event] {
-        convertToEvents(buildSteps: buildSteps, filter: filter)
+        convertToEvents(buildStep: buildStep, filter: filter)
     }
     
     public func step(for event: Event) -> BuildStep? {
-        let step = buildSteps.subSteps.first { step in
+        let step = buildStep.subSteps.first { step in
             step.title.hasSuffix(event.taskName)
         }
         
@@ -80,11 +84,11 @@ public class RealBuildLogParser {
     }
     
     func convertToEvents(
-        buildSteps: BuildStep,
+        buildStep: BuildStep,
         filter: FilterSettings
     ) -> [Event] {
         let dateFormatter = DateFormatter.iso8601Full_Z
-        let events = buildSteps.subSteps
+        let events = buildStep.subSteps
             .compactMap { step -> Event? in
                 var substeps = step.subSteps
                 

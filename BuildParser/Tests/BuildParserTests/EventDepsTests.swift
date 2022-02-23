@@ -94,11 +94,13 @@ extension Event {
         taskName: String = "",
         startDate: Date = Date(),
         endDate: Date = Date(),
+        fetchedFromCache: Bool = false,
         steps: [Event] = []
     ) -> Event {
         Event(taskName: taskName,
               startDate: startDate,
               endDate: endDate,
+              fetchedFromCache: fetchedFromCache,
               steps: steps)
     }
 }

@@ -162,7 +162,7 @@ class TimelineLayer: CALayer {
         let time = TimeInterval(coordinate.x / frame.width) * eventsDuration
         
         currentTime.updateWithoutAnimation {
-            currentTime.string = dateFormatter.string(from: Date(timeIntervalSince1970: time))
+            currentTime.string = dateFormatter.string(from: time)
         }
         
         let frame = CGRect(x: coordinate.x + 5,
@@ -179,11 +179,7 @@ class TimelineLayer: CALayer {
         }
     }
     
-    lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "m:ss"
-        return dateFormatter
-    }()
+    lazy var dateFormatter = DurationFormatter()
 }
 
 extension TimeInterval {
