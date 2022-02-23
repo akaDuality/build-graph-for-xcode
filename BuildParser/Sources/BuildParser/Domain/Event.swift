@@ -1,7 +1,6 @@
 import Foundation
 
-public class Event: Equatable {
-    
+public class Event: Equatable, Hashable {
     
     public init(taskName: String,
                 startDate: Date,
@@ -26,6 +25,10 @@ public class Event: Equatable {
     public static func == (lhs: Event, rhs: Event) -> Bool {
         lhs.taskName == rhs.taskName
         // TODO: Add data
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(taskName)
     }
 }
 

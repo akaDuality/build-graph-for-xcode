@@ -17,6 +17,18 @@ extension CALayer {
     }
 }
 
+public class InteractionsSettings {
+    public static var shared = InteractionsSettings()
+    
+    public var highlightOnHover: Bool = true
+    public var showTime: Bool = true
+    public var showColorLegend: Bool = true
+    public var showBlockingDependeciesWithoutHighlighting: Bool = true
+    public var resizeWindowOnProjectSelection: Bool = true
+    
+    public init() {}
+}
+
 public class AppLayer: CALayer {
     public let events: [Event]
     
@@ -89,6 +101,10 @@ public class AppLayer: CALayer {
     }
     
     // MARK: Event
+    public func selectEvent(at coordinate: CGPoint) {
+        modulesLayer.selectEvent(at: coordinate)
+    }
+    
     public func highlightEvent(at coordinate: CGPoint) {
         modulesLayer.highlightEvent(at: coordinate)
     }
@@ -107,7 +123,7 @@ public class AppLayer: CALayer {
     }
     
     // MARK: Concurrency
-    public func drawConcurrency(at coordinate: CGPoint) {
+    public func drawConcurrencyLine(at coordinate: CGPoint) {
         concurrencyLayer.drawConcurrency(at: coordinate)
     }
     

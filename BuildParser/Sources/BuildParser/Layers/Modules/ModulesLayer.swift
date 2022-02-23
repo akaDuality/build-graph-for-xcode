@@ -21,7 +21,7 @@ class ModulesLayer: CALayer {
     private let rects: [EventRelativeRect]
     private(set) var eventShapes: [EventLayer]
     
-    public var highlightedEvent: Event? = nil {
+    var highlightedEvent: Event? = nil {
         didSet {
             guard highlightedEvent != oldValue else {
                 return // skip redraw of modules, nothing changed
@@ -36,7 +36,30 @@ class ModulesLayer: CALayer {
         }
     }
     
+    var selectedEvents: [Event] {
+        didSet {
+            guard selectedEvents != oldValue else {
+                return // skip redraw of modules, nothing changed
+            }
+
+            updateWithoutAnimation {
+                setNeedsLayout()
+                layoutIfNeeded()
+            }
+        }
+    }
+    
     private let higlightedLift: CALayer
+    
+    public func selectEvent(at coordinate: CGPoint) {
+        guard let event = eventLineContains(coordinate: coordinate) else { return }
+        
+        if let indexToRemove = selectedEvents.firstIndex(of: event) {
+            selectedEvents.remove(at: indexToRemove)
+        } else {
+            selectedEvents.append(event)
+        }
+    }
     
     public func highlightEvent(at coordinate: CGPoint) {
         let event = eventLineContains(coordinate: coordinate)
@@ -53,6 +76,7 @@ class ModulesLayer: CALayer {
         }
         self.eventShapes = .init()
         self.higlightedLift = .init()
+        self.selectedEvents = []
         
         super.init()
         
@@ -67,6 +91,7 @@ class ModulesLayer: CALayer {
         self.highlightedEvent = layer.highlightedEvent
         self.rects = layer.rects
         self.higlightedLift = layer.higlightedLift
+        self.selectedEvents = layer.selectedEvents
         
         super.init(layer: layer)
     }
@@ -169,17 +194,39 @@ class ModulesLayer: CALayer {
     let vSpace: CGFloat = 1
     
     private func alpha(for rect: EventRelativeRect) -> Float {
+        var hasSelected = false
+        
+        if !selectedEvents.isEmpty {
+            hasSelected = true
+            
+            for event in selectedEvents {
+                let shouldBeHighlighted = shouldBeHighlighted(event: event,
+                                                              domain: rect.event.domain,
+                                                              taskName: rect.event.taskName)
+                if shouldBeHighlighted {
+                    return 1
+                }
+            }
+        }
+        
         // TODO: Draw all connections
         if let highlightedEvent = highlightedEvent {
-            if rect.event.domain == highlightedEvent.domain
-                || highlightedEvent.parentsContains(rect.event.taskName) {
+            hasSelected = true
+            
+            let shouldBeHighlighted = shouldBeHighlighted(event: highlightedEvent,
+                                                          domain: rect.event.domain,
+                                                          taskName: rect.event.taskName)
+            if shouldBeHighlighted {
                 return 1
-            } else {
-                return Colors.dimmingAlpha
             }
-        } else {
-            return 1
         }
+        
+        return hasSelected ? Colors.dimmingAlpha : 1
+    }
+    
+    private func shouldBeHighlighted(event: Event, domain: String, taskName: String) -> Bool {
+        return domain == event.domain
+            || event.parentsContains(taskName)
     }
 }
 

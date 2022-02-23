@@ -46,7 +46,7 @@ public class HUDLayer: CALayer {
                                    height: height)
     }
     
-    public func drawConcurrency(at coordinate: CGPoint) {
+    public func drawTimeline(at coordinate: CGPoint) {
         timelineLayer.coordinate = coordinate
     }
     

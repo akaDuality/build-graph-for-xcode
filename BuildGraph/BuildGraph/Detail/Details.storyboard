@@ -174,10 +174,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0AU-P7-nif">
-                                <rect key="frame" x="18" y="157" width="414" height="31"/>
+                                <rect key="frame" x="18" y="197" width="414" height="31"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="← select a project to show build data" id="DnH-nK-C8f">
                                     <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -185,7 +185,7 @@
                         <constraints>
                             <constraint firstItem="0AU-P7-nif" firstAttribute="leading" secondItem="ddu-g0-LqC" secondAttribute="leading" id="O7l-Qg-240"/>
                             <constraint firstItem="0AU-P7-nif" firstAttribute="centerX" secondItem="ddu-g0-LqC" secondAttribute="centerX" id="agq-JG-3XR"/>
-                            <constraint firstItem="0AU-P7-nif" firstAttribute="top" secondItem="ddu-g0-LqC" secondAttribute="top" constant="40" id="b0O-UD-32A"/>
+                            <constraint firstItem="0AU-P7-nif" firstAttribute="top" secondItem="ddu-g0-LqC" secondAttribute="top" id="b0O-UD-32A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Lii-Xy-ETY"/>
                         <viewLayoutGuide key="layoutMargins" id="ddu-g0-LqC"/>

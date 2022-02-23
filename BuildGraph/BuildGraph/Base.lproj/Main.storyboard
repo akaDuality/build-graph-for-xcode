@@ -867,8 +867,29 @@
                                     <action selector="deselectAllOtherFlags:" target="AVJ-kY-T3V" id="1dK-2a-Svn"/>
                                 </connections>
                             </button>
+                            <box title="Interactions" translatesAutoresizingMaskIntoConstraints="NO" id="1ft-Dh-qKL">
+                                <rect key="frame" x="15" y="327" width="262" height="44"/>
+                                <view key="contentView" id="wRt-Zr-Vmy">
+                                    <rect key="frame" x="3" y="3" width="256" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TjK-oj-tQt">
+                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                            <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="TjK-oj-tQt" secondAttribute="bottom" id="BPJ-Eq-tUy"/>
+                                        <constraint firstAttribute="trailing" secondItem="TjK-oj-tQt" secondAttribute="trailing" id="PIK-pZ-spT"/>
+                                        <constraint firstItem="TjK-oj-tQt" firstAttribute="top" secondItem="wRt-Zr-Vmy" secondAttribute="top" id="cRV-f0-Q1Y"/>
+                                        <constraint firstItem="TjK-oj-tQt" firstAttribute="leading" secondItem="wRt-Zr-Vmy" secondAttribute="leading" id="dfm-lM-HN6"/>
+                                    </constraints>
+                                </view>
+                                <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
+                            </box>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="1ft-Dh-qKL" firstAttribute="centerX" secondItem="7JE-3f-E71" secondAttribute="centerX" id="F3i-at-3LK"/>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="50" id="J7I-b4-JZP"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="KUp-Ar-oZO"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="7" id="O4T-67-Rxv"/>
@@ -882,7 +903,9 @@
                             <constraint firstItem="AVY-Z9-SCE" firstAttribute="top" secondItem="JVm-vu-Bbo" secondAttribute="bottom" constant="7" id="l7t-aA-KMU"/>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="centerX" secondItem="8Il-EF-1Tf" secondAttribute="centerX" id="pIn-SD-QrH"/>
                             <constraint firstItem="JVm-vu-Bbo" firstAttribute="leading" secondItem="AVY-Z9-SCE" secondAttribute="trailing" constant="-77" id="pyv-IU-Too"/>
+                            <constraint firstItem="1ft-Dh-qKL" firstAttribute="leading" secondItem="7JE-3f-E71" secondAttribute="leading" id="q60-da-RqN"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="leading" secondItem="8Il-EF-1Tf" secondAttribute="leading" constant="12" id="raG-Ga-Aa9"/>
+                            <constraint firstItem="1ft-Dh-qKL" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="60" id="sIB-lL-olV"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="24" id="wTE-cT-LRt"/>
                         </constraints>
                     </view>

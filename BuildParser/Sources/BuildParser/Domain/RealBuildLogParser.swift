@@ -27,6 +27,10 @@ public class FilterSettings {
         }
         allowedTypes.remove(at: indexToRemove)
     }
+    
+    public func enableAll() {
+        allowedTypes = DetailStepType.allCases
+    }
 }
 
 extension DetailStepType {

@@ -13,6 +13,7 @@ import XCLogParser
 class DetailViewController: NSViewController {
     
     var zoomController: ZoomController!
+    let mouseController = MouseContorller()
     
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -23,12 +24,8 @@ class DetailViewController: NSViewController {
             view.window?.title = title!
         }
         
-        addMouseTracking()
-        let clickRecognizer = NSClickGestureRecognizer(
-            target: self,
-            action: #selector(didClick(_:))
-        )
-        view().contentView.addGestureRecognizer(clickRecognizer)
+        mouseController.addMouseTracking(to: view())
+        addClickRecognizers()
         updateState()
         
         zoomController = ZoomController(
@@ -118,14 +115,29 @@ class DetailViewController: NSViewController {
         view().removeLayer()
         shareButton.isEnabled = false
     }
+    
+    // MARK: - Mouse
+    private func addClickRecognizers() {
+        let leftClickRecognizer = NSClickGestureRecognizer(
+            target: self,
+            action: #selector(didLeftClick(_:))
+        )
+        view().contentView.addGestureRecognizer(leftClickRecognizer)
+        
+//        let rightClickRecognizer = NSClickGestureRecognizer(
+//            target: self,
+//            action: #selector(didRightClick(_:))
+//        )
+//        rightClickRecognizer.buttonMask = 0x2
+//        view().contentView.addGestureRecognizer(rightClickRecognizer)
+    }
                                   
-    @objc func didClick(_ recognizer: NSClickGestureRecognizer) {
+    @objc func didLeftClick(_ recognizer: NSClickGestureRecognizer) {
         guard !isPopoverPresented else { return } // Click will dismith previous one
         
         let coordinate = recognizer.location(in: view().contentView)
         
-        guard let event = view().modulesLayer?.event(at: coordinate)
-        else { return }
+        guard let event = view().modulesLayer?.event(at: coordinate) else { return }
               
         let events = event.steps
        
@@ -133,7 +145,17 @@ class DetailViewController: NSViewController {
             return // TODO: Give feedback
         }
         
-        let child = controllerForDetailsPopover(events: events, title: event.taskName)
+        presentPopover(events: events, title: event.taskName, coordinate: coordinate)
+    }
+    
+    @objc func didRightClick(_ recognizer: NSClickGestureRecognizer) {
+        let coordinate = recognizer.location(in: view().contentView)
+        
+        view().modulesLayer?.selectEvent(at: coordinate)
+    }
+    
+    private func presentPopover(events: [Event], title: String, coordinate: NSPoint) {
+        let child = controllerForDetailsPopover(events: events, title: title)
         
         child.preferredContentSize = CGSize(width: 1000, height: 500)
         present(child,
@@ -166,46 +188,10 @@ class DetailViewController: NSViewController {
         return popover
     }
     
-    var trackingArea: NSTrackingArea!
-    func addMouseTracking() {
-        trackingArea = NSTrackingArea(
-            rect: view.bounds,
-            options: [.activeAlways,
-                      .mouseMoved,
-                      .mouseEnteredAndExited,
-                      .inVisibleRect],
-            owner: self,
-            userInfo: nil)
-        view.addTrackingArea(trackingArea)
-    }
-
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
-    }
-    
-    override func mouseEntered(with event: NSEvent) {
-        view.window?.acceptsMouseMovedEvents = true
-        view.window?.makeFirstResponder(self)
-    }
-    
-    override func mouseMoved(with event: NSEvent) {
-        let coordinate = view().contentView.convert(
-            event.locationInWindow,
-            from: nil)
-        
-        view().modulesLayer?.highlightEvent(at: coordinate)
-        view().modulesLayer?.drawConcurrency(at: coordinate)
-        view().hudLayer?.drawConcurrency(at: coordinate)
-    }
-    
-    override func mouseExited(with event: NSEvent) {
-        view.window?.acceptsMouseMovedEvents = false
-        
-        view().modulesLayer?.clearHighlightedEvent()
-        view().modulesLayer?.clearConcurrency()
-        view().hudLayer?.clearConcurrency()
     }
     
     // MARK: - Zoom
@@ -216,6 +202,57 @@ class DetailViewController: NSViewController {
     
     @IBAction func zoomOut(_ sender: Any) {
         zoomController.zoomOut()
+    }
+}
+
+class MouseContorller: NSResponder {
+    
+    var trackingArea: NSTrackingArea!
+    var view: DetailView!
+    
+    func addMouseTracking(to view: DetailView) {
+        self.view = view
+        
+        trackingArea = NSTrackingArea(
+            rect: view.bounds,
+            options: [.activeAlways,
+                      .mouseMoved,
+                      .mouseEnteredAndExited,
+                      .inVisibleRect],
+            owner: self,
+            userInfo: nil)
+        view.addTrackingArea(trackingArea)
+    }
+    
+    override func mouseEntered(with event: NSEvent) {
+        view.window?.acceptsMouseMovedEvents = true
+        view.window?.makeFirstResponder(self)
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
+        let coordinate = view.contentView.convert(
+            event.locationInWindow,
+            from: nil)
+        
+        highlightEvent(at: coordinate)
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        view.window?.acceptsMouseMovedEvents = false
+        
+        removeHighlightedEvent()
+    }
+    
+    func highlightEvent(at coordinate: CGPoint) {
+        view.modulesLayer?.highlightEvent(at: coordinate)
+        view.modulesLayer?.drawConcurrencyLine(at: coordinate)
+        view.hudLayer?.drawTimeline(at: coordinate)
+    }
+    
+    func removeHighlightedEvent() {
+        view.modulesLayer?.clearHighlightedEvent()
+        view.modulesLayer?.clearConcurrency()
+        view.hudLayer?.clearConcurrency()
     }
 }
 

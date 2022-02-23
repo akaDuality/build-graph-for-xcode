@@ -38,7 +38,7 @@ struct Colors {
         
         static var legend: [ColorDescription] {
             [
-                (NSLocalizedString("Has subtasks", comment: ""),    subtask()),
+                (NSLocalizedString("Subtasks", comment: ""),    subtask()),
                 (NSLocalizedString("Task", comment: ""),            step()),
                 (NSLocalizedString("Waiting", comment: ""),         background()),
                 (NSLocalizedString("Cached", comment: ""),          cached()),

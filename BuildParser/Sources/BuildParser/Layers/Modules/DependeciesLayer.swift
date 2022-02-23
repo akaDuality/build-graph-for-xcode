@@ -42,27 +42,39 @@ class DependeciesLayer: ModulesLayer {
         super.layoutSublayers()
         
         drawConnections(for: highlightedEvent)
+        
+        for selectedEvent in selectedEvents {
+            drawConnections(for: selectedEvent)
+        }
+    }
+    
+    private func isHighlightedModule(event: Event, parent: Event) -> Bool {
+        let showChild = parent.taskName == highlightedEvent?.taskName
+        let showParent = event.taskName == highlightedEvent?.taskName
+        let isHighlightedModule = showChild || showParent || selectedEvents.contains(event) || selectedEvents.contains(parent)
+        return isHighlightedModule
     }
     
     private func drawConnectionsToParents(for event: Event, drawParents: Bool) {
         for parent in event.parents {
-            guard let fromIndex = events.index(name: event.taskName)
-            else { continue }
-            
-            let showChild = parent.taskName == highlightedEvent?.taskName
-            let showParent = event.taskName == highlightedEvent?.taskName
-            let isHighlightedModule = showChild || showParent
-            
-            guard let toIndex = events.index(name: parent.taskName)
-            else { continue }
-            
-            guard fromIndex != toIndex
-            else { continue }
-            
+            let isHighlightedModule = isHighlightedModule(event: event, parent: parent)
+
             let isBlockerDependency = event.isBlocked(by: parent)
             
-            let showBlockersOnly = isBlockerDependency && highlightedEvent == nil
-            if showBlockersOnly || isHighlightedModule {
+            let showBlockersOnEmptyState = event.isBlocked(by: parent)
+            && highlightedEvent == nil
+            && selectedEvents.isEmpty
+            
+            if showBlockersOnEmptyState || isHighlightedModule {
+                guard let fromIndex = events.index(name: event.taskName)
+                else { continue }
+                
+                guard let toIndex = events.index(name: parent.taskName)
+                else { continue }
+                
+                guard fromIndex != toIndex
+                else { continue }
+                
                 connectModules(
                     from: eventShapes[toIndex],
                     to: eventShapes[fromIndex],

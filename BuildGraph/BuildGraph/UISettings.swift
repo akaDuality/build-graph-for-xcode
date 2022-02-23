@@ -23,6 +23,9 @@ class UISettings {
     func removeSelectedProject() {
         UserDefaults.standard.removeObject(forKey: "selectedProject")
     }
+    
+    @Storage(key: "showLegend", defaultValue: true)
+    var showLegend: Bool?
 }
 
 @propertyWrapper
