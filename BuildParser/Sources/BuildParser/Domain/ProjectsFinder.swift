@@ -17,8 +17,7 @@ public class ProjectsFinder {
     let projectReferenceFactory = ProjectReferenceFactory()
     let defaultDerivedData = DefaultDerivedData()
     
-    public func projects() throws -> [ProjectReference] {
-        let derivedDataPath = try derivedDataPath()
+    public func projects(derivedDataPath: URL) throws -> [ProjectReference] {
         let hasAccess = derivedDataPath.startAccessingSecurityScopedResource()
         if !hasAccess {
             print("This directory might not need it, or this URL might not be a security scoped URL, or maybe something's wrong?")

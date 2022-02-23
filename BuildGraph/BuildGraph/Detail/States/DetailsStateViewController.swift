@@ -16,7 +16,7 @@ enum DetailsState: StateProtocol {
     case data(_ events: [Event], _ deps: [Dependency], _ title: String, _ project: ProjectReference)
     case error(_ message: String, _ project: ProjectReference)
     
-    static var `default`: DetailsState = .empty
+    static var `default`: Self = .empty
 }
 
 protocol DetailsDelegate: AnyObject {

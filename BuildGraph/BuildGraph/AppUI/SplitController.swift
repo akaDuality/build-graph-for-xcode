@@ -14,15 +14,24 @@ class SplitController: NSSplitViewController {
     private let uiSettings = UISettings()
     var filter = FilterSettings.shared
     
+    var projectsPresenter: ProjectsPresenter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        projects.delegate = self
+        self.projectsPresenter = ProjectsPresenter(delegate: self) // TODO: Not self, should be another delegate
         detail.delegate = self
+        projects.presenter = projectsPresenter
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        projectsPresenter.reloadProjetcs(ui: projects)
     }
 
-    var projects: ProjectsOutlineViewController! {
-        (splitViewItems[0].viewController as! ProjectsOutlineViewController)
+    var projects: ProjectsStateViewController! {
+        (splitViewItems[0].viewController as! ProjectsStateViewController)
     }
     
     var detail: DetailsStateViewController! {
@@ -41,7 +50,9 @@ extension SplitController: DetailsDelegate {
         view.window as! MainWindow
     }
     
-    func willLoadProject(project: ProjectReference) {
+    func willLoadProject(
+        project: ProjectReference
+    ) {
         // Remove current project in case if I wouldn't open selected.
         // In case of crash, next time user will select another one
         uiSettings.removeSelectedProject()
@@ -50,7 +61,10 @@ extension SplitController: DetailsDelegate {
         mainWindow().updateNavigationButtons(for: project)
     }
     
-    func didLoadProject(project: ProjectReference, detailsController: DetailViewController) {
+    func didLoadProject(
+        project: ProjectReference,
+        detailsController: DetailViewController
+    ) {
         self.uiSettings.selectedProject = project.name // Save only after success parsing
         mainWindow().enableButtons()
     }

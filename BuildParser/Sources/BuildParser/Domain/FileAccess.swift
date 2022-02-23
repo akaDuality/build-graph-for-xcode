@@ -47,19 +47,27 @@ public class FileAccess: FileAccessProtocol {
             return url
         }
         
+        let url = try requestAccess(to: directoryURL)
+
+        return url
+    }
+    
+    public func requestAccess(to directoryURL: URL) throws -> URL {
         let url = try showUIAccess(directoryURL: directoryURL)
         try saveBookmarkData(for: url)
-
         return url
     }
     
     private func showUIAccess(directoryURL: URL) throws -> URL {
         let openPanel = NSOpenPanel()
         openPanel.directoryURL = directoryURL
-        openPanel.message = NSLocalizedString("Choose your derived data directory",
-                                              comment: "Open file dialog subtitle")
-        openPanel.prompt = NSLocalizedString("Choose",
-                                             comment: "Open file dialog action button")
+        openPanel.message = NSLocalizedString(
+            "Choose your derived data directory",
+            comment: "Open file dialog subtitle")
+        openPanel.prompt = NSLocalizedString(
+            "Choose",
+            comment: "Open file dialog action button")
+        
         openPanel.allowedFileTypes = ["none"]
         openPanel.allowsOtherFileTypes = false
         openPanel.canChooseFiles = false

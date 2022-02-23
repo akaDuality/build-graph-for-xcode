@@ -18,6 +18,11 @@
 		1E61EC6F2794543500208FDB /* SettingsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */; };
 		1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7106E7271F1C1600C292AA /* Tuist2.json */; };
 		1E71FE87271EC10000C292AA /* Tuist.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E71FE86271EC10000C292AA /* Tuist.json */; };
+		1E79A71327C630D3005A6C19 /* ProjectsStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71227C630D3005A6C19 /* ProjectsStateViewController.swift */; };
+		1E79A71527C6313E005A6C19 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E79A71427C6313E005A6C19 /* Projects.storyboard */; };
+		1E79A71927C63F12005A6C19 /* ProjectDescriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71827C63F12005A6C19 /* ProjectDescriptionService.swift */; };
+		1E79A71B27C6407A005A6C19 /* NoProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71A27C6407A005A6C19 /* NoProjectsViewController.swift */; };
+		1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71C27C64529005A6C19 /* MainWindow.swift */; };
 		1EAD77FD2781E9E500C65AC5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAD77FC2781E9E500C65AC5 /* DetailView.swift */; };
 		1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */; };
 		1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */; };
@@ -73,6 +78,11 @@
 		1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopoverViewController.swift; sourceTree = "<group>"; };
 		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
+		1E79A71227C630D3005A6C19 /* ProjectsStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsStateViewController.swift; sourceTree = "<group>"; };
+		1E79A71427C6313E005A6C19 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
+		1E79A71827C63F12005A6C19 /* ProjectDescriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionService.swift; sourceTree = "<group>"; };
+		1E79A71A27C6407A005A6C19 /* NoProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoProjectsViewController.swift; sourceTree = "<group>"; };
+		1E79A71C27C64529005A6C19 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		1E9690092789C0280010FF04 /* BuildDeps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BuildDeps-Info.plist"; sourceTree = "<group>"; };
 		1EAD77FC2781E9E500C65AC5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitController.swift; sourceTree = "<group>"; };
@@ -146,7 +156,6 @@
 			children = (
 				1ED7AD3627831D0600BA74F9 /* DetailsStateViewController.swift */,
 				1E538BD827B956A400136F82 /* DetailsStatePresenter.swift */,
-				1ED7AD342783198700BA74F9 /* StateViewController.swift */,
 				1ED7AD3C2783295800BA74F9 /* LoadingViewController.swift */,
 				1ED7AD3E27832F6400BA74F9 /* RetryViewController.swift */,
 			);
@@ -163,6 +172,24 @@
 			path = Details;
 			sourceTree = "<group>";
 		};
+		1E79A71627C637FF005A6C19 /* Common UI */ = {
+			isa = PBXGroup;
+			children = (
+				1ED7AD342783198700BA74F9 /* StateViewController.swift */,
+			);
+			path = "Common UI";
+			sourceTree = "<group>";
+		};
+		1E79A71727C6380C005A6C19 /* AppUI */ = {
+			isa = PBXGroup;
+			children = (
+				1EF5609527844D2700001935 /* WindowController.swift */,
+				1E79A71C27C64529005A6C19 /* MainWindow.swift */,
+				1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */,
+			);
+			path = AppUI;
+			sourceTree = "<group>";
+		};
 		1EAD77FE2781EA0000C65AC5 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,8 +203,12 @@
 		1EAD77FF2781EC9400C65AC5 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				1EF535BB279342CD00035D70 /* ProjectsOutlineViewController.swift */,
+				1E79A71427C6313E005A6C19 /* Projects.storyboard */,
 				1EF535BD2793463500035D70 /* ProjectsPresenter.swift */,
+				1E79A71A27C6407A005A6C19 /* NoProjectsViewController.swift */,
+				1E79A71827C63F12005A6C19 /* ProjectDescriptionService.swift */,
+				1E79A71227C630D3005A6C19 /* ProjectsStateViewController.swift */,
+				1EF535BB279342CD00035D70 /* ProjectsOutlineViewController.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -230,8 +261,8 @@
 			children = (
 				1EDB5E3427135F0000741EEF /* AppDelegate.swift */,
 				1EDB5E3A27135F0100741EEF /* Main.storyboard */,
-				1EF5609527844D2700001935 /* WindowController.swift */,
-				1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */,
+				1E79A71727C6380C005A6C19 /* AppUI */,
+				1E79A71627C637FF005A6C19 /* Common UI */,
 				1E61EC6D2794542100208FDB /* Popovers */,
 				1EAD77FF2781EC9400C65AC5 /* Projects */,
 				1EAD77FE2781EA0000C65AC5 /* Detail */,
@@ -380,6 +411,7 @@
 				1E16961B27247AF1006D93CE /* targetGraph.txt in Resources */,
 				1EDB6A242714183500741EEF /* AppEvents.json in Resources */,
 				1E71FE87271EC10000C292AA /* Tuist.json in Resources */,
+				1E79A71527C6313E005A6C19 /* Projects.storyboard in Resources */,
 				1EC72584271D436900352213 /* Drinkit.json in Resources */,
 				1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */,
 				1E0FAD512716D1C700DE2128 /* AppEventsMoveDomain.json in Resources */,
@@ -416,16 +448,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E538BD727B9550100136F82 /* ZoomController.swift in Sources */,
+				1E79A71B27C6407A005A6C19 /* NoProjectsViewController.swift in Sources */,
 				1ED7AD3727831D0600BA74F9 /* DetailsStateViewController.swift in Sources */,
 				1EF535BC279342CE00035D70 /* ProjectsOutlineViewController.swift in Sources */,
 				1EB1A8DC272EB14E00D31AB8 /* ImageSaveService.swift in Sources */,
 				1EAD77FD2781E9E500C65AC5 /* DetailView.swift in Sources */,
 				1E538BD927B956A400136F82 /* DetailsStatePresenter.swift in Sources */,
+				1E79A71927C63F12005A6C19 /* ProjectDescriptionService.swift in Sources */,
 				1EF535BE2793463500035D70 /* ProjectsPresenter.swift in Sources */,
 				1ED7AD352783198700BA74F9 /* StateViewController.swift in Sources */,
 				1ED7AD3F27832F6400BA74F9 /* RetryViewController.swift in Sources */,
 				1EDB5E3727135F0000741EEF /* DetaliViewController.swift in Sources */,
+				1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */,
 				1EF5609627844D2700001935 /* WindowController.swift in Sources */,
+				1E79A71327C630D3005A6C19 /* ProjectsStateViewController.swift in Sources */,
 				1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */,
 				1E61EC6F2794543500208FDB /* SettingsPopoverViewController.swift in Sources */,
 				1ED7AD3D2783295800BA74F9 /* LoadingViewController.swift in Sources */,

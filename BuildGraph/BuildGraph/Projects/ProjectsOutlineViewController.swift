@@ -8,26 +8,29 @@
 import AppKit
 import BuildParser
 
+protocol ProjectsListDatasource {
+    var projects: [ProjectReference] { get }
+    
+    func select(project: ProjectReference)
+    
+    func description(for url: URL) -> String
+    func tooltip(for url: URL) -> String
+}
+
 class ProjectsOutlineViewController: NSViewController {
     
-    weak var delegate: ProjectsSelectionDelegate?
-    var presenter: ProjectsPresenter!
+    var presenter: ProjectsListDatasource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view().outlineView.dataSource = self
+        view().outlineView.delegate = self
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        
-        presenter = ProjectsPresenter(delegate: delegate!)
-        presenter.ui = self
-        
-        view().outlineView.dataSource = self
-        view().outlineView.delegate = self
-        
-        presenter.reloadProjetcs()
-        
+
         addContextMenu()
     }
     
@@ -138,10 +141,7 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
     }
 }
 
-extension ProjectsOutlineViewController: ProjectsUI {
-    func reloadData() {
-        view().outlineView.reloadData()
-    }
+extension ProjectsOutlineViewController {
     
     func select(project: ProjectReference) {
         view().select(project: project)
@@ -198,4 +198,3 @@ class ProjectsOutlineView: NSView {
                                      byExtendingSelection: false)
     }
 }
-

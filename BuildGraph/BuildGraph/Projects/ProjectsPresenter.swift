@@ -13,8 +13,7 @@ protocol ProjectsSelectionDelegate: AnyObject {
 }
 
 protocol ProjectsUI: AnyObject {
-    func reloadData()
-    func select(project: ProjectReference)
+    var state: ProjectsState { get set }
 }
 
 class ProjectsPresenter {
@@ -27,43 +26,55 @@ class ProjectsPresenter {
     weak var ui: ProjectsUI?
     
     private let uiSettings = UISettings()
-    private let projectDescriptionService = ProjectDescriptionService()
     
-    @objc func reloadProjetcs() {
+    func reloadProjetcs() {
         let pathFinder = ProjectsFinder()
-        projects = try! pathFinder.projects()
+        let derivedData = try! pathFinder.derivedDataPath()
+        projects = try! pathFinder.projects(derivedDataPath: derivedData)
         
-        if let selectedProject = uiSettings.selectedProject {
-            select(name: selectedProject)
-        }
-    }
-    
-    func select(name: String) {
-        guard let project = projects.first(where: { project in
-            project.name == name
-        }) else {
+        guard !projects.isEmpty else {
+            ui?.state = .empty(derivedData)
             return
         }
         
-        ui?.select(project: project)
-        delegate?.didSelect(project: project)
+        let selectedProject = selectedProject(in: projects)
+        ui?.state = .projects(selectedProject)
+        
+        if let selectedProject = selectedProject {
+            delegate?.didSelect(project: selectedProject)
+        }
     }
+    
+    func reloadProjetcs(ui: ProjectsUI) {
+        self.ui = ui
+        
+        reloadProjetcs()
+    }
+    
+    private func selectedProject(in projects: [ProjectReference]) -> ProjectReference? {
+        guard let selectedProjectName = uiSettings.selectedProject else { return nil }
+        
+        return projects.first(where: { project in
+            project.name == selectedProjectName
+        })
+    }
+    
+    private(set) var projects: [ProjectReference] = []
+    
     
     func select(project: ProjectReference) {
         delegate?.didSelect(project: project)
-    }
-    
-    private(set) var projects: [ProjectReference] = [] {
-        didSet {
-            ui?.reloadData()
-        }
     }
     
     func selectProject(at index: Int) {
         let project = projects[index]
         delegate?.didSelect(project: project)
     }
-    
+
+    private let projectDescriptionService = ProjectDescriptionService()
+}
+
+extension ProjectsPresenter: ProjectsListDatasource {
     func description(for url: URL) -> String {
         projectDescriptionService.dateDescription(for: url)
     }
@@ -71,24 +82,4 @@ class ProjectsPresenter {
     func tooltip(for url: URL) -> String {
         url.lastPathComponent.components(separatedBy: ".").first ?? url.lastPathComponent
     }
-}
-
-class ProjectDescriptionService {
-    func description(for project: ProjectReference) -> String {
-        "\(project.name), \(dateDescription(for: project.currentActivityLog))"
-    }
-        
-    func dateDescription(for url: URL) -> String {
-        guard let creationDate = try? url.resourceValues(forKeys: [.creationDateKey]).creationDate
-        else { return url.lastPathComponent }
-        
-        return dateFormatter.string(from: creationDate)
-    }
-    
-    lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
 }
