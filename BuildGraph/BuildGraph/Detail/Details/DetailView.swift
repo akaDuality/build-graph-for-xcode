@@ -53,12 +53,12 @@ class DetailView: NSView {
         modulesLayer = AppLayer(
             events: events,
             scale: scale)
-        modulesLayer?.masksToBounds = false
         
         hudLayer = HUDLayer(events: events, scale: scale)
         needsLayout = true
         
         contentView.wantsLayer = true
+        contentView.layer?.masksToBounds = false
         contentView.layer?.addSublayer(modulesLayer!)
         
         scrollView.documentView = contentView

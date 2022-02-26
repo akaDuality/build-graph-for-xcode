@@ -215,8 +215,9 @@ extension Event {
     }
     
     func isBlocked(by event: Event) -> Bool {
-        startDate.timeIntervalSince(event.endDate)
-        < 1
+        let interval = startDate.timeIntervalSince(event.endDate)
+        
+        return (0...1).contains(interval)
     }
 }
 
