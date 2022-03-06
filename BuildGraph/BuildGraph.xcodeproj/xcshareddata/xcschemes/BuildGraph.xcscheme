@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
-               BuildableName = "BuildDeps.app"
+               BuildableName = "BuildGraph.app"
                BlueprintName = "BuildGraph"
                ReferencedContainer = "container:BuildGraph.xcodeproj">
             </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
-            BuildableName = "BuildDeps.app"
+            BuildableName = "BuildGraph.app"
             BlueprintName = "BuildGraph"
             ReferencedContainer = "container:BuildGraph.xcodeproj">
          </BuildableReference>
@@ -87,7 +87,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
-            BuildableName = "BuildDeps.app"
+            BuildableName = "BuildGraph.app"
             BlueprintName = "BuildGraph"
             ReferencedContainer = "container:BuildGraph.xcodeproj">
          </BuildableReference>
