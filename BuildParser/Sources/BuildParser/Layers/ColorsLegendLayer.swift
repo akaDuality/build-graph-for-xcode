@@ -31,6 +31,11 @@ class ColorsLegendLayer: CALayer {
         }
     }
     
+    var intrinsicContentSize: CGSize {
+        return CGSize(width: 130,
+                      height: (lineHeight + space) * CGFloat(Colors.Events.legend.count) + inset * 2)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,64 +59,15 @@ class ColorsLegendLayer: CALayer {
         }
         
         for (index, subview) in colorDescriptionLayers.enumerated() {
-            let height: CGFloat = 14
-            subview.frame = CGRect(x: 8,
-                                   y: 8 + (height + 4) * CGFloat(index),
-                                   width: frame.width - 8*2,
-                                   height: height)
-        }
-    }
-}
-
-class ColorDescriptionLayer: CALayer {
-    let colorLayer: CALayer
-    let descriptionLayer: CATextLayer
-    
-    init(colorDescription: ColorDescription, scale: CGFloat) {
-        self.colorLayer = CALayer()
-        self.descriptionLayer = CATextLayer()
-        
-        super.init()
-        
-        colorLayer.backgroundColor = colorDescription.color
-        colorLayer.contentsScale = scale
-        addSublayer(colorLayer)
-        
-        descriptionLayer.contentsScale = scale
-        descriptionLayer.string = colorDescription.desc
-        descriptionLayer.foregroundColor = Colors.textColor()
-        descriptionLayer.fontSize = 10
-        addSublayer(descriptionLayer)
-        
-        colorLayer.cornerRadius = 2
-        if #available(macOS 10.15, *) {
-            colorLayer.cornerCurve = .continuous
+            
+            subview.frame = CGRect(x: inset,
+                                   y: inset + (lineHeight + 4) * CGFloat(index),
+                                   width: frame.width - inset*2,
+                                   height: lineHeight)
         }
     }
     
-    public override init(layer: Any) {
-        let layer = layer as! ColorDescriptionLayer
-        
-        self.colorLayer = layer.colorLayer
-        self.descriptionLayer = layer.descriptionLayer
-        
-        super.init(layer: layer)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSublayers() {
-        super.layoutSublayers()
-        
-        colorLayer.frame = CGRect(x: 0,
-                                  y: 0,
-                                  width: 50,
-                                  height: frame.height)
-        descriptionLayer.frame = CGRect(x: colorLayer.frame.maxX + 8,
-                                        y: 0,
-                                        width: 150,
-                                        height: frame.height)
-    }
+    let lineHeight: CGFloat = 14
+    let inset: CGFloat = 8
+    let space: CGFloat = 4
 }

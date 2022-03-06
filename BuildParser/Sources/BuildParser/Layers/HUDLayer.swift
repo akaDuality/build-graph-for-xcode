@@ -11,8 +11,8 @@ public class HUDLayer: CALayer {
     private let timelineLayer: TimelineLayer
     private let legendLayer: ColorsLegendLayer
     
-    public init(events: [Event], scale: CGFloat) {
-        self.timelineLayer = TimelineLayer(eventsDuration: events.duration(), scale: scale)
+    public init(duration: TimeInterval, scale: CGFloat) {
+        self.timelineLayer = TimelineLayer(eventsDuration: duration, scale: scale)
         self.legendLayer = ColorsLegendLayer(scale: scale)
         
         // Time Layer
@@ -40,9 +40,10 @@ public class HUDLayer: CALayer {
         
         timelineLayer.frame = bounds
         
-        let height: CGFloat = 86
-        legendLayer.frame = CGRect(x: 20, y: frame.height - height - 80 - 52, // Toolbar,
-                                   width: 200,
+        let height: CGFloat = legendLayer.intrinsicContentSize.height
+        legendLayer.frame = CGRect(x: 20,
+                                   y: frame.height - height - 60,
+                                   width: legendLayer.intrinsicContentSize.width,
                                    height: height)
     }
     

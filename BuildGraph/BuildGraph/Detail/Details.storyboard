@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,12 +10,12 @@
         <!--Detail View Controller-->
         <scene sceneID="Wbn-Um-3ry">
             <objects>
-                <viewController storyboardIdentifier="data" id="mdS-38-uT0" customClass="DetailViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" id="Iu8-Pp-pFO" customClass="DetailView" customModule="BuildDeps" customModuleProvider="target">
+                <viewController storyboardIdentifier="data" id="mdS-38-uT0" customClass="DetailViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" id="Iu8-Pp-pFO" customClass="DetailView" customModule="BuildGraph" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D" customClass="HUDScrollView" customModule="BuildDeps" customModuleProvider="target">
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D" customClass="HUDScrollView" customModule="BuildGraph" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
                                 <clipView key="contentView" id="kmJ-xz-3Wv">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
@@ -36,7 +36,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ddB-Q6-2lq" customClass="HUDView" customModule="BuildGraph" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            </customView>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ" userLabel="Zoom controls">
                                 <rect key="frame" x="392" y="182" width="72" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EQ9-O4-CcC">
@@ -79,12 +82,17 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="zGP-rt-v5D" secondAttribute="trailing" id="8Zq-A4-rVc"/>
                             <constraint firstAttribute="bottom" secondItem="zGP-rt-v5D" secondAttribute="bottom" id="Bpv-wq-o4r"/>
+                            <constraint firstAttribute="trailing" secondItem="ddB-Q6-2lq" secondAttribute="trailing" id="Ja9-Kg-T3U"/>
+                            <constraint firstAttribute="bottom" secondItem="ddB-Q6-2lq" secondAttribute="bottom" id="O7x-w8-jgq"/>
                             <constraint firstItem="CvU-A5-cDZ" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="68" id="VEy-cY-qae"/>
+                            <constraint firstItem="ddB-Q6-2lq" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" id="fH1-PB-6WX"/>
                             <constraint firstItem="zGP-rt-v5D" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="52" id="j8j-lI-w5M"/>
                             <constraint firstItem="zGP-rt-v5D" firstAttribute="leading" secondItem="Iu8-Pp-pFO" secondAttribute="leading" id="nG8-y7-lIL"/>
+                            <constraint firstItem="ddB-Q6-2lq" firstAttribute="leading" secondItem="Iu8-Pp-pFO" secondAttribute="leading" id="wQa-VS-bIJ"/>
                             <constraint firstAttribute="trailing" secondItem="CvU-A5-cDZ" secondAttribute="trailing" constant="16" id="wWv-Om-qkf"/>
                         </constraints>
                         <connections>
+                            <outlet property="hudView" destination="ddB-Q6-2lq" id="2aT-ZG-Gxk"/>
                             <outlet property="loadingIndicator" destination="M52-Qa-0Ks" id="lHP-VV-m0c"/>
                             <outlet property="scrollView" destination="zGP-rt-v5D" id="2tI-Ux-qEb"/>
                             <outlet property="topConstraint" destination="j8j-lI-w5M" id="avM-xG-qIp"/>
@@ -211,7 +219,7 @@
         <!--Loading View Controller-->
         <scene sceneID="5RB-OX-ktn">
             <objects>
-                <viewController storyboardIdentifier="loading" id="4EO-VF-8Wl" customClass="LoadingViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loading" id="4EO-VF-8Wl" customClass="LoadingViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="exb-51-eaO">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <subviews>
@@ -235,7 +243,7 @@
         <!--Retry View Controller-->
         <scene sceneID="gbv-xA-DnE">
             <objects>
-                <viewController storyboardIdentifier="retry" id="hqM-UB-Pyh" customClass="RetryViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="retry" id="hqM-UB-Pyh" customClass="RetryViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="9Xc-mZ-syu">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

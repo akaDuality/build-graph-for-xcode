@@ -38,10 +38,44 @@ class HUDScrollView: NSScrollView {
     }
 }
 
-class DetailView: NSView {
-    var modulesLayer: AppLayer?
+class HUDView: FlippedView {
     var hudLayer: HUDLayer?
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+    }
+    
+    func setup(duration: TimeInterval, scale: CGFloat) {
+        hudLayer = HUDLayer(duration: duration, scale: scale)
+        wantsLayer = true
+        layer?.addSublayer(hudLayer!)
+    }
+    
+    override func layout() {
+        super.layout()
+        
+        layer?.updateWithoutAnimation {
+            self.hudLayer?.frame = bounds
+            self.hudLayer?.layoutIfNeeded()
+        }
+    }
+    
+    override func updateLayer() {
+        super.updateLayer()
+        
+        hudLayer?.setNeedsLayout()
+    }
+    
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        nil
+    }
+}
+
+class DetailView: NSView {
+    var modulesLayer: AppLayer?
+    
+    @IBOutlet weak var hudView: HUDView!
     @IBOutlet weak var scrollView: HUDScrollView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var zoomInButton: NSButton!
@@ -56,7 +90,6 @@ class DetailView: NSView {
             events: events,
             scale: scale)
         
-        hudLayer = HUDLayer(events: events, scale: scale)
         needsLayout = true
         
         contentView.wantsLayer = true
@@ -68,25 +101,19 @@ class DetailView: NSView {
         scrollView.automaticallyAdjustsContentInsets = false
         scrollView.contentInsets = .zero
         
-        scrollView.hudLayer = hudLayer
-        modulesLayer?.addSublayer(hudLayer!)
+        hudView.setup(duration: events.duration(), scale: scale)
+//        scrollView.hudLayer = hudLayer
+//        modulesLayer?.addSublayer(hudLayer!)
         
         layoutModules() // calc intrinsic content size
         
         scrollView.observeScrollChange()
     }
     
-    override func layout() {
-        super.layout()
-        
-        hudLayer?.frame = bounds
-    }
-    
     override func updateLayer() {
         super.updateLayer()
         
         modulesLayer?.setNeedsLayout()
-        hudLayer?.setNeedsLayout()
     }
     
     override func viewDidChangeEffectiveAppearance() {

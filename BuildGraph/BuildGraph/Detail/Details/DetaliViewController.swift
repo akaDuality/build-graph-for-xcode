@@ -246,13 +246,13 @@ class MouseContorller: NSResponder {
     func highlightEvent(at coordinate: CGPoint) {
         view.modulesLayer?.highlightEvent(at: coordinate)
         view.modulesLayer?.drawConcurrencyLine(at: coordinate)
-        view.hudLayer?.drawTimeline(at: coordinate)
+        view.hudView.hudLayer?.drawTimeline(at: coordinate)
     }
     
     func removeHighlightedEvent() {
         view.modulesLayer?.clearHighlightedEvent()
         view.modulesLayer?.clearConcurrency()
-        view.hudLayer?.clearConcurrency()
+        view.hudView.hudLayer?.clearConcurrency()
     }
 }
 

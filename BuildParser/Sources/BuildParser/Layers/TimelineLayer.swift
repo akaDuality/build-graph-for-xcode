@@ -105,7 +105,6 @@ class TimelineLayer: CALayer {
         layoutCurrentTime()
     }
     
-    private let toolbarHeight: CGFloat = 52
     private let minuteHeight: CGFloat = 30
     private let quarterHeight: CGFloat = 15
     private let secondHeight: CGFloat = 10
@@ -131,7 +130,7 @@ class TimelineLayer: CALayer {
                 tickLayer.isHidden = second % 5 != 0 || minutesWidth < 20 // can't draw even qurter tick
             }
             
-            let y: CGFloat = frame.height - height - toolbarHeight // TODO: refactor magic number
+            let y: CGFloat = frame.height - height
             let frame = CGRect(x: secondWidth * CGFloat(second),
                                y: y,
                                width: 1,
@@ -166,7 +165,7 @@ class TimelineLayer: CALayer {
         }
         
         let frame = CGRect(x: coordinate.x + 5,
-                           y: frame.height - minuteHeight * 2 - toolbarHeight,
+                           y: frame.height - minuteHeight * 2,
                            width: textWidth,
                            height: minuteHeight)
         
