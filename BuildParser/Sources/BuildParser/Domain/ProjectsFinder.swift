@@ -46,7 +46,7 @@ public class ProjectsFinder {
         }
         
         // TODO: Handle file deprecation
-        let derivedDataAccessURL = try fileAccess.promptForWorkingDirectoryPermission(directoryURL: derivedDataURL)!
+        let derivedDataAccessURL = try fileAccess.promptForWorkingDirectoryPermission(directoryURL: derivedDataURL)
         return derivedDataAccessURL
     }
     

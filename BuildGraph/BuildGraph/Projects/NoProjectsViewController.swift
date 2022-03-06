@@ -10,6 +10,7 @@ import AppKit
 import BuildParser
 
 protocol NoProjectsDelegate: AnyObject {
+    func requestAccessAndReloadProjects()
     func reloadProjetcs()
 }
 
@@ -22,10 +23,7 @@ class NoProjectsViewController: NSViewController {
     }
     
     @IBAction func changeDerivedDataDidPress(_ sender: Any) {
-        let newDerivedData = try? FileAccess()
-            .requestAccess(to: view().derivedData)
-        
-        delegate?.reloadProjetcs()
+        delegate?.requestAccessAndReloadProjects()
     }
     
     func view() -> NoProjectsView {

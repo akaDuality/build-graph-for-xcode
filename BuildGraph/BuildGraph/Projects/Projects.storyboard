@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,8 +10,8 @@
         <!--No Projects View Controller-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController storyboardIdentifier="empty" id="bU7-R8-ocO" customClass="NoProjectsViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="tOy-S4-hL0" customClass="NoProjectsView" customModule="BuildDeps" customModuleProvider="target">
+                <viewController storyboardIdentifier="empty" id="bU7-R8-ocO" customClass="NoProjectsViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="tOy-S4-hL0" customClass="NoProjectsView" customModule="BuildGraph" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="282" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -85,7 +85,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="changeDerivedDataDidPress" target="bU7-R8-ocO" id="8Zd-gw-mKR"/>
+                                                    <action selector="changeDerivedDataDidPress:" target="bU7-R8-ocO" id="6Cr-R6-1zL"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -140,8 +140,8 @@
         <!--Projects Outline View Controller-->
         <scene sceneID="vaX-4m-xVW">
             <objects>
-                <viewController storyboardIdentifier="projects" id="O8g-gR-oDc" customClass="ProjectsOutlineViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Dan-Tq-aY8" customClass="ProjectsOutlineView" customModule="BuildDeps" customModuleProvider="target">
+                <viewController storyboardIdentifier="projects" id="O8g-gR-oDc" customClass="ProjectsOutlineViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Dan-Tq-aY8" customClass="ProjectsOutlineView" customModule="BuildGraph" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -242,7 +242,81 @@
                 </viewController>
                 <customObject id="2xm-5H-MYl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-533" y="122"/>
+            <point key="canvasLocation" x="-858" y="122"/>
+        </scene>
+        <!--No Access View Controller-->
+        <scene sceneID="usj-BB-QZx">
+            <objects>
+                <viewController storyboardIdentifier="noAccess" id="QnW-fe-Syf" customClass="NoAccessViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="3MY-c0-tAL" customClass="NoProjectsView" customModule="BuildGraph" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="282" height="500"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="48" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6z-9N-Mga">
+                                <rect key="frame" x="20" y="293" width="242" height="115"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AkH-WO-F3b">
+                                        <rect key="frame" x="0.0" y="0.0" width="242" height="115"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rcg-ma-8Li">
+                                                <rect key="frame" x="-2" y="52" width="177" height="63"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="No access to Derived Data" id="Vur-Y5-pRd">
+                                                    <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tV3-Qq-bMK">
+                                                <rect key="frame" x="-2" y="28" width="215" height="16"/>
+                                                <textFieldCell key="cell" title="The app can't work without access" id="akr-9e-URT">
+                                                    <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4bE-td-IcP">
+                                                <rect key="frame" x="-7" y="-7" width="114" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Grant access" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y9X-fa-4sJ">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="changeDerivedDataDidPress:" target="QnW-fe-Syf" id="MNT-f7-cmF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="o6z-9N-Mga" firstAttribute="top" secondItem="N36-tN-S1w" secondAttribute="top" constant="20" symbolic="YES" id="75v-cE-wnB"/>
+                            <constraint firstItem="o6z-9N-Mga" firstAttribute="leading" secondItem="N36-tN-S1w" secondAttribute="leading" id="ina-Wg-syz"/>
+                            <constraint firstItem="o6z-9N-Mga" firstAttribute="trailing" secondItem="N36-tN-S1w" secondAttribute="trailing" id="jF9-4t-mtm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HeC-dZ-cVP"/>
+                        <viewLayoutGuide key="layoutMargins" id="N36-tN-S1w"/>
+                    </view>
+                </viewController>
+                <customObject id="LUY-mg-u0z" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-562" y="122"/>
         </scene>
     </scenes>
 </document>

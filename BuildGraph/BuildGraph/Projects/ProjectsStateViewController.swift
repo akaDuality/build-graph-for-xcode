@@ -13,6 +13,7 @@ enum ProjectsState: StateProtocol {
     case loading
     case empty(_ derivedDataURL: URL)
     case projects(_ selectedProject: ProjectReference?)
+    case noAccessToDerivedData
     
     static var `default`: Self = .loading
 }
@@ -45,6 +46,10 @@ class ProjectsStateViewController: StateViewController<ProjectsState>, ProjectsU
                     controller.select(project: selectedProject)
                 }
                 
+                return controller
+            case .noAccessToDerivedData:
+                let controller = storyboard.instantiateController(withIdentifier: "noAccess") as! NoAccessViewController
+                controller.delegate = self.presenter
                 return controller
             }
         }

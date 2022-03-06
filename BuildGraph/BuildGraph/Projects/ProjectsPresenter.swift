@@ -27,20 +27,38 @@ class ProjectsPresenter {
     
     private let uiSettings = UISettings()
     
-    func reloadProjetcs() {
-        let pathFinder = ProjectsFinder()
-        let derivedData = try! pathFinder.derivedDataPath()
-        projects = try! pathFinder.projects(derivedDataPath: derivedData)
-        
-        guard !projects.isEmpty else {
-            ui?.state = .empty(derivedData)
-            return
+    func requestAccessAndReloadProjects() {
+        do {
+            let pathFinder = ProjectsFinder()
+            let derivedDataPath = try pathFinder.derivedDataPath()
+            
+            let newDerivedData = try FileAccess()
+                .requestAccess(to: derivedDataPath)
+            
+            reloadProjetcs()
+        } catch {
+            ui?.state = .noAccessToDerivedData
         }
-        
-        let selectedProject = selectedProject(in: projects)
-        ui?.state = .projects(selectedProject)
-        
-        delegate?.didSelect(project: selectedProject)
+    }
+    
+    func reloadProjetcs() {
+        do {
+            let pathFinder = ProjectsFinder()
+            let derivedData = try pathFinder.derivedDataPath()
+            projects = try pathFinder.projects(derivedDataPath: derivedData)
+
+            guard !projects.isEmpty else {
+                ui?.state = .empty(derivedData)
+                return
+            }
+
+            let selectedProject = selectedProject(in: projects)
+            ui?.state = .projects(selectedProject)
+
+            delegate?.didSelect(project: selectedProject)
+        } catch let error {
+            ui?.state = .noAccessToDerivedData
+        }
     }
     
     func reloadProjetcs(ui: ProjectsUI) {
