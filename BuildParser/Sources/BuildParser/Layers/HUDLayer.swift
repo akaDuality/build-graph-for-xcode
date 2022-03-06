@@ -8,10 +8,13 @@
 import QuartzCore
 
 public class HUDLayer: CALayer {
-    private let timelineLayer: TimelineLayer
+    private var timelineLayer: TimelineLayer
     private let legendLayer: ColorsLegendLayer
     
+    private let eventsDuration: TimeInterval
+    
     public init(duration: TimeInterval, scale: CGFloat) {
+        self.eventsDuration = duration
         self.timelineLayer = TimelineLayer(eventsDuration: duration, scale: scale)
         self.legendLayer = ColorsLegendLayer(scale: scale)
         
@@ -22,11 +25,22 @@ public class HUDLayer: CALayer {
         addSublayer(legendLayer)
     }
     
+    public func scale(to magnification: CGFloat) {
+        timelineLayer.removeFromSuperlayer()
+        
+        let newDuration = eventsDuration / magnification
+        
+        self.timelineLayer = TimelineLayer(eventsDuration: newDuration, scale: contentsScale)
+        addSublayer(timelineLayer)
+        self.setNeedsLayout()
+    }
+    
     public override init(layer: Any) {
         let layer = layer as! HUDLayer
         
         self.timelineLayer = layer.timelineLayer
         self.legendLayer = layer.legendLayer
+        self.eventsDuration = layer.eventsDuration
         
         super.init(layer: layer)
     }

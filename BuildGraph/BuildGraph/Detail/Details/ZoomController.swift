@@ -7,15 +7,22 @@
 
 import AppKit
 
+protocol ZoomDelegate: AnyObject {
+    func didZoom(to magnification: CGFloat)
+}
+
 class ZoomController {
     init(scrollView: NSScrollView,
+         delegate: ZoomDelegate,
          scaleFactor: CGFloat = NSScreen.main!.backingScaleFactor) {
         self.scrollView = scrollView
         self.screenScaleFactor = scaleFactor
+        self.delegate = delegate
     }
     
     let scrollView: NSScrollView
     let screenScaleFactor: CGFloat
+    weak var delegate: ZoomDelegate?
     
     func zoomIn() {
         zoom(to: magnification + magnificationStep)
@@ -45,7 +52,10 @@ class ZoomController {
     private func zoom(to magnification: CGFloat) {
         scrollView.setMagnification(magnification,
                                     centeredAt: center)
+        
         updateScale(to: magnification * screenScaleFactor)
+        
+        delegate?.didZoom(to: magnification)
     }
     
     private func updateScale(to scale: CGFloat) {

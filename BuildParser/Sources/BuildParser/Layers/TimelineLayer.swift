@@ -59,7 +59,10 @@ class TimelineLayer: CALayer {
         }
         
         addTicks()
-        
+        addCurrentTime()
+    }
+    
+    private func addCurrentTime() {
         currentTime.foregroundColor = Colors.timeColor()
         currentTime.fontSize = 20
         
@@ -186,7 +189,11 @@ extension TimeInterval {
         seconds / 60
     }
     var seconds: Int {
-        Int(self)
+        guard !self.isInfinite else {
+            return 0
+        }
+        
+        return Int(self)
     }
     var secondsInMinute: Int {
         seconds % 60

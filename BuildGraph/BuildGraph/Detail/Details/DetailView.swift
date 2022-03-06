@@ -10,68 +10,6 @@ import BuildParser
 import GraphParser
 import XCLogParser
 
-class HUDScrollView: NSScrollView {
-    var hudLayer: HUDLayer?
-    
-//    override func layout() {
-//        super.layout()
-//
-//        hudLayer?.frame = bounds
-//    }
-    
-    func observeScrollChange() {
-        allowsMagnification = false // Here is a problem with smooth zoom by touchpad
-        
-        contentView.postsBoundsChangedNotifications = true
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didScrollContent),
-                                               name: NSView.boundsDidChangeNotification,
-                                               object: nil)
-    }
-    
-    @objc func didScrollContent() {
-        hudLayer?.updateWithoutAnimation {
-            hudLayer?.frame = contentView.bounds.offsetBy(dx: 0, dy: 52) // TODO: Remove hardcode
-        }
-        
-        // TODO: Update scale
-    }
-}
-
-class HUDView: FlippedView {
-    var hudLayer: HUDLayer?
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-    }
-    
-    func setup(duration: TimeInterval, scale: CGFloat) {
-        hudLayer = HUDLayer(duration: duration, scale: scale)
-        wantsLayer = true
-        layer?.addSublayer(hudLayer!)
-    }
-    
-    override func layout() {
-        super.layout()
-        
-        layer?.updateWithoutAnimation {
-            self.hudLayer?.frame = bounds
-            self.hudLayer?.layoutIfNeeded()
-        }
-    }
-    
-    override func updateLayer() {
-        super.updateLayer()
-        
-        hudLayer?.setNeedsLayout()
-    }
-    
-    override func hitTest(_ point: NSPoint) -> NSView? {
-        nil
-    }
-}
-
 class DetailView: NSView {
     var modulesLayer: AppLayer?
     
@@ -102,7 +40,7 @@ class DetailView: NSView {
         scrollView.contentInsets = .zero
         
         hudView.setup(duration: events.duration(), scale: scale)
-//        scrollView.hudLayer = hudLayer
+//        scrollView.hudLayer = hudView.hudLayer
 //        modulesLayer?.addSublayer(hudLayer!)
         
         layoutModules() // calc intrinsic content size
