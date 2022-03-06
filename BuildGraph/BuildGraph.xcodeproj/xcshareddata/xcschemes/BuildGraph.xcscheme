@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
                BuildableName = "BuildDeps.app"
-               BlueprintName = "BuildDeps"
+               BlueprintName = "BuildGraph"
                ReferencedContainer = "container:BuildGraph.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -71,7 +71,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
             BuildableName = "BuildDeps.app"
-            BlueprintName = "BuildDeps"
+            BlueprintName = "BuildGraph"
             ReferencedContainer = "container:BuildGraph.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -88,7 +88,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
             BuildableName = "BuildDeps.app"
-            BlueprintName = "BuildDeps"
+            BlueprintName = "BuildGraph"
             ReferencedContainer = "container:BuildGraph.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
