@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -677,7 +677,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BuildDeps" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BuildGraph" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -686,8 +686,8 @@
         <!--Window Controller-->
         <scene sceneID="8s9-m6-HQ8">
             <objects>
-                <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildDeps" customModuleProvider="target">
+                <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildGraph" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="425" y="462" width="800" height="200"/>
@@ -792,7 +792,7 @@
         <!--Settings Popover View Controller-->
         <scene sceneID="mob-fX-uiP">
             <objects>
-                <viewController id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="3qk-xS-avz">
                         <rect key="frame" x="0.0" y="0.0" width="340" height="617"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -922,7 +922,7 @@
         <!--Split Controller-->
         <scene sceneID="6Af-iS-TkZ">
             <objects>
-                <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="DCf-W7-ceh"/>
                         <splitViewItem id="z34-W5-asi"/>
@@ -943,7 +943,7 @@
         <!--Details State View Controller-->
         <scene sceneID="pAW-rV-PZr">
             <objects>
-                <viewController id="rEc-My-FiG" customClass="DetailsStateViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rEc-My-FiG" customClass="DetailsStateViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="me5-j8-t6X">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -958,7 +958,7 @@
         <!--Projects State View Controller-->
         <scene sceneID="mUt-g6-Me5">
             <objects>
-                <viewController id="9Ke-Cl-ZR8" customClass="ProjectsStateViewController" customModule="BuildDeps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9Ke-Cl-ZR8" customClass="ProjectsStateViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="iMY-Eg-U1r">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

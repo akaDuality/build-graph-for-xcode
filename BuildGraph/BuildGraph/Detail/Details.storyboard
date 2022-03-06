@@ -39,7 +39,7 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ddB-Q6-2lq" customClass="HUDView" customModule="BuildGraph" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ" userLabel="Zoom controls">
+                            <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ" userLabel="Zoom controls">
                                 <rect key="frame" x="392" y="182" width="72" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EQ9-O4-CcC">
