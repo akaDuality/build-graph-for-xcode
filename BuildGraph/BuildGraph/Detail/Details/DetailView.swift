@@ -20,9 +20,9 @@ class HUDScrollView: NSScrollView {
 //    }
     
     func observeScrollChange() {
+        allowsMagnification = false // Here is a problem with smooth zoom by touchpad
         
         contentView.postsBoundsChangedNotifications = true
-        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didScrollContent),
                                                name: NSView.boundsDidChangeNotification,
@@ -33,6 +33,8 @@ class HUDScrollView: NSScrollView {
         hudLayer?.updateWithoutAnimation {
             hudLayer?.frame = contentView.bounds.offsetBy(dx: 0, dy: 52) // TODO: Remove hardcode
         }
+        
+        // TODO: Update scale
     }
 }
 
