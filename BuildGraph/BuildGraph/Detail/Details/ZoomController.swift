@@ -20,6 +20,18 @@ class ZoomController {
         self.delegate = delegate
     }
     
+    func observeScrollChange() {
+        scrollView.contentView.postsBoundsChangedNotifications = true
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didScrollContent),
+                                               name: NSView.boundsDidChangeNotification,
+                                               object: nil)
+    }
+    
+    @objc func didScrollContent() {
+        delegate?.didZoom(to: magnification)
+    }
+    
     let scrollView: NSScrollView
     let screenScaleFactor: CGFloat
     weak var delegate: ZoomDelegate?

@@ -19,7 +19,6 @@ class DetailViewController: NSViewController {
         super.viewDidAppear()
         
         if embeddInWindow {
-//            view.window?.toolbar = toolbar
             view().resizeWindowHeightIfPossible()
             view.window?.title = title!
         }
@@ -32,6 +31,8 @@ class DetailViewController: NSViewController {
             scrollView: view().scrollView,
             delegate: self
         )
+        
+        zoomController.observeScrollChange()
     }
     
     override func viewDidLayout() {

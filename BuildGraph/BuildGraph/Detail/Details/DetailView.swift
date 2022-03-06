@@ -40,12 +40,10 @@ class DetailView: NSView {
         scrollView.contentInsets = .zero
         
         hudView.setup(duration: events.duration(), scale: scale)
-//        scrollView.hudLayer = hudView.hudLayer
+        scrollView.hudLayer = hudView.hudLayer
 //        modulesLayer?.addSublayer(hudLayer!)
         
         layoutModules() // calc intrinsic content size
-        
-        scrollView.observeScrollChange()
     }
     
     override func updateLayer() {
