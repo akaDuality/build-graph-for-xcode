@@ -37,25 +37,25 @@
       "size" : "128x128"
     },
     {
-      "filename" : "MacOS Icon 01@512.png",
+      "filename" : "MacOS Icon 01@256-1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "MacOS Icon 01@1024.png",
+      "filename" : "MacOS Icon 01@512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "Build Graph icon512.png",
+      "filename" : "MacOS Icon 01@512-1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "Build Graph icon1024.png",
+      "filename" : "MacOS Icon 01@1024-1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
