@@ -14,7 +14,6 @@
 		1E16961B27247AF1006D93CE /* targetGraph.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E16961A27247918006D93CE /* targetGraph.txt */; };
 		1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */; };
 		1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */; };
-		1E1EAEDE27D4A36100D552F6 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAEDD27D4A36100D552F6 /* FirebasePerformance */; };
 		1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */; };
 		1E2D7A5527288521009ED389 /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2D7A5427288521009ED389 /* UISettings.swift */; };
 		1E538BD727B9550100136F82 /* ZoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E538BD627B9550100136F82 /* ZoomController.swift */; };
@@ -136,7 +135,6 @@
 			files = (
 				1E16961827246EC5006D93CE /* GraphParser in Frameworks */,
 				1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */,
-				1E1EAEDE27D4A36100D552F6 /* FirebasePerformance in Frameworks */,
 				1EDB5E6127135F1600741EEF /* BuildParser in Frameworks */,
 				1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -341,7 +339,6 @@
 				1E16961727246EC5006D93CE /* GraphParser */,
 				1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */,
 				1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */,
-				1E1EAEDD27D4A36100D552F6 /* FirebasePerformance */,
 			);
 			productName = BuildGraph;
 			productReference = 1EDB5E3127135F0000741EEF /* BuildGraph.app */;
@@ -683,6 +680,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akaDuality.BuildGraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -712,6 +710,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akaDuality.BuildGraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -881,11 +880,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E1EAED827D4A36100D552F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
-		};
-		1E1EAEDD27D4A36100D552F6 /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E1EAED827D4A36100D552F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
 		};
 		1EDB5E6027135F1600741EEF /* BuildParser */ = {
 			isa = XCSwiftPackageProductDependency;
