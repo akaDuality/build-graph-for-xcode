@@ -9,20 +9,6 @@ import Foundation
 import AppKit
 import XCLogParser
 
-class BookmarkSaver {
-    let userDefaults = UserDefaults.standard
-    
-    func saveDerivedDataBookmark(data: Data) {
-        userDefaults.set(data, forKey: "derivedDataBookmark")
-    }
-    
-    func derivedDataBookmark() -> Data? {
-        userDefaults.value(forKey: "derivedDataBookmark") as? Data
-    }
-    
-    // TODO: Union with UISettings
-}
-
 public protocol FileAccessProtocol {
     func accessedDerivedDataURL() -> URL?
 }
