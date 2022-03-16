@@ -27,10 +27,12 @@ class ImageSaveService {
     
     private func fileName(for project: ProjectReference?, title: String?) -> String {
         guard let project = project else {
-            return "\(title ?? Date().description).png"
+            return (title ?? Date().description)
+                .appedingPngFormat
         }
         
         return ProjectDescriptionService().description(for: project)
+            .appedingPngFormat
     }
     
     // TODO: Add background color
@@ -59,6 +61,12 @@ class ImageSaveService {
         } catch let error {
             print(error)
         }
+    }
+}
+
+fileprivate extension String {
+    var appedingPngFormat: Self {
+        (self) + ".png"
     }
 }
 
