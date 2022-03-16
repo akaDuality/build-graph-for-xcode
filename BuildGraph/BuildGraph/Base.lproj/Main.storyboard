@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -698,6 +698,11 @@
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
                             <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="892B5DBF-E693-4392-A8A3-5A49838F341B" label="Refresh" paletteLabel="Refresh" tag="-1" image="arrow.clockwise" catalog="system" sizingBehavior="auto" id="1HI-xL-x8z">
+                                    <connections>
+                                        <action selector="refresh:" target="LFf-Ro-PN7" id="vyc-Zw-Chv"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="0Qa-Qa-ok0"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aNr-aQ-u4z"/>
                                 <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Save image" paletteLabel="Image" image="paperplane.fill" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
@@ -764,6 +769,7 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="1HI-xL-x8z"/>
                                 <toolbarItem reference="NRJ-yX-oB1"/>
                                 <toolbarItem reference="pZ8-K6-ajH"/>
                                 <toolbarItem reference="0Qa-Qa-ok0"/>
@@ -974,6 +980,7 @@
     <resources>
         <image name="NSGoLeftTemplate" width="10" height="14"/>
         <image name="NSGoRightTemplate" width="10" height="14"/>
+        <image name="arrow.clockwise" catalog="system" width="14" height="16"/>
         <image name="paperplane.fill" catalog="system" width="16" height="16"/>
         <image name="puzzlepiece.fill" catalog="system" width="22" height="15"/>
     </resources>

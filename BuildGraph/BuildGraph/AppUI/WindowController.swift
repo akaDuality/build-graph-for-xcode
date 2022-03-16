@@ -17,7 +17,6 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        window!.toolbar!.delegate = self
         window().setupToolbar(window!.toolbar!)
     }
     
@@ -63,32 +62,8 @@ class WindowController: NSWindowController {
     func splitViewController() -> SplitController {
         return self.contentViewController as! SplitController
     }
-}
-
-extension WindowController: NSToolbarDelegate {
-    func toolbar(_ toolbar: NSToolbar,
-                 itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
-                 willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        switch itemIdentifier {
-        case .refresh:
-            let refresh = NSToolbarItem(itemIdentifier: itemIdentifier)
-            refresh.image = NSImage(systemSymbolName: "arrow.clockwise",
-                                    accessibilityDescription: NSLocalizedString("Refresh projects", comment: "Toolbar button"))
-            refresh.label = NSLocalizedString("Refresh", comment: "Toolbar button")
-            refresh.target = self
-            refresh.action = #selector(self.refresh)
-            refresh.isEnabled = true
-            return refresh
-        default:
-            fatalError()
-        }
-    }
     
-    @objc func refresh() {
+    @IBAction func refresh(_ sender: Any) {
         splitViewController().projectsPresenter.reloadProjetcs()
     }
-}
-
-extension NSToolbarItem.Identifier {
-    static let refresh = Self(rawValue: "Refresh")
 }
