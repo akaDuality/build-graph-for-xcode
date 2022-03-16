@@ -17,8 +17,8 @@ class MainWindow: NSWindow {
     @IBOutlet weak var sendImageToolbarItem: NSToolbarItem!
     
     func setupToolbar(_ toolbar: NSToolbar) {
-        toolbar.insertItem(withItemIdentifier: .toggleSidebar, at: 1)
-        toolbar.insertItem(withItemIdentifier: .sidebarTrackingSeparator, at: 2)
+        toolbar.insertItem(withItemIdentifier: .toggleSidebar, at: 2)
+        toolbar.insertItem(withItemIdentifier: .sidebarTrackingSeparator, at: 3)
         
         toolbar.sizeMode = .regular
         toolbar.displayMode = .iconOnly
