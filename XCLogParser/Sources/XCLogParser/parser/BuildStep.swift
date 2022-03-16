@@ -87,6 +87,11 @@ public enum DetailStepType: String, Encodable, CaseIterable, Equatable {
 
     // swiftlint:disable:next cyclomatic_complexity
     public static func getDetailType(signature: String) -> DetailStepType {
+        if signature.contains("Compiling") {
+            return .swiftCompilation
+        }
+            
+        print("getDetailType for \(signature)")
         switch signature {
         case Prefix("CompileC "):
             return .cCompilation
