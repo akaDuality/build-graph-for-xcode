@@ -28,6 +28,8 @@ class SplitController: NSSplitViewController {
         super.viewDidAppear()
         
         projectsPresenter.reloadProjetcs(ui: projects)
+        
+        mainWindow().setupToolbar()
     }
 
     var projects: ProjectsStateViewController! {

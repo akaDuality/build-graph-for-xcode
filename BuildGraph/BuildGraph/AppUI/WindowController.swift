@@ -14,12 +14,6 @@ class WindowController: NSWindowController {
         window as! MainWindow
     }
     
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        
-        window().setupToolbar(window!.toolbar!)
-    }
-    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
