@@ -50,7 +50,7 @@ class SettingsPopoverViewController: NSViewController {
     
     private func setAllCheckbox(in stackView: NSStackView, to state: NSControl.StateValue) {
         for subview in stackView.arrangedSubviews {
-            guard let checkbox = subview as? DetailStepCheckBox else { continue }
+            guard let checkbox = subview.subviews.first as? DetailStepCheckBox else { continue }
             
             checkbox.state = state
             updateSettings(stepType: checkbox.stepType, isOn: state == .on)
