@@ -762,7 +762,7 @@
                                         </connections>
                                     </searchField>
                                 </searchToolbarItem>
-                                <toolbarItem implicitItemIdentifier="36985640-83C1-4EE8-94D7-20C5849E041A" label="Events" paletteLabel="Events" tag="-1" image="slider.horizontal.below.square.filled.and.square" catalog="system" bordered="YES" sizingBehavior="auto" id="b83-4x-o6p">
+                                <toolbarItem implicitItemIdentifier="36985640-83C1-4EE8-94D7-20C5849E041A" label="Events" paletteLabel="Events" tag="-1" image="slider.horizontal.below.square.filled.and.square" catalog="system" bordered="YES" sizingBehavior="auto" autovalidates="NO" id="b83-4x-o6p">
                                     <connections>
                                         <segue destination="AVJ-kY-T3V" kind="popover" popoverAnchorView="b83-4x-o6p" popoverBehavior="t" preferredEdge="maxY" id="Eah-DU-Cox"/>
                                     </connections>
