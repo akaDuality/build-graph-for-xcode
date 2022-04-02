@@ -22,7 +22,6 @@ public class InteractionsSettings {
     
     public var highlightOnHover: Bool = true
     public var showTime: Bool = true
-    public var showColorLegend: Bool = true
     public var showBlockingDependeciesWithoutHighlighting: Bool = true
     public var resizeWindowOnProjectSelection: Bool = true
     
@@ -33,7 +32,7 @@ public class AppLayer: CALayer {
     public let events: [Event]
     
     private let modulesLayer: DependeciesLayer
-    private let periodsLayer: PeriodsLayer
+//    private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
     
     private let fullframes: [CALayer]
@@ -52,21 +51,27 @@ public class AppLayer: CALayer {
     
     public var showPerformance: Bool = true {
         didSet {
-            periodsLayer.isHidden = !showPerformance
+//            periodsLayer.isHidden = !showPerformance
         }
     }
     
-    public init(events: [Event], scale: CGFloat) {
+    public init(events: [Event], fontSize: CGFloat, scale: CGFloat) {
         self.events = events
         
-        self.modulesLayer = DependeciesLayer(events: events, scale: scale)
+        self.modulesLayer = DependeciesLayer(events: events,
+                                             fontSize: fontSize,
+                                             scale: scale)
         self.concurrencyLayer = ConcurrencyLayer(events: events, scale: scale)
         
-        self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
-                                         start: events.start(),
-                                         totalDuration: events.duration())
+//        self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
+//                                         start: events.start(),
+//                                         totalDuration: events.duration())
         
-        fullframes = [periodsLayer, modulesLayer, concurrencyLayer]
+        fullframes = [
+//            periodsLayer,
+            modulesLayer,
+            concurrencyLayer
+        ]
         
         // Time Layer
         super.init()
@@ -80,7 +85,7 @@ public class AppLayer: CALayer {
         self.events = layer.events
         self.modulesLayer = layer.modulesLayer
         self.concurrencyLayer = layer.concurrencyLayer
-        self.periodsLayer = layer.periodsLayer
+//        self.periodsLayer = layer.periodsLayer
         self.fullframes = layer.fullframes
         
         super.init(layer: layer)
