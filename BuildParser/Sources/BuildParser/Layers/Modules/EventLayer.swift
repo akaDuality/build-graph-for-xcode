@@ -94,7 +94,7 @@ class EventLayer: CALayer {
     
     func layoutText(spaceToLeft: CGFloat, spaceToRight: CGFloat) {
         textLayer.string = event.description
-        textLayer.backgroundColor = NSColor.red.cgColor
+//        textLayer.backgroundColor = NSColor.systemRed.cgColor
         
         let textWidth: CGFloat = event.description
             .size(OfFont: NSFont.systemFont(ofSize: textLayer.fontSize))
