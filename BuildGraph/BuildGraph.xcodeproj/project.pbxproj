@@ -164,6 +164,7 @@
 			children = (
 				1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */,
 				1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */,
+				1E2D7A5427288521009ED389 /* UISettings.swift */,
 			);
 			path = Popovers;
 			sourceTree = "<group>";
@@ -288,7 +289,6 @@
 				1E61EC6D2794542100208FDB /* Popovers */,
 				1EAD77FF2781EC9400C65AC5 /* Projects */,
 				1EAD77FE2781EA0000C65AC5 /* Detail */,
-				1E2D7A5427288521009ED389 /* UISettings.swift */,
 				1EB1A8DB272EB14E00D31AB8 /* ImageSaveService.swift */,
 				1EDB5E3827135F0100741EEF /* Assets.xcassets */,
 				1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */,
