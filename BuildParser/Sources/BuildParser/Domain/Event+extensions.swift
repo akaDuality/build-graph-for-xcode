@@ -182,9 +182,6 @@ extension Array where Element == Event {
 }
 
 extension Event {
-    var duration: TimeInterval {
-        endDate.timeIntervalSince(startDate)
-    }
     
     func hit(time: Date) -> Bool {
         (startDate...endDate).contains(time)

@@ -4,19 +4,23 @@ public class Event: Equatable, Hashable {
     
     public init(taskName: String,
                 startDate: Date,
-                endDate: Date,
+                duration: TimeInterval,
                 fetchedFromCache: Bool,
                 steps: [Event]) {
         self.taskName = taskName
         self.startDate = startDate
-        self.endDate = endDate
+        self.duration = duration
         self.fetchedFromCache = fetchedFromCache
         self.steps = steps
     }
     
     public let taskName: String
     public let startDate: Date
-    public let endDate: Date
+    public let duration: TimeInterval
+    public lazy var endDate: Date = {
+        startDate.addingTimeInterval(duration)
+    }()
+    
     public let fetchedFromCache: Bool
     public let steps: [Event]
     

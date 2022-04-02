@@ -59,15 +59,24 @@ public class RealBuildLogParser {
         buildStep.title
     }
     
+    var progress = Progress(totalUnitCount: 3)
+    
     public func parse(logURL: URL, filter: FilterSettings) throws -> [Event] {
+        progress = Progress(totalUnitCount: 3)
+        
         let activityLog = try activityLogParser.parseActivityLogInURL(
             logURL,
             redacted: false, // Parameter is not important, code was comment out
             withoutBuildSpecificInformation: false) // Parameter is not important, code was comment out
         
+        progress.completedUnitCount = 1
+        
         buildStep = try buildParser.parse(activityLog: activityLog)
-       
+        progress.completedUnitCount = 2
+        
         let events = convertToEvents(buildStep: buildStep, filter: filter)
+        progress.completedUnitCount = 3
+        
         return events
     }
     
@@ -83,13 +92,15 @@ public class RealBuildLogParser {
         return step
     }
     
+    let dateFormatter = DateFormatter.iso8601Full_Z
+    
     func convertToEvents(
         buildStep: BuildStep,
         filter: FilterSettings
     ) -> [Event] {
-        let dateFormatter = DateFormatter.iso8601Full_Z
-        let events = buildStep.subSteps
-            .compactMap { step -> Event? in
+        
+        let events: [Event] = buildStep.subSteps
+            .parallelCompactMap { step -> Event? in
                 var substeps = step.subSteps
                 
                 // TODO: Speedup if all or none settings are enabled
@@ -97,8 +108,8 @@ public class RealBuildLogParser {
                     filter.allowedTypes.contains(substep.detailStepType)
                 }
                 
-                guard let startDate = substeps.first?.startDate,
-                      let lastDate = substeps.last?.endDate
+                guard
+                    let startDate = substeps.first?.startDate
                 else {
                     return nil // Empty array
                 }
@@ -107,13 +118,10 @@ public class RealBuildLogParser {
                     return nil
                 }
                 
-                return Event(
-                    taskName: step.title.without_Build_target,
-                    startDate: dateFormatter.date(from: startDate)!,
-                    endDate: dateFormatter.date(from: lastDate)!,
-                    fetchedFromCache: step.fetchedFromCache,
-                    steps: convertToEvents(subSteps: substeps)
-                )
+                return self.event(from: step,
+                                  startDate: startDate,
+                                  duration: step.duration,
+                                  substeps: substeps)
             }
             .sorted { lhsEvent, rhsEvent in
                 if lhsEvent.startDate == rhsEvent.startDate {
@@ -129,16 +137,25 @@ public class RealBuildLogParser {
     public func convertToEvents(
         subSteps: [BuildStep]
     ) -> [Event] {
-        let dateFormatter = DateFormatter.iso8601Full_Z
+//        var events = [Event]()
+//
+//        // Separate by high-level tasks
+//        DispatchQueue.concurrentPerform(iterations: subSteps.count) { index in
+//            let step = subSteps[index]
+//
+//            let event = Event(
+//                taskName: step.title.without_Build_target,
+//                startDate: dateFormatter.date(from: step.startDate)!,
+//                endDate: dateFormatter.date(from: step.endDate)!,
+//                fetchedFromCache: step.fetchedFromCache,
+//                steps: convertToEvents(subSteps: step.subSteps)
+//            )
+//            events.append(event)
+//        }
+        
         let events = subSteps
-            .map { step -> Event in
-                return Event(
-                    taskName: step.title.without_Build_target,
-                    startDate: dateFormatter.date(from: step.startDate)!,
-                    endDate: dateFormatter.date(from: step.endDate)!,
-                    fetchedFromCache: step.fetchedFromCache,
-                    steps: convertToEvents(subSteps: step.subSteps)
-                )
+            .map { step in
+                event(from:step, startDate: step.startDate, duration: step.duration, substeps: step.subSteps)
             }
             .sorted { lhsEvent, rhsEvent in
                 if lhsEvent.startDate == rhsEvent.startDate {
@@ -147,8 +164,67 @@ public class RealBuildLogParser {
                     return lhsEvent.startDate < rhsEvent.startDate
                 }
             }
-        
         return events
+    }
+    
+    private func event(from step: BuildStep,
+                       startDate: String,
+                       duration: TimeInterval,
+                       substeps: [BuildStep]) -> Event {
+        Event(
+            taskName: step.title.without_Build_target,
+            startDate: dateFormatter.date(from: startDate)!,
+            duration: duration,
+            fetchedFromCache: step.fetchedFromCache,
+            steps: self.convertToEvents(subSteps: substeps)
+        )
+    }
+}
+
+extension DateFormatter {
+    public static let iso8601Full_Z: DateFormatter = {
+        dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ")
+    }()
+    
+    static func dateFormatter(format: String) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }
+}
+
+extension Collection {
+    // Atother implementation https://talk.objc.io/episodes/S01E90-concurrent-map
+    func parallelMap<R>(_ transform: @escaping (Element) -> R) -> [R] {
+        var res: [R?] = .init(repeating: nil, count: count)
+        
+        let lock = NSRecursiveLock()
+        DispatchQueue.concurrentPerform(iterations: count) { i in
+            let result = transform(self[index(startIndex, offsetBy: i)])
+            lock.lock()
+            res[i] = result
+            lock.unlock()
+        }
+        
+        return res.map({ $0! })
+    }
+    
+    func parallelCompactMap<R>(_ transform: @escaping (Element) -> R?) -> [R] {
+        var res: [R?] = .init(repeating: nil, count: count)
+        
+        let lock = NSRecursiveLock()
+        DispatchQueue.concurrentPerform(iterations: count) { i in
+            if let result = transform(self[index(startIndex, offsetBy: i)]) {
+                lock.lock()
+                res[i] = result
+                lock.unlock()
+            }
+        }
+            
+        return res.compactMap { $0 }
     }
 }
 

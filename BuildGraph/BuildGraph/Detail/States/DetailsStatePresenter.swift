@@ -29,26 +29,27 @@ class DetailsStatePresenter {
                             _ project: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
-        print("will read \(project.activityLogURL), depsURL \(String(describing: project.depsURL))")
-        
-        do {
-            let events = try parser.parse(
-                logURL: project.currentActivityLog,
-                filter: filter)
+        Task {
+            print("will read \(project.activityLogURL), depsURL \(String(describing: project.depsURL))")
             
-            guard events.count > 0 else {
-                // TODO: depends on compilationOnly flag
-                didFail(NSLocalizedString("No compilation data found", comment: ""))
-                return
+            do {
+                // TODO: how this try is handled?
+                let events = try await events(currentActivityLog: project.currentActivityLog, filter: filter)
+                let dependencies = await dependencies(depsURL: project.depsURL)
+                cachedDependencies = dependencies
+                
+                events.connect(by: dependencies)
+                
+                guard events.count > 0 else {
+                    // TODO: depends on compilationOnly flag
+                    didFail(ParsingError.noEventsFound.localizedDescription)
+                    return
+                }
+                
+                didLoad(events, cachedDependencies ?? [], self.parser.title, project)
+            } catch let error {
+                didFail(error.localizedDescription)
             }
-            
-            let dependencies = connectWithDependencies(events: events,
-                                                       depsURL: project.depsURL)
-            cachedDependencies = dependencies
-            
-            didLoad(events, dependencies, self.parser.title, project)
-        } catch let error {
-            didFail(error.localizedDescription)
         }
     }
     
@@ -62,12 +63,17 @@ class DetailsStatePresenter {
         if let dependencies = cachedDependencies {
             events.connect(by: dependencies)
         }
-//        let dependencies = connectWithDependencies(events: events, depsURL: project.depsURL)
         
         didLoad(events, cachedDependencies ?? [], parser.title)
     }
     
-    private func connectWithDependencies(events: [Event], depsURL: URL?) -> [Dependency] {
+    private func events(currentActivityLog: URL, filter: FilterSettings) async throws -> [Event] {
+        try parser.parse(
+            logURL: currentActivityLog,
+            filter: filter)
+    }
+    
+    private func dependencies(depsURL: URL?) async -> [Dependency] {
         var dependencies = [Dependency]()
         
         if let depsURL = depsURL {
@@ -77,9 +83,19 @@ class DetailsStatePresenter {
                 // TODO: Log
             }
         }
-        
-        events.connect(by: dependencies)
-        
         return dependencies
+    }
+}
+
+
+enum ParsingError: Error {
+    case noEventsFound
+}
+
+extension ParsingError: CustomNSError {
+    var localizedDescription: String {
+        switch self {
+        case .noEventsFound: return NSLocalizedString("No compilation data found", comment: "")
+        }
     }
 }
