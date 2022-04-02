@@ -42,16 +42,32 @@ public class ProjectReferenceFactory {
         
         do {
             let activityLogURL = try logFinder.activityLogs()
-            guard activityLogURL.count > 0 else {
+            let logsWithContent = logsWithContent(urls: activityLogURL)
+            
+            guard logsWithContent.count > 0 else {
                 return nil
             }
             
             return ProjectReference(name: shortName,
-                                    activityLogURL: activityLogURL,
+                                    activityLogURL: logsWithContent,
                                     depsURL: try? logFinder.buildGraphURL())
         } catch {
             print("skip \(shortName), can't find .activityLog with build information")
             return nil
+        }
+    }
+    
+    private func logsWithContent(urls: [URL]) -> [URL] {
+        urls.compactMap { url  in
+            guard let attr = try? FileManager.default.attributesOfItem(atPath: url.path) else {
+                return nil
+            }
+            
+            guard (attr[.size] as? UInt64 ?? 0) > 0 else {
+                return nil
+            }
+            
+            return url
         }
     }
 }
