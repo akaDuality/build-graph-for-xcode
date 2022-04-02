@@ -126,8 +126,11 @@ public final class ParserBuildSteps {
             
             let title = logSection.title.string
             
-            if #available(macOS 10.14, *) {
-                os_signpost(.begin, log: logger!, name: "section", "%@", title)
+            let signpost = false
+            if signpost {
+                if #available(macOS 10.14, *) {
+                    os_signpost(.begin, log: logger!, name: "section", "%@", title)
+                }
             }
             let signature = logSection.signature.string
             
@@ -234,8 +237,11 @@ public final class ParserBuildSteps {
 //            }
 
 //            step = addCompilationTimes(step: step)
-            if #available(macOS 10.14, *) {
-                os_signpost(.end, log: logger!, name: "section")
+            
+            if signpost {
+                if #available(macOS 10.14, *) {
+                    os_signpost(.end, log: logger!, name: "section")
+                }
             }
             return step
     }
