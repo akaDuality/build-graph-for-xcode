@@ -55,7 +55,9 @@ public class HUDLayer: CALayer {
     public override func layoutSublayers() {
         super.layoutSublayers()
         
-        timelineLayer.frame = bounds
+        let frame = superlayer?.bounds ?? bounds // strange zero-bounds when hide legend
+        
+        timelineLayer.frame = frame
         
         let height: CGFloat = legendLayer.intrinsicContentSize.height
         legendLayer.frame = CGRect(x: 20,
@@ -65,12 +67,6 @@ public class HUDLayer: CALayer {
         
         
         legendLayer.isHidden = legendIsHidden
-    }
-    
-    override public var frame: CGRect {
-        didSet {
-            
-        }
     }
     
     public var legendIsHidden: Bool
