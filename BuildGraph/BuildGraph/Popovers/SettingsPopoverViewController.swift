@@ -17,6 +17,7 @@ protocol FilterSettingsDelegate: AnyObject {
 class SettingsPopoverViewController: NSViewController {
     @IBOutlet weak var compilationStackView: NSStackView!
     @IBOutlet weak var otherStackView: NSStackView!
+    @IBOutlet weak var formatStackView: NSStackView!
     
     @IBOutlet weak var cachedModulesCheckbox: NSButton!
     
@@ -26,8 +27,6 @@ class SettingsPopoverViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // TODO: Add settings restoration
         
         cachedModulesCheckbox.state = settings.showCached ? .on: .off
         
@@ -43,6 +42,9 @@ class SettingsPopoverViewController: NSViewController {
         
         setupTextSize()
         showLegend.state = UISettings().showLegend ? .on: .off
+        
+        formatStackView.setCustomSpacing(24, after: textSizeSlider)
+        textSizeSlider.isContinuous = true
     }
     
     @IBAction func selectAllCompilationFlags(_ sender: Any) {
@@ -124,11 +126,11 @@ class SettingsPopoverViewController: NSViewController {
     @IBOutlet weak var showLegend: NSButton!
     
     private func setupTextSize() {
-        textSizeStepper.integerValue = UISettings().textSize
+        textSizeSlider.integerValue = UISettings().textSize
         textSizeLabel.stringValue = "Font size: \(UISettings().textSize)"
     }
     
-    @IBAction func textSizeDidChange(_ sender: NSStepper) {
+    @IBAction func textSizeDidChange(_ sender: NSSlider) {
         UISettings().textSize = sender.integerValue
         
         setupTextSize()
@@ -136,8 +138,16 @@ class SettingsPopoverViewController: NSViewController {
         delegate?.didUpdateUISettings()
     }
     
+//    @IBAction func textSizeDidChange(_ sender: NSStepper) {
+//        UISettings().textSize = sender.integerValue
+//
+//        setupTextSize()
+//
+//        delegate?.didUpdateUISettings()
+//    }
+    
     @IBOutlet weak var textSizeLabel: NSTextField!
-    @IBOutlet weak var textSizeStepper: NSStepper!
+    @IBOutlet weak var textSizeSlider: NSSlider!
 }
 
 class DetailStepCheckBox: NSButton {
