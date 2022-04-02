@@ -19,17 +19,19 @@ class DetailView: NSView {
     @IBOutlet weak var zoomInButton: NSButton!
     @IBOutlet weak var zoomOutButton: NSButton!
     
-    let contentView = FlippedView()
+    var contentView = FlippedView()
     
     func showEvents(events: [Event]) {
         let scale = NSScreen.main!.backingScaleFactor
         
         modulesLayer = AppLayer(
             events: events,
+            fontSize: CGFloat(UISettings().textSize), // TODO: Move to parameters?
             scale: scale)
         
         needsLayout = true
         
+        contentView = FlippedView()
         contentView.wantsLayer = true
         contentView.layer?.masksToBounds = false
         contentView.layer?.addSublayer(modulesLayer!)
@@ -39,11 +41,14 @@ class DetailView: NSView {
         scrollView.automaticallyAdjustsContentInsets = false
         scrollView.contentInsets = .zero
         
-        hudView.setup(duration: events.duration(), scale: scale)
+        hudView.setup(duration: events.duration(),
+                      legendIsHidden: !UISettings().showLegend, // TODO: Move to parameters?
+                      scale: scale)
         scrollView.hudLayer = hudView.hudLayer
 //        modulesLayer?.addSublayer(hudLayer!)
         
         layoutModules() // calc intrinsic content size
+        layoutSubtreeIfNeeded()
     }
     
     override func updateLayer() {
@@ -55,6 +60,10 @@ class DetailView: NSView {
     override func viewDidChangeEffectiveAppearance() {
         super.viewDidChangeEffectiveAppearance()
         
+        recreateHierarchy()
+    }
+    
+    func recreateHierarchy() {
         guard let events = modulesLayer?.events else {
             return
         }

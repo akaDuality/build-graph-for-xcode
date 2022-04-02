@@ -29,12 +29,11 @@ struct Colors {
     
     struct Events {
         static var step: () -> CGColor = { NSColor.systemBrown.effectiveCGColor }
-        static var cached: () -> CGColor = { NSColor.systemGreen.effectiveCGColor }
+        static var cached: () -> CGColor = { NSColor.systemGray.effectiveCGColor }
         static var subtask: () -> CGColor = { NSColor.systemBlue.effectiveCGColor }
         static var background: () -> CGColor = { NSColor.systemGray.effectiveCGColor.copy(alpha: 0.25)! }
         
         static var legendBackground: () -> CGColor = { NSColor.systemGray.effectiveCGColor }
-        
         
         static var legend: [ColorDescription] {
             [

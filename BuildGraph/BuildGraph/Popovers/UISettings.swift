@@ -25,7 +25,10 @@ class UISettings {
     }
     
     @Storage(key: "showLegend", defaultValue: true)
-    var showLegend: Bool?
+    var showLegend: Bool
+    
+    @Storage(key: "textSize", defaultValue: 10)
+    var textSize: Int
 }
 
 @propertyWrapper

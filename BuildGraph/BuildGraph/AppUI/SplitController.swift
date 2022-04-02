@@ -76,4 +76,11 @@ extension SplitController: FilterSettingsDelegate {
     func didUpdateFilter(_ filterSettings: FilterSettings) {
         detail.updateFilterForCurrentProject(filterSettings)
     }
+    
+    func didUpdateUISettings() {
+        guard let dataController = detail.currentController as? DetailViewController else { return }
+        
+        dataController.view().recreateHierarchy()
+        dataController.view().hudView.hudLayer?.legendIsHidden = !UISettings().showLegend
+    }
 }

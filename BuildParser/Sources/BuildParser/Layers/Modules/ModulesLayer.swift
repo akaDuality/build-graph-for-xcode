@@ -66,7 +66,7 @@ class ModulesLayer: CALayer {
         highlightedEvent = event
     }
     
-    public init(events: [Event], scale: CGFloat) {
+    public init(events: [Event], fontSize: CGFloat, scale: CGFloat) {
         self.events = events
         
         self.rects = events.map { event in
@@ -78,15 +78,18 @@ class ModulesLayer: CALayer {
         self.higlightedLift = .init()
         self.selectedEvents = []
         
+        self.eventHeight = fontSize + 4
         super.init()
         
-        setup(scale: scale)
+        
+        setup(fontSize: fontSize, scale: scale)
     }
     
     public override init(layer: Any) {
         let layer = layer as! ModulesLayer
         
         self.events = layer.events
+        self.eventHeight = layer.eventHeight
         self.eventShapes = layer.eventShapes
         self.highlightedEvent = layer.highlightedEvent
         self.rects = layer.rects
@@ -100,7 +103,7 @@ class ModulesLayer: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setup(scale: CGFloat) {
+    private func setup(fontSize: CGFloat, scale: CGFloat) {
         higlightedLift.backgroundColor = Colors.liftColor()
         self.higlightedLift.frame = .zero
         addSublayer(higlightedLift)
@@ -108,6 +111,7 @@ class ModulesLayer: CALayer {
         for (_, event) in events.enumerated() {
             let layer = EventLayer(
                 event: event,
+                fontSize: fontSize,
                 scale: scale)
             eventShapes.append(layer)
             addSublayer(layer)
@@ -180,17 +184,17 @@ class ModulesLayer: CALayer {
         let startY = PeriodsLayer.periodsHeight * 1.5
         
         return CGRect(x: width * rect.start,
-                      y: startY + CGFloat(i) * (self.height + vSpace),
+                      y: startY + CGFloat(i) * (self.eventHeight + vSpace),
                       width: width * rect.duration,
-                      height: self.height)
+                      height: self.eventHeight)
     }
     
     public var intrinsicContentSize: CGSize {
         return CGSize(width: 5000,
-                      height: CGFloat(rects.count) * (height + vSpace) + PeriodsLayer.periodsHeight + 100)
+                      height: CGFloat(rects.count) * (eventHeight + vSpace) + PeriodsLayer.periodsHeight + 100)
     }
     
-    var height: CGFloat = 14
+    let eventHeight: CGFloat
     let vSpace: CGFloat = 1
     
     private func alpha(for rect: EventRelativeRect) -> Float {

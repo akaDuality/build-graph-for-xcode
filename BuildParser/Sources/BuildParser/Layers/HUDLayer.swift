@@ -13,11 +13,13 @@ public class HUDLayer: CALayer {
     
     private let eventsDuration: TimeInterval
     
-    public init(duration: TimeInterval, scale: CGFloat) {
+    public init(duration: TimeInterval, legendIsHidden: Bool, scale: CGFloat) {
         self.eventsDuration = duration
         self.timelineLayer = TimelineLayer(eventsDuration: duration, scale: scale)
-        self.legendLayer = ColorsLegendLayer(scale: scale)
         
+        self.legendIsHidden = legendIsHidden
+        self.legendLayer = ColorsLegendLayer(scale: scale)
+
         // Time Layer
         super.init()
         
@@ -40,10 +42,11 @@ public class HUDLayer: CALayer {
         
         self.timelineLayer = layer.timelineLayer
         self.legendLayer = layer.legendLayer
+        self.legendIsHidden = layer.legendIsHidden
         self.eventsDuration = layer.eventsDuration
         
         super.init(layer: layer)
-    }
+    } 
     
     public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -59,7 +62,18 @@ public class HUDLayer: CALayer {
                                    y: frame.height - height - 60,
                                    width: legendLayer.intrinsicContentSize.width,
                                    height: height)
+        
+        
+        legendLayer.isHidden = legendIsHidden
     }
+    
+    override public var frame: CGRect {
+        didSet {
+            
+        }
+    }
+    
+    public var legendIsHidden: Bool
     
     public func drawTimeline(at coordinate: CGPoint) {
         timelineLayer.coordinate = coordinate

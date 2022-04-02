@@ -11,9 +11,11 @@ import AppKit
 class EventLayer: CALayer {
     internal init(
         event: Event,
+        fontSize: CGFloat,
         scale: CGFloat)
     {
         self.event = event
+        self.fontSize = fontSize
         self.textLayer = CATextLayer()
         self.stepShapes = [CALayer]()
         super.init()
@@ -31,6 +33,7 @@ class EventLayer: CALayer {
         
         textLayer.foregroundColor = Colors.textColor()
         textLayer.contentsScale = scale
+        textLayer.font = NSFont.systemFont(ofSize: fontSize)
         textLayer.fontSize = fontSize
         addSublayer(textLayer)
     }
@@ -43,6 +46,7 @@ class EventLayer: CALayer {
         let layer = layer as! EventLayer
         
         self.event = layer.event
+        self.fontSize = layer.fontSize
         self.textLayer = layer.textLayer
         self.stepShapes = layer.stepShapes
         
@@ -50,6 +54,8 @@ class EventLayer: CALayer {
     }
     
     let event: Event
+    let fontSize: CGFloat
+    
     var spaceToLeft: CGFloat {
         frame.minX
     }
@@ -88,23 +94,27 @@ class EventLayer: CALayer {
     
     func layoutText(spaceToLeft: CGFloat, spaceToRight: CGFloat) {
         textLayer.string = event.description
+        textLayer.backgroundColor = NSColor.red.cgColor
+        
+        let textWidth: CGFloat = event.description
+            .size(OfFont: NSFont.systemFont(ofSize: textLayer.fontSize))
+            .width
         
         if spaceToLeft > textWidth {
             textLayer.foregroundColor = Colors.textInvertedColor()
-            layoutLeft()
-        } else if textWidth < frame.width {
-            textLayer.foregroundColor = Colors.textOverModuleColor()
-            layoutInside()
-        } else {
+            layoutLeft(textWidth)
+        } else if spaceToRight > textWidth {
             textLayer.foregroundColor = Colors.textInvertedColor()
-            layoutRight()
+            layoutRight(textWidth)
+        } else {
+            textLayer.foregroundColor = Colors.textOverModuleColor()
+            layoutInsideRight(textWidth)
         }
     }
     
-    let textWidth: CGFloat = 200 // TODO: calculate on fly
     let textOffset: CGFloat = 4
     
-    private func layoutRight() {
+    private func layoutRight(_ textWidth: CGFloat) {
         textLayer.alignmentMode = .left
         textLayer.frame = CGRect(
             x: bounds.maxX + textOffset,
@@ -113,7 +123,7 @@ class EventLayer: CALayer {
             height: bounds.height)
     }
     
-    private func layoutLeft() {
+    private func layoutLeft(_ textWidth: CGFloat) {
         textLayer.alignmentMode = .right
         textLayer.frame = CGRect(
             x: bounds.minX - textOffset - textWidth,
@@ -122,7 +132,7 @@ class EventLayer: CALayer {
             height: bounds.height)
     }
     
-    private func layoutInside() {
+    private func layoutInsideRight(_ textWidth: CGFloat) {
         textLayer.alignmentMode = .right
         textLayer.frame = CGRect(
             x: bounds.minX + textOffset,
@@ -131,6 +141,10 @@ class EventLayer: CALayer {
             height: bounds.height)
         textLayer.alignmentMode = .left
     }
-    
-    let fontSize: CGFloat = 10
+}
+
+extension String {
+    func size(OfFont font: NSFont) -> CGSize {
+        return (self as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+    }
 }

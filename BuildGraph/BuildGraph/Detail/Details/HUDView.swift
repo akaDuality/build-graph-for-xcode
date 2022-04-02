@@ -16,8 +16,12 @@ class HUDView: FlippedView {
         super.init(coder: coder)
     }
     
-    func setup(duration: TimeInterval, scale: CGFloat) {
-        hudLayer = HUDLayer(duration: duration, scale: scale)
+    func setup(duration: TimeInterval, legendIsHidden: Bool, scale: CGFloat) {
+        hudLayer?.removeFromSuperlayer() // remove previous one
+        
+        hudLayer = HUDLayer(duration: duration,
+                            legendIsHidden: legendIsHidden,
+                            scale: scale)
         wantsLayer = true
         layer?.addSublayer(hudLayer!)
     }

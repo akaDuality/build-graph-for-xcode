@@ -161,6 +161,8 @@ class TimelineLayer: CALayer {
         let coordinate = coordinate ?? CGPoint(x: frame.maxX, y: 0)
         // TODO: Size text to fit
         let textWidth: CGFloat = 100
+        
+        guard frame.width > 0 else { return } // Can't devide on zero
         let time = TimeInterval(coordinate.x / frame.width) * eventsDuration
         
         currentTime.updateWithoutAnimation {

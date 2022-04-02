@@ -11,6 +11,7 @@ import BuildParser
 
 protocol FilterSettingsDelegate: AnyObject {
     func didUpdateFilter(_ filterSettings: FilterSettings)
+    func didUpdateUISettings()
 }
 
 class SettingsPopoverViewController: NSViewController {
@@ -39,7 +40,11 @@ class SettingsPopoverViewController: NSViewController {
                 otherStackView.addArrangedSubview(button)
             }
         }
+        
+        setupTextSize()
+        showLegend.state = UISettings().showLegend ? .on: .off
     }
+    
     @IBAction func selectAllCompilationFlags(_ sender: Any) {
         setAllCheckbox(in: compilationStackView, to: .on)
     }
@@ -55,13 +60,6 @@ class SettingsPopoverViewController: NSViewController {
             checkbox.state = state
             updateSettings(stepType: checkbox.stepType, isOn: state == .on)
         }
-        
-        delegate?.didUpdateFilter(settings)
-    }
-    
-    @IBAction func showCachedModulesDidChagne(_ sender: NSButton) {
-        let isOn = sender.state == .on
-        settings.showCached = isOn
         
         delegate?.didUpdateFilter(settings)
     }
@@ -108,6 +106,38 @@ class SettingsPopoverViewController: NSViewController {
             settings.remove(stepType: stepType)
         }
     }
+    
+    @IBAction func showCachedModulesDidChagne(_ sender: NSButton) {
+        let isOn = sender.state == .on
+        settings.showCached = isOn
+        
+        delegate?.didUpdateFilter(settings)
+    }
+    
+    // MARK: Format
+    @IBAction func showLegendDidChanged(_ sender: NSButton) {
+        UISettings().showLegend = sender.state == .on
+        
+        delegate?.didUpdateUISettings()
+    }
+    
+    @IBOutlet weak var showLegend: NSButton!
+    
+    private func setupTextSize() {
+        textSizeStepper.integerValue = UISettings().textSize
+        textSizeLabel.stringValue = "Font size: \(UISettings().textSize)"
+    }
+    
+    @IBAction func textSizeDidChange(_ sender: NSStepper) {
+        UISettings().textSize = sender.integerValue
+        
+        setupTextSize()
+        
+        delegate?.didUpdateUISettings()
+    }
+    
+    @IBOutlet weak var textSizeLabel: NSTextField!
+    @IBOutlet weak var textSizeStepper: NSStepper!
 }
 
 class DetailStepCheckBox: NSButton {
