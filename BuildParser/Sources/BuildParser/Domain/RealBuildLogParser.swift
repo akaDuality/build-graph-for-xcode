@@ -7,6 +7,7 @@
 
 import XCLogParser
 import Foundation
+import os
 
 public class FilterSettings {
     public static var shared = FilterSettings()
@@ -63,19 +64,35 @@ public class RealBuildLogParser {
     
     public func parse(logURL: URL, filter: FilterSettings) throws -> [Event] {
         progress = Progress(totalUnitCount: 3)
+        os_log("start parsing")
+        var date = Date()
         
         let activityLog = try activityLogParser.parseActivityLogInURL(
             logURL,
             redacted: false, // Parameter is not important, code was comment out
             withoutBuildSpecificInformation: false) // Parameter is not important, code was comment out
+        var diff = Date().timeIntervalSince(date)
+        if #available(macOS 11.0, *) {
+            os_log("read activity log, \(diff)")
+        }
+        date = Date()
         
         progress.completedUnitCount = 1
         
         buildStep = try buildParser.parse(activityLog: activityLog)
         progress.completedUnitCount = 2
+        diff = Date().timeIntervalSince(date)
+        if #available(macOS 11.0, *) {
+            os_log("parse logs, \(diff)")
+        }
+        date = Date()
         
         let events = convertToEvents(buildStep: buildStep, filter: filter)
         progress.completedUnitCount = 3
+        diff = Date().timeIntervalSince(date)
+        if #available(macOS 11.0, *) {
+            os_log("convert events, \(diff)")
+        }
         
         return events
     }
