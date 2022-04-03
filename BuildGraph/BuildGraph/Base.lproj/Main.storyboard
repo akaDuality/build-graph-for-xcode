@@ -160,10 +160,15 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Show Projects" keyEquivalent="s" id="kIP-vf-haE">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                        <menuItem title="Show Projects" keyEquivalent="s" id="7jn-Op-IS6">
                                             <connections>
-                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
+                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="k7m-M3-GZh"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Toggle Settings" keyEquivalent="s" id="kIP-vf-haE">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="togglesSettingsSidebar:" target="Ady-hI-5gd" id="fhi-SW-LHf"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -227,13 +232,13 @@
         <scene sceneID="8s9-m6-HQ8">
             <objects>
                 <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildGraph" customModuleProvider="target">
+                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildGraph" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="425" y="462" width="800" height="200"/>
+                        <rect key="contentRect" x="425" y="462" width="1200" height="200"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
                         <view key="contentView" id="I9F-zK-pE3">
-                            <rect key="frame" x="0.0" y="0.0" width="800" height="200"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1200" height="200"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
@@ -471,6 +476,7 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yy2-fF-m5R" secondAttribute="bottom" constant="20" id="2qp-Jw-IXb"/>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="50" id="J7I-b4-JZP"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="7" id="O4T-67-Rxv"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="SfL-Oe-TMc"/>

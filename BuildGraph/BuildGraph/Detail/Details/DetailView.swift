@@ -26,6 +26,7 @@ class DetailView: NSView {
         
         modulesLayer = AppLayer(
             events: events,
+            relativeBuildStart: 0.95,
             fontSize: CGFloat(UISettings().textSize), // TODO: Move to parameters?
             scale: scale)
         

@@ -1,24 +1,30 @@
 //
-//  ConcurrencyLayer.swift
+//  VerticalLineLayer.swift
 //  
 //
-//  Created by Mikhail Rubanov on 13.10.2021.
+//  Created by Mikhail Rubanov on 04.04.2022.
 //
 
 import QuartzCore
 
-class ConcurrencyLayer: CALayer {
-    private let events: [Event]
+class VerticalLineLayer: CALayer {
+    
+    var color = Colors.concurencyColor() {
+        didSet {
+            concurrencyLine.backgroundColor = color
+            concurrencyTitle.foregroundColor = color
+        }
+    }
     
     private let concurrencyLine: CALayer
-    private let concurrencyTitle: CATextLayer
+    let concurrencyTitle: CATextLayer
     
-    public var coordinate: CGPoint? = .zero {
-        didSet {
-            updateWithoutAnimation {
-                setNeedsLayout()
-                layoutIfNeeded()
-            }
+    public var coordinate: CGPoint? = .zero
+    
+    func updateLayoutWithoutAnimation() {
+        updateWithoutAnimation {
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
@@ -30,8 +36,7 @@ class ConcurrencyLayer: CALayer {
         }
     }
     
-    public init(events: [Event], scale: CGFloat) {
-        self.events = events
+    public init(scale: CGFloat) {
         self.concurrencyLine = CALayer()
         self.concurrencyTitle = CATextLayer()
         
@@ -41,9 +46,8 @@ class ConcurrencyLayer: CALayer {
     }
     
     public override init(layer: Any) {
-        let layer = layer as! ConcurrencyLayer
+        let layer = layer as! VerticalLineLayer
         
-        self.events = layer.events
         self.concurrencyLine = layer.concurrencyLine
         self.concurrencyTitle = layer.concurrencyTitle
         self.coordinate = layer.coordinate
@@ -55,21 +59,11 @@ class ConcurrencyLayer: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func drawConcurrency(at coordinate: CGPoint) {
-        self.coordinate = coordinate
-        
-        let relativeX = coordinate.x / frame.width
-        let time = events.duration() * relativeX
-        let concurency = events.concurrency(at: time)
-        concurrencyTitle.string = "\(concurency)"
-    }
-    
     private func setup(scale: CGFloat) {
-        concurrencyLine.backgroundColor = Colors.concurencyColor()
+        concurrencyLine.contentsScale = scale
         addSublayer(concurrencyLine)
         
         concurrencyTitle.contentsScale = scale
-        concurrencyTitle.foregroundColor = Colors.concurencyColor()
         concurrencyTitle.fontSize = 20
         addSublayer(concurrencyTitle)
     }
@@ -84,13 +78,24 @@ class ConcurrencyLayer: CALayer {
                                            width: 1,
                                            height: frame.height)
             let titleHeight: CGFloat = 20
-            concurrencyTitle.frame = CGRect(x: coordinate.x + 10,
-                                            y: coordinate.y - titleHeight - 10,
-                                            width: 100,
-                                            height: titleHeight)
+            let titleWidth: CGFloat = 150
+            if coordinate.x < bounds.width - titleWidth - 10 {
+                // Draw right
+                concurrencyTitle.alignmentMode = .left
+                concurrencyTitle.frame = CGRect(x: coordinate.x + 10,
+                                                y: coordinate.y - titleHeight - 10,
+                                                width: titleWidth,
+                                                height: titleHeight)
+            } else {
+                // Dras left
+                concurrencyTitle.alignmentMode = .right
+                concurrencyTitle.frame = CGRect(x: coordinate.x - 10 - titleWidth,
+                                                y: coordinate.y - titleHeight - 10,
+                                                width: titleWidth,
+                                                height: titleHeight)
+            }
         } else {
             concurrencyHidden = true
         }
-        
     }
 }

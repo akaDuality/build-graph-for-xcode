@@ -34,6 +34,7 @@ public class AppLayer: CALayer {
     private let modulesLayer: DependeciesLayer
 //    private let periodsLayer: PeriodsLayer
     private let concurrencyLayer: ConcurrencyLayer
+    private let buildStartLayer: BuildStartLayer
     
     private let fullframes: [CALayer]
     
@@ -55,14 +56,15 @@ public class AppLayer: CALayer {
         }
     }
     
-    public init(events: [Event], fontSize: CGFloat, scale: CGFloat) {
+    public init(events: [Event], relativeBuildStart: CGFloat, fontSize: CGFloat, scale: CGFloat) {
         self.events = events
         
         self.modulesLayer = DependeciesLayer(events: events,
                                              fontSize: fontSize,
                                              scale: scale)
         self.concurrencyLayer = ConcurrencyLayer(events: events, scale: scale)
-        
+        self.buildStartLayer = BuildStartLayer(scale: scale)
+        buildStartLayer.relativeBuildStart = relativeBuildStart
 //        self.periodsLayer = PeriodsLayer(periods: events.allPeriods(),
 //                                         start: events.start(),
 //                                         totalDuration: events.duration())
@@ -70,7 +72,8 @@ public class AppLayer: CALayer {
         fullframes = [
 //            periodsLayer,
             modulesLayer,
-            concurrencyLayer
+            concurrencyLayer,
+            buildStartLayer
         ]
         
         // Time Layer
@@ -85,6 +88,7 @@ public class AppLayer: CALayer {
         self.events = layer.events
         self.modulesLayer = layer.modulesLayer
         self.concurrencyLayer = layer.concurrencyLayer
+        self.buildStartLayer = layer.buildStartLayer
 //        self.periodsLayer = layer.periodsLayer
         self.fullframes = layer.fullframes
         
