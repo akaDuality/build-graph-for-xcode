@@ -14,7 +14,8 @@ public class FilterSettings {
     
     public init() {}
     
-    public var showCached: Bool = true
+    @Storage(key: "showCached", defaultValue: true)
+    public var showCached: Bool
     
     public var allowedTypes: [DetailStepType] = DetailStepType.compilationSteps
     
@@ -31,6 +32,30 @@ public class FilterSettings {
     
     public func enableAll() {
         allowedTypes = DetailStepType.allCases
+    }
+}
+
+@propertyWrapper
+public struct Storage<T> {
+    private let key: String
+    private let defaultValue: T
+    
+    public init(key: String, defaultValue: T) {
+        self.key = key
+        self.defaultValue = defaultValue
+    }
+    
+    let userDefaults = UserDefaults.standard
+    
+    public var wrappedValue: T {
+        get {
+            return userDefaults
+                .object(forKey: key) as? T ?? defaultValue
+        }
+        set {
+            userDefaults
+                .set(newValue, forKey: key)
+        }
     }
 }
 

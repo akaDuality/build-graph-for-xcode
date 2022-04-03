@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BuildParser
 
 class UISettings {
     @Storage(key: "showSubtask", defaultValue: false)
@@ -31,26 +32,4 @@ class UISettings {
     var textSize: Int
 }
 
-@propertyWrapper
-struct Storage<T> {
-    private let key: String
-    private let defaultValue: T
-    
-    init(key: String, defaultValue: T) {
-        self.key = key
-        self.defaultValue = defaultValue
-    }
-    
-    let userDefaults = UserDefaults.standard
-    
-    var wrappedValue: T {
-        get {
-            return userDefaults
-                .object(forKey: key) as? T ?? defaultValue
-        }
-        set {
-            userDefaults
-                .set(newValue, forKey: key)
-        }
-    }
-}
+
