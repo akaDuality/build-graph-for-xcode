@@ -248,6 +248,10 @@ public struct BuildStep: Encodable {
     /// In a compilation step this will be false only if the file was actually compiled.
     /// in a `target` or `main` step it will be false if at least one sub step wasn't fetched from cache.
     public let fetchedFromCache: Bool
+    
+    public func beforeBuild(buildDate: Date) -> Bool {
+        return startDate < buildDate
+    }
 
     /// Actual compilation end time of the Step. With the new Build System, sometimes linking happens minutes
     /// after compilation finishes. This is specially visible in Targets, where the files can be compiled

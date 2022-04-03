@@ -366,7 +366,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="8Il-EF-1Tf">
-                                <rect key="frame" x="15" y="736" width="310" height="44"/>
+                                <rect key="frame" x="15" y="678" width="310" height="44"/>
                                 <view key="contentView" id="1y2-Zw-aiW">
                                     <rect key="frame" x="3" y="3" width="304" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -386,7 +386,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="qGp-Tb-uz5">
-                                <rect key="frame" x="15" y="646" width="310" height="44"/>
+                                <rect key="frame" x="15" y="588" width="310" height="44"/>
                                 <view key="contentView" id="2Z4-Sr-azM">
                                     <rect key="frame" x="3" y="3" width="304" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -406,7 +406,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVY-Z9-SCE">
-                                <rect key="frame" x="18" y="714" width="77" height="18"/>
+                                <rect key="frame" x="18" y="656" width="77" height="18"/>
                                 <buttonCell key="cell" type="inline" title="Check all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pzG-Wd-z2G">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -416,7 +416,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="07F-ks-YDb">
-                                <rect key="frame" x="248" y="624" width="74" height="18"/>
+                                <rect key="frame" x="248" y="566" width="74" height="18"/>
                                 <buttonCell key="cell" type="inline" title="Uncheck all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kwD-I7-TUL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -426,16 +426,16 @@
                                 </connections>
                             </button>
                             <box title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="yy2-fF-m5R">
-                                <rect key="frame" x="15" y="475" width="310" height="129"/>
+                                <rect key="frame" x="15" y="441" width="310" height="105"/>
                                 <view key="contentView" id="cRq-1Y-rdd">
-                                    <rect key="frame" x="3" y="3" width="304" height="109"/>
+                                    <rect key="frame" x="3" y="3" width="304" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-6D-buE">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="109"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="85"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEQ-ZT-Wxh">
-                                                    <rect key="frame" x="10" y="85" width="81" height="16"/>
+                                                    <rect key="frame" x="10" y="61" width="81" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Font size: 10" id="qDT-Cl-k58">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -443,14 +443,14 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wk7-u0-FkA">
-                                                    <rect key="frame" x="10" y="62" width="96" height="17"/>
+                                                    <rect key="frame" x="10" y="38" width="96" height="17"/>
                                                     <sliderCell key="cell" controlSize="mini" state="on" alignment="left" minValue="5" maxValue="20" doubleValue="10.357142857142858" tickMarkPosition="above" numberOfTickMarks="15" allowsTickMarkValuesOnly="YES" sliderType="linear" id="pNu-wP-hlb"/>
                                                     <connections>
                                                         <action selector="textSizeDidChange:" target="AVJ-kY-T3V" id="f3J-Dc-VYc"/>
                                                     </connections>
                                                 </slider>
                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mKW-GQ-Xcq">
-                                                    <rect key="frame" x="10" y="39" width="104" height="18"/>
+                                                    <rect key="frame" x="10" y="15" width="104" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Show legend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="DAk-Lc-EKZ">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -459,26 +459,14 @@
                                                         <action selector="showLegendDidChanged:" target="AVJ-kY-T3V" id="yzd-7m-ybF"/>
                                                     </connections>
                                                 </button>
-                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
-                                                    <rect key="frame" x="10" y="15" width="128" height="18"/>
-                                                    <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dS6-NU-oEH">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="showCachedModulesDidChagne:" target="AVJ-kY-T3V" id="mrH-6y-mv4"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
-                                                <real value="1000"/>
                                                 <integer value="1000"/>
                                             </visibilityPriorities>
                                             <customSpacing>
-                                                <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
@@ -494,12 +482,23 @@
                                 </view>
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
+                                <rect key="frame" x="28" y="741" width="128" height="18"/>
+                                <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dS6-NU-oEH">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showCachedModulesDidChagne:" target="AVJ-kY-T3V" id="mrH-6y-mv4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="50" id="J7I-b4-JZP"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="7" id="O4T-67-Rxv"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="SfL-Oe-TMc"/>
                             <constraint firstItem="yy2-fF-m5R" firstAttribute="top" secondItem="07F-ks-YDb" secondAttribute="bottom" constant="20" id="UiY-S9-VaP"/>
+                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="42" id="WvQ-aV-tlt"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7JE-3f-E71" secondAttribute="leading" id="YTE-Br-7ww"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="leading" secondItem="3qk-xS-avz" secondAttribute="leading" constant="18" id="dQS-jW-BDk"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="trailing" secondItem="7JE-3f-E71" secondAttribute="trailing" id="fcc-zR-0gM"/>
@@ -510,7 +509,8 @@
                             <constraint firstItem="yy2-fF-m5R" firstAttribute="leading" secondItem="7JE-3f-E71" secondAttribute="leading" id="lVy-ZL-Nrh"/>
                             <constraint firstItem="qGp-Tb-uz5" firstAttribute="centerX" secondItem="8Il-EF-1Tf" secondAttribute="centerX" id="pIn-SD-QrH"/>
                             <constraint firstItem="JVm-vu-Bbo" firstAttribute="leading" secondItem="AVY-Z9-SCE" secondAttribute="trailing" constant="-77" id="pyv-IU-Too"/>
-                            <constraint firstItem="8Il-EF-1Tf" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="20" id="r3C-SZ-l8b"/>
+                            <constraint firstItem="8Il-EF-1Tf" firstAttribute="top" secondItem="vfY-Tw-Ngg" secondAttribute="bottom" constant="20" id="uQj-t9-jJR"/>
+                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="leading" secondItem="mKW-GQ-Xcq" secondAttribute="leading" id="zmW-Uz-6Jk"/>
                         </constraints>
                     </view>
                     <connections>

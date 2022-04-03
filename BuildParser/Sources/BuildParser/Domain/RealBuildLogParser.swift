@@ -121,11 +121,14 @@ public class RealBuildLogParser {
                 // TODO: Speedup if all or none settings are enabled
                 substeps = substeps.filter { substep in
                     filter.allowedTypes.contains(substep.detailStepType)
-                    && substep.startDate > buildStep.startDate // TODO: Investigate non cached old tasks
                 }
                 
-                if !filter.showCached && step.fetchedFromCache {
-                    return nil
+                if !filter.showCached {
+                    let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStep.startDate)
+                    if step.fetchedFromCache
+                        || buildEarlierThanCurrentBuild {
+                        return nil
+                    }
                 }
                 
                 guard
