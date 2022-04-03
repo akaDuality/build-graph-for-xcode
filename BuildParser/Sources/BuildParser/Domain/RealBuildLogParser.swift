@@ -123,19 +123,20 @@ public class RealBuildLogParser {
                     filter.allowedTypes.contains(substep.detailStepType)
                 }
                 
-                guard
-                    let startDate = substeps.first?.startDate
-                else {
-                    return nil // Empty array
-                }
-                
                 if !filter.showCached && step.fetchedFromCache {
                     return nil
                 }
                 
+                guard
+                    let startDate = substeps.first?.startDate,
+                    let endDate = substeps.last?.endDate
+                else {
+                    return nil // Empty array
+                }
+                
                 return self.event(from: step,
                                   startDate: startDate,
-                                  duration: step.duration,
+                                  duration: endDate.timeIntervalSince(startDate),
                                   substeps: substeps)
             }
             .sorted { lhsEvent, rhsEvent in

@@ -175,6 +175,9 @@ public struct BuildStep: Encodable {
 
     /// The start date of the step represented in the format ISO8601
 //    public let endDate: String
+    public var endDate: Date {
+        startDate.addingTimeInterval(duration)
+    }
 
     /// The timestap in which the step started represented as Unix epoch <br>
     /// - For steps of type BuildStepType.main this is the date in which the build started
