@@ -49,19 +49,16 @@ public final class Lexer {
     /// - parameter withoutBuildSpecificInformation: If true, build specific information will be removed from the logs.
     /// - returns: An array of all the `Token` in the log.
     /// - throws: An error if the document is not a valid SLF document
-    public func tokenize(contents: String,
-                         redacted: Bool,
-                         withoutBuildSpecificInformation: Bool) throws -> [Token] {
+    public func tokenize(contents: String) throws -> [Token] {
         let scanner = Scanner(string: contents)
         guard scanSLFHeader(scanner: scanner) else {
             throw XCLogParserError.invalidLogHeader(filePath)
         }
         var tokens = [Token]()
         while !scanner.isAtEnd {
-            guard let logTokens = scanSLFType(scanner: scanner,
-                                              redacted: redacted,
-                                              withoutBuildSpecificInformation: withoutBuildSpecificInformation),
-                logTokens.isEmpty == false else {
+            guard let logTokens = scanSLFType(scanner: scanner),
+                logTokens.isEmpty == false
+            else {
                 print(tokens)
                 throw XCLogParserError.invalidLine(scanner.approximateLine)
             }
@@ -71,15 +68,11 @@ public final class Lexer {
     }
 
     private func scanSLFHeader(scanner: Scanner) -> Bool {
-        #if os(Linux)
-        var format: String?
-        #else
         var format: NSString?
-        #endif
         return scanner.scanString(Lexer.SLFHeader, into: &format)
     }
 
-    private func scanSLFType(scanner: Scanner, redacted: Bool, withoutBuildSpecificInformation: Bool) -> [Token]? {
+    private func scanSLFType(scanner: Scanner) -> [Token]? {
 
         guard let payload = scanPayload(scanner: scanner) else {
             return nil
@@ -91,20 +84,15 @@ public final class Lexer {
         return tokenTypes.compactMap { tokenType -> Token? in
             scanToken(scanner: scanner,
                       payload: payload,
-                      tokenType: tokenType,
-                      redacted: redacted,
-                      withoutBuildSpecificInformation: withoutBuildSpecificInformation)
+                      tokenType: tokenType)
         }
     }
 
     private let hexChars = CharacterSet(charactersIn: "abcdef0123456789")
     private func scanPayload(scanner: Scanner) -> String? {
         var payload: String = ""
-#if os(Linux)
-        var char: String?
-#else
+
         var char: NSString?
-#endif
         while scanner.scanCharacters(from: hexChars, into: &char),
               let char = char as String? {
             payload.append(char)
@@ -113,11 +101,7 @@ public final class Lexer {
     }
 
     private func scanTypeDelimiter(scanner: Scanner) -> [TokenType]? {
-        #if os(Linux)
-        var delimiters: String?
-        #else
         var delimiters: NSString?
-        #endif
         if scanner.scanCharacters(from: typeDelimiters, into: &delimiters), let delimiters = delimiters {
             let delimiters = String(delimiters)
             if delimiters.count > 1 {
@@ -139,24 +123,18 @@ public final class Lexer {
 
     private func scanToken(scanner: Scanner,
                            payload: String,
-                           tokenType: TokenType,
-                           redacted: Bool,
-                           withoutBuildSpecificInformation: Bool) -> Token? {
+                           tokenType: TokenType) -> Token? {
         switch tokenType {
         case .int:
             return handleIntTokenTypeCase(payload: payload)
         case .className:
             return handleClassNameTokenTypeCase(scanner: scanner,
-                                                payload: payload,
-                                                redacted: redacted,
-                                                withoutBuildSpecificInformation: withoutBuildSpecificInformation)
+                                                payload: payload)
         case .classNameRef:
             return handleClassNameRefTokenTypeCase(payload: payload)
         case .string:
             return handleStringTokenTypeCase(scanner: scanner,
-                                             payload: payload,
-                                             redacted: redacted,
-                                             withoutBuildSpecificInformation: withoutBuildSpecificInformation)
+                                             payload: payload)
         case .double:
             return handleDoubleTokenTypeCase(payload: payload)
         case .null:
@@ -175,13 +153,9 @@ public final class Lexer {
     }
 
     private func handleClassNameTokenTypeCase(scanner: Scanner,
-                                              payload: String,
-                                              redacted: Bool,
-                                              withoutBuildSpecificInformation: Bool) -> Token? {
+                                              payload: String) -> Token? {
         guard let className = scanString(length: payload,
-                                         scanner: scanner,
-                                         redacted: redacted,
-                                         withoutBuildSpecificInformation: withoutBuildSpecificInformation) else {
+                                         scanner: scanner) else {
                                             print("error parsing string")
                                             return nil
         }
@@ -200,13 +174,9 @@ public final class Lexer {
     }
 
     private func handleStringTokenTypeCase(scanner: Scanner,
-                                           payload: String,
-                                           redacted: Bool,
-                                           withoutBuildSpecificInformation: Bool) -> Token? {
+                                           payload: String) -> Token? {
         guard let content = scanString(length: payload,
-                                       scanner: scanner,
-                                       redacted: redacted,
-                                       withoutBuildSpecificInformation: withoutBuildSpecificInformation) else {
+                                       scanner: scanner) else {
                                         print("error parsing string")
                                         return nil
         }
@@ -230,30 +200,17 @@ public final class Lexer {
     }
 
     private func scanString(length: String,
-                            scanner: Scanner,
-                            redacted: Bool,
-                            withoutBuildSpecificInformation: Bool) -> Substring? {
+                            scanner: Scanner) -> Substring? {
         guard let value = Int(length) else {
             print("error parsing string")
             return nil
         }
-        #if swift(>=5.0)
         let start = String.Index(utf16Offset: scanner.scanLocation, in: scanner.string)
         let end = String.Index(utf16Offset: scanner.scanLocation + value, in: scanner.string)
-        #else
-        let start = String.Index(encodedOffset: scanner.scanLocation)
-        let end = String.Index(encodedOffset: scanner.scanLocation + value)
-        #endif
+        
         scanner.scanLocation += value
         var result = scanner.string[start..<end]
-//        if redacted {
-//            result = redactor.redactUserDir(string: result)
-//        }
-//        if withoutBuildSpecificInformation {
-//            result = result
-//                .removeProductBuildIdentifier()
-//                .removeHexadecimalNumbers()
-//        }
+
         return result
     }
 
@@ -269,13 +226,10 @@ public final class Lexer {
 extension Scanner {
     var approximateLine: String {
         let endCount = string.count - scanLocation > 21 ? scanLocation + 21 : string.count - scanLocation
-        #if swift(>=5.0)
+
         let start = String.Index(utf16Offset: scanLocation, in: self.string)
         let end = String.Index(utf16Offset: endCount, in: self.string)
-        #else
-        let start = String.Index(encodedOffset: scanLocation)
-        let end = String.Index(encodedOffset: endCount)
-        #endif
+
         if end <= start {
             return String(string[start..<string.endIndex])
         }

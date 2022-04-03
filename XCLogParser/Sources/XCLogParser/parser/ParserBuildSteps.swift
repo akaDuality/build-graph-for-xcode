@@ -44,14 +44,6 @@ public final class ParserBuildSteps {
     /// Usefult to save space.
     let omitNotesDetails: Bool
 
-    public lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ"
-        return formatter
-    }()
-
     lazy var warningCountRegexp: NSRegularExpression? = {
         let pattern = "([0-9]) warning[s]? generated"
         return NSRegularExpression.fromPattern(pattern)
@@ -171,7 +163,7 @@ public final class ParserBuildSteps {
                                  title: type == .target ? getTargetName(title) : title,
                                  signature: signature,
                                  startDate: toDate(timeInterval: logSection.timeStartedRecording),
-                                 endDate: toDate(timeInterval: logSection.timeStoppedRecording),
+//                                 endDate: toDate(timeInterval: logSection.timeStoppedRecording),
 //                                 startTimestamp: toTimestampSince1970(timeInterval: logSection.timeStartedRecording),
 //                                 endTimestamp: toTimestampSince1970(timeInterval: logSection.timeStoppedRecording),
                                  duration: getDuration(startTimeInterval: logSection.timeStartedRecording,
@@ -246,8 +238,8 @@ public final class ParserBuildSteps {
             return step
     }
 
-    private func toDate(timeInterval: Double) -> String {
-        return dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: timeInterval))
+    private func toDate(timeInterval: Double) -> Date {
+        return Date(timeIntervalSinceReferenceDate: timeInterval)
     }
 
     private func toTimestampSince1970(timeInterval: Double) -> Double {

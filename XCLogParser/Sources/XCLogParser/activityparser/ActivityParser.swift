@@ -18,6 +18,7 @@
 // under the License.
 
 import Foundation
+import os
 
 /// Parses an xcactivitylog into a Swift representation
 /// Used by the Dump command
@@ -43,11 +44,10 @@ public class ActivityParser {
     /// This flag is useful for grouping logs by its content.
     /// - returns: An instance of `IDEActivityLog1
     /// - throws: An Error if the file is not valid.
-    public func parseActivityLogInURL(_ logURL: URL,
-                                      redacted: Bool,
-                                      withoutBuildSpecificInformation: Bool) throws -> IDEActivityLog {
-        let tokens = try getTokens(logURL, redacted: redacted,
-                                   withoutBuildSpecificInformation: withoutBuildSpecificInformation)
+    public func parseActivityLogInURL(_ logURL: URL) throws -> IDEActivityLog {
+        os_log("-- Parse")
+        let tokens = try getTokens(logURL)
+        os_log("-- Get tokens")
         return try parseIDEActiviyLogFromTokens(tokens)
     }
 
@@ -234,26 +234,16 @@ public class ActivityParser {
                                      endLocation: try parseDocumentLocation(iterator: &iterator))
     }
 
-    private func getTokens(_ logURL: URL,
-                           redacted: Bool,
-                           withoutBuildSpecificInformation: Bool) throws -> [Token] {
+    private func getTokens(_ logURL: URL) throws -> [Token] {
         let logLoader = LogLoader()
         var tokens: [Token] = []
-        #if os(Linux)
-        let content = try logLoader.loadFromURL(logURL)
-        let lexer = Lexer(filePath: logURL.path)
-        tokens = try lexer.tokenize(contents: content,
-                                        redacted: redacted,
-                                        withoutBuildSpecificInformation: withoutBuildSpecificInformation)
-        #else
+
         try autoreleasepool {
             let content = try logLoader.loadFromURL(logURL)
             let lexer = Lexer(filePath: logURL.path)
-            tokens = try lexer.tokenize(contents: content,
-                                            redacted: redacted,
-                                            withoutBuildSpecificInformation: withoutBuildSpecificInformation)
+            tokens = try lexer.tokenize(contents: content)
         }
-        #endif
+        
         return tokens
     }
 

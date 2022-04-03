@@ -91,7 +91,7 @@ public enum DetailStepType: String, Encodable, CaseIterable, Equatable {
             return .swiftCompilation
         }
             
-        print("getDetailType for \(signature)")
+//        print("getDetailType for \(signature)")
         switch signature {
         case Prefix("CompileC "):
             return .cCompilation
@@ -171,10 +171,10 @@ public struct BuildStep: Encodable {
     public let signature: String
 
     /// The start date of the step represented in the format ISO8601
-    public let startDate: String
+    public let startDate: Date
 
     /// The start date of the step represented in the format ISO8601
-    public let endDate: String
+//    public let endDate: String
 
     /// The timestap in which the step started represented as Unix epoch <br>
     /// - For steps of type BuildStepType.main this is the date in which the build started
@@ -274,8 +274,8 @@ public struct BuildStep: Encodable {
 //                domain: String,
                 title: String,
                 signature: String,
-                startDate: String,
-                endDate: String,
+                startDate: Date,
+//                endDate: String,
 //                startTimestamp: Double,
 //                endTimestamp: Double,
                 duration: Double,
@@ -307,7 +307,7 @@ public struct BuildStep: Encodable {
         self.title = title
         self.signature = signature
         self.startDate = startDate
-        self.endDate = endDate
+//        self.endDate = endDate
 //        self.startTimestamp = startTimestamp
 //        self.endTimestamp = endTimestamp
         self.duration = duration

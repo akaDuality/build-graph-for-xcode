@@ -67,10 +67,8 @@ public class RealBuildLogParser {
         os_log("start parsing")
         var date = Date()
         
-        let activityLog = try activityLogParser.parseActivityLogInURL(
-            logURL,
-            redacted: false, // Parameter is not important, code was comment out
-            withoutBuildSpecificInformation: false) // Parameter is not important, code was comment out
+        let activityLog = try activityLogParser.parseActivityLogInURL(logURL)
+        
         var diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
             os_log("read activity log, \(diff)")
@@ -154,22 +152,6 @@ public class RealBuildLogParser {
     public func convertToEvents(
         subSteps: [BuildStep]
     ) -> [Event] {
-//        var events = [Event]()
-//
-//        // Separate by high-level tasks
-//        DispatchQueue.concurrentPerform(iterations: subSteps.count) { index in
-//            let step = subSteps[index]
-//
-//            let event = Event(
-//                taskName: step.title.without_Build_target,
-//                startDate: dateFormatter.date(from: step.startDate)!,
-//                endDate: dateFormatter.date(from: step.endDate)!,
-//                fetchedFromCache: step.fetchedFromCache,
-//                steps: convertToEvents(subSteps: step.subSteps)
-//            )
-//            events.append(event)
-//        }
-        
         let events = subSteps
             .map { step in
                 event(from:step, startDate: step.startDate, duration: step.duration, substeps: step.subSteps)
@@ -185,12 +167,12 @@ public class RealBuildLogParser {
     }
     
     private func event(from step: BuildStep,
-                       startDate: String,
+                       startDate: Date,
                        duration: TimeInterval,
                        substeps: [BuildStep]) -> Event {
         Event(
             taskName: step.title.without_Build_target,
-            startDate: dateFormatter.date(from: startDate)!,
+            startDate: startDate,
             duration: duration,
             fetchedFromCache: step.fetchedFromCache,
             steps: self.convertToEvents(subSteps: substeps)

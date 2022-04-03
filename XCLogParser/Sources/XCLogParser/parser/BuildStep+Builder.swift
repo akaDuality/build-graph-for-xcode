@@ -205,7 +205,7 @@ extension BuildStep {
                          title: title,
                          signature: signature,
                          startDate: startDate,
-                         endDate: endDate,
+//                         endDate: endDate,
 //                         startTimestamp: startTimestamp,
 //                         endTimestamp: endTimestamp,
                          duration: duration,
