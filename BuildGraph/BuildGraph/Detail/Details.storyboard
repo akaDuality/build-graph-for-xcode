@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -249,49 +249,36 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5OI-Dk-aTi">
-                                <rect key="frame" x="18" y="193" width="298" height="31"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="No compilation data found" id="Nvf-tS-ows">
+                                <rect key="frame" x="18" y="193" width="414" height="31"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Update settings to show graph" id="Nvf-tS-ows">
                                     <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-vu-roe">
-                                <rect key="frame" x="20" y="157" width="271" height="28"/>
+                                <rect key="frame" x="20" y="169" width="410" height="16"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uu4-1j-utS">
-                                        <rect key="frame" x="-2" y="7" width="67" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Refresh or" id="LZG-eO-GSB">
+                                        <rect key="frame" x="-2" y="0.0" width="414" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="... or refresh in projects navigator" id="LZG-eO-GSB">
                                             <font key="font" textStyle="body" name=".SFNS-Regular"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q5Z-RO-6N7">
-                                        <rect key="frame" x="65" y="-6" width="212" height="40"/>
-                                        <buttonCell key="cell" type="push" title="Show non-compilation events" bezelStyle="rounded" alignment="center" controlSize="large" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7y9-71-vbx">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                            <font key="font" textStyle="body" name=".SFNS-Regular"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="showNonCompilationEventsDidPressed:" target="hqM-UB-Pyh" id="HKg-hU-r8D"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="uu4-1j-utS" firstAttribute="firstBaseline" secondItem="Q5Z-RO-6N7" secondAttribute="firstBaseline" id="HRB-Bz-id1"/>
-                                </constraints>
                                 <visibilityPriorities>
-                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="uu4-1j-utS" firstAttribute="centerX" secondItem="T5W-2y-A0w" secondAttribute="centerX" id="FeQ-to-Hkm"/>
+                            <constraint firstItem="5OI-Dk-aTi" firstAttribute="centerX" secondItem="T5W-2y-A0w" secondAttribute="centerX" id="Lod-3q-0m5"/>
                             <constraint firstItem="5OI-Dk-aTi" firstAttribute="top" secondItem="T5W-2y-A0w" secondAttribute="top" constant="4" id="RJC-Ao-sR9"/>
                             <constraint firstItem="hJ6-vu-roe" firstAttribute="leading" secondItem="5OI-Dk-aTi" secondAttribute="leading" id="grS-pV-t11"/>
                             <constraint firstItem="hJ6-vu-roe" firstAttribute="top" secondItem="5OI-Dk-aTi" secondAttribute="bottom" constant="8" symbolic="YES" id="gtE-Ev-Rli"/>

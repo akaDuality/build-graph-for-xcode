@@ -39,6 +39,14 @@ class SplitController: NSSplitViewController {
     var detail: DetailsStateViewController! {
         (splitViewItems[1].viewController as! DetailsStateViewController)
     }
+    
+    func toggleSettingsSidebar() {
+        if splitViewItems.count == 3 {
+            hideSettingsIfNeeded()
+        } else {
+            showSettings()
+        }
+    }
 }
 
 extension SplitController: ProjectsSelectionDelegate {
@@ -48,6 +56,7 @@ extension SplitController: ProjectsSelectionDelegate {
 }
 
 extension SplitController: DetailsDelegate {
+
     func mainWindow() -> MainWindow {
         view.window as! MainWindow
     }
@@ -61,6 +70,8 @@ extension SplitController: DetailsDelegate {
         
         mainWindow().disableButtons()
         mainWindow().updateNavigationButtons(for: project)
+        
+        hideSettingsIfNeeded()
     }
     
     func didLoadProject(
@@ -69,6 +80,29 @@ extension SplitController: DetailsDelegate {
     ) {
         self.uiSettings.selectedProject = project.name // Save only after success parsing
         mainWindow().enableButtons()
+        
+        showSettings()
+    }
+    
+    func didFailLoadProject() {
+        showSettings()
+    }
+    
+    private func hideSettingsIfNeeded() {
+        if splitViewItems.count == 3 {
+            removeSplitViewItem(splitViewItems.last!)
+        }
+    }
+    
+    private func showSettings() {
+        hideSettingsIfNeeded()
+        
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let filterSettingsController = storyboard.instantiateController(withIdentifier: "Settings") as! SettingsPopoverViewController
+        filterSettingsController.delegate = self
+        
+        filterSettingsController.setup(counter: detail.presenter.parser.makeCounter()) // TODO: Refactor
+        addSplitViewItem(NSSplitViewItem(sidebarWithViewController: filterSettingsController))
     }
 }
 

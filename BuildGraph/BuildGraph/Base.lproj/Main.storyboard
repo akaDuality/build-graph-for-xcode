@@ -148,16 +148,8 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Font" systemMenu="font" id="aXa-aM-Jaq">
                                                 <items>
-                                                    <menuItem title="Bigger" tag="3" keyEquivalent="+" id="Ptp-SP-VEL">
-                                                        <connections>
-                                                            <action selector="modifyFont:" target="YLy-65-1bz" id="Uc7-di-UnL"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                    <menuItem title="Smaller" tag="4" keyEquivalent="-" id="i1d-Er-qST">
-                                                        <connections>
-                                                            <action selector="modifyFont:" target="YLy-65-1bz" id="HcX-Lf-eNd"/>
-                                                        </connections>
-                                                    </menuItem>
+                                                    <menuItem title="Bigger" tag="3" keyEquivalent="+" id="Ptp-SP-VEL"/>
+                                                    <menuItem title="Smaller" tag="4" keyEquivalent="-" id="i1d-Er-qST"/>
                                                 </items>
                                             </menu>
                                         </menuItem>
@@ -168,20 +160,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="HyV-fh-RgO">
                                     <items>
-                                        <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleToolbarShown:" target="Ady-hI-5gd" id="BXY-wc-z0C"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="runToolbarCustomizationPalette:" target="Ady-hI-5gd" id="pQI-g3-MTW"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="hB3-LF-h0Y"/>
-                                        <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
+                                        <menuItem title="Show Projects" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
@@ -240,7 +219,6 @@
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BuildGraph" customModuleProvider="target"/>
-                <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-739" y="445"/>
@@ -258,7 +236,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="800" height="200"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
-                        <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
+                        <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="892B5DBF-E693-4392-A8A3-5A49838F341B" label="Refresh" paletteLabel="Refresh" tag="-1" image="arrow.clockwise" catalog="system" bordered="YES" sizingBehavior="auto" id="1HI-xL-x8z">
                                     <connections>
@@ -324,9 +302,9 @@
                                         </connections>
                                     </searchField>
                                 </searchToolbarItem>
-                                <toolbarItem implicitItemIdentifier="36985640-83C1-4EE8-94D7-20C5849E041A" label="Events" paletteLabel="Events" tag="-1" image="slider.horizontal.below.square.filled.and.square" catalog="system" bordered="YES" sizingBehavior="auto" autovalidates="NO" id="b83-4x-o6p">
+                                <toolbarItem implicitItemIdentifier="39BD64C9-3BAF-429F-B36D-776FF7D359F2" label="Settings" paletteLabel="Settings" tag="-1" image="sidebar.right" catalog="system" bordered="YES" sizingBehavior="auto" id="GjH-pW-nh9">
                                     <connections>
-                                        <segue destination="AVJ-kY-T3V" kind="popover" popoverAnchorView="b83-4x-o6p" popoverBehavior="t" preferredEdge="maxY" id="Eah-DU-Cox"/>
+                                        <action selector="togglesSettingsSidebar:" target="LFf-Ro-PN7" id="BvB-za-BVK"/>
                                     </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -336,14 +314,13 @@
                                 <toolbarItem reference="NRJ-yX-oB1"/>
                                 <toolbarItem reference="pZ8-K6-ajH"/>
                                 <toolbarItem reference="0Qa-Qa-ok0"/>
-                                <toolbarItem reference="b83-4x-o6p"/>
                                 <toolbarItem reference="tOZ-ba-ewD"/>
                                 <searchToolbarItem reference="ZhZ-nU-lfr"/>
+                                <toolbarItem reference="GjH-pW-nh9"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="LFf-Ro-PN7" id="ui6-5g-a1j"/>
-                            <outlet property="eventsButton" destination="b83-4x-o6p" id="JNO-7J-5Jo"/>
                             <outlet property="nextButton" destination="pZ8-K6-ajH" id="eNh-Tx-xmF"/>
                             <outlet property="previousButton" destination="NRJ-yX-oB1" id="e3m-xG-uKC"/>
                             <outlet property="sendImageToolbarItem" destination="tOZ-ba-ewD" id="T9v-x7-2c3"/>
@@ -360,19 +337,19 @@
         <!--Settings Popover View Controller-->
         <scene sceneID="mob-fX-uiP">
             <objects>
-                <viewController id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Settings" id="AVJ-kY-T3V" customClass="SettingsPopoverViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="3qk-xS-avz">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="800"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="8Il-EF-1Tf">
-                                <rect key="frame" x="15" y="678" width="310" height="44"/>
+                                <rect key="frame" x="15" y="648" width="250" height="44"/>
                                 <view key="contentView" id="1y2-Zw-aiW">
-                                    <rect key="frame" x="3" y="3" width="304" height="24"/>
+                                    <rect key="frame" x="3" y="3" width="244" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JVm-vu-Bbo">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="244" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>
@@ -386,13 +363,13 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="qGp-Tb-uz5">
-                                <rect key="frame" x="15" y="588" width="310" height="44"/>
+                                <rect key="frame" x="15" y="558" width="250" height="44"/>
                                 <view key="contentView" id="2Z4-Sr-azM">
-                                    <rect key="frame" x="3" y="3" width="304" height="24"/>
+                                    <rect key="frame" x="3" y="3" width="244" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7JE-3f-E71">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="244" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>
@@ -406,7 +383,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVY-Z9-SCE">
-                                <rect key="frame" x="18" y="656" width="77" height="18"/>
+                                <rect key="frame" x="18" y="626" width="77" height="18"/>
                                 <buttonCell key="cell" type="inline" title="Check all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pzG-Wd-z2G">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -416,7 +393,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="07F-ks-YDb">
-                                <rect key="frame" x="248" y="566" width="74" height="18"/>
+                                <rect key="frame" x="188" y="536" width="74" height="18"/>
                                 <buttonCell key="cell" type="inline" title="Uncheck all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kwD-I7-TUL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -426,13 +403,13 @@
                                 </connections>
                             </button>
                             <box title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="yy2-fF-m5R">
-                                <rect key="frame" x="15" y="441" width="310" height="105"/>
+                                <rect key="frame" x="15" y="411" width="250" height="105"/>
                                 <view key="contentView" id="cRq-1Y-rdd">
-                                    <rect key="frame" x="3" y="3" width="304" height="85"/>
+                                    <rect key="frame" x="3" y="3" width="244" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5r-6D-buE">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="244" height="85"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEQ-ZT-Wxh">
                                                     <rect key="frame" x="10" y="61" width="81" height="16"/>
@@ -483,7 +460,7 @@
                                 <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
-                                <rect key="frame" x="28" y="741" width="128" height="18"/>
+                                <rect key="frame" x="28" y="711" width="128" height="18"/>
                                 <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dS6-NU-oEH">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -498,7 +475,7 @@
                             <constraint firstItem="07F-ks-YDb" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="7" id="O4T-67-Rxv"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="SfL-Oe-TMc"/>
                             <constraint firstItem="yy2-fF-m5R" firstAttribute="top" secondItem="07F-ks-YDb" secondAttribute="bottom" constant="20" id="UiY-S9-VaP"/>
-                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="42" id="WvQ-aV-tlt"/>
+                            <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="72" id="WvQ-aV-tlt"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7JE-3f-E71" secondAttribute="leading" id="YTE-Br-7ww"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="leading" secondItem="3qk-xS-avz" secondAttribute="leading" constant="18" id="dQS-jW-BDk"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="trailing" secondItem="7JE-3f-E71" secondAttribute="trailing" id="fcc-zR-0gM"/>
@@ -525,7 +502,7 @@
                 </viewController>
                 <customObject id="BtL-W5-DHq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-759" y="1376"/>
+            <point key="canvasLocation" x="575" y="904"/>
         </scene>
         <!--Split Controller-->
         <scene sceneID="6Af-iS-TkZ">
@@ -575,6 +552,7 @@
                     </view>
                 </viewController>
                 <customObject id="38g-Vj-3ZZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <splitViewItem id="8Yg-CT-z6h"/>
             </objects>
             <point key="canvasLocation" x="-201" y="1126"/>
         </scene>
@@ -583,7 +561,7 @@
         <image name="NSGoLeftTemplate" width="10" height="14"/>
         <image name="NSGoRightTemplate" width="10" height="14"/>
         <image name="arrow.clockwise" catalog="system" width="14" height="16"/>
-        <image name="slider.horizontal.below.square.filled.and.square" catalog="system" width="19" height="14"/>
+        <image name="sidebar.right" catalog="system" width="18" height="14"/>
         <image name="square.and.arrow.up" catalog="system" width="15" height="17"/>
     </resources>
 </document>

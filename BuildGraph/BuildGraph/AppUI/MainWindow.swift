@@ -13,7 +13,6 @@ class MainWindow: NSWindow {
     @IBOutlet weak var previousButton: NSToolbarItem!
     @IBOutlet weak var nextButton: NSToolbarItem!
     
-    @IBOutlet weak var eventsButton: NSToolbarItem!
     @IBOutlet weak var sendImageToolbarItem: NSToolbarItem!
     
     func setupToolbar() {
@@ -32,12 +31,10 @@ class MainWindow: NSWindow {
     
     func disableButtons() {
         sendImageToolbarItem.isEnabled = false
-        eventsButton.isEnabled = false
     }
     
     func enableButtons() {
         sendImageToolbarItem.isEnabled = true
-        eventsButton.isEnabled = true
     }
     
     func updateNavigationButtons(for project: ProjectReference) {

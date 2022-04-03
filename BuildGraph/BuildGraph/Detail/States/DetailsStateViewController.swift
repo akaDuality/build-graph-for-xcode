@@ -21,8 +21,9 @@ enum DetailsState: StateProtocol {
 }
 
 protocol DetailsDelegate: AnyObject {
-    func didLoadProject(project: ProjectReference, detailsController: DetailViewController)
     func willLoadProject(project: ProjectReference)
+    func didLoadProject(project: ProjectReference, detailsController: DetailViewController)
+    func didFailLoadProject()
 }
 
 class DetailsStateViewController: StateViewController<DetailsState> {
@@ -54,12 +55,6 @@ class DetailsStateViewController: StateViewController<DetailsState> {
             case .error(let message, let project):
                 // TODO: Pass message to controller
                 let retryViewController = storyboard.instantiateController(withIdentifier: "retry") as! RetryViewController
-                retryViewController.showNonCompilationEvents = { [unowned self] in
-                    // TODO: Update settings just for one project
-                    FilterSettings.shared.enableAll()
-                    
-                    self.selectProject(project: project, filter: .shared)
-                }
                 return retryViewController
             }
         }
@@ -91,13 +86,14 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                         
                         derivedData?.stopAccessingSecurityScopedResource()
                         
-                        delegate?.didLoadProject(project: project, detailsController: self.currentController as! DetailViewController)
+                        self.delegate?.didLoadProject(project: project, detailsController: self.currentController as! DetailViewController)
                     }
                 },
                 didFail: { message in
                     DispatchQueue.main.async {
                         derivedData?.stopAccessingSecurityScopedResource()
                         self.state = .error(message, project)
+                        self.delegate?.didFailLoadProject()
                     }
                 }
             )

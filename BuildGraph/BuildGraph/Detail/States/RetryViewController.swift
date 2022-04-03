@@ -11,14 +11,7 @@ class RetryViewController: NSViewController {
     
     @IBOutlet weak var titleLabel: NSTextField!
     
-    var showNonCompilationEvents: () -> Void = {}
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    @IBAction func showNonCompilationEventsDidPressed(_ sender: Any) {
-        showNonCompilationEvents()
     }
 }

@@ -14,16 +14,6 @@ class WindowController: NSWindowController {
         window as! MainWindow
     }
     
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if let filterSettingsController = segue.destinationController as? SettingsPopoverViewController {
-            filterSettingsController.counter = splitViewController().detail.presenter.parser.makeCounter()
-            filterSettingsController.delegate = splitViewController()
-            filterSettingsController.settings = splitViewController().filter
-        }
-    }
-    
     @IBAction func makeScreenshotOfGraph(_ sender: Any) {
         guard let detailController = splitViewController().detail.currentController as? DetailViewController else {
             return
@@ -38,6 +28,10 @@ class WindowController: NSWindowController {
         guard let detailController = splitViewController().detail.currentController as? DetailViewController else { return }
         
         detailController.search(text: text)
+    }
+    
+    @IBAction func togglesSettingsSidebar(_ sender: Any) {
+        splitViewController().toggleSettingsSidebar()
     }
     
     @IBAction func previousProjectDidPress(_ sender: Any) {

@@ -21,13 +21,13 @@ class SettingsPopoverViewController: NSViewController {
     
     @IBOutlet weak var cachedModulesCheckbox: NSButton!
     
-    var settings: FilterSettings!
+    let settings = FilterSettings.shared
     weak var delegate: FilterSettingsDelegate?
-    var counter: BuildStepCounter!
+    private var counter: BuildStepCounter!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    func setup(counter: BuildStepCounter) {
+        _ = view // Load view from storyboard
+        self.counter = counter
         cachedModulesCheckbox.state = settings.showCached ? .on: .off
         
         for stepType in DetailStepType.allCases {
