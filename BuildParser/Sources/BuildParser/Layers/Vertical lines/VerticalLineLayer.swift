@@ -19,7 +19,11 @@ class VerticalLineLayer: CALayer {
     private let concurrencyLine: CALayer
     let concurrencyTitle: CATextLayer
     
-    public var coordinate: CGPoint? = .zero
+    public var coordinate: CGPoint? = nil {
+        didSet {
+            concurrencyHidden = coordinate == nil
+        }
+    }
     
     func updateLayoutWithoutAnimation() {
         updateWithoutAnimation {
