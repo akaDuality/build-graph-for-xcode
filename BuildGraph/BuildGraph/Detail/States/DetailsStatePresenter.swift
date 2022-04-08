@@ -8,6 +8,7 @@
 import Foundation
 import BuildParser
 import GraphParser
+import os
 
 //protocol DetailStateUIProtocol {
 //
@@ -18,35 +19,31 @@ class DetailsStatePresenter {
     
     let parser = RealBuildLogParser()
     
-    private var cachedDependencies: [Dependency]?
-    
     func loadAndInsert(
-        project: ProjectReference,
+        projectReference: ProjectReference,
         filter: FilterSettings,
-        didLoad: @escaping (_ events: [Event],
-                            _ deps: [Dependency],
+        didLoad: @escaping (_ projectReference: Project,
                             _ title: String,
-                            _ project: ProjectReference) -> Void,
+                            _ projectReference: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
         Task {
-            print("will read \(project.activityLogURL), depsURL \(String(describing: project.depsURL))")
+            os_log("will read \(projectReference.activityLogURL), depsURL \(String(describing: projectReference.depsURL))")
             
             do {
                 // TODO: how this try is handled?
-                let events = try await events(currentActivityLog: project.currentActivityLog, filter: filter)
-                let dependencies = await dependencies(depsURL: project.depsURL)
-                cachedDependencies = dependencies
+                let project = try await project(currentActivityLog: projectReference.currentActivityLog, filter: filter)
+                let dependencies = await dependencies(depsURL: projectReference.depsURL)
                 
-                events.connect(by: dependencies)
+                project.connect(dependencies: dependencies)
                 
-                guard events.count > 0 else {
+                guard project.events.count > 0 else {
                     // TODO: depends on compilationOnly flag
                     didFail(ParsingError.noEventsFound.localizedDescription)
                     return
                 }
                 
-                didLoad(events, cachedDependencies ?? [], self.parser.title, project)
+                didLoad(project, self.parser.title, projectReference)
             } catch let error {
                 didFail(error.localizedDescription)
             }
@@ -54,20 +51,25 @@ class DetailsStatePresenter {
     }
     
     func updateWithFilter(
-        project: ProjectReference,
+        oldProject: Project,
+        projectReference: ProjectReference,
         filter: FilterSettings,
-        didLoad: @escaping (_ events: [Event], _ deps: [Dependency], _ title: String) -> Void
+        didLoad: @escaping (_ project: Project, _ title: String) -> Void
     ) {
+        // TODO: Rework to project
         let events = parser.update(with: filter)
         
-        if let dependencies = cachedDependencies {
+        if let dependencies = oldProject.cachedDependencies {
             events.connect(by: dependencies)
         }
         
-        didLoad(events, cachedDependencies ?? [], parser.title)
+        // TODO: Create in another place
+        let project = Project(events: events, relativeBuildStart: 0)
+        
+        didLoad(project, parser.title)
     }
     
-    private func events(currentActivityLog: URL, filter: FilterSettings) async throws -> [Event] {
+    private func project(currentActivityLog: URL, filter: FilterSettings) async throws -> Project {
         try parser.parse(
             logURL: currentActivityLog,
             filter: filter)

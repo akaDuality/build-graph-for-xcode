@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // TODO: Pass correct filter settings
         windowController.splitViewController().detail.selectProject(
-            project: project,
+            projectReference: project,
             filter: .shared)
         
         return true

@@ -9,56 +9,6 @@ import XCLogParser
 import Foundation
 import os
 
-public class FilterSettings {
-    public static var shared = FilterSettings()
-    
-    public init() {}
-    
-    @Storage(key: "showCached", defaultValue: true)
-    public var showCached: Bool
-    
-    public var allowedTypes: [DetailStepType] = DetailStepType.compilationSteps
-    
-    public func add(stepType: DetailStepType) {
-        allowedTypes.append(stepType)
-    }
-    
-    public func remove(stepType: DetailStepType) {
-        guard let indexToRemove = allowedTypes.firstIndex(of: stepType) else {
-            return
-        }
-        allowedTypes.remove(at: indexToRemove)
-    }
-    
-    public func enableAll() {
-        allowedTypes = DetailStepType.allCases
-    }
-}
-
-@propertyWrapper
-public struct Storage<T> {
-    private let key: String
-    private let defaultValue: T
-    
-    public init(key: String, defaultValue: T) {
-        self.key = key
-        self.defaultValue = defaultValue
-    }
-    
-    let userDefaults = UserDefaults.standard
-    
-    public var wrappedValue: T {
-        get {
-            return userDefaults
-                .object(forKey: key) as? T ?? defaultValue
-        }
-        set {
-            userDefaults
-                .set(newValue, forKey: key)
-        }
-    }
-}
-
 extension DetailStepType {
     static var compilationSteps: [Self] {
         Self.allCases
@@ -87,7 +37,7 @@ public class RealBuildLogParser {
     
     var progress = Progress(totalUnitCount: 3)
     
-    public func parse(logURL: URL, filter: FilterSettings) throws -> [Event] {
+    public func parse(logURL: URL, filter: FilterSettings) throws -> Project {
         progress = Progress(totalUnitCount: 3)
         os_log("start parsing")
         var date = Date()
@@ -117,7 +67,21 @@ public class RealBuildLogParser {
             os_log("convert events, \(diff)")
         }
         
-        return events
+        return Project(events: events,
+                       relativeBuildStart: relativeDuration(events: events, buildStart: buildStep.startDate))
+    }
+    
+    private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {
+        let duration = events.duration()
+        guard duration > 0 else {
+            return 0
+        }
+        
+        let earliestDate = events.start()
+        let buildStart = buildStep.startDate
+        
+        let relativeStart = buildStart.timeIntervalSince(earliestDate) / duration
+        return relativeStart
     }
     
     public func update(with filter: FilterSettings) -> [Event] {
@@ -207,21 +171,6 @@ public class RealBuildLogParser {
             fetchedFromCache: step.fetchedFromCache,
             steps: self.convertToEvents(subSteps: substeps)
         )
-    }
-}
-
-extension DateFormatter {
-    public static let iso8601Full_Z: DateFormatter = {
-        dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ")
-    }()
-    
-    static func dateFormatter(format: String) -> DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        return formatter
     }
 }
 

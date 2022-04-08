@@ -42,18 +42,17 @@ class DetailViewController: NSViewController {
     }
     
     private var embeddInWindow: Bool = true
-    private var project: ProjectReference?
+    private var projectReference: ProjectReference?
     public func show(
-        events: [Event],
-        deps: [Dependency],
+        project: Project,
         title: String,
         embeddInWindow: Bool,
-        project: ProjectReference?
+        projectReference: ProjectReference?
     ) {
         self.title = title
         self.embeddInWindow = embeddInWindow
-        self.project = project
-        view().showEvents(events: events)
+        self.projectReference = projectReference
+        view().show(project: project)
     
         updateState()
         shareButton.isEnabled = true
@@ -108,7 +107,7 @@ class DetailViewController: NSViewController {
     
     func shareImage() {
         ImageSaveService().saveImage(
-            project: project,
+            project: projectReference,
             title: title,
             view: view().contentView)
     }
@@ -182,11 +181,10 @@ class DetailViewController: NSViewController {
             .instantiateController(withIdentifier: "data") as! DetailViewController
         _ = popover.view
         
-        popover.show(events: events,
-                     deps: [],
+        popover.show(project: Project(events: events, relativeBuildStart: 0),
                      title: title,
                      embeddInWindow: false,
-                     project: nil)
+                     projectReference: nil)
         return popover
     }
     

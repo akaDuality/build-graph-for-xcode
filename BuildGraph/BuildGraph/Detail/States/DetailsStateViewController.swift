@@ -14,7 +14,7 @@ enum DetailsState: StateProtocol {
     case blank
     case noProject
     case loading
-    case data(_ events: [Event], _ deps: [Dependency], _ title: String, _ project: ProjectReference)
+    case data(project: Project, title: String, projectReference: ProjectReference)
     case error(_ message: String, _ project: ProjectReference)
     
     static var `default`: Self = .blank
@@ -44,13 +44,12 @@ class DetailsStateViewController: StateViewController<DetailsState> {
                 return storyboard.instantiateController(withIdentifier: "noProject") as! ViewController
             case .loading:
                 return storyboard.instantiateController(withIdentifier: "loading") as! ViewController
-            case .data(let events, let deps, let title, let project):
+            case .data(let project, let title, let projectReference):
                 let dataController = storyboard.instantiateController(withIdentifier: "data") as! DetailViewController
-                dataController.show(events: events,
-                                    deps: deps,
+                dataController.show(project: project,
                                     title: title,
                                     embeddInWindow: true,
-                                    project: project)
+                                    projectReference: projectReference)
                 return dataController
             case .error(let message, let project):
                 // TODO: Pass message to controller
@@ -62,10 +61,10 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     
     var currentProject: ProjectReference?
     
-    func selectProject(project: ProjectReference?, filter: FilterSettings) {
-        self.currentProject = project
+    func selectProject(projectReference: ProjectReference?, filter: FilterSettings) {
+        self.currentProject = projectReference
         
-        guard let project = project else {
+        guard let projectReference = projectReference else {
             self.state = .noProject
             return
         }
@@ -74,25 +73,26 @@ class DetailsStateViewController: StateViewController<DetailsState> {
         _ = derivedData?.startAccessingSecurityScopedResource()
         
         self.state = .loading
-        delegate?.willLoadProject(project: project)
+        delegate?.willLoadProject(project: projectReference)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
             presenter.loadAndInsert(
-                project: project,
+                projectReference: projectReference,
                 filter: filter,
-                didLoad: { events, deps, title, project in
+                didLoad: { project, title, projectReference in
                     DispatchQueue.main.async {
-                        self.state = .data(events, deps, title, project)
+                        self.state = .data(project: project, title: title, projectReference: projectReference)
                         
                         derivedData?.stopAccessingSecurityScopedResource()
                         
-                        self.delegate?.didLoadProject(project: project, detailsController: self.currentController as! DetailViewController)
+                        self.delegate?.didLoadProject(project: projectReference,
+                                                      detailsController: self.currentController as! DetailViewController)
                     }
                 },
                 didFail: { message in
                     DispatchQueue.main.async {
                         derivedData?.stopAccessingSecurityScopedResource()
-                        self.state = .error(message, project)
+                        self.state = .error(message, projectReference)
                         self.delegate?.didFailLoadProject()
                     }
                 }
@@ -102,25 +102,36 @@ class DetailsStateViewController: StateViewController<DetailsState> {
     
     // MARK: - Update filter
     func updateFilterForCurrentProject(_ filter: FilterSettings) {
-        guard let project = currentProject else {
+        guard let projectReference = currentProject else {
+            return
+        }
+        
+        guard case .data(let project, _, _) = self.state else {
             return
         }
         
         self.state = .loading
-        delegate?.willLoadProject(project: project)
+        delegate?.willLoadProject(project: projectReference)
         
         DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            presenter.updateWithFilter(project: project, filter: filter) { events, deps, title in
+            presenter.updateWithFilter(
+                oldProject: project,
+                projectReference: projectReference,
+                filter: filter
+            ) { project, title in
+                
                 DispatchQueue.main.async {
-                    guard events.count > 0 else {
-                        self.state = .error("No data for current filter", project)
+                    guard project.events.count > 0 else {
+                        self.state = .error("No data for current filter", projectReference)
                         return
                     }
                     
-                    self.state = .data(events, deps, title, project)
+                    self.state = .data(project: project,
+                                       title: title,
+                                       projectReference: projectReference)
                     
                     delegate?.didLoadProject(
-                        project: project,
+                        project: projectReference,
                         detailsController: self.currentController as! DetailViewController)
                 }
             }

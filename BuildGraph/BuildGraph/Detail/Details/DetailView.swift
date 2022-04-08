@@ -21,12 +21,14 @@ class DetailView: NSView {
     
     var contentView = FlippedView()
     
-    func showEvents(events: [Event]) {
+    var project: Project?
+    func show(project: Project) {
+        self.project = project
         let scale = NSScreen.main!.backingScaleFactor
         
         modulesLayer = AppLayer(
-            events: events,
-            relativeBuildStart: 0.95,
+            events: project.events,
+            relativeBuildStart: project.relativeBuildStart,
             fontSize: CGFloat(UISettings().textSize), // TODO: Move to parameters?
             scale: scale)
         
@@ -42,7 +44,7 @@ class DetailView: NSView {
         scrollView.automaticallyAdjustsContentInsets = false
         scrollView.contentInsets = .zero
         
-        hudView.setup(duration: events.duration(),
+        hudView.setup(duration: project.events.duration(),
                       legendIsHidden: !UISettings().showLegend, // TODO: Move to parameters?
                       scale: scale)
         scrollView.hudLayer = hudView.hudLayer
@@ -65,12 +67,12 @@ class DetailView: NSView {
     }
     
     func recreateHierarchy() {
-        guard let events = modulesLayer?.events else {
+        guard let project = project else {
             return
         }
         
         removeLayer()
-        showEvents(events: events)
+        show(project: project)
         updateSettings()
     }
     
