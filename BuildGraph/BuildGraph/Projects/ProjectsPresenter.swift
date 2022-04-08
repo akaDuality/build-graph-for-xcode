@@ -54,8 +54,6 @@ class ProjectsPresenter {
 
             let selectedProject = selectedProject(in: projects)
             ui?.state = .projects(selectedProject)
-
-            delegate?.didSelect(project: selectedProject)
         } catch let error {
             ui?.state = .noAccessToDerivedData
         }

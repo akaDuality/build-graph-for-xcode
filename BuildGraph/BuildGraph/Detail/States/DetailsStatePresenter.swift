@@ -27,6 +27,8 @@ class DetailsStatePresenter {
                             _ projectReference: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
+        os_log("loadAndInsert")
+        
         Task {
             os_log("will read \(projectReference.activityLogURL), depsURL \(String(describing: projectReference.depsURL))")
             
