@@ -8,15 +8,15 @@
 import AppKit
 import XCLogParser
 import BuildParser
-import Details
+//import Details
 
-protocol FilterSettingsDelegate: AnyObject {
+public protocol FilterSettingsDelegate: AnyObject {
     func didUpdateFilter(_ filterSettings: FilterSettings)
     func didUpdateUISettings()
 }
 
-class SettingsPopoverViewController: NSViewController {
-    static func load(
+public class SettingsPopoverViewController: NSViewController {
+    public static func load(
         with delegate: FilterSettingsDelegate,
         counter: BuildStepCounter
     ) -> NSViewController {

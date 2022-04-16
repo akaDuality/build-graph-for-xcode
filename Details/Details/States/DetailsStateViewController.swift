@@ -30,6 +30,7 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
     
     public var delegate: DetailsDelegate?
     public let presenter = DetailsStatePresenter()
+    public var graphConfig: GraphConfig!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -49,7 +50,8 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                 dataController.show(project: project,
                                     title: title,
                                     embeddInWindow: true,
-                                    projectReference: projectReference)
+                                    projectReference: projectReference,
+                                    graphConfig: self.graphConfig)
                 return dataController
             case .error(let message, let project):
                 // TODO: Pass message to controller

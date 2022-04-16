@@ -14,16 +14,15 @@
 		1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */; };
 		1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */; };
 		1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */; };
-		1E61EC6F2794543500208FDB /* SettingsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */; };
 		1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7106E7271F1C1600C292AA /* Tuist2.json */; };
 		1E71FE87271EC10000C292AA /* Tuist.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E71FE86271EC10000C292AA /* Tuist.json */; };
 		1E737179280B11EA007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; };
 		1E73717A280B11EA007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E7371B7280B1397007C7B10 /* Projects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371B6280B1397007C7B10 /* Projects.framework */; };
 		1E7371B8280B1397007C7B10 /* Projects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371B6280B1397007C7B10 /* Projects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1E7371C1280B1736007C7B10 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7371C0280B1736007C7B10 /* Settings.storyboard */; };
+		1E7371EB280B187D007C7B10 /* Filters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371EA280B187D007C7B10 /* Filters.framework */; };
+		1E7371EC280B187D007C7B10 /* Filters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371EA280B187D007C7B10 /* Filters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71C27C64529005A6C19 /* MainWindow.swift */; };
-		1E79A71F27C64DE0005A6C19 /* DetailStepTypeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */; };
 		1E9AE0202800B62100851519 /* Details.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; };
 		1E9AE0212800B62100851519 /* Details.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */; };
@@ -68,6 +67,7 @@
 			files = (
 				1E73717A280B11EA007C7B10 /* BuildParser.framework in Embed Frameworks */,
 				1E9AE0212800B62100851519 /* Details.framework in Embed Frameworks */,
+				1E7371EC280B187D007C7B10 /* Filters.framework in Embed Frameworks */,
 				1E7371B8280B1397007C7B10 /* Projects.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -81,15 +81,13 @@
 		1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestEventsMoveDomainAndDataPersistence.json; sourceTree = "<group>"; };
 		1E16961A27247918006D93CE /* targetGraph.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = targetGraph.txt; sourceTree = "<group>"; };
 		1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopoverViewController.swift; sourceTree = "<group>"; };
 		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
 		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
 		1E737165280B0EA3007C7B10 /* GraphParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GraphParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E737168280B0EA8007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7371B6280B1397007C7B10 /* Projects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Projects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E7371C0280B1736007C7B10 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		1E7371EA280B187D007C7B10 /* Filters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Filters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E79A71C27C64529005A6C19 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
-		1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStepTypeDescription.swift; sourceTree = "<group>"; };
 		1E9690092789C0280010FF04 /* BuildDeps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BuildDeps-Info.plist"; sourceTree = "<group>"; };
 		1E9AE01F2800B62100851519 /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitController.swift; sourceTree = "<group>"; };
@@ -119,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7371EB280B187D007C7B10 /* Filters.framework in Frameworks */,
 				1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */,
 				1E9AE0202800B62100851519 /* Details.framework in Frameworks */,
 				1E737179280B11EA007C7B10 /* BuildParser.framework in Frameworks */,
@@ -144,26 +143,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E61EC6D2794542100208FDB /* Popovers */ = {
-			isa = PBXGroup;
-			children = (
-				1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */,
-				1E7371C0280B1736007C7B10 /* Settings.storyboard */,
-				1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */,
-			);
-			path = Popovers;
-			sourceTree = "<group>";
-		};
-		1E79A71727C6380C005A6C19 /* AppUI */ = {
-			isa = PBXGroup;
-			children = (
-				1EF5609527844D2700001935 /* WindowController.swift */,
-				1E79A71C27C64529005A6C19 /* MainWindow.swift */,
-				1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */,
-			);
-			path = AppUI;
-			sourceTree = "<group>";
-		};
 		1EB1A8D4272DC17100D31AB8 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,8 +192,9 @@
 			children = (
 				1EDB5E3427135F0000741EEF /* AppDelegate.swift */,
 				1EDB5E3A27135F0100741EEF /* Main.storyboard */,
-				1E79A71727C6380C005A6C19 /* AppUI */,
-				1E61EC6D2794542100208FDB /* Popovers */,
+				1EF5609527844D2700001935 /* WindowController.swift */,
+				1E79A71C27C64529005A6C19 /* MainWindow.swift */,
+				1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */,
 				1EDB5E3827135F0100741EEF /* Assets.xcassets */,
 				1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */,
 				1EB1A8D4272DC17100D31AB8 /* Samples */,
@@ -242,6 +222,7 @@
 		1EDB5E5F27135F1600741EEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E7371EA280B187D007C7B10 /* Filters.framework */,
 				1E7371B6280B1397007C7B10 /* Projects.framework */,
 				1E737168280B0EA8007C7B10 /* BuildParser.framework */,
 				1E737165280B0EA3007C7B10 /* GraphParser.framework */,
@@ -373,7 +354,6 @@
 				1EC72E24271D4D3800352213 /* Doner 42.json in Resources */,
 				1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */,
 				1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */,
-				1E7371C1280B1736007C7B10 /* Settings.storyboard in Resources */,
 				1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */,
 				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
 				1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */,
@@ -402,11 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E79A71F27C64DE0005A6C19 /* DetailStepTypeDescription.swift in Sources */,
 				1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */,
 				1EF5609627844D2700001935 /* WindowController.swift in Sources */,
 				1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */,
-				1E61EC6F2794543500208FDB /* SettingsPopoverViewController.swift in Sources */,
 				1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

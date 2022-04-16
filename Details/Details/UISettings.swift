@@ -11,14 +11,14 @@ import BuildParser
 public class UISettings {
     public init() {}
     
-    @Storage(key: "showSubtask", defaultValue: false)
-    public var showSubtask: Bool
-    
-    @Storage(key: "showLinks", defaultValue: false)
-    public var showLinks: Bool
-    
-    @Storage(key: "showPerformance", defaultValue: false)
-    public var showPerformance: Bool
+//    @Storage(key: "showSubtask", defaultValue: false)
+//    public var showSubtask: Bool
+//
+//    @Storage(key: "showLinks", defaultValue: false)
+//    public var showLinks: Bool
+//    
+//    @Storage(key: "showPerformance", defaultValue: false)
+//    public var showPerformance: Bool
     
     @Storage(key: "showLegend", defaultValue: true)
     public var showLegend: Bool

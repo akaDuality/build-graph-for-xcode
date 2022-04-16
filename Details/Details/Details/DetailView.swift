@@ -10,6 +10,11 @@ import BuildParser
 import GraphParser
 import XCLogParser
 
+public protocol GraphConfig {
+    var textSize: Int { get }
+    var showLegend: Bool { get }
+}
+
 public class DetailView: NSView {
     var modulesLayer: AppLayer?
     
@@ -27,14 +32,17 @@ public class DetailView: NSView {
     var contentView = FlippedView()
     
     var project: Project?
-    public func show(project: Project) {
+    var graphConfig: GraphConfig?
+    
+    public func show(project: Project, graphConfig: GraphConfig) {
         self.project = project
+        self.graphConfig = graphConfig
         let scale = NSScreen.main!.backingScaleFactor
         
         modulesLayer = AppLayer(
             events: project.events,
             relativeBuildStart: project.relativeBuildStart,
-            fontSize: CGFloat(UISettings().textSize), // TODO: Move to parameters?
+            fontSize: CGFloat(graphConfig.textSize), // TODO: Move to parameters?
             scale: scale)
         
         needsLayout = true
@@ -50,7 +58,7 @@ public class DetailView: NSView {
         scrollView.contentInsets = .zero
         
         hudView.setup(duration: project.events.duration(),
-                      legendIsHidden: !UISettings().showLegend, // TODO: Move to parameters?
+                      legendIsHidden: !graphConfig.showLegend, // TODO: Move to parameters?
                       scale: scale)
         scrollView.hudLayer = hudView.hudLayer
 //        modulesLayer?.addSublayer(hudLayer!)
@@ -72,12 +80,13 @@ public class DetailView: NSView {
     }
     
     public func recreateHierarchy() {
-        guard let project = project else {
-            return
-        }
+        guard
+            let project = project,
+            let graphConfig = graphConfig
+        else { return }
         
         removeLayer()
-        show(project: project)
+        show(project: project, graphConfig: graphConfig)
         updateSettings()
     }
     
@@ -90,11 +99,10 @@ public class DetailView: NSView {
     }
     
     // TODO: Move setting to layer initialization
-    let uiSettings = UISettings()
     private func updateSettings() {
-        modulesLayer?.showPerformance = uiSettings.showPerformance
-        modulesLayer?.showLinks = uiSettings.showLinks
-        modulesLayer?.showSubtask = uiSettings.showSubtask
+        modulesLayer?.showPerformance = false
+        modulesLayer?.showLinks = true
+        modulesLayer?.showSubtask = true
     }
     
     private func contentSize(appLayer: AppLayer) -> CGSize {

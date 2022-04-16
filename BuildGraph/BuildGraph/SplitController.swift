@@ -9,6 +9,9 @@ import AppKit
 import BuildParser
 import Details
 import Projects
+import Filters
+
+extension UISettings: GraphConfig {}
 
 class SplitController: NSSplitViewController {
     
@@ -23,6 +26,7 @@ class SplitController: NSSplitViewController {
         
         self.projectsPresenter = ProjectsPresenter(delegate: self) // TODO: Not self, should be another delegate
         detail.delegate = self
+        detail.graphConfig = UISettings()
         projects.presenter = projectsPresenter
     }
     

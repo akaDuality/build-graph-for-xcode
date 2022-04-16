@@ -25,7 +25,7 @@ public class DetailViewController: NSViewController {
         
         mouseController.addMouseTracking(to: view())
         addClickRecognizers()
-        updateState()
+//        updateState()
         
         zoomController = ZoomController(
             scrollView: view().scrollView,
@@ -47,54 +47,55 @@ public class DetailViewController: NSViewController {
         project: Project,
         title: String,
         embeddInWindow: Bool,
-        projectReference: ProjectReference?
+        projectReference: ProjectReference?,
+        graphConfig: GraphConfig
     ) {
         self.title = title
         self.embeddInWindow = embeddInWindow
         self.projectReference = projectReference
-        view().show(project: project)
+        view().show(project: project, graphConfig: graphConfig)
     
-        updateState()
-        shareButton.isEnabled = true
+//        updateState()
+//        shareButton.isEnabled = true
     }
     
-    // MARK: - Toolbar
-    @IBOutlet var toolbar: NSToolbar!
-    @IBOutlet weak var subtaskVisibility: NSSwitch!
-    @IBOutlet weak var linkVisibility: NSSwitch!
-    @IBOutlet weak var performanceVisibility: NSSwitch!
+//    // MARK: - Toolbar
+//    @IBOutlet var toolbar: NSToolbar!
+//    @IBOutlet weak var subtaskVisibility: NSSwitch!
+//    @IBOutlet weak var linkVisibility: NSSwitch!
+//    @IBOutlet weak var performanceVisibility: NSSwitch!
+//
+//    @IBOutlet weak var shareButton: NSToolbarItem!
+//
+//    @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
+//        let isOn = sender.state == .on
+//        view().modulesLayer?.showSubtask = isOn
+//        uiSettings.showSubtask = isOn
+//    }
+//
+//    @IBAction func linkVisibilityDidChange(_ sender: NSSwitch) {
+//        let isOn = sender.state == .on
+//        view().modulesLayer?.showLinks = isOn
+//        uiSettings.showLinks = isOn
+//    }
+//    @IBAction func performanceVisibilityDidChange(_ sender: NSSwitch) {
+//        let isOn = sender.state == .on
+//        view().modulesLayer?.showPerformance = isOn
+//        uiSettings.showPerformance = isOn
+//    }
     
-    @IBOutlet weak var shareButton: NSToolbarItem!
-    
-    @IBAction func subtaskVisibilityDidChange(_ sender: NSSwitch) {
-        let isOn = sender.state == .on
-        view().modulesLayer?.showSubtask = isOn
-        uiSettings.showSubtask = isOn
-    }
-    
-    @IBAction func linkVisibilityDidChange(_ sender: NSSwitch) {
-        let isOn = sender.state == .on
-        view().modulesLayer?.showLinks = isOn
-        uiSettings.showLinks = isOn
-    }
-    @IBAction func performanceVisibilityDidChange(_ sender: NSSwitch) {
-        let isOn = sender.state == .on
-        view().modulesLayer?.showPerformance = isOn
-        uiSettings.showPerformance = isOn
-    }
-    
-    private func updateState() {
-        subtaskVisibility       .state = .on//uiSettings.showSubtask ? .on: .off
-        linkVisibility          .state = .on//uiSettings.showLinks ? .on: .off
-        performanceVisibility   .state = uiSettings.showPerformance ? .on: .off
-        
-        subtaskVisibilityDidChange(subtaskVisibility)
-        linkVisibilityDidChange(linkVisibility)
-        performanceVisibilityDidChange(performanceVisibility)
-    }
+//    private func updateState() {
+//        subtaskVisibility       .state = .on//uiSettings.showSubtask ? .on: .off
+//        linkVisibility          .state = .on//uiSettings.showLinks ? .on: .off
+//        performanceVisibility   .state = uiSettings.showPerformance ? .on: .off
+//
+//        subtaskVisibilityDidChange(subtaskVisibility)
+//        linkVisibilityDidChange(linkVisibility)
+//        performanceVisibilityDidChange(performanceVisibility)
+//    }
     
     // MARK: - Content
-    let uiSettings = UISettings()
+//    let uiSettings = UISettings()
     
     public func view() -> DetailView {
         view as! DetailView
@@ -114,7 +115,7 @@ public class DetailViewController: NSViewController {
    
     func clear() {
         view().removeLayer()
-        shareButton.isEnabled = false
+//        shareButton.isEnabled = false
     }
     
     // MARK: - Mouse
@@ -184,7 +185,8 @@ public class DetailViewController: NSViewController {
         popover.show(project: Project(events: events, relativeBuildStart: 0),
                      title: title,
                      embeddInWindow: false,
-                     projectReference: nil)
+                     projectReference: nil,
+                     graphConfig: view().graphConfig!)
         return popover
     }
     
