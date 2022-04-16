@@ -15,8 +15,17 @@ class AppReview {
             return
         }
         
-        SKStoreReviewController.requestReview()
+        guard !wasShown else { return } // Do not show twice in a row
+        
+        showReview()
     }
+    
+    private func showReview() {
+        SKStoreReviewController.requestReview()
+        wasShown = true
+    }
+    
+    private var wasShown = false
     
     private var canShowReview: Bool {
         requestCount >= 5
