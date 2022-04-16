@@ -110,39 +110,12 @@
         }
       },
       {
-        "package": "swift-custom-dump",
-        "repositoryURL": "https://github.com/pointfreeco/swift-custom-dump",
-        "state": {
-          "branch": null,
-          "revision": "51698ece74ecf31959d3fa81733f0a5363ef1b4e",
-          "version": "0.3.0"
-        }
-      },
-      {
         "package": "SwiftProtobuf",
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
           "revision": "e1499bc69b9040b29184f7f2996f7bab467c1639",
           "version": "1.19.0"
-        }
-      },
-      {
-        "package": "xctest-dynamic-overlay",
-        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
-        "state": {
-          "branch": null,
-          "revision": "50a70a9d3583fe228ce672e8923010c8df2deddd",
-          "version": "0.2.1"
-        }
-      },
-      {
-        "package": "XMLCoder",
-        "repositoryURL": "https://github.com/MaxDesiatov/XMLCoder.git",
-        "state": {
-          "branch": null,
-          "revision": "887de88b37b2d691d67db950770e09776229cf6d",
-          "version": "0.13.0"
         }
       }
     ]

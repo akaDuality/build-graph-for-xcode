@@ -20,18 +20,6 @@
       location = "group:../../../Developer/DevSchool/src/cleancode/swift/GraphParser/GraphParser.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:CodeMetrics.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:FileAnalyzer">
-   </FileRef>
-   <FileRef
-      location = "group:UnitTests">
-   </FileRef>
-   <FileRef
-      location = "group:BuildTime">
-   </FileRef>
-   <FileRef
       location = "group:XCLogParser">
    </FileRef>
 </Workspace>
