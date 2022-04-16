@@ -16,6 +16,18 @@ protocol FilterSettingsDelegate: AnyObject {
 }
 
 class SettingsPopoverViewController: NSViewController {
+    static func load(
+        with delegate: FilterSettingsDelegate,
+        counter: BuildStepCounter
+    ) -> NSViewController {
+        let storyboard = NSStoryboard(name: "Settings", bundle: Bundle(for: SettingsPopoverViewController.self))
+        let settingsController = storyboard.instantiateController(withIdentifier: "Settings") as! SettingsPopoverViewController
+        settingsController.delegate = delegate
+        
+        settingsController.setup(counter: counter) // TODO: Refactor
+        return settingsController
+    }
+    
     @IBOutlet weak var compilationStackView: NSStackView!
     @IBOutlet weak var otherStackView: NSStackView!
     @IBOutlet weak var formatStackView: NSStackView!

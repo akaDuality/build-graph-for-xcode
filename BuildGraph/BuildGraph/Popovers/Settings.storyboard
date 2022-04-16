@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings Popover View Controller-->
+        <scene sceneID="nCs-C1-vSk">
+            <objects>
+                <viewController storyboardIdentifier="Settings" id="i5P-uT-lAI" customClass="SettingsPopoverViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="DJs-8H-6iB">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="800"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="cvp-Jd-EPS">
+                                <rect key="frame" x="15" y="648" width="250" height="44"/>
+                                <view key="contentView" id="kk8-Ht-hFn">
+                                    <rect key="frame" x="3" y="3" width="244" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbr-yY-b1b">
+                                            <rect key="frame" x="0.0" y="0.0" width="244" height="24"/>
+                                            <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cbr-yY-b1b" secondAttribute="bottom" id="77Y-Se-fkh"/>
+                                        <constraint firstAttribute="trailing" secondItem="cbr-yY-b1b" secondAttribute="trailing" id="HWs-s7-Bjr"/>
+                                        <constraint firstItem="cbr-yY-b1b" firstAttribute="top" secondItem="kk8-Ht-hFn" secondAttribute="top" id="dqR-d2-uIa"/>
+                                        <constraint firstItem="cbr-yY-b1b" firstAttribute="leading" secondItem="kk8-Ht-hFn" secondAttribute="leading" id="tGd-OL-MGs"/>
+                                    </constraints>
+                                </view>
+                                <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
+                            </box>
+                            <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-G6-FUa">
+                                <rect key="frame" x="15" y="558" width="250" height="44"/>
+                                <view key="contentView" id="gBC-CM-QwR">
+                                    <rect key="frame" x="3" y="3" width="244" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lst-8O-MWA">
+                                            <rect key="frame" x="0.0" y="0.0" width="244" height="24"/>
+                                            <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="lst-8O-MWA" secondAttribute="trailing" id="J31-v0-QYc"/>
+                                        <constraint firstItem="lst-8O-MWA" firstAttribute="leading" secondItem="gBC-CM-QwR" secondAttribute="leading" id="XAP-Jn-DO6"/>
+                                        <constraint firstItem="lst-8O-MWA" firstAttribute="top" secondItem="gBC-CM-QwR" secondAttribute="top" id="eO5-Mi-wcx"/>
+                                        <constraint firstAttribute="bottom" secondItem="lst-8O-MWA" secondAttribute="bottom" id="hn5-HT-fve"/>
+                                    </constraints>
+                                </view>
+                                <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
+                            </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P5m-Ia-AQZ">
+                                <rect key="frame" x="18" y="626" width="77" height="18"/>
+                                <buttonCell key="cell" type="inline" title="Check all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MPW-Z6-Ajh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectAllCompilationFlags:" target="i5P-uT-lAI" id="jfI-NK-EjD"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hrA-vi-u8q">
+                                <rect key="frame" x="188" y="536" width="74" height="18"/>
+                                <buttonCell key="cell" type="inline" title="Uncheck all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kag-S5-b93">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deselectAllOtherFlags:" target="i5P-uT-lAI" id="C5l-sb-xqJ"/>
+                                </connections>
+                            </button>
+                            <box title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="KVd-fa-EXc">
+                                <rect key="frame" x="15" y="423" width="250" height="105"/>
+                                <view key="contentView" id="KR2-6I-21J">
+                                    <rect key="frame" x="3" y="3" width="244" height="85"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-NO-yzk">
+                                            <rect key="frame" x="0.0" y="0.0" width="244" height="85"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13W-4J-Bj2">
+                                                    <rect key="frame" x="10" y="61" width="81" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Font size: 10" id="GHs-s8-Ift">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dnl-Hv-aof">
+                                                    <rect key="frame" x="10" y="38" width="96" height="17"/>
+                                                    <sliderCell key="cell" controlSize="mini" state="on" alignment="left" minValue="5" maxValue="20" doubleValue="10.357142857142858" tickMarkPosition="above" numberOfTickMarks="15" allowsTickMarkValuesOnly="YES" sliderType="linear" id="qIl-Z5-8Gd"/>
+                                                    <connections>
+                                                        <action selector="textSizeDidChange:" target="i5P-uT-lAI" id="Hl7-aJ-Jdf"/>
+                                                    </connections>
+                                                </slider>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iic-LO-PeG">
+                                                    <rect key="frame" x="10" y="15" width="104" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="Show legend" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="tm7-fU-v8O">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="showLegendDidChanged:" target="i5P-uT-lAI" id="BS4-VO-27W"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="ovn-NO-yzk" secondAttribute="trailing" id="0PE-W7-8Xl"/>
+                                        <constraint firstAttribute="bottom" secondItem="ovn-NO-yzk" secondAttribute="bottom" id="Chy-o3-asf"/>
+                                        <constraint firstItem="ovn-NO-yzk" firstAttribute="top" secondItem="KR2-6I-21J" secondAttribute="top" id="Y6R-cC-PTb"/>
+                                        <constraint firstItem="ovn-NO-yzk" firstAttribute="leading" secondItem="KR2-6I-21J" secondAttribute="leading" id="rat-20-WOC"/>
+                                    </constraints>
+                                </view>
+                                <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
+                            </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6P5-6D-z8P">
+                                <rect key="frame" x="28" y="711" width="128" height="18"/>
+                                <buttonCell key="cell" type="check" title="Cached modules" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="t2u-pc-olk">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showCachedModulesDidChagne:" target="i5P-uT-lAI" id="5nR-2V-3M0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hrA-vi-u8q" firstAttribute="trailing" secondItem="lst-8O-MWA" secondAttribute="trailing" id="3n8-xK-lbs"/>
+                            <constraint firstItem="KVd-fa-EXc" firstAttribute="top" secondItem="hrA-vi-u8q" secondAttribute="bottom" constant="8" id="78u-Hi-EGY"/>
+                            <constraint firstItem="KVd-fa-EXc" firstAttribute="centerX" secondItem="lst-8O-MWA" secondAttribute="centerX" id="AlW-sd-Osy"/>
+                            <constraint firstItem="hrA-vi-u8q" firstAttribute="top" secondItem="lst-8O-MWA" secondAttribute="bottom" constant="7" id="BjS-Om-W4x"/>
+                            <constraint firstItem="6P5-6D-z8P" firstAttribute="leading" secondItem="Iic-LO-PeG" secondAttribute="leading" id="CY7-KY-5tL"/>
+                            <constraint firstItem="4ng-G6-FUa" firstAttribute="leading" secondItem="cvp-Jd-EPS" secondAttribute="leading" id="JX6-h4-MpM"/>
+                            <constraint firstItem="4ng-G6-FUa" firstAttribute="centerX" secondItem="cvp-Jd-EPS" secondAttribute="centerX" id="L0b-Bj-mrO"/>
+                            <constraint firstItem="4ng-G6-FUa" firstAttribute="top" secondItem="P5m-Ia-AQZ" secondAttribute="bottom" constant="24" id="Lb6-7O-ZcA"/>
+                            <constraint firstItem="P5m-Ia-AQZ" firstAttribute="top" secondItem="cbr-yY-b1b" secondAttribute="bottom" constant="7" id="MFN-RF-vqP"/>
+                            <constraint firstItem="cvp-Jd-EPS" firstAttribute="centerX" secondItem="DJs-8H-6iB" secondAttribute="centerX" id="P0X-YX-3HW"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KVd-fa-EXc" secondAttribute="bottom" constant="20" id="cKW-ho-QG5"/>
+                            <constraint firstItem="cvp-Jd-EPS" firstAttribute="top" secondItem="6P5-6D-z8P" secondAttribute="bottom" constant="20" id="dWy-M8-gBF"/>
+                            <constraint firstItem="cvp-Jd-EPS" firstAttribute="leading" secondItem="DJs-8H-6iB" secondAttribute="leading" constant="18" id="eq6-Wc-64Z"/>
+                            <constraint firstItem="6P5-6D-z8P" firstAttribute="top" secondItem="DJs-8H-6iB" secondAttribute="top" constant="72" id="jmu-9p-1to"/>
+                            <constraint firstItem="KVd-fa-EXc" firstAttribute="leading" secondItem="lst-8O-MWA" secondAttribute="leading" id="mYp-QV-wuu"/>
+                            <constraint firstItem="hrA-vi-u8q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lst-8O-MWA" secondAttribute="leading" id="pA3-h0-6Gq"/>
+                            <constraint firstItem="cbr-yY-b1b" firstAttribute="leading" secondItem="P5m-Ia-AQZ" secondAttribute="trailing" constant="-77" id="piJ-zg-WKX"/>
+                            <constraint firstItem="P5m-Ia-AQZ" firstAttribute="leading" secondItem="cbr-yY-b1b" secondAttribute="leading" id="vBU-rR-dNJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cachedModulesCheckbox" destination="6P5-6D-z8P" id="dpC-hQ-KcV"/>
+                        <outlet property="compilationStackView" destination="cbr-yY-b1b" id="29k-6L-Wkb"/>
+                        <outlet property="formatStackView" destination="ovn-NO-yzk" id="ZqO-bf-B0F"/>
+                        <outlet property="otherStackView" destination="lst-8O-MWA" id="xJS-Zj-6Jg"/>
+                        <outlet property="showLegend" destination="Iic-LO-PeG" id="5iB-5v-k37"/>
+                        <outlet property="textSizeLabel" destination="13W-4J-Bj2" id="AYd-C9-TN0"/>
+                        <outlet property="textSizeSlider" destination="dnl-Hv-aof" id="yZj-b0-wvn"/>
+                    </connections>
+                </viewController>
+                <customObject id="P5F-OV-WzU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="91" y="106"/>
+        </scene>
+    </scenes>
+</document>

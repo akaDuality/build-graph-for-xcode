@@ -21,6 +21,7 @@
 		1E73717A280B11EA007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E7371B7280B1397007C7B10 /* Projects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371B6280B1397007C7B10 /* Projects.framework */; };
 		1E7371B8280B1397007C7B10 /* Projects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371B6280B1397007C7B10 /* Projects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E7371C1280B1736007C7B10 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7371C0280B1736007C7B10 /* Settings.storyboard */; };
 		1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71C27C64529005A6C19 /* MainWindow.swift */; };
 		1E79A71F27C64DE0005A6C19 /* DetailStepTypeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */; };
 		1E9AE0202800B62100851519 /* Details.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; };
@@ -86,6 +87,7 @@
 		1E737165280B0EA3007C7B10 /* GraphParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GraphParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E737168280B0EA8007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7371B6280B1397007C7B10 /* Projects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Projects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7371C0280B1736007C7B10 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		1E79A71C27C64529005A6C19 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStepTypeDescription.swift; sourceTree = "<group>"; };
 		1E9690092789C0280010FF04 /* BuildDeps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BuildDeps-Info.plist"; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				1E61EC6E2794543500208FDB /* SettingsPopoverViewController.swift */,
+				1E7371C0280B1736007C7B10 /* Settings.storyboard */,
 				1E79A71E27C64DE0005A6C19 /* DetailStepTypeDescription.swift */,
 			);
 			path = Popovers;
@@ -370,6 +373,7 @@
 				1EC72E24271D4D3800352213 /* Doner 42.json in Resources */,
 				1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */,
 				1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */,
+				1E7371C1280B1736007C7B10 /* Settings.storyboard in Resources */,
 				1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */,
 				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
 				1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */,

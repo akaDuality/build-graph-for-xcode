@@ -99,11 +99,10 @@ extension SplitController: DetailsDelegate {
     private func showSettings() {
         hideSettingsIfNeeded()
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let filterSettingsController = storyboard.instantiateController(withIdentifier: "Settings") as! SettingsPopoverViewController
-        filterSettingsController.delegate = self
+        let filterSettingsController = SettingsPopoverViewController.load(
+            with: self,
+            counter: detail.presenter.parser.makeCounter())
         
-        filterSettingsController.setup(counter: detail.presenter.parser.makeCounter()) // TODO: Refactor
         addSplitViewItem(NSSplitViewItem(sidebarWithViewController: filterSettingsController))
     }
 }
