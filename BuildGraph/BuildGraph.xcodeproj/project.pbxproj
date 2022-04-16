@@ -22,6 +22,7 @@
 		1E7371B8280B1397007C7B10 /* Projects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371B6280B1397007C7B10 /* Projects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E7371EB280B187D007C7B10 /* Filters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371EA280B187D007C7B10 /* Filters.framework */; };
 		1E7371EC280B187D007C7B10 /* Filters.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371EA280B187D007C7B10 /* Filters.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E7371F5280B266C007C7B10 /* AppReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371F4280B266C007C7B10 /* AppReview.swift */; };
 		1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E79A71C27C64529005A6C19 /* MainWindow.swift */; };
 		1E9AE0202800B62100851519 /* Details.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; };
 		1E9AE0212800B62100851519 /* Details.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -87,6 +88,7 @@
 		1E737168280B0EA8007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7371B6280B1397007C7B10 /* Projects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Projects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7371EA280B187D007C7B10 /* Filters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Filters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7371F4280B266C007C7B10 /* AppReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReview.swift; sourceTree = "<group>"; };
 		1E79A71C27C64529005A6C19 /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		1E9690092789C0280010FF04 /* BuildDeps-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BuildDeps-Info.plist"; sourceTree = "<group>"; };
 		1E9AE01F2800B62100851519 /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +197,7 @@
 				1EF5609527844D2700001935 /* WindowController.swift */,
 				1E79A71C27C64529005A6C19 /* MainWindow.swift */,
 				1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */,
+				1E7371F4280B266C007C7B10 /* AppReview.swift */,
 				1EDB5E3827135F0100741EEF /* Assets.xcassets */,
 				1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */,
 				1EB1A8D4272DC17100D31AB8 /* Samples */,
@@ -384,6 +387,7 @@
 			files = (
 				1E79A71D27C64529005A6C19 /* MainWindow.swift in Sources */,
 				1EF5609627844D2700001935 /* WindowController.swift in Sources */,
+				1E7371F5280B266C007C7B10 /* AppReview.swift in Sources */,
 				1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */,
 				1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */,
 			);

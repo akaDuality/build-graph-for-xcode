@@ -20,6 +20,7 @@ class SplitController: NSSplitViewController {
     var filter = FilterSettings.shared
     
     var projectsPresenter: ProjectsPresenter!
+    let appReview = AppReview()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,8 @@ extension SplitController: DetailsDelegate {
         mainWindow().enableButtons()
         
         showSettings()
+        
+        appReview.requestIfPossible()
     }
     
     func didFailLoadProject() {
