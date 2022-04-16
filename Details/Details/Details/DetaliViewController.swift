@@ -178,7 +178,7 @@ public class DetailViewController: NSViewController {
     }
     
     private func controllerForDetailsPopover(events: [Event], title: String) -> NSViewController {
-        let popover = NSStoryboard(name: "Details", bundle: nil)
+        let popover = NSStoryboard(name: "Details", bundle: Bundle(for: type(of: self)))
             .instantiateController(withIdentifier: "data") as! DetailViewController
         _ = popover.view
         
