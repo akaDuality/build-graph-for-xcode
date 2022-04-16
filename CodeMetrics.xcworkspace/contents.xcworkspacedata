@@ -5,7 +5,13 @@
       location = "group:BuildGraph/BuildGraph.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:BuildParser">
+      location = "group:Details/Details.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Developer/DevSchool/src/cleancode/swift/GraphParser/GraphParser.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Developer/DevSchool/src/cleancode/swift/BuildParser/BuildParser.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:CodeMetrics.xcodeproj">
@@ -14,12 +20,12 @@
       location = "group:FileAnalyzer">
    </FileRef>
    <FileRef
-      location = "group:LeadTime">
-   </FileRef>
-   <FileRef
       location = "group:UnitTests">
    </FileRef>
    <FileRef
       location = "group:BuildTime">
+   </FileRef>
+   <FileRef
+      location = "group:XCLogParser">
    </FileRef>
 </Workspace>

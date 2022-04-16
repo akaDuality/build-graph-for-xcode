@@ -6,8 +6,8 @@
 //
 
 import Cocoa
-import BuildParser
 import Firebase
+import BuildParser
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {

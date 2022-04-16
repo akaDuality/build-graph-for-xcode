@@ -8,6 +8,7 @@
 import AppKit
 import XCLogParser
 import BuildParser
+import Details
 
 protocol FilterSettingsDelegate: AnyObject {
     func didUpdateFilter(_ filterSettings: FilterSettings)

@@ -6,8 +6,8 @@
 //
 
 import AppKit
-
 import BuildParser
+import Details
 
 class SplitController: NSSplitViewController {
     
@@ -115,6 +115,6 @@ extension SplitController: FilterSettingsDelegate {
         guard let dataController = detail.currentController as? DetailViewController else { return }
         
         dataController.view().recreateHierarchy()
-        dataController.view().hudView.hudLayer?.legendIsHidden = !UISettings().showLegend
+        dataController.view().showLegend = UISettings().showLegend
     }
 }

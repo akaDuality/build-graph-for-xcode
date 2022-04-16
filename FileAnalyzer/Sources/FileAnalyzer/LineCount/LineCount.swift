@@ -106,7 +106,7 @@ extension Project {
                             "DMapKit",
                             "DynamicType",
                             "Kusto",
-                            "Mindbox",
+                            "MindboxDodo",
                             "Phone",
                             "hCaptcha",
                           ]),
@@ -172,6 +172,11 @@ extension Project {
                             "PushNotificationContentExtension",
                           ]),
             
+            Project.Layer(name: "Helpers",
+                          modules: [
+                            "DesignSandbox",
+                          ]),
+            
             Project.Layer(name: "Common",
                           modules: [
                             "Acquirers",
@@ -180,6 +185,7 @@ extension Project {
                             "DE2E",
                             "DID",
                             "DNetwork",
+                            "DParsers",
                             "Pods",
                           ]),
         ]

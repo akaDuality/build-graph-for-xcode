@@ -6,7 +6,7 @@
 //
 
 import AppKit
-import BuildParser
+import Details
 
 class WindowController: NSWindowController {
     

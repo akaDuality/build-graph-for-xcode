@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -534,7 +534,7 @@
         <!--Details State View Controller-->
         <scene sceneID="pAW-rV-PZr">
             <objects>
-                <viewController id="rEc-My-FiG" customClass="DetailsStateViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rEc-My-FiG" customClass="DetailsStateViewController" customModule="Details" sceneMemberID="viewController">
                     <view key="view" id="me5-j8-t6X">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

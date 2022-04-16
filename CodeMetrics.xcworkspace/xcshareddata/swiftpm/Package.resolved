@@ -101,30 +101,12 @@
         }
       },
       {
-        "package": "OctoKit",
-        "repositoryURL": "https://github.com/nerdishbynature/octokit.swift",
-        "state": {
-          "branch": null,
-          "revision": "9521cdff919053868ab13cd08a228f7bc1bde2a9",
-          "version": "0.11.0"
-        }
-      },
-      {
         "package": "Promises",
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {
           "branch": null,
           "revision": "611337c330350c9c1823ad6d671e7f936af5ee13",
           "version": "2.0.0"
-        }
-      },
-      {
-        "package": "RequestKit",
-        "repositoryURL": "https://github.com/nerdishbynature/RequestKit.git",
-        "state": {
-          "branch": null,
-          "revision": "fd5e9e99aada7432170366c9e95967011ce13bad",
-          "version": "2.4.0"
         }
       },
       {
@@ -143,15 +125,6 @@
           "branch": null,
           "revision": "e1499bc69b9040b29184f7f2996f7bab467c1639",
           "version": "1.19.0"
-        }
-      },
-      {
-        "package": "SnapshotTesting",
-        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
-        "state": {
-          "branch": null,
-          "revision": "f8a9c997c3c1dab4e216a8ec9014e23144cbab37",
-          "version": "1.9.0"
         }
       },
       {

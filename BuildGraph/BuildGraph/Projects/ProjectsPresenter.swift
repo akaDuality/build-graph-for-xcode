@@ -7,6 +7,7 @@
 
 import Foundation
 import BuildParser
+import Details
 
 protocol ProjectsSelectionDelegate: AnyObject {
     func didSelect(project: ProjectReference?)
