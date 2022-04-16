@@ -8,10 +8,12 @@
 import AppKit
 import BuildParser
 import Details
+import Projects
 
 class SplitController: NSSplitViewController {
     
     private let uiSettings = UISettings()
+    private let projectSettings = ProjectSettings()
     var filter = FilterSettings.shared
     
     var projectsPresenter: ProjectsPresenter!
@@ -66,7 +68,7 @@ extension SplitController: DetailsDelegate {
     ) {
         // Remove current project in case if I wouldn't open selected.
         // In case of crash, next time user will select another one
-        uiSettings.removeSelectedProject()
+        projectSettings.removeSelectedProject()
         
         mainWindow().disableButtons()
         mainWindow().updateNavigationButtons(for: project)
@@ -78,7 +80,7 @@ extension SplitController: DetailsDelegate {
         project: ProjectReference,
         detailsController: DetailViewController
     ) {
-        self.uiSettings.selectedProject = project.name // Save only after success parsing
+        projectSettings.selectedProject = project.name // Save only after success parsing
         mainWindow().enableButtons()
         
         showSettings()

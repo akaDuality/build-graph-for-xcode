@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import BuildParser
 
 public class ProjectDescriptionService {
     public init() {}
     
-    func description(for project: ProjectReference) -> String {
+    public func description(for project: ProjectReference) -> String {
         "\(project.name), \(dateDescription(for: project.currentActivityLog))"
     }
     

@@ -365,7 +365,7 @@
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JVm-vu-Bbo" secondAttribute="bottom" id="vv0-oA-y4j"/>
                                     </constraints>
                                 </view>
-                                <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
+                                <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
                             </box>
                             <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="qGp-Tb-uz5">
                                 <rect key="frame" x="15" y="558" width="250" height="44"/>
@@ -385,7 +385,7 @@
                                         <constraint firstAttribute="trailing" secondItem="7JE-3f-E71" secondAttribute="trailing" id="vcQ-6h-WLb"/>
                                     </constraints>
                                 </view>
-                                <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
+                                <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AVY-Z9-SCE">
                                 <rect key="frame" x="18" y="626" width="77" height="18"/>
@@ -408,7 +408,7 @@
                                 </connections>
                             </button>
                             <box title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="yy2-fF-m5R">
-                                <rect key="frame" x="15" y="411" width="250" height="105"/>
+                                <rect key="frame" x="15" y="423" width="250" height="105"/>
                                 <view key="contentView" id="cRq-1Y-rdd">
                                     <rect key="frame" x="3" y="3" width="244" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -462,7 +462,7 @@
                                         <constraint firstItem="v5r-6D-buE" firstAttribute="top" secondItem="cRq-1Y-rdd" secondAttribute="top" id="r9g-Bl-OJ1"/>
                                     </constraints>
                                 </view>
-                                <font key="titleFont" textStyle="body" name=".SFNS-Regular"/>
+                                <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Tw-Ngg">
                                 <rect key="frame" x="28" y="711" width="128" height="18"/>
@@ -476,11 +476,11 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="AVY-Z9-SCE" secondAttribute="bottom" constant="24" id="2VK-JT-baU"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yy2-fF-m5R" secondAttribute="bottom" constant="20" id="2qp-Jw-IXb"/>
-                            <constraint firstItem="qGp-Tb-uz5" firstAttribute="top" secondItem="8Il-EF-1Tf" secondAttribute="bottom" constant="50" id="J7I-b4-JZP"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="top" secondItem="7JE-3f-E71" secondAttribute="bottom" constant="7" id="O4T-67-Rxv"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="centerX" secondItem="3qk-xS-avz" secondAttribute="centerX" id="SfL-Oe-TMc"/>
-                            <constraint firstItem="yy2-fF-m5R" firstAttribute="top" secondItem="07F-ks-YDb" secondAttribute="bottom" constant="20" id="UiY-S9-VaP"/>
+                            <constraint firstItem="yy2-fF-m5R" firstAttribute="top" secondItem="07F-ks-YDb" secondAttribute="bottom" constant="8" id="UiY-S9-VaP"/>
                             <constraint firstItem="vfY-Tw-Ngg" firstAttribute="top" secondItem="3qk-xS-avz" secondAttribute="top" constant="72" id="WvQ-aV-tlt"/>
                             <constraint firstItem="07F-ks-YDb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7JE-3f-E71" secondAttribute="leading" id="YTE-Br-7ww"/>
                             <constraint firstItem="8Il-EF-1Tf" firstAttribute="leading" secondItem="3qk-xS-avz" secondAttribute="leading" constant="18" id="dQS-jW-BDk"/>
@@ -549,7 +549,7 @@
         <!--Projects State View Controller-->
         <scene sceneID="mUt-g6-Me5">
             <objects>
-                <viewController id="9Ke-Cl-ZR8" customClass="ProjectsStateViewController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9Ke-Cl-ZR8" customClass="ProjectsStateViewController" customModule="Projects" sceneMemberID="viewController">
                     <view key="view" id="iMY-Eg-U1r">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

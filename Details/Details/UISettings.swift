@@ -20,13 +20,6 @@ public class UISettings {
     @Storage(key: "showPerformance", defaultValue: false)
     public var showPerformance: Bool
     
-    @Storage(key: "selectedProject", defaultValue: nil)
-    public var selectedProject: String?
-    
-    public func removeSelectedProject() {
-        UserDefaults.standard.removeObject(forKey: "selectedProject")
-    }
-    
     @Storage(key: "showLegend", defaultValue: true)
     public var showLegend: Bool
     

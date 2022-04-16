@@ -7,6 +7,7 @@
 
 import AppKit
 import Details
+import Projects
 
 class WindowController: NSWindowController {
     

@@ -8,10 +8,13 @@
       location = "group:Details/Details.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../../Developer/DevSchool/src/cleancode/swift/GraphParser/GraphParser.xcodeproj">
+      location = "group:../../../Developer/DevSchool/src/cleancode/swift/Projects/Projects.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../../Developer/DevSchool/src/cleancode/swift/BuildParser/BuildParser.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../Developer/DevSchool/src/cleancode/swift/GraphParser/GraphParser.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:CodeMetrics.xcodeproj">
