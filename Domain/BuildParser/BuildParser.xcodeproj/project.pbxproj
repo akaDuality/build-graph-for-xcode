@@ -67,7 +67,8 @@
 		1E737171280B0F38007C7B10 /* XCLogParser in Frameworks */ = {isa = PBXBuildFile; productRef = 1E737170280B0F38007C7B10 /* XCLogParser */; };
 		1E737173280B0F47007C7B10 /* GraphParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737172280B0F47007C7B10 /* GraphParser.framework */; };
 		1E737174280B0F47007C7B10 /* GraphParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737172280B0F47007C7B10 /* GraphParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1E7371BF280B156B007C7B10 /* ProjectDescriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371BE280B156B007C7B10 /* ProjectDescriptionService.swift */; };
+		1EFF82EE280D3A98000E022D /* ProjectDescriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82ED280D3A98000E022D /* ProjectDescriptionService.swift */; };
+		1EFF82FA280D3CFF000E022D /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82F9280D3CFF000E022D /* UISettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,7 +155,8 @@
 		1E73714D280B0E14007C7B10 /* ProjectReferenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectReferenceTests.swift; sourceTree = "<group>"; };
 		1E737163280B0E35007C7B10 /* BuildParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildParserTests.swift; sourceTree = "<group>"; };
 		1E737172280B0F47007C7B10 /* GraphParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GraphParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E7371BE280B156B007C7B10 /* ProjectDescriptionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectDescriptionService.swift; path = ../../../../../../../../Documents/Projects/CodeMetrics/Details/Details/Common/ProjectDescriptionService.swift; sourceTree = "<group>"; };
+		1EFF82ED280D3A98000E022D /* ProjectDescriptionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionService.swift; sourceTree = "<group>"; };
+		1EFF82F9280D3CFF000E022D /* UISettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,8 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				1E7370CB280B0DBA007C7B10 /* Storage.swift */,
+				1EFF82ED280D3A98000E022D /* ProjectDescriptionService.swift */,
 				1E7370CC280B0DBA007C7B10 /* DurationFormatter.swift */,
-				1E7371BE280B156B007C7B10 /* ProjectDescriptionService.swift */,
 				1E7370CD280B0DBA007C7B10 /* ProjectReference.swift */,
 				1E7370CE280B0DBA007C7B10 /* Event.swift */,
 				1E7370CF280B0DBA007C7B10 /* ProjectReferenceFactory.swift */,
@@ -286,6 +288,7 @@
 				1E7370DB280B0DBA007C7B10 /* Common */,
 				1E7370DC280B0DBA007C7B10 /* FolderMonitor.swift */,
 				1E7370DD280B0DBA007C7B10 /* BuildStepCounter.swift */,
+				1EFF82F9280D3CFF000E022D /* UISettings.swift */,
 				1E7370DE280B0DBA007C7B10 /* FilterSettings.swift */,
 			);
 			path = Domain;
@@ -508,7 +511,7 @@
 				1E7370FF280B0DBA007C7B10 /* FilterSettings.swift in Sources */,
 				1E7370E7280B0DBA007C7B10 /* VerticalLineLayer.swift in Sources */,
 				1E7370E1280B0DBA007C7B10 /* ColorDescriptionLayer.swift in Sources */,
-				1E7371BF280B156B007C7B10 /* ProjectDescriptionService.swift in Sources */,
+				1EFF82EE280D3A98000E022D /* ProjectDescriptionService.swift in Sources */,
 				1E7370F6280B0DBA007C7B10 /* ProjectsFinder.swift in Sources */,
 				1E7370EB280B0DBA007C7B10 /* TimelineLayer.swift in Sources */,
 				1E7370E5280B0DBA007C7B10 /* BuildStartLayer.swift in Sources */,
@@ -523,6 +526,7 @@
 				1E7370E2280B0DBA007C7B10 /* HUDLayer.swift in Sources */,
 				1E7370A3280B0DA4007C7B10 /* BuildParser.docc in Sources */,
 				1E7370F3280B0DBA007C7B10 /* DateFormatter+8601.swift in Sources */,
+				1EFF82FA280D3CFF000E022D /* UISettings.swift in Sources */,
 				1E7370FC280B0DBA007C7B10 /* Project.swift in Sources */,
 				1E7370ED280B0DBA007C7B10 /* EventRelativeRect.swift in Sources */,
 				1E7370F9280B0DBA007C7B10 /* Analyzer.swift in Sources */,

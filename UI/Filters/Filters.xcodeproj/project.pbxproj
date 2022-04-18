@@ -10,12 +10,11 @@
 		1E7371D5280B1822007C7B10 /* Filters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371CC280B1822007C7B10 /* Filters.framework */; };
 		1E7371DA280B1822007C7B10 /* FiltersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371D9280B1822007C7B10 /* FiltersTests.swift */; };
 		1E7371DB280B1822007C7B10 /* Filters.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7371CF280B1822007C7B10 /* Filters.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E7371E7280B182F007C7B10 /* SettingsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371E4280B182F007C7B10 /* SettingsPopoverViewController.swift */; };
-		1E7371E8280B182F007C7B10 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7371E5280B182F007C7B10 /* Settings.storyboard */; };
-		1E7371E9280B182F007C7B10 /* DetailStepTypeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371E6280B182F007C7B10 /* DetailStepTypeDescription.swift */; };
 		1E7371EF280B1932007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371EE280B1932007C7B10 /* BuildParser.framework */; };
 		1E7371F0280B1932007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371EE280B1932007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1E7371F3280B1B21007C7B10 /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371F2280B1B21007C7B10 /* UISettings.swift */; };
+		1EFF82F2280D3B33000E022D /* DetailStepTypeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82EF280D3B33000E022D /* DetailStepTypeDescription.swift */; };
+		1EFF82F3280D3B33000E022D /* SettingsPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82F0280D3B33000E022D /* SettingsPopoverViewController.swift */; };
+		1EFF82F4280D3B33000E022D /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EFF82F1280D3B33000E022D /* Settings.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,11 +46,10 @@
 		1E7371CF280B1822007C7B10 /* Filters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		1E7371D4280B1822007C7B10 /* FiltersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FiltersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7371D9280B1822007C7B10 /* FiltersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTests.swift; sourceTree = "<group>"; };
-		1E7371E4280B182F007C7B10 /* SettingsPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPopoverViewController.swift; path = ../../../../../../../Documents/Projects/CodeMetrics/BuildGraph/BuildGraph/Popovers/SettingsPopoverViewController.swift; sourceTree = "<group>"; };
-		1E7371E5280B182F007C7B10 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = ../../../../../../../Documents/Projects/CodeMetrics/BuildGraph/BuildGraph/Popovers/Settings.storyboard; sourceTree = "<group>"; };
-		1E7371E6280B182F007C7B10 /* DetailStepTypeDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailStepTypeDescription.swift; path = ../../../../../../../Documents/Projects/CodeMetrics/BuildGraph/BuildGraph/Popovers/DetailStepTypeDescription.swift; sourceTree = "<group>"; };
 		1E7371EE280B1932007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E7371F2280B1B21007C7B10 /* UISettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UISettings.swift; path = ../../../../../../../Documents/Projects/CodeMetrics/Details/Details/UISettings.swift; sourceTree = "<group>"; };
+		1EFF82EF280D3B33000E022D /* DetailStepTypeDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStepTypeDescription.swift; sourceTree = "<group>"; };
+		1EFF82F0280D3B33000E022D /* SettingsPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPopoverViewController.swift; sourceTree = "<group>"; };
+		1EFF82F1280D3B33000E022D /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +95,9 @@
 			isa = PBXGroup;
 			children = (
 				1E7371CF280B1822007C7B10 /* Filters.h */,
-				1E7371F2280B1B21007C7B10 /* UISettings.swift */,
-				1E7371E4280B182F007C7B10 /* SettingsPopoverViewController.swift */,
-				1E7371E5280B182F007C7B10 /* Settings.storyboard */,
-				1E7371E6280B182F007C7B10 /* DetailStepTypeDescription.swift */,
+				1EFF82EF280D3B33000E022D /* DetailStepTypeDescription.swift */,
+				1EFF82F1280D3B33000E022D /* Settings.storyboard */,
+				1EFF82F0280D3B33000E022D /* SettingsPopoverViewController.swift */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -214,7 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E7371E8280B182F007C7B10 /* Settings.storyboard in Resources */,
+				1EFF82F4280D3B33000E022D /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,9 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E7371E7280B182F007C7B10 /* SettingsPopoverViewController.swift in Sources */,
-				1E7371E9280B182F007C7B10 /* DetailStepTypeDescription.swift in Sources */,
-				1E7371F3280B1B21007C7B10 /* UISettings.swift in Sources */,
+				1EFF82F3280D3B33000E022D /* SettingsPopoverViewController.swift in Sources */,
+				1EFF82F2280D3B33000E022D /* DetailStepTypeDescription.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

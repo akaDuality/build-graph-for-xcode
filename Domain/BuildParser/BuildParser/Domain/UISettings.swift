@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import BuildParser
 
 public class UISettings {
     public init() {}
