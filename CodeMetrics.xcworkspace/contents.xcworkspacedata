@@ -4,22 +4,30 @@
    <FileRef
       location = "group:BuildGraph/BuildGraph.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Details/Details.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../Developer/DevSchool/src/cleancode/swift/Filters/Filters.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../Developer/DevSchool/src/cleancode/swift/Projects/Projects.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../Developer/DevSchool/src/cleancode/swift/BuildParser/BuildParser.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../../Developer/DevSchool/src/cleancode/swift/GraphParser/GraphParser.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:XCLogParser">
-   </FileRef>
+   <Group
+      location = "group:BuildGraph/../UI"
+      name = "UI">
+      <FileRef
+         location = "group:Details/Details.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Projects/Projects.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Filters/Filters.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:BuildGraph/../Domain"
+      name = "Domain">
+      <FileRef
+         location = "group:BuildParser/BuildParser.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:GraphParser/GraphParser.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/rubanov/Documents/Projects/CodeMetrics/Domain/XCLogParser">
+      </FileRef>
+   </Group>
 </Workspace>

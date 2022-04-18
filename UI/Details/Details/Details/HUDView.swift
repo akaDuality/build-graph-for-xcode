@@ -1,0 +1,47 @@
+//
+//  HUDView.swift
+//  BuildGraph
+//
+//  Created by Mikhail Rubanov on 06.03.2022.
+//
+
+import Foundation
+import AppKit
+import BuildParser
+
+class HUDView: FlippedView {
+    var hudLayer: HUDLayer?
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    func setup(duration: TimeInterval, legendIsHidden: Bool, scale: CGFloat) {
+        hudLayer?.removeFromSuperlayer() // remove previous one
+        
+        hudLayer = HUDLayer(duration: duration,
+                            legendIsHidden: legendIsHidden,
+                            scale: scale)
+        wantsLayer = true
+        layer?.addSublayer(hudLayer!)
+    }
+    
+    override func layout() {
+        super.layout()
+        
+        layer?.updateWithoutAnimation {
+            self.hudLayer?.frame = bounds
+            self.hudLayer?.layoutIfNeeded()
+        }
+    }
+    
+    override func updateLayer() {
+        super.updateLayer()
+        
+        hudLayer?.setNeedsLayout()
+    }
+    
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        nil
+    }
+}

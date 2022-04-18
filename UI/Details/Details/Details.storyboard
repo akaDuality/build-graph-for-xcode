@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail View Controller-->
+        <scene sceneID="Wbn-Um-3ry">
+            <objects>
+                <viewController storyboardIdentifier="data" id="mdS-38-uT0" customClass="DetailViewController" customModule="Details" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" id="Iu8-Pp-pFO" customClass="DetailView" customModule="Details" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D" customClass="HUDScrollView" customModule="Details" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
+                                <clipView key="contentView" id="kmJ-xz-3Wv">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view id="vMu-dF-XQW">
+                                            <rect key="frame" x="0.0" y="0.0" width="465" height="203"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="7Aa-Zl-exb">
+                                    <rect key="frame" x="0.0" y="202" width="480" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="vah-yU-LBv">
+                                    <rect key="frame" x="464" y="0.0" width="16" height="218"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ddB-Q6-2lq" customClass="HUDView" customModule="Details" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            </customView>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ" userLabel="Zoom controls">
+                                <rect key="frame" x="392" y="182" width="72" height="20"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EQ9-O4-CcC">
+                                        <rect key="frame" x="-7" y="-7" width="46" height="32"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="minus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t6J-bq-t5z">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent">-</string>
+                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                        </buttonCell>
+                                        <accessibility description="Zoom out"/>
+                                        <connections>
+                                            <action selector="zoomOut:" target="mdS-38-uT0" id="raZ-zx-gld"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="irs-zY-n9e">
+                                        <rect key="frame" x="33" y="-7" width="46" height="32"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="plus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wjy-SY-bRc">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent">=</string>
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                        </buttonCell>
+                                        <accessibility description="Zoom in"/>
+                                        <connections>
+                                            <action selector="zoomIn:" target="mdS-38-uT0" id="6qQ-q9-mrN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zGP-rt-v5D" secondAttribute="trailing" id="8Zq-A4-rVc"/>
+                            <constraint firstAttribute="bottom" secondItem="zGP-rt-v5D" secondAttribute="bottom" id="Bpv-wq-o4r"/>
+                            <constraint firstAttribute="trailing" secondItem="ddB-Q6-2lq" secondAttribute="trailing" id="Ja9-Kg-T3U"/>
+                            <constraint firstAttribute="bottom" secondItem="ddB-Q6-2lq" secondAttribute="bottom" id="O7x-w8-jgq"/>
+                            <constraint firstItem="CvU-A5-cDZ" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="68" id="VEy-cY-qae"/>
+                            <constraint firstItem="ddB-Q6-2lq" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" id="fH1-PB-6WX"/>
+                            <constraint firstItem="zGP-rt-v5D" firstAttribute="top" secondItem="Iu8-Pp-pFO" secondAttribute="top" constant="52" id="j8j-lI-w5M"/>
+                            <constraint firstItem="zGP-rt-v5D" firstAttribute="leading" secondItem="Iu8-Pp-pFO" secondAttribute="leading" id="nG8-y7-lIL"/>
+                            <constraint firstItem="ddB-Q6-2lq" firstAttribute="leading" secondItem="Iu8-Pp-pFO" secondAttribute="leading" id="wQa-VS-bIJ"/>
+                            <constraint firstAttribute="trailing" secondItem="CvU-A5-cDZ" secondAttribute="trailing" constant="16" id="wWv-Om-qkf"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="hudView" destination="ddB-Q6-2lq" id="2aT-ZG-Gxk"/>
+                            <outlet property="scrollView" destination="zGP-rt-v5D" id="2tI-Ux-qEb"/>
+                            <outlet property="topConstraint" destination="j8j-lI-w5M" id="avM-xG-qIp"/>
+                            <outlet property="zoomInButton" destination="irs-zY-n9e" id="SWh-7r-Zgk"/>
+                            <outlet property="zoomOutButton" destination="EQ9-O4-CcC" id="V8b-Xd-Twl"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <customObject id="SUv-VW-WYg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="149" y="1866"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3tU-Gl-Abu">
+            <objects>
+                <viewController storyboardIdentifier="blank" id="gvL-16-e6A" sceneMemberID="viewController">
+                    <view key="view" id="iDK-Tm-Qwp">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="e1J-BW-1LT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-841" y="1866"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="KU1-Nd-bet">
+            <objects>
+                <viewController storyboardIdentifier="noProject" id="rZM-ID-TvK" sceneMemberID="viewController">
+                    <view key="view" id="ImN-pI-RX6">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0AU-P7-nif">
+                                <rect key="frame" x="18" y="197" width="414" height="31"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="← select a project to show build data" id="DnH-nK-C8f">
+                                    <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="0AU-P7-nif" firstAttribute="leading" secondItem="ddu-g0-LqC" secondAttribute="leading" id="O7l-Qg-240"/>
+                            <constraint firstItem="0AU-P7-nif" firstAttribute="centerX" secondItem="ddu-g0-LqC" secondAttribute="centerX" id="agq-JG-3XR"/>
+                            <constraint firstItem="0AU-P7-nif" firstAttribute="top" secondItem="ddu-g0-LqC" secondAttribute="top" id="b0O-UD-32A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Lii-Xy-ETY"/>
+                        <viewLayoutGuide key="layoutMargins" id="ddu-g0-LqC"/>
+                    </view>
+                </viewController>
+                <customObject id="q9P-Pl-RjQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-353" y="1866"/>
+        </scene>
+        <!--Loading View Controller-->
+        <scene sceneID="5RB-OX-ktn">
+            <objects>
+                <viewController storyboardIdentifier="loading" id="4EO-VF-8Wl" customClass="LoadingViewController" customModule="Details" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="exb-51-eaO">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <subviews>
+                            <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="M52-Qa-0Ks">
+                                <rect key="frame" x="209" y="134" width="32" height="32"/>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="M52-Qa-0Ks" firstAttribute="centerX" secondItem="exb-51-eaO" secondAttribute="centerX" id="EgL-SL-TUY"/>
+                            <constraint firstItem="M52-Qa-0Ks" firstAttribute="centerY" secondItem="exb-51-eaO" secondAttribute="centerY" id="PIv-aC-nf7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progressIndicator" destination="M52-Qa-0Ks" id="8qx-NV-2eu"/>
+                    </connections>
+                </viewController>
+                <customObject id="1MF-Il-Rib" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134" y="1506"/>
+        </scene>
+        <!--Retry View Controller-->
+        <scene sceneID="gbv-xA-DnE">
+            <objects>
+                <viewController storyboardIdentifier="retry" id="hqM-UB-Pyh" customClass="RetryViewController" customModule="Details" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="9Xc-mZ-syu">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5OI-Dk-aTi">
+                                <rect key="frame" x="18" y="193" width="414" height="31"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Update settings to show graph" id="Nvf-tS-ows">
+                                    <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJ6-vu-roe">
+                                <rect key="frame" x="20" y="169" width="410" height="16"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uu4-1j-utS">
+                                        <rect key="frame" x="-2" y="0.0" width="414" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="... or refresh in projects navigator" id="LZG-eO-GSB">
+                                            <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="uu4-1j-utS" firstAttribute="centerX" secondItem="T5W-2y-A0w" secondAttribute="centerX" id="FeQ-to-Hkm"/>
+                            <constraint firstItem="5OI-Dk-aTi" firstAttribute="centerX" secondItem="T5W-2y-A0w" secondAttribute="centerX" id="Lod-3q-0m5"/>
+                            <constraint firstItem="5OI-Dk-aTi" firstAttribute="top" secondItem="T5W-2y-A0w" secondAttribute="top" constant="4" id="RJC-Ao-sR9"/>
+                            <constraint firstItem="hJ6-vu-roe" firstAttribute="leading" secondItem="5OI-Dk-aTi" secondAttribute="leading" id="grS-pV-t11"/>
+                            <constraint firstItem="hJ6-vu-roe" firstAttribute="top" secondItem="5OI-Dk-aTi" secondAttribute="bottom" constant="8" symbolic="YES" id="gtE-Ev-Rli"/>
+                            <constraint firstItem="5OI-Dk-aTi" firstAttribute="leading" secondItem="T5W-2y-A0w" secondAttribute="leading" id="wFv-6Y-CPN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VAf-nW-4dx"/>
+                        <viewLayoutGuide key="layoutMargins" id="T5W-2y-A0w"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="5OI-Dk-aTi" id="aoJ-gN-KtT"/>
+                    </connections>
+                </viewController>
+                <customObject id="Iw8-h0-nLL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134" y="2210"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
+    </resources>
+</document>
