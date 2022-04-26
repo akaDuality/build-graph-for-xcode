@@ -9,19 +9,29 @@ import Foundation
 import AppKit
 import BuildParser
 
-class ImageSaveService {
-    func saveImage(project: ProjectReference?, title: String?, view: NSView) {
+class FileLocationChoose {
+    func requestLocation(nameFieldStringValue: String, then completion: @escaping (URL) -> Void) {
         let savePanel = NSSavePanel()
         savePanel.canCreateDirectories = true
         savePanel.showsTagField = false
-        savePanel.nameFieldStringValue = fileName(for: project, title: title)
+        savePanel.nameFieldStringValue = nameFieldStringValue
         savePanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
         savePanel.begin { (result) in
             if result == .OK {
-                self.setBackColorAndSave(
-                    url: savePanel.url!,
-                    view: view)
+                completion(savePanel.url!)
             }
+        }
+    }
+}
+
+class ImageSaveService {
+    func saveImage(project: ProjectReference?, title: String?, view: NSView) {
+        FileLocationChoose()
+            .requestLocation(nameFieldStringValue: fileName(for: project, title: title))
+        { url in
+            self.setBackColorAndSave(
+                url: url,
+                view: view)
         }
     }
     
