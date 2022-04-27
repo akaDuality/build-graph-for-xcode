@@ -39,13 +39,13 @@ let logsDir = "/Logs/Build/"
 /// Helper methods to locate Xcode's Log directory and its content
 public struct LogFinder {
 
-    public init(derivedDataDir: URL, fileManager: FileManagerProtocol = FileManager.default) {
-        self.derivedDataDir = derivedDataDir
+    public init(projectDir: URL, fileManager: FileManagerProtocol = FileManager.default) {
+        self.projectDir = projectDir
         self.fileManager = fileManager
     }
     
     private let fileManager: FileManagerProtocol
-    private let derivedDataDir: URL
+    private let projectDir: URL
 
     public func latestActivityLog() throws -> URL {
         // get project dir
@@ -71,13 +71,13 @@ public struct LogFinder {
     }
 
     public func getProjectDir() throws -> URL {
-        let path = derivedDataDir.appendingPathComponent(logsDir).path
+        let path = projectDir.appendingPathComponent(logsDir).path
         if fileManager.fileExists(
             atPath: path) {
-            return derivedDataDir
+            return projectDir
         }
 
-        throw LogError.noLogFound(dir: derivedDataDir.path)
+        throw LogError.noLogFound(dir: projectDir.path)
     }
     
     public func buildGraphURL() throws -> URL {

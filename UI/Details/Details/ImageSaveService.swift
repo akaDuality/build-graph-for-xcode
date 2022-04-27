@@ -9,44 +9,8 @@ import Foundation
 import AppKit
 import BuildParser
 
-class FileLocationChoose {
-    func requestLocation(nameFieldStringValue: String, then completion: @escaping (URL) -> Void) {
-        let savePanel = NSSavePanel()
-        savePanel.canCreateDirectories = true
-        savePanel.showsTagField = false
-        savePanel.nameFieldStringValue = nameFieldStringValue
-        savePanel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
-        savePanel.begin { (result) in
-            if result == .OK {
-                completion(savePanel.url!)
-            }
-        }
-    }
-}
-
 class ImageSaveService {
-    func saveImage(project: ProjectReference?, title: String?, view: NSView) {
-        FileLocationChoose()
-            .requestLocation(nameFieldStringValue: fileName(for: project, title: title))
-        { url in
-            self.setBackColorAndSave(
-                url: url,
-                view: view)
-        }
-    }
-    
-    private func fileName(for project: ProjectReference?, title: String?) -> String {
-        guard let project = project else {
-            return (title ?? Date().description)
-                .appedingPngFormat
-        }
-        
-        return ProjectDescriptionService().description(for: project)
-            .appedingPngFormat
-    }
-    
-    // TODO: Add background color
-    private func setBackColorAndSave(url: URL, view: NSView) {
+    func saveImage(url: URL, view: NSView) {
         let previousColor = view.layer?.backgroundColor
         defer {
             view.layer?.backgroundColor = previousColor
@@ -71,12 +35,6 @@ class ImageSaveService {
         } catch let error {
             print(error)
         }
-    }
-}
-
-fileprivate extension String {
-    var appedingPngFormat: Self {
-        (self) + ".png"
     }
 }
 

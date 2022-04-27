@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E60AF3C2817F6B400322425 /* SnapshotSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E60AF3B2817F6B400322425 /* SnapshotSaveService.swift */; };
+		1E60AF3E2817F6EA00322425 /* FileLocationSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E60AF3D2817F6EA00322425 /* FileLocationSelector.swift */; };
+		1E60AF402819094500322425 /* XcodeBuildSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E60AF3F2819094500322425 /* XcodeBuildSnapshot.swift */; };
 		1E73716C280B0EFC007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E73716B280B0EFC007C7B10 /* BuildParser.framework */; };
 		1E73716D280B0EFC007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E73716B280B0EFC007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E737177280B0F5F007C7B10 /* GraphParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737176280B0F5F007C7B10 /* GraphParser.framework */; };
@@ -54,6 +57,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E60AF3B2817F6B400322425 /* SnapshotSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotSaveService.swift; sourceTree = "<group>"; };
+		1E60AF3D2817F6EA00322425 /* FileLocationSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationSelector.swift; sourceTree = "<group>"; };
+		1E60AF3F2819094500322425 /* XcodeBuildSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeBuildSnapshot.swift; sourceTree = "<group>"; };
 		1E73716B280B0EFC007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E737176280B0F5F007C7B10 /* GraphParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GraphParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9AE07F2800BD2500851519 /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +127,9 @@
 				1E9AE09A2800BD2C00851519 /* Details */,
 				1E9AE0A12800BD2C00851519 /* Details.storyboard */,
 				1E9AE0A52800BD2C00851519 /* ImageSaveService.swift */,
+				1E60AF3D2817F6EA00322425 /* FileLocationSelector.swift */,
+				1E60AF3B2817F6B400322425 /* SnapshotSaveService.swift */,
+				1E60AF3F2819094500322425 /* XcodeBuildSnapshot.swift */,
 				1E9AE0A62800BD2C00851519 /* States */,
 			);
 			path = Details;
@@ -280,12 +289,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E60AF3C2817F6B400322425 /* SnapshotSaveService.swift in Sources */,
 				1E9AE0AC2800BD2C00851519 /* HUDView.swift in Sources */,
+				1E60AF402819094500322425 /* XcodeBuildSnapshot.swift in Sources */,
 				1E9AE0B62800BD2C00851519 /* DetailsStatePresenter.swift in Sources */,
 				1E9AE0B02800BD2C00851519 /* ZoomController.swift in Sources */,
 				1E9AE0AF2800BD2C00851519 /* HUDScrollView.swift in Sources */,
 				1E9AE0B52800BD2C00851519 /* DetailsStateViewController.swift in Sources */,
 				1E9AE0AD2800BD2C00851519 /* MouseContorller.swift in Sources */,
+				1E60AF3E2817F6EA00322425 /* FileLocationSelector.swift in Sources */,
 				1E9AE0AE2800BD2C00851519 /* DetaliViewController.swift in Sources */,
 				1E9AE0B82800BD2C00851519 /* RetryViewController.swift in Sources */,
 				1E9AE0B42800BD2C00851519 /* ImageSaveService.swift in Sources */,

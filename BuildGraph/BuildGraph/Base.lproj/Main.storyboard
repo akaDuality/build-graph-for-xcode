@@ -250,12 +250,12 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="0Qa-Qa-ok0"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aNr-aQ-u4z"/>
-                                <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Save image" paletteLabel="Image" image="square.and.arrow.up" catalog="system" sizingBehavior="auto" id="tOZ-ba-ewD">
+                                <toolbarItem implicitItemIdentifier="18D4D0E7-155C-4C89-8612-C18AFC424CFB" label="Save image" paletteLabel="Image" image="square.and.arrow.up" catalog="system" bordered="YES" sizingBehavior="auto" id="tOZ-ba-ewD">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="XyR-33-egz">
-                                        <rect key="frame" x="12" y="14" width="15.5" height="17"/>
+                                        <rect key="frame" x="0.0" y="14" width="45" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="square.and.arrow.up" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="KpE-aU-vrh">
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="square.and.arrow.up" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KpE-aU-vrh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>

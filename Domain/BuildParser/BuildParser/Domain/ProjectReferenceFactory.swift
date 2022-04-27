@@ -12,8 +12,7 @@ public class ProjectReferenceFactory {
     public init() {}
     
     public func projectReference(
-        activityLogURL: URL,
-        accessedDerivedDataURL: URL // TODO: Can be ommited?
+        activityLogURL: URL
     ) -> ProjectReference {
     
         let folderWithName = activityLogURL.pathComponents[activityLogURL.pathComponents.count - 4]
@@ -25,20 +24,21 @@ public class ProjectReferenceFactory {
             .deletingLastPathComponent() // Skip Logs folder
         
         let logFinder = LogFinder(
-            derivedDataDir: rootPathForProject)
+            projectDir: rootPathForProject)
 
         return ProjectReference(name: name,
+                                rootPath: rootPathForProject,
                                 activityLogURL: [activityLogURL],
                                 depsURL: try? logFinder.buildGraphURL())
     }
     
     public func projectReference(
-        accessedDerivedDataURL: URL,
-        fullName: String
+        folder: URL
     ) -> ProjectReference? {
-        let shortName = ProjectReference.shortName(from: fullName)
+        let logFinder = LogFinder(projectDir: folder)
         
-        let logFinder = LogFinder(derivedDataDir: accessedDerivedDataURL.appendingPathComponent(fullName))
+        let fullName = folder.lastPathComponent
+        let shortName = ProjectReference.shortName(from: fullName)
         
         do {
             let activityLogURL = try logFinder.activityLogs()
@@ -49,12 +49,23 @@ public class ProjectReferenceFactory {
             }
             
             return ProjectReference(name: shortName,
+                                    rootPath: folder,
                                     activityLogURL: logsWithContent,
                                     depsURL: try? logFinder.buildGraphURL())
         } catch {
             print("skip \(shortName), can't find .activityLog with build information")
             return nil
         }
+    }
+    
+    public func projectReference(
+        accessedDerivedDataURL: URL,
+        fullName: String
+    ) -> ProjectReference? {
+        
+        
+        let rootPath = accessedDerivedDataURL.appendingPathComponent(fullName)
+        return projectReference(folder: rootPath)
     }
     
     private func logsWithContent(urls: [URL]) -> [URL] {

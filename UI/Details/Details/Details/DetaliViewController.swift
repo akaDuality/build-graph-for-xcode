@@ -107,10 +107,21 @@ public class DetailViewController: NSViewController {
     }
     
     public func shareImage() {
-        ImageSaveService().saveImage(
-            project: projectReference,
-            title: title,
-            view: view().contentView)
+        FileLocationSelector()
+            .requestLocation(
+                project: projectReference,
+                title: title!,
+                fileExtension: XcodeBuildSnapshot.bgbuildsnapshot)
+        { url in
+            
+//            ImageSaveService().saveImage(
+//                url: url,
+//                view: self.view().contentView)
+            
+            SnapshotSaveService().save(
+                project: self.projectReference!,
+                to: url)
+        }
     }
    
     func clear() {

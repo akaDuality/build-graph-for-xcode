@@ -8,6 +8,7 @@
 import Cocoa
 import Firebase
 import BuildParser
+import Details
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -29,19 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
         
-        let activityLogURL = URL(fileURLWithPath: filename)
-        
-        // TODO: File can be outside of default derived data
-        let derivedData = FileAccess().accessedDerivedDataURL()
-        _ = derivedData?.startAccessingSecurityScopedResource()
-    
-        let projectReferenceFactory = ProjectReferenceFactory()
-        
-        let project = projectReferenceFactory.projectReference(
-            activityLogURL: activityLogURL,
-            accessedDerivedDataURL: derivedData!)
-        
-        derivedData?.stopAccessingSecurityScopedResource()
+        let fileURL = URL(fileURLWithPath: filename)
+        let project = project(from: fileURL)
         
         // TODO: Pass correct filter settings
         windowController.splitViewController().detail.selectProject(
@@ -50,6 +40,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         return true
     }
+    
+    private func project(from fileURL: URL) -> ProjectReference {
+        if fileURL.pathExtension == XcodeBuildSnapshot.bgbuildsnapshot {
+            let snapshot = try! XcodeBuildSnapshot(url: fileURL)
+            return snapshot.project
+        } else {
+            let project = projectFromActivityLog(fileURL)
+            
+            return project
+        }
+    }
+    
+    private func projectFromActivityLog(_ activityLog: URL) -> ProjectReference {
+        // TODO: File can be outside of default derived data
+        let derivedData = FileAccess().accessedDerivedDataURL()
+        _ = derivedData?.startAccessingSecurityScopedResource()
+        defer {
+            derivedData?.stopAccessingSecurityScopedResource()
+        }
+        
+        let projectReferenceFactory = ProjectReferenceFactory()
+        
+        let project = projectReferenceFactory.projectReference(
+            activityLogURL: activityLog)
+        
+        return project
+    }
+    
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         true

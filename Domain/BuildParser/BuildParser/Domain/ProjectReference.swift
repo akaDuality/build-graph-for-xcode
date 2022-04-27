@@ -16,6 +16,7 @@ public class ProjectReference: Equatable {
     
     public init(
         name: String,
+        rootPath: URL,
         activityLogURL: [URL],
         depsURL: URL?
     ) {
@@ -23,11 +24,13 @@ public class ProjectReference: Equatable {
         
         self.currentActivityLogIndex = 0
         self.name = name
+        self.rootPath = rootPath
         self.activityLogURL = activityLogURL
         self.depsURL = depsURL
     }
     
     public let name: String
+    public let rootPath: URL
     public let activityLogURL: [URL]
     
     // MARK:  - Current File
