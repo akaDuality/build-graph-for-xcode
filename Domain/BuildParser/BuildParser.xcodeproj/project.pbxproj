@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1D7FCD2819C7A900B64954 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1D7FCC2819C7A900B64954 /* SnapshotTesting */; };
+		1E1D7FD02819C7F500B64954 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1D7FCF2819C7F500B64954 /* CustomDump */; };
 		1E7370A3280B0DA4007C7B10 /* BuildParser.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1E7370A2280B0DA4007C7B10 /* BuildParser.docc */; };
 		1E7370A9280B0DA4007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E73709E280B0DA4007C7B10 /* BuildParser.framework */; };
 		1E7370AF280B0DA4007C7B10 /* BuildParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7370A1280B0DA4007C7B10 /* BuildParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,20 +47,16 @@
 		1E7370FF280B0DBA007C7B10 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7370DE280B0DBA007C7B10 /* FilterSettings.swift */; };
 		1E73714E280B0E14007C7B10 /* XCLogParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737133280B0E13007C7B10 /* XCLogParserTests.swift */; };
 		1E73714F280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E737136280B0E13007C7B10 /* test_drawingTestEvents.1.png */; };
-		1E737150280B0E14007C7B10 /* test_drawingAppEvents.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E737137280B0E13007C7B10 /* test_drawingAppEvents.1.png */; };
-		1E737151280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E737139280B0E13007C7B10 /* test_drawingTestEvents.1.png */; };
 		1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713B280B0E13007C7B10 /* test2Min.1.png */; };
 		1E737153280B0E14007C7B10 /* test60Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713C280B0E13007C7B10 /* test60Min.1.png */; };
 		1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713D280B0E13007C7B10 /* test10Min.1.png */; };
 		1E737155280B0E14007C7B10 /* test20Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713E280B0E13007C7B10 /* test20Min.1.png */; };
 		1E737156280B0E14007C7B10 /* test_wholFile.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E737140280B0E13007C7B10 /* test_wholFile.1.txt */; };
 		1E737157280B0E14007C7B10 /* TestEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E737141280B0E14007C7B10 /* TestEvents.json */; };
-		1E737158280B0E14007C7B10 /* TestEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E737143280B0E14007C7B10 /* TestEvents.json */; };
 		1E737159280B0E14007C7B10 /* AppEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E737144280B0E14007C7B10 /* AppEvents.json */; };
 		1E73715A280B0E14007C7B10 /* EventTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737145280B0E14007C7B10 /* EventTest.swift */; };
 		1E73715B280B0E14007C7B10 /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737146280B0E14007C7B10 /* GraphTests.swift */; };
 		1E73715C280B0E14007C7B10 /* DurationFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737147280B0E14007C7B10 /* DurationFormatterTest.swift */; };
-		1E73715D280B0E14007C7B10 /* AppEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E737148280B0E14007C7B10 /* AppEvents.json */; };
 		1E73715E280B0E14007C7B10 /* TimelineLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737149280B0E14007C7B10 /* TimelineLayerTests.swift */; };
 		1E73715F280B0E14007C7B10 /* EventDepsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E73714A280B0E14007C7B10 /* EventDepsTests.swift */; };
 		1E737161280B0E14007C7B10 /* PathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E73714C280B0E14007C7B10 /* PathFinderTests.swift */; };
@@ -174,6 +172,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E7370A9280B0DA4007C7B10 /* BuildParser.framework in Frameworks */,
+				1E1D7FD02819C7F500B64954 /* CustomDump in Frameworks */,
+				1E1D7FCD2819C7A900B64954 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +425,10 @@
 				1E7370AB280B0DA4007C7B10 /* PBXTargetDependency */,
 			);
 			name = BuildParserTests;
+			packageProductDependencies = (
+				1E1D7FCC2819C7A900B64954 /* SnapshotTesting */,
+				1E1D7FCF2819C7F500B64954 /* CustomDump */,
+			);
 			productName = BuildParserTests;
 			productReference = 1E7370A8280B0DA4007C7B10 /* BuildParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -456,6 +460,10 @@
 				Base,
 			);
 			mainGroup = 1E737094280B0DA4007C7B10;
+			packageReferences = (
+				1E1D7FCB2819C7A900B64954 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				1E1D7FCE2819C7F500B64954 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
+			);
 			productRefGroup = 1E73709F280B0DA4007C7B10 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -479,16 +487,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E737159280B0E14007C7B10 /* AppEvents.json in Resources */,
-				1E737150280B0E14007C7B10 /* test_drawingAppEvents.1.png in Resources */,
 				1E737157280B0E14007C7B10 /* TestEvents.json in Resources */,
 				1E737156280B0E14007C7B10 /* test_wholFile.1.txt in Resources */,
 				1E73714F280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */,
 				1E737155280B0E14007C7B10 /* test20Min.1.png in Resources */,
 				1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */,
 				1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */,
-				1E73715D280B0E14007C7B10 /* AppEvents.json in Resources */,
-				1E737151280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */,
-				1E737158280B0E14007C7B10 /* TestEvents.json in Resources */,
 				1E737153280B0E14007C7B10 /* test60Min.1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -807,7 +811,36 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		1E1D7FCB2819C7A900B64954 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1E1D7FCE2819C7F500B64954 /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		1E1D7FCC2819C7A900B64954 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E1D7FCB2819C7A900B64954 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		1E1D7FCF2819C7F500B64954 /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E1D7FCE2819C7F500B64954 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
+		};
 		1E737170280B0F38007C7B10 /* XCLogParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XCLogParser;

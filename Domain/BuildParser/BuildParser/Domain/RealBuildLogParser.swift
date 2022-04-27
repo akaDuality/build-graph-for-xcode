@@ -44,6 +44,8 @@ public class RealBuildLogParser {
         
         let activityLog = try activityLogParser.parseActivityLogInURL(logURL)
         
+        let depsPath = buildDescription(activityLog: activityLog)
+        
         var diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
             os_log("read activity log, \(diff)")
@@ -69,6 +71,18 @@ public class RealBuildLogParser {
         
         return Project(events: events,
                        relativeBuildStart: relativeDuration(events: events, buildStart: buildStep.startDate))
+    }
+    
+    private func buildDescription(activityLog: IDEActivityLog) -> String? {
+//        guard let section = activityLog.mainSection.subSections
+//            .first?.subSections.first(where: { subsection in
+//            subsection.title == "Create build description"
+//            }) else { return nil }
+//
+//        return String(section?.text)
+        return nil
+//        Create build description
+//        Build description signature: b4416238eb7eecbe4969bbd303f28fe5\rBuild description path: /Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Build/Intermediates.noindex/XCBuildData/b4416238eb7eecbe4969bbd303f28fe5-desc.xcbuild\r
     }
     
     private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {

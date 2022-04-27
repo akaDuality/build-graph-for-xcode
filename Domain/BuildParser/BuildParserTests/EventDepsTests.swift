@@ -93,14 +93,10 @@ extension Event {
     static func testMake(
         taskName: String = "",
         startDate: Date = Date(),
-        endDate: Date = Date(),
+        duration: TimeInterval = 0,
         fetchedFromCache: Bool = false,
         steps: [Event] = []
     ) -> Event {
-        Event(taskName: taskName,
-              startDate: startDate,
-              endDate: endDate,
-              fetchedFromCache: fetchedFromCache,
-              steps: steps)
+        Event(taskName: taskName, startDate: startDate, duration: duration, fetchedFromCache: fetchedFromCache, steps: steps)
     }
 }

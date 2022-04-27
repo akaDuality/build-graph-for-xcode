@@ -8,65 +8,65 @@
 import XCTest
 import BuildParser
 
-class ProjectReferenceTests: XCTestCase {
-    
-    let derivedData = URL(fileURLWithPath: Bundle.module.resourcePath!)
-        .appendingPathComponent("DerivedData")
-    
-    func testConstructorWithProjectFolder() throws {
-        let sut = ProjectReferenceFactory()
-        
-        let project = try XCTUnwrap(
-            sut.projectReference(
-                    accessedDerivedDataURL: derivedData,
-                    fullName: "CodeMetrics-dycvocfpyegeqgbmavxjkihheltm")
-        )
-        
-        XCTAssertEqual(
-            project.name,
-            "CodeMetrics")
-        
-        XCTAssertEqual(
-           project.activityLogURL,
-           [derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
-            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/0F14C80C-80E0-4798-B970-5956D7A6D8BC.xcactivitylog")
-           ])
-        
-        XCTAssertEqual(
-            project.depsURL,
-            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Build/Intermediates.noindex/XCBuildData/6dc3c5f17f0bf003046e94e4e0f7185b-targetGraph.txt")
-            )
-    }
-    
-    // TODO: Test failable initializer
-    
-    func testConstructorWithDirectPath() throws {
-        let sut = ProjectReferenceFactory()
-        
-        let project = try XCTUnwrap(
-            sut.projectReference(
-                activityLogURL:
-                    derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
-                accessedDerivedDataURL: derivedData)
-        )
-
-        XCTAssertEqual(
-            project.name,
-            "CodeMetrics")
-
-        XCTAssertEqual(
-            project.activityLogURL,
-            
-            [derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
-            ])
-        // TODO: should I find all files?
-
-        XCTAssertEqual(
-            project.depsURL,
-            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Build/Intermediates.noindex/XCBuildData/6dc3c5f17f0bf003046e94e4e0f7185b-targetGraph.txt")
-        )
-    }
-}
+//class ProjectReferenceTests: XCTestCase {
+//    
+//    let derivedData = URL(fileURLWithPath: Bundle.module.resourcePath!)
+//        .appendingPathComponent("DerivedData")
+//    
+//    func testConstructorWithProjectFolder() throws {
+//        let sut = ProjectReferenceFactory()
+//        
+//        let project = try XCTUnwrap(
+//            sut.projectReference(
+//                    accessedDerivedDataURL: derivedData,
+//                    fullName: "CodeMetrics-dycvocfpyegeqgbmavxjkihheltm")
+//        )
+//        
+//        XCTAssertEqual(
+//            project.name,
+//            "CodeMetrics")
+//        
+//        XCTAssertEqual(
+//           project.activityLogURL,
+//           [derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
+//            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/0F14C80C-80E0-4798-B970-5956D7A6D8BC.xcactivitylog")
+//           ])
+//        
+//        XCTAssertEqual(
+//            project.depsURL,
+//            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Build/Intermediates.noindex/XCBuildData/6dc3c5f17f0bf003046e94e4e0f7185b-targetGraph.txt")
+//            )
+//    }
+//    
+//    // TODO: Test failable initializer
+//    
+//    func testConstructorWithDirectPath() throws {
+//        let sut = ProjectReferenceFactory()
+//        
+//        let project = try XCTUnwrap(
+//            sut.projectReference(
+//                activityLogURL:
+//                    derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
+//                accessedDerivedDataURL: derivedData)
+//        )
+//
+//        XCTAssertEqual(
+//            project.name,
+//            "CodeMetrics")
+//
+//        XCTAssertEqual(
+//            project.activityLogURL,
+//            
+//            [derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Logs/Build/1CEFFBA1-72C4-458C-966E-91BB42B2C222.xcactivitylog"),
+//            ])
+//        // TODO: should I find all files?
+//
+//        XCTAssertEqual(
+//            project.depsURL,
+//            derivedData.appendingPathComponent("CodeMetrics-dycvocfpyegeqgbmavxjkihheltm/Build/Intermediates.noindex/XCBuildData/6dc3c5f17f0bf003046e94e4e0f7185b-targetGraph.txt")
+//        )
+//    }
+//}
 
 import XCLogParser
 class FileAccessMock: FileAccessProtocol {
