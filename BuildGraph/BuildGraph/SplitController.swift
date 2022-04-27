@@ -57,6 +57,10 @@ class SplitController: NSSplitViewController {
 }
 
 extension SplitController: ProjectsSelectionDelegate {
+    func didSelectNothing() {
+        detail.state = .noProject
+    }
+    
     func didSelect(project: ProjectReference?) {
         detail.selectProject(projectReference: project, filter: filter)
     }

@@ -10,6 +10,7 @@ import BuildParser
 
 public protocol ProjectsSelectionDelegate: AnyObject {
     func didSelect(project: ProjectReference?)
+    func didSelectNothing()
 }
 
 public protocol ProjectsUI: AnyObject {
@@ -66,6 +67,10 @@ public class ProjectsPresenter {
 
             let selectedProject = selectedProject(in: projects)
             ui?.state = .projects(selectedProject)
+            
+            if selectedProject == nil {
+                delegate?.didSelectNothing()
+            }
         } catch let error {
             ui?.state = .noAccessToDerivedData
         }
