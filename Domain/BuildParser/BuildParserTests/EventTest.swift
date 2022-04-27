@@ -8,30 +8,30 @@
 import XCTest
 @testable import BuildParser
 
-//final class EventTest: XCTestCase {
-//    func event(name: String) -> Event {
-//        Event(taskName: name,
-//              startDate: Date(),
-//              endDate: Date(),
-//              fetchedFromCache: false,
-//              steps: [])
-//    }
-//    
-//    func test_ClearDomain() {
-//        let event = event(name: "Crypto")
-//        XCTAssertEqual(event.domain, "Crypto")
-//        XCTAssertEqual(event.type, .framework)
-//    }
-//    
-//    func test_HelpersDomain() {
-//        let event = event(name: "CryptoTestHelpers")
-//        XCTAssertEqual(event.domain, "Crypto")
-//        XCTAssertEqual(event.type, .helpers)
-//    }
-//    
-//    func test_TestDomain() {
-//        let event = event(name: "CryptoTestHelpers-Unit-Tests")
-//        XCTAssertEqual(event.domain, "Crypto")
-//        XCTAssertEqual(event.type, .tests)
-//    }
-//}
+final class EventTest: XCTestCase {
+    func event(name: String) -> Event {
+        Event(taskName: name,
+              startDate: Date(),
+              duration: 0,
+              fetchedFromCache: false,
+              steps: [])
+    }
+    
+    func test_ClearDomain() {
+        let event = event(name: "Crypto")
+        XCTAssertEqual(event.domain, "Crypto")
+        XCTAssertEqual(event.type, .framework)
+    }
+    
+    func test_HelpersDomain() {
+        let event = event(name: "CryptoTestHelpers")
+        XCTAssertEqual(event.domain, "Crypto")
+        XCTAssertEqual(event.type, .helpers)
+    }
+    
+    func test_TestDomain() {
+        let event = event(name: "CryptoTestHelpers-Unit-Tests")
+        XCTAssertEqual(event.domain, "Crypto")
+        XCTAssertEqual(event.type, .tests)
+    }
+}

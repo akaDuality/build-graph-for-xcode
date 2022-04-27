@@ -36,7 +36,7 @@ public class RealBuildLogParser {
     }
     
     var progress = Progress(totalUnitCount: 3)
-    
+    var depsPath: String?
     public func parse(logURL: URL, filter: FilterSettings) throws -> Project {
         progress = Progress(totalUnitCount: 3)
         os_log("start parsing")
@@ -44,7 +44,7 @@ public class RealBuildLogParser {
         
         let activityLog = try activityLogParser.parseActivityLogInURL(logURL)
         
-        let depsPath = buildDescription(activityLog: activityLog)
+        depsPath = DepsPathExtraction().buildDescription(activityLog: activityLog)
         
         var diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
@@ -71,18 +71,6 @@ public class RealBuildLogParser {
         
         return Project(events: events,
                        relativeBuildStart: relativeDuration(events: events, buildStart: buildStep.startDate))
-    }
-    
-    private func buildDescription(activityLog: IDEActivityLog) -> String? {
-//        guard let section = activityLog.mainSection.subSections
-//            .first?.subSections.first(where: { subsection in
-//            subsection.title == "Create build description"
-//            }) else { return nil }
-//
-//        return String(section?.text)
-        return nil
-//        Create build description
-//        Build description signature: b4416238eb7eecbe4969bbd303f28fe5\rBuild description path: /Users/rubanov/Library/Developer/Xcode/DerivedData/CodeMetrics-aegjnninizgadzcfxjaecrwuhtfu/Build/Intermediates.noindex/XCBuildData/b4416238eb7eecbe4969bbd303f28fe5-desc.xcbuild\r
     }
     
     private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {
@@ -185,6 +173,40 @@ public class RealBuildLogParser {
             fetchedFromCache: step.fetchedFromCache,
             steps: self.convertToEvents(subSteps: substeps)
         )
+    }
+}
+
+class DepsPathExtraction {
+    func buildDescription(activityLog: IDEActivityLog) -> String? {
+        guard let section = activityLog.mainSection.subSections
+            .first?.subSections.first(where: { subsection in
+                subsection.title == "Create build description"
+            }) else { return nil }
+        
+        guard let number = number(from: String(section.text)) else { return nil }
+        return "\(number)-targetGraph.txt"
+    }
+
+    func number(from description: String) -> String? {
+        let patten = "XCBuildData\\/(\\w*)-"
+        let regex = try! NSRegularExpression(pattern: patten)
+        let matches = regex.matches(in: description, options: .withoutAnchoringBounds,
+                                    range: description.fullRange)
+        guard let match = matches.last,
+              match.numberOfRanges > 1
+        else { return nil }
+
+        let rangeInContent = Range(match.range(at: 1),
+                                   in: description)!
+
+        let text = description[rangeInContent]
+        return String(text)
+    }
+}
+
+extension String {
+    var fullRange: NSRange {
+        return NSRange(location: 0, length: count)
     }
 }
 
