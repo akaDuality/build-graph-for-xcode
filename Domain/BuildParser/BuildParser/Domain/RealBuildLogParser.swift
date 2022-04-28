@@ -115,7 +115,7 @@ public class RealBuildLogParser {
                     filter.allowedTypes.contains(substep.detailStepType)
                 }
                 
-                if filter.hideCached {
+                if filter.cacheVisibility == .cached {
                     let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStart)
                     if step.fetchedFromCache
                         || buildEarlierThanCurrentBuild {
@@ -125,9 +125,10 @@ public class RealBuildLogParser {
                 
                 guard
                     let startDate = substeps.first?.startDate,
-                    let endDate = self.last(substeps: substeps,
-                                            hideCached: filter.hideCached,
-                                            buildStart: buildStart)
+                    let endDate = self.last(
+                        substeps: substeps,
+                        cacheVisibility: filter.cacheVisibility,
+                        buildStart: buildStart)
                 else {
                     return nil // Empty array
                 }
@@ -148,13 +149,26 @@ public class RealBuildLogParser {
         return events
     }
     
-    private func last(substeps: [BuildStep], hideCached: Bool, buildStart: Date) -> Date? {
-        if hideCached {
+    private func filter(substeps: [BuildStep], filter: FilterSettings) -> [BuildStep] {
+        []
+    }
+    
+    private func last(
+        substeps: [BuildStep],
+        cacheVisibility: FilterSettings.CacheVisibility,
+        buildStart: Date
+    ) -> Date? {
+        switch cacheVisibility {
+        case .all:
+            return substeps.last?.endDate
+        case .cached:
+            return substeps.filter({ step in
+                step.startDate < buildStart
+            }).last?.endDate
+        case .currentBuild:
             return substeps.filter({ step in
                 step.startDate > buildStart
             }).last?.endDate
-        } else {
-            return substeps.last?.endDate
         }
     }
     

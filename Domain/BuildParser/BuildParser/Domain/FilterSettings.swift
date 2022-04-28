@@ -13,11 +13,24 @@ public class FilterSettings {
     
     public init() {}
     
-    @Storage(key: "showCached", defaultValue: true)
-    public var showCached: Bool
-    public var hideCached: Bool {
-        !showCached
+//    @Storage(key: "showCached", defaultValue: true)
+//    public var showCached: Bool
+//    public var hideCached: Bool {
+//        !showCached
+//    }
+    
+    public var cacheVisibility: CacheVisibility {
+        set {
+            cacheVisibilityRaw = newValue.rawValue
+        }
+        
+        get {
+            CacheVisibility(rawValue: cacheVisibilityRaw)!
+        }
     }
+    
+    @Storage(key: "cacheVisibility", defaultValue: CacheVisibility.currentBuild.rawValue)
+    public var cacheVisibilityRaw: CacheVisibility.RawValue
     
     public var allowedTypes: [DetailStepType] = DetailStepType.compilationSteps
     
@@ -34,5 +47,11 @@ public class FilterSettings {
     
     public func enableAll() {
         allowedTypes = DetailStepType.allCases
+    }
+    
+    public enum CacheVisibility: Int {
+        case all
+        case cached
+        case currentBuild
     }
 }
