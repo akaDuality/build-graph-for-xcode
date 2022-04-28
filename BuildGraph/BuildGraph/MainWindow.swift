@@ -44,6 +44,16 @@ class MainWindow: NSWindow {
         subtitle = project.indexDescription
     }
     
+    func updateNavigationButtons(
+        for project: ProjectReference,
+        buildDuration: TimeInterval) {
+        
+        subtitle = "\(project.indexDescription), \(durationFormatter.string(from: buildDuration))"
+    }
+    
+    private let durationFormatter = DurationFormatter()
+    
+    
     func resizeWindowHeight(to newHeight: CGFloat) {
         let frame = CGRect(x: frame.minX,
                            y: max(0, frame.midY - newHeight/2),

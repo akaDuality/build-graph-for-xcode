@@ -15,6 +15,9 @@ public class FilterSettings {
     
     @Storage(key: "showCached", defaultValue: true)
     public var showCached: Bool
+    public var hideCached: Bool {
+        !showCached
+    }
     
     public var allowedTypes: [DetailStepType] = DetailStepType.compilationSteps
     

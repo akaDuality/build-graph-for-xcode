@@ -22,7 +22,11 @@ public enum DetailsState: StateProtocol {
 
 public protocol DetailsDelegate: AnyObject {
     func willLoadProject(project: ProjectReference)
-    func didLoadProject(project: ProjectReference, detailsController: DetailViewController)
+    func didLoadProject(
+        project: Project,
+        projectReference: ProjectReference,
+        detailsController: DetailViewController
+    )
     func didFailLoadProject()
 }
 
@@ -87,8 +91,10 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                         
                         derivedData?.stopAccessingSecurityScopedResource()
                         
-                        self.delegate?.didLoadProject(project: projectReference,
-                                                      detailsController: self.currentController as! DetailViewController)
+                        self.delegate?.didLoadProject(
+                            project: project,
+                            projectReference: projectReference,
+                            detailsController: self.currentController as! DetailViewController)
                     }
                 },
                 didFail: { message in
@@ -132,8 +138,9 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                                        title: title,
                                        projectReference: projectReference)
                     
-                    delegate?.didLoadProject(
-                        project: projectReference,
+                    self.delegate?.didLoadProject(
+                        project: project,
+                        projectReference: projectReference,
                         detailsController: self.currentController as! DetailViewController)
                 }
             }

@@ -114,7 +114,7 @@ public class RealBuildLogParser {
                     filter.allowedTypes.contains(substep.detailStepType)
                 }
                 
-                if !filter.showCached {
+                if filter.hideCached {
                     let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStep.startDate)
                     if step.fetchedFromCache
                         || buildEarlierThanCurrentBuild {
