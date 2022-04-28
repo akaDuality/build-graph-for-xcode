@@ -104,6 +104,7 @@ public class RealBuildLogParser {
         buildStep: BuildStep,
         filter: FilterSettings
     ) -> [Event] {
+        let buildStart = buildStep.startDate
         
         let events: [Event] = buildStep.subSteps
             .parallelCompactMap { step -> Event? in
@@ -115,7 +116,7 @@ public class RealBuildLogParser {
                 }
                 
                 if filter.hideCached {
-                    let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStep.startDate)
+                    let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStart)
                     if step.fetchedFromCache
                         || buildEarlierThanCurrentBuild {
                         return nil
@@ -124,7 +125,9 @@ public class RealBuildLogParser {
                 
                 guard
                     let startDate = substeps.first?.startDate,
-                    let endDate = substeps.last?.endDate
+                    let endDate = self.last(substeps: substeps,
+                                            hideCached: filter.hideCached,
+                                            buildStart: buildStart)
                 else {
                     return nil // Empty array
                 }
@@ -143,6 +146,16 @@ public class RealBuildLogParser {
             }
         
         return events
+    }
+    
+    private func last(substeps: [BuildStep], hideCached: Bool, buildStart: Date) -> Date? {
+        if hideCached {
+            return substeps.filter({ step in
+                step.startDate > buildStart
+            }).last?.endDate
+        } else {
+            return substeps.last?.endDate
+        }
     }
     
     public func convertToEvents(
@@ -284,5 +297,13 @@ extension BuildStep {
     
     func output() {
         print(description)
+    }
+}
+
+extension Collection {
+    
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
