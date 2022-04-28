@@ -27,28 +27,28 @@ public class DetailsStatePresenter {
                             _ projectReference: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
-        os_log("loadAndInsert")
+        os_log("will read \(projectReference.activityLogURL), depsURL \(String(describing: projectReference.depsURL))")
         
-        Task {
-            os_log("will read \(projectReference.activityLogURL), depsURL \(String(describing: projectReference.depsURL))")
+        do {
+            let project = try parser.parse(
+                logURL: projectReference.currentActivityLog,
+                rootURL: projectReference.rootPath,
+                filter: filter)
             
-            do {
-                // TODO: how this try is handled?
-                let project = try await project(currentActivityLog: projectReference.currentActivityLog, filter: filter)
-                let dependencies = await dependencies(depsURL: projectReference.depsURL)
-                
+            if let depsPath = parser.depsPath,
+               let dependencies = dependencies(depsURL: depsPath) {
                 project.connect(dependencies: dependencies)
-                
-                guard project.events.count > 0 else {
-                    // TODO: depends on compilationOnly flag
-                    didFail(ParsingError.noEventsFound.localizedDescription)
-                    return
-                }
-                
-                didLoad(project, self.parser.title, projectReference)
-            } catch let error {
-                didFail(error.localizedDescription)
             }
+            
+            guard project.events.count > 0 else {
+                // TODO: depends on compilationOnly flag
+                didFail(ParsingError.noEventsFound.localizedDescription)
+                return
+            }
+            
+            didLoad(project, self.parser.title, projectReference)
+        } catch let error {
+            didFail(error.localizedDescription)
         }
     }
     
@@ -71,23 +71,12 @@ public class DetailsStatePresenter {
         didLoad(project, parser.title)
     }
     
-    private func project(currentActivityLog: URL, filter: FilterSettings) async throws -> Project {
-        try parser.parse(
-            logURL: currentActivityLog,
-            filter: filter)
-    }
-    
-    private func dependencies(depsURL: URL?) async -> [Dependency] {
-        var dependencies = [Dependency]()
-        
-        if let depsURL = depsURL {
-            if let depsContent = try? String(contentsOf: depsURL) {
-                dependencies = DependencyParser().parseFile(depsContent)
-            } else {
-                // TODO: Log
-            }
+    private func dependencies(depsURL: URL) -> [Dependency]? {
+        guard let depsContent = try? String(contentsOf: depsURL) else {
+            return nil
         }
-        return dependencies
+        
+        return DependencyParser().parseFile(depsContent)
     }
 }
 

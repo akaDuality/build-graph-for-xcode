@@ -36,15 +36,15 @@ public class RealBuildLogParser {
     }
     
     var progress = Progress(totalUnitCount: 3)
-    var depsPath: String?
-    public func parse(logURL: URL, filter: FilterSettings) throws -> Project {
+    public private(set) var depsPath: URL?
+    public func parse(logURL: URL, rootURL: URL, filter: FilterSettings) throws -> Project {
         progress = Progress(totalUnitCount: 3)
         os_log("start parsing")
         var date = Date()
         
         let activityLog = try activityLogParser.parseActivityLogInURL(logURL)
         
-        depsPath = DepsPathExtraction().buildDescription(activityLog: activityLog)
+        depsPath = DepsPathExtraction(rootURL: rootURL).depedenciesPath(activityLog: activityLog)
         
         var diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
@@ -176,8 +176,19 @@ public class RealBuildLogParser {
     }
 }
 
-class DepsPathExtraction {
-    func buildDescription(activityLog: IDEActivityLog) -> String? {
+struct DepsPathExtraction {
+    let rootURL: URL
+    
+    func depedenciesPath(activityLog: IDEActivityLog) -> URL? {
+        guard let fileName = fileName(from: activityLog) else { return nil }
+        
+        return rootURL.appendingPathComponent("Build")
+            .appendingPathComponent("Intermediates.noindex")
+            .appendingPathComponent("XCBuildData")
+            .appendingPathComponent(fileName)
+    }
+    
+    func fileName(from activityLog: IDEActivityLog) -> String? {
         guard let section = activityLog.mainSection.subSections
             .first?.subSections.first(where: { subsection in
                 subsection.title == "Create build description"
