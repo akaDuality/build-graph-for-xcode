@@ -94,6 +94,18 @@ extension Array where Element == Event {
         return events(at: date).count
     }
     
+    func removeGap(period: Period) {
+        let duration = period.duration // cache for faster calculation
+        
+        for event in self {
+            if event.startDate > period.start {
+                event.startDate = event.startDate.addingTimeInterval(-duration)
+            }
+            
+            event.steps.removeGap(period: period) // Compile assets can recompile even in frameworks that have been compiled already
+        }
+    }
+    
     private func events(at time: Date) -> [Event] {
         return filter { event in
             if event.steps.count > 0 {
@@ -223,6 +235,10 @@ struct Period {
     let concurrency: Int
     let start: Date
     let end: Date
+    
+    var duration: TimeInterval {
+        end.timeIntervalSince(start)
+    }
 }
 
 func relativeStart(absoluteStart: Date, start: Date, duration: TimeInterval) -> CGFloat {

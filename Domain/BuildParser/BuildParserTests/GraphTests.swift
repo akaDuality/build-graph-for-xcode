@@ -18,7 +18,8 @@ final class GraphTests: XCTestCase {
     // MARK: DSL
     private func layer(snapshotName: String) throws -> CALayer {
         let snapshot = try TestBundle().snapshot(name: snapshotName)
-        let project = try parser.parse(projectReference: snapshot.project, filter: .shared)
+        let project = try parser.parse(projectReference: snapshot.project,
+                                       filter: .shared)
         
         let layer = AppLayer(events: project.events, relativeBuildStart: 0, fontSize: 10, scale: 1)
         
@@ -51,8 +52,9 @@ final class GraphTests: XCTestCase {
     }
     
     func test_drawingIncrementalWithGap() throws {
-        // TODO: Should be good looking
-//        XCTExpectFailure()
         try snapshot(name: "IncrementalWithBigGap")
+        
+        // TODO: Draw cache only
+        // TODO: Draw incremental build only
     }
 }

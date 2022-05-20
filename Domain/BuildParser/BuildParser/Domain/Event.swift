@@ -15,11 +15,11 @@ public class Event: Equatable, Hashable {
     }
     
     public let taskName: String
-    public let startDate: Date
+    public var startDate: Date // Can be moved in case of big gap
     public let duration: TimeInterval
-    public lazy var endDate: Date = {
+    public var endDate: Date {
         startDate.addingTimeInterval(duration)
-    }()
+    }
     
     public let fetchedFromCache: Bool
     public let steps: [Event]

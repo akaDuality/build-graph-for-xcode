@@ -54,7 +54,29 @@ class BuildStepConverter {
                 }
             }
         
+        if filter.cacheVisibility == .all {
+            removeGapForIncrementalBuilds(events: events)
+        }
+        
         return events
+    }
+    
+    private func removeGapForIncrementalBuilds(events: [Event]) {
+        let eventsDuration = events.duration()
+        
+        guard eventsDuration > 1 /* sec */ else { return }
+        
+        let periods = events.allPeriods()
+        for period in periods {
+            guard period.concurrency == 0 else { continue }
+            
+            let relativeDuration = period.duration / eventsDuration
+            let moreThanHalf = relativeDuration > 0.5
+            
+            if moreThanHalf {
+                events.removeGap(period: period)
+            }
+        }
     }
     
     private func filter(
