@@ -10,12 +10,11 @@ import XCLogParser
 
 class BuildStepConverter {
     func convertToEvents(
-        buildStep: BuildStep,
+        steps: [BuildStep],
+        buildStart: Date,
         filter: FilterSettings
     ) -> [Event] {
-        let buildStart = buildStep.startDate
-        
-        let events: [Event] = buildStep.subSteps
+        let events: [Event] = steps
             .parallelCompactMap { step -> Event? in
                 if filter.cacheVisibility == .currentBuild {
                     let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStart)

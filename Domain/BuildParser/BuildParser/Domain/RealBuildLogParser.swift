@@ -62,7 +62,10 @@ public class RealBuildLogParser {
         date = Date()
         
         // 3. Convert to Events
-        let events = BuildStepConverter().convertToEvents(buildStep: buildStep, filter: filter)
+        let events = BuildStepConverter().convertToEvents(
+            steps: buildStep.subSteps,
+            buildStart: buildStep.startDate,
+            filter: filter)
         
         diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
@@ -90,7 +93,9 @@ public class RealBuildLogParser {
     }
     
     public func update(with filter: FilterSettings) -> [Event] {
-        BuildStepConverter().convertToEvents(buildStep: buildStep, filter: filter)
+        BuildStepConverter().convertToEvents(steps: buildStep.subSteps,
+                                             buildStart: buildStep.startDate,
+                                             filter: filter)
     }
     
     public func step(for event: Event) -> BuildStep? {
