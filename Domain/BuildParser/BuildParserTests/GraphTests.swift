@@ -9,41 +9,50 @@ import XCTest
 @testable import BuildParser
 import SnapshotTesting
 
-//final class GraphTests: XCTestCase {
-//    
-//    let record = false
-//    
-//    let parser = RealBuildLogParser()
-//    
-//    func test_drawingAppEvents() throws {
-//        throw XCTSkip("too slow")
-//        let events = try parser.parse(logURL: appEventsPath, filter: .shared)
-//        let view = AppLayer(events: events, relativeBuildStart: 0, fontSize: 10, scale: 1)
-//        
-//        view.frame = CGRect(x: 0,
-//                            y: 0,
-//                            width: view.intrinsicContentSize.width,
-//                            height: view.intrinsicContentSize.height)
-//        let layer: CALayer = view
-//        assertSnapshot(matching: layer,
-//                       as: .image,
-//                       record: record)
-//    }
-//    
-//    func test_drawingTestEvents() throws {
-//        throw XCTSkip("too slow")
-//        let events = try parser.parse(logURL: testEventsPath, filter: .shared)
-//        let view = AppLayer(events: events, relativeBuildStart: 0, fontSize: 10, scale: 1)
-//        //        view.highlightedEvent = events[100]
-//        //        view.highlightEvent(at: <#T##CGPoint#>)
-//        
-//        view.frame = CGRect(x: 0,
-//                            y: 0,
-//                            width: view.intrinsicContentSize.width,
-//                            height: view.intrinsicContentSize.height)
-//        let layer: CALayer = view
-//        assertSnapshot(matching: layer,
-//                       as: .image,
-//                       record: record)
-//    }
-//}
+final class GraphTests: XCTestCase {
+    
+    let record = false
+    
+    let parser = RealBuildLogParser()
+    
+    // MARK: DSL
+    private func layer(snapshotName: String) throws -> CALayer {
+        let snapshot = try TestBundle().snapshot(name: snapshotName)
+        let project = try parser.parse(projectReference: snapshot.project, filter: .shared)
+        
+        let layer = AppLayer(events: project.events, relativeBuildStart: 0, fontSize: 10, scale: 1)
+        
+        layer.frame = CGRect(x: 0,
+                             y: 0,
+                             width: 500,
+                             height: layer.intrinsicContentSize.height)
+        layer.backgroundColor = CGColor.white
+        
+        return layer
+    }
+    
+    private func snapshot(name: String,
+                          testName: String = #function,
+                          file: StaticString = #file,
+                          line: UInt = #line) throws {
+        let layer = try layer(snapshotName: name)
+        
+        assertSnapshot(matching: layer,
+                       as: .image,
+                       record: record,
+                       file: file,
+                       testName: testName,
+                       line: line)
+    }
+    
+    // MARK: Tests
+    func test_drawingSimpleClean() throws {
+        try snapshot(name: "SimpleClean")
+    }
+    
+    func test_drawingIncrementalWithGap() throws {
+        // TODO: Should be good looking
+//        XCTExpectFailure()
+        try snapshot(name: "IncrementalWithBigGap")
+    }
+}

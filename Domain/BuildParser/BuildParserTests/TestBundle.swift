@@ -9,8 +9,8 @@ import Foundation
 import Details
 
 class TestBundle {
-    var simpleClean: URL {
-        try! snapshot(name: "SimpleClean").project.currentActivityLog
+    var simpleClean: XcodeBuildSnapshot {
+        try! snapshot(name: "SimpleClean")
     }
     
     func snapshot(name: String) throws -> XcodeBuildSnapshot {

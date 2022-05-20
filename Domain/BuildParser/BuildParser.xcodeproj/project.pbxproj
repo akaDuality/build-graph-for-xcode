@@ -55,7 +55,6 @@
 		1E7370FE280B0DBA007C7B10 /* BuildStepCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7370DD280B0DBA007C7B10 /* BuildStepCounter.swift */; };
 		1E7370FF280B0DBA007C7B10 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7370DE280B0DBA007C7B10 /* FilterSettings.swift */; };
 		1E73714E280B0E14007C7B10 /* XCLogParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737133280B0E13007C7B10 /* XCLogParserTests.swift */; };
-		1E73714F280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E737136280B0E13007C7B10 /* test_drawingTestEvents.1.png */; };
 		1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713B280B0E13007C7B10 /* test2Min.1.png */; };
 		1E737153280B0E14007C7B10 /* test60Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713C280B0E13007C7B10 /* test60Min.1.png */; };
 		1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713D280B0E13007C7B10 /* test10Min.1.png */; };
@@ -147,8 +146,6 @@
 		1E7370DD280B0DBA007C7B10 /* BuildStepCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildStepCounter.swift; sourceTree = "<group>"; };
 		1E7370DE280B0DBA007C7B10 /* FilterSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
 		1E737133280B0E13007C7B10 /* XCLogParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCLogParserTests.swift; sourceTree = "<group>"; };
-		1E737136280B0E13007C7B10 /* test_drawingTestEvents.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_drawingTestEvents.1.png; sourceTree = "<group>"; };
-		1E737137280B0E13007C7B10 /* test_drawingAppEvents.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_drawingAppEvents.1.png; sourceTree = "<group>"; };
 		1E737139280B0E13007C7B10 /* test_drawingTestEvents.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_drawingTestEvents.1.png; sourceTree = "<group>"; };
 		1E73713B280B0E13007C7B10 /* test2Min.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2Min.1.png; sourceTree = "<group>"; };
 		1E73713C280B0E13007C7B10 /* test60Min.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test60Min.1.png; sourceTree = "<group>"; };
@@ -347,8 +344,6 @@
 		1E737135280B0E13007C7B10 /* GraphTests */ = {
 			isa = PBXGroup;
 			children = (
-				1E737136280B0E13007C7B10 /* test_drawingTestEvents.1.png */,
-				1E737137280B0E13007C7B10 /* test_drawingAppEvents.1.png */,
 			);
 			path = GraphTests;
 			sourceTree = "<group>";
@@ -510,7 +505,6 @@
 			files = (
 				1E737156280B0E14007C7B10 /* test_wholFile.1.txt in Resources */,
 				1E0531D4283802D9000428EF /* SimpleClean.bgbuildsnapshot in Resources */,
-				1E73714F280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */,
 				1E737155280B0E14007C7B10 /* test20Min.1.png in Resources */,
 				1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */,
 				1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */,

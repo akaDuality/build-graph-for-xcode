@@ -22,7 +22,7 @@ public class DetailsStatePresenter {
     func loadAndInsert(
         projectReference: ProjectReference,
         filter: FilterSettings,
-        didLoad: @escaping (_ projectReference: Project,
+        didLoad: @escaping (_ project: Project,
                             _ title: String,
                             _ projectReference: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
@@ -31,8 +31,7 @@ public class DetailsStatePresenter {
         
         do {
             let project = try parser.parse(
-                logURL: projectReference.currentActivityLog,
-                rootURL: projectReference.rootPath,
+                projectReference: projectReference,
                 filter: filter)
             
             if let depsPath = parser.depsPath,

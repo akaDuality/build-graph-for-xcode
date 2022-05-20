@@ -37,6 +37,14 @@ public class RealBuildLogParser {
     
 
     public private(set) var depsPath: URL?
+    
+    public func parse(projectReference: ProjectReference, filter: FilterSettings) throws -> Project {
+        try parse(
+            logURL: projectReference.currentActivityLog,
+            rootURL: projectReference.rootPath,
+            filter: filter)
+    }
+    
     public func parse(logURL: URL, rootURL: URL, filter: FilterSettings) throws -> Project {
         os_log("start parsing")
         var date = Date()

@@ -23,13 +23,11 @@ class RealBuildLogParserTests: XCTestCase {
         
         let testBundle = TestBundle()
         let project = try parser.parse(
-            logURL: testBundle.simpleClean,
-            rootURL: URL(fileURLWithPath: "root"),
+            projectReference: testBundle.simpleClean.project,
             filter: .shared)
         
-        XCTAssertEqual(parser.depsPath?.absoluteString,
-                       "file:///Users/rubanov/Library/Developer/Xcode/DerivedData/BulidGraph-dwlksaohfylpdedqejrvuuglqzeo/Build/Products/Debug/root/Build/Intermediates.noindex/XCBuildData/e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt")
-        // TODO: Assert relative path
+        XCTAssertEqual(parser.depsPath?.absoluteString.split(separator: "/").last,
+                       "e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt")
     }
 }
 
