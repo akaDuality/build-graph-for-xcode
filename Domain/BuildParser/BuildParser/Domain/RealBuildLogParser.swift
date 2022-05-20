@@ -35,13 +35,13 @@ public class RealBuildLogParser {
         buildStep.title
     }
     
-    var progress = Progress(totalUnitCount: 3)
+
     public private(set) var depsPath: URL?
     public func parse(logURL: URL, rootURL: URL, filter: FilterSettings) throws -> Project {
-        progress = Progress(totalUnitCount: 3)
         os_log("start parsing")
         var date = Date()
         
+        // 1. Read file
         let activityLog = try activityLogParser.parseActivityLogInURL(logURL)
         
         depsPath = DepsPathExtraction(rootURL: rootURL).depedenciesPath(activityLog: activityLog)
@@ -52,18 +52,18 @@ public class RealBuildLogParser {
         }
         date = Date()
         
-        progress.completedUnitCount = 1
-        
+        // 2. Parse to build steps
         buildStep = try buildParser.parse(activityLog: activityLog)
-        progress.completedUnitCount = 2
+        
         diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
             os_log("parse logs, \(diff)")
         }
         date = Date()
         
-        let events = convertToEvents(buildStep: buildStep, filter: filter)
-        progress.completedUnitCount = 3
+        // 3. Convert to Events
+        let events = BuildStepConverter().convertToEvents(buildStep: buildStep, filter: filter)
+        
         diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {
             os_log("convert events, \(diff)")
@@ -90,7 +90,7 @@ public class RealBuildLogParser {
     }
     
     public func update(with filter: FilterSettings) -> [Event] {
-        convertToEvents(buildStep: buildStep, filter: filter)
+        BuildStepConverter().convertToEvents(buildStep: buildStep, filter: filter)
     }
     
     public func step(for event: Event) -> BuildStep? {
@@ -102,166 +102,11 @@ public class RealBuildLogParser {
     }
     
     let dateFormatter = DateFormatter.iso8601Full_Z
-    
-    func convertToEvents(
-        buildStep: BuildStep,
-        filter: FilterSettings
-    ) -> [Event] {
-        let buildStart = buildStep.startDate
-        
-        let events: [Event] = buildStep.subSteps
-            .parallelCompactMap { step -> Event? in
-                if filter.cacheVisibility == .currentBuild {
-                    let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStart)
-                    if step.fetchedFromCache
-                        || buildEarlierThanCurrentBuild {
-                        return nil
-                    }
-                }
-                
-                var substeps = step.subSteps
-                
-                // TODO: Speedup if all or none settings are enabled
-                substeps = self.filter(substeps: substeps, filter: filter, buildStart: buildStart)
-                
-                guard
-                    let startDate = substeps.first?.startDate,
-                    let endDate = substeps.last?.startDate
-                else {
-                    return nil // Empty array
-                }
-                
-                let duration = endDate.timeIntervalSince(startDate)
-                guard duration > 0 else {
-                    return nil
-                }
-                
-                return self.event(from: step,
-                                  startDate: startDate,
-                                  duration: duration,
-                                  substeps: substeps)
-            }
-            .sorted { lhsEvent, rhsEvent in
-                if lhsEvent.startDate == rhsEvent.startDate {
-                    return lhsEvent.taskName < rhsEvent.taskName
-                } else {
-                    return lhsEvent.startDate < rhsEvent.startDate
-                }
-            }
-        
-        return events
-    }
-    
-    private func filter(
-        substeps: [BuildStep],
-        filter: FilterSettings,
-        buildStart: Date
-    ) -> [BuildStep] {
-        var substeps = substeps.filter { substep in
-            filter.allowedTypes.contains(substep.detailStepType)
-        }
-        
-        substeps = substeps.filter({ substep in
-            switch filter.cacheVisibility {
-            case .all:
-                return true
-            case .cached:
-                return substep.startDate < buildStart
-            case .currentBuild:
-                return substep.startDate > buildStart
-            }
-        })
-        
-        return substeps
-    }
-    
-    private func last(
-        substeps: [BuildStep],
-        cacheVisibility: FilterSettings.CacheVisibility,
-        buildStart: Date
-    ) -> Date? {
-        switch cacheVisibility {
-        case .all:
-            return substeps.last?.endDate
-        case .cached:
-            return substeps.filter({ step in
-                step.startDate < buildStart
-            }).last?.endDate
-        case .currentBuild:
-            return substeps.filter({ step in
-                step.startDate > buildStart
-            }).last?.endDate
-        }
-    }
-    
-    public func convertToEvents(
-        subSteps: [BuildStep]
-    ) -> [Event] {
-        let events = subSteps
-            .map { step in
-                event(from:step, startDate: step.startDate, duration: step.duration, substeps: step.subSteps)
-            }
-            .sorted { lhsEvent, rhsEvent in
-                if lhsEvent.startDate == rhsEvent.startDate {
-                    return lhsEvent.taskName < rhsEvent.taskName
-                } else {
-                    return lhsEvent.startDate < rhsEvent.startDate
-                }
-            }
-        return events
-    }
-    
-    private func event(from step: BuildStep,
-                       startDate: Date,
-                       duration: TimeInterval,
-                       substeps: [BuildStep]) -> Event {
-        Event(
-            taskName: step.title.without_Build_target,
-            startDate: startDate,
-            duration: duration,
-            fetchedFromCache: step.fetchedFromCache,
-            steps: self.convertToEvents(subSteps: substeps)
-        )
-    }
 }
-
-
 
 extension String {
     var fullRange: NSRange {
         return NSRange(location: 0, length: count)
-    }
-}
-
-extension Collection {
-    // Atother implementation https://talk.objc.io/episodes/S01E90-concurrent-map
-    func parallelMap<R>(_ transform: @escaping (Element) -> R) -> [R] {
-        var res: [R?] = .init(repeating: nil, count: count)
-        
-        let lock = NSRecursiveLock()
-        DispatchQueue.concurrentPerform(iterations: count) { i in
-            let result = transform(self[index(startIndex, offsetBy: i)])
-            lock.lock()
-            res[i] = result
-            lock.unlock()
-        }
-        
-        return res.map({ $0! })
-    }
-    
-    func parallelCompactMap<R>(_ transform: @escaping (Element) -> R?) -> [R] {
-        var res: [R?] = .init(repeating: nil, count: count)
-        
-        let lock = NSRecursiveLock()
-        DispatchQueue.concurrentPerform(iterations: count) { i in
-            if let result = transform(self[index(startIndex, offsetBy: i)]) {
-                lock.lock()
-                res[i] = result
-                lock.unlock()
-            }
-        }
-            
-        return res.compactMap { $0 }
     }
 }
 
@@ -296,14 +141,6 @@ extension BuildStep {
     
     func output() {
         print(description)
-    }
-}
-
-extension Collection {
-    
-    /// Returns the element at the specified index if it is within bounds, otherwise nil.
-    subscript (safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
     }
 }
 
