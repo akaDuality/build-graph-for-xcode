@@ -40,12 +40,6 @@ public class DetailsStatePresenter {
                 project.connect(dependencies: dependencies)
             }
             
-            guard project.events.count > 0 else {
-                // TODO: depends on compilationOnly flag
-                didFail(ParsingError.noEventsFound.localizedDescription)
-                return
-            }
-            
             didLoad(project, self.parser.title, projectReference)
         } catch let error {
             didFail(error.localizedDescription)
@@ -77,18 +71,5 @@ public class DetailsStatePresenter {
         }
         
         return DependencyParser().parseFile(depsContent)
-    }
-}
-
-
-enum ParsingError: Error {
-    case noEventsFound
-}
-
-extension ParsingError: CustomNSError {
-    var localizedDescription: String {
-        switch self {
-        case .noEventsFound: return NSLocalizedString("No compilation data found", comment: "")
-        }
     }
 }

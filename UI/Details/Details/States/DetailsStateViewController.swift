@@ -108,13 +108,25 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
         }
     }
     
+    private func projectFromCurrentState() -> Project? {
+        switch state {
+            // TODO: Restore project
+//        case .error(_, let project):
+//            return project
+        case .data(project: let project, title: _, projectReference: _):
+            return project
+        default:
+            return nil
+        }
+    }
+    
     // MARK: - Update filter
     public func updateFilterForCurrentProject(_ filter: FilterSettings) {
         guard let projectReference = currentProject else {
             return
         }
         
-        guard case .data(let project, _, _) = self.state else {
+        guard let project = projectFromCurrentState() else {
             return
         }
         

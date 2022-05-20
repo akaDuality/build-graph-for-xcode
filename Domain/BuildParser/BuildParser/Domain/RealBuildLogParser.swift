@@ -70,7 +70,10 @@ public class RealBuildLogParser {
         }
         
         return Project(events: events,
-                       relativeBuildStart: relativeDuration(events: events, buildStart: buildStep.startDate))
+                       relativeBuildStart: 0
+                        
+//                        relativeDuration(events: events, buildStart: buildStep.startDate)
+        )
     }
     
     private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {
@@ -108,14 +111,7 @@ public class RealBuildLogParser {
         
         let events: [Event] = buildStep.subSteps
             .parallelCompactMap { step -> Event? in
-                var substeps = step.subSteps
-                
-                // TODO: Speedup if all or none settings are enabled
-                substeps = substeps.filter { substep in
-                    filter.allowedTypes.contains(substep.detailStepType)
-                }
-                
-                if filter.cacheVisibility == .cached {
+                if filter.cacheVisibility == .currentBuild {
                     let buildEarlierThanCurrentBuild = step.beforeBuild(buildDate: buildStart)
                     if step.fetchedFromCache
                         || buildEarlierThanCurrentBuild {
@@ -123,19 +119,26 @@ public class RealBuildLogParser {
                     }
                 }
                 
+                var substeps = step.subSteps
+                
+                // TODO: Speedup if all or none settings are enabled
+                substeps = self.filter(substeps: substeps, filter: filter, buildStart: buildStart)
+                
                 guard
                     let startDate = substeps.first?.startDate,
-                    let endDate = self.last(
-                        substeps: substeps,
-                        cacheVisibility: filter.cacheVisibility,
-                        buildStart: buildStart)
+                    let endDate = substeps.last?.startDate
                 else {
                     return nil // Empty array
                 }
                 
+                let duration = endDate.timeIntervalSince(startDate)
+                guard duration > 0 else {
+                    return nil
+                }
+                
                 return self.event(from: step,
                                   startDate: startDate,
-                                  duration: endDate.timeIntervalSince(startDate),
+                                  duration: duration,
                                   substeps: substeps)
             }
             .sorted { lhsEvent, rhsEvent in
@@ -149,8 +152,27 @@ public class RealBuildLogParser {
         return events
     }
     
-    private func filter(substeps: [BuildStep], filter: FilterSettings) -> [BuildStep] {
-        []
+    private func filter(
+        substeps: [BuildStep],
+        filter: FilterSettings,
+        buildStart: Date
+    ) -> [BuildStep] {
+        var substeps = substeps.filter { substep in
+            filter.allowedTypes.contains(substep.detailStepType)
+        }
+        
+        substeps = substeps.filter({ substep in
+            switch filter.cacheVisibility {
+            case .all:
+                return true
+            case .cached:
+                return substep.startDate < buildStart
+            case .currentBuild:
+                return substep.startDate > buildStart
+            }
+        })
+        
+        return substeps
     }
     
     private func last(
@@ -203,44 +225,7 @@ public class RealBuildLogParser {
     }
 }
 
-struct DepsPathExtraction {
-    let rootURL: URL
-    
-    func depedenciesPath(activityLog: IDEActivityLog) -> URL? {
-        guard let fileName = fileName(from: activityLog) else { return nil }
-        
-        return rootURL.appendingPathComponent("Build")
-            .appendingPathComponent("Intermediates.noindex")
-            .appendingPathComponent("XCBuildData")
-            .appendingPathComponent(fileName)
-    }
-    
-    func fileName(from activityLog: IDEActivityLog) -> String? {
-        guard let section = activityLog.mainSection.subSections
-            .first?.subSections.first(where: { subsection in
-                subsection.title == "Create build description"
-            }) else { return nil }
-        
-        guard let number = number(from: String(section.text)) else { return nil }
-        return "\(number)-targetGraph.txt"
-    }
 
-    func number(from description: String) -> String? {
-        let patten = "XCBuildData\\/(\\w*)-"
-        let regex = try! NSRegularExpression(pattern: patten)
-        let matches = regex.matches(in: description, options: .withoutAnchoringBounds,
-                                    range: description.fullRange)
-        guard let match = matches.last,
-              match.numberOfRanges > 1
-        else { return nil }
-
-        let rangeInContent = Range(match.range(at: 1),
-                                   in: description)!
-
-        let text = description[rangeInContent]
-        return String(text)
-    }
-}
 
 extension String {
     var fullRange: NSRange {
@@ -319,5 +304,17 @@ extension Collection {
     /// Returns the element at the specified index if it is within bounds, otherwise nil.
     subscript (safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
+    }
+}
+
+enum ParsingError: Error {
+    case noEventsFound
+}
+
+extension ParsingError: CustomNSError {
+    var localizedDescription: String {
+        switch self {
+        case .noEventsFound: return NSLocalizedString("No compilation data found", comment: "")
+        }
     }
 }
