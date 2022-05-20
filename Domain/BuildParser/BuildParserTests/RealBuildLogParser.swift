@@ -23,7 +23,7 @@ class RealBuildLogParserTests: XCTestCase {
         
         let testBundle = TestBundle()
         let project = try parser.parse(
-            logURL: testBundle.paymentSDK,
+            logURL: testBundle.simpleClean,
             rootURL: URL(fileURLWithPath: "root"),
             filter: .shared)
         

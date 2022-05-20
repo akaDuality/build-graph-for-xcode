@@ -19,7 +19,7 @@ class ParsingTests: XCTestCase {
     }
 
     func testExample() throws {
-        let url = TestBundle().paymentSDK
+        let url = TestBundle().simpleClean
         let parser = RealBuildLogParser()
         
         let filter = FilterSettings()

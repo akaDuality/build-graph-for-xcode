@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import Details
 
 class TestBundle {
-    var paymentSDK: URL {
-        Bundle(for: TestBundle.self)
-            .url(forResource: "F5F5EB7C-FD56-4037-9959-7056E5363FCD",
-                 withExtension: "xcactivitylog")!
+    var simpleClean: URL {
+        try! snapshot(name: "SimpleClean").project.currentActivityLog
+    }
+    
+    func snapshot(name: String) throws -> XcodeBuildSnapshot {
+        let url = Bundle(for: TestBundle.self)
+            .url(forResource: name,
+                 withExtension: "bgbuildsnapshot")!
+        
+        return try XcodeBuildSnapshot(url: url)
     }
 }

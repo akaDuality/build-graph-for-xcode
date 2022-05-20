@@ -10,10 +10,10 @@
 		1E0531CC2837F8E6000428EF /* BuildStepConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0531CB2837F8E6000428EF /* BuildStepConverter.swift */; };
 		1E0531CE2837F967000428EF /* Collection+ParallelMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0531CD2837F967000428EF /* Collection+ParallelMap.swift */; };
 		1E0531D02837F9A7000428EF /* Collection+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0531CF2837F9A7000428EF /* Collection+Safe.swift */; };
+		1E0531D228380291000428EF /* IncrementalWithBigGap.bgbuildsnapshot in Resources */ = {isa = PBXBuildFile; fileRef = 1E0531D128380291000428EF /* IncrementalWithBigGap.bgbuildsnapshot */; };
+		1E0531D4283802D9000428EF /* SimpleClean.bgbuildsnapshot in Resources */ = {isa = PBXBuildFile; fileRef = 1E0531D3283802D9000428EF /* SimpleClean.bgbuildsnapshot */; };
 		1E1D7FCD2819C7A900B64954 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1D7FCC2819C7A900B64954 /* SnapshotTesting */; };
 		1E1D7FD02819C7F500B64954 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1D7FCF2819C7F500B64954 /* CustomDump */; };
-		1E1D7FD92819CB0100B64954 /* F5F5EB7C-FD56-4037-9959-7056E5363FCD.xcactivitylog in Resources */ = {isa = PBXBuildFile; fileRef = 1E1D7FD42819CB0100B64954 /* F5F5EB7C-FD56-4037-9959-7056E5363FCD.xcactivitylog */; };
-		1E1D7FDA2819CB0100B64954 /* e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E1D7FD82819CB0100B64954 /* e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt */; };
 		1E1D7FDC2819CB1E00B64954 /* ParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D7FDB2819CB1E00B64954 /* ParsingTests.swift */; };
 		1E1D7FDF281BC39000B64954 /* DepsPathExtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D7FDE281BC39000B64954 /* DepsPathExtraction.swift */; };
 		1E1D7FE1281BC3BD00B64954 /* RealBuildLogParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1D7FE0281BC3BD00B64954 /* RealBuildLogParser.swift */; };
@@ -103,8 +103,8 @@
 		1E0531CB2837F8E6000428EF /* BuildStepConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildStepConverter.swift; sourceTree = "<group>"; };
 		1E0531CD2837F967000428EF /* Collection+ParallelMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+ParallelMap.swift"; sourceTree = "<group>"; };
 		1E0531CF2837F9A7000428EF /* Collection+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Safe.swift"; sourceTree = "<group>"; };
-		1E1D7FD42819CB0100B64954 /* F5F5EB7C-FD56-4037-9959-7056E5363FCD.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = "F5F5EB7C-FD56-4037-9959-7056E5363FCD.xcactivitylog"; sourceTree = "<group>"; };
-		1E1D7FD82819CB0100B64954 /* e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt"; sourceTree = "<group>"; };
+		1E0531D128380291000428EF /* IncrementalWithBigGap.bgbuildsnapshot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IncrementalWithBigGap.bgbuildsnapshot; sourceTree = "<group>"; };
+		1E0531D3283802D9000428EF /* SimpleClean.bgbuildsnapshot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleClean.bgbuildsnapshot; sourceTree = "<group>"; };
 		1E1D7FDB2819CB1E00B64954 /* ParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingTests.swift; sourceTree = "<group>"; };
 		1E1D7FDE281BC39000B64954 /* DepsPathExtraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepsPathExtraction.swift; sourceTree = "<group>"; };
 		1E1D7FE0281BC3BD00B64954 /* RealBuildLogParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealBuildLogParser.swift; sourceTree = "<group>"; };
@@ -190,55 +190,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1E1D7FD12819CB0100B64954 /* PaymentSDK.bgbuildsnapshot */ = {
-			isa = PBXGroup;
-			children = (
-				1E1D7FD22819CB0100B64954 /* Logs */,
-				1E1D7FD52819CB0100B64954 /* Build */,
-			);
-			path = PaymentSDK.bgbuildsnapshot;
-			sourceTree = "<group>";
-		};
-		1E1D7FD22819CB0100B64954 /* Logs */ = {
-			isa = PBXGroup;
-			children = (
-				1E1D7FD32819CB0100B64954 /* Build */,
-			);
-			path = Logs;
-			sourceTree = "<group>";
-		};
-		1E1D7FD32819CB0100B64954 /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				1E1D7FD42819CB0100B64954 /* F5F5EB7C-FD56-4037-9959-7056E5363FCD.xcactivitylog */,
-			);
-			path = Build;
-			sourceTree = "<group>";
-		};
-		1E1D7FD52819CB0100B64954 /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				1E1D7FD62819CB0100B64954 /* Intermediates.noindex */,
-			);
-			path = Build;
-			sourceTree = "<group>";
-		};
-		1E1D7FD62819CB0100B64954 /* Intermediates.noindex */ = {
-			isa = PBXGroup;
-			children = (
-				1E1D7FD72819CB0100B64954 /* XCBuildData */,
-			);
-			path = Intermediates.noindex;
-			sourceTree = "<group>";
-		};
-		1E1D7FD72819CB0100B64954 /* XCBuildData */ = {
-			isa = PBXGroup;
-			children = (
-				1E1D7FD82819CB0100B64954 /* e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt */,
-			);
-			path = XCBuildData;
-			sourceTree = "<group>";
-		};
 		1E1D7FDD281BC37400B64954 /* Parsing */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,7 +383,8 @@
 		1E737142280B0E14007C7B10 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				1E1D7FD12819CB0100B64954 /* PaymentSDK.bgbuildsnapshot */,
+				1E0531D3283802D9000428EF /* SimpleClean.bgbuildsnapshot */,
+				1E0531D128380291000428EF /* IncrementalWithBigGap.bgbuildsnapshot */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -557,13 +509,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E737156280B0E14007C7B10 /* test_wholFile.1.txt in Resources */,
+				1E0531D4283802D9000428EF /* SimpleClean.bgbuildsnapshot in Resources */,
 				1E73714F280B0E14007C7B10 /* test_drawingTestEvents.1.png in Resources */,
 				1E737155280B0E14007C7B10 /* test20Min.1.png in Resources */,
-				1E1D7FDA2819CB0100B64954 /* e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt in Resources */,
 				1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */,
 				1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */,
 				1E737153280B0E14007C7B10 /* test60Min.1.png in Resources */,
-				1E1D7FD92819CB0100B64954 /* F5F5EB7C-FD56-4037-9959-7056E5363FCD.xcactivitylog in Resources */,
+				1E0531D228380291000428EF /* IncrementalWithBigGap.bgbuildsnapshot in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
