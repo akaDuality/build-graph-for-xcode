@@ -70,6 +70,8 @@ public class ProjectsPresenter {
             
             if selectedProject == nil {
                 delegate?.didSelectNothing()
+            } else {
+                delegate?.didSelect(project: selectedProject)
             }
         } catch let error {
             ui?.state = .noAccessToDerivedData
@@ -92,8 +94,18 @@ public class ProjectsPresenter {
     
     private(set) var projects: [ProjectReference] = []
     
-    
     func select(project: ProjectReference) {
+        guard project != selectedProject(in: self.projects) else {
+            return
+        }
+        delegate?.didSelect(project: project)
+    }
+    
+    func changeBuild(project: ProjectReference, lastBuildIndex: Int) {
+        guard project != selectedProject(in: self.projects)
+                || project.currentActivityLogIndex != lastBuildIndex else {
+            return
+        }
         delegate?.didSelect(project: project)
     }
     
@@ -105,7 +117,14 @@ public class ProjectsPresenter {
     private let projectDescriptionService = ProjectDescriptionService()
 }
 
+// MARK: - ProjectsListDatasource
+
 extension ProjectsPresenter: ProjectsListDatasource {
+    
+    func shouldSelectProject(project: ProjectReference) -> Bool {
+        return project == selectedProject(in: self.projects)
+    }
+    
     func description(for url: URL) -> String {
         projectDescriptionService.dateDescription(for: url)
     }

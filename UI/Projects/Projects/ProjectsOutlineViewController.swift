@@ -12,6 +12,7 @@ protocol ProjectsListDatasource {
     var projects: [ProjectReference] { get }
     
     func select(project: ProjectReference)
+    func changeBuild(project: ProjectReference, lastBuildIndex: Int)
     func shouldSelectProject(project: ProjectReference) -> Bool
     
     func description(for url: URL) -> String
@@ -116,8 +117,9 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         } else if let url = outlineView.item(atRow: outlineView.selectedRow) as? URL,
                   let project = outlineView.parent(forItem: url) as? ProjectReference {
             
+            let previousIndex = project.currentActivityLogIndex
             project.currentActivityLogIndex = outlineView.childIndex(forItem: url)
-            presenter.select(project: project)
+            presenter.changeBuild(project: project, lastBuildIndex: previousIndex)
         }
     }
     
