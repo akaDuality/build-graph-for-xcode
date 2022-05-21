@@ -12,6 +12,7 @@ protocol ProjectsListDatasource {
     var projects: [ProjectReference] { get }
     
     func select(project: ProjectReference)
+    func shouldSelectProject(project: ProjectReference) -> Bool
     
     func description(for url: URL) -> String
     func tooltip(for url: URL) -> String
@@ -111,7 +112,6 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         guard let outlineView = notification.object as? NSOutlineView else { return }
         
         if let project = outlineView.item(atRow: outlineView.selectedRow) as? ProjectReference {
-            // TODO: Select last currentActivityLogIndex?
             presenter.select(project: project)
         } else if let url = outlineView.item(atRow: outlineView.selectedRow) as? URL,
                   let project = outlineView.parent(forItem: url) as? ProjectReference {
@@ -134,8 +134,8 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
     public func outlineViewItemDidCollapse(_ notification: Notification) {
         guard let _ = notification.object as? NSOutlineView else { return }
         
-        if let project = notification.userInfo?["NSObject"] as? ProjectReference {
-            // TODO: Select only if same project is selected already
+        if let project = notification.userInfo?["NSObject"] as? ProjectReference,
+           presenter.shouldSelectProject(project: project) {
             view().select(project: project)
         }
     }
