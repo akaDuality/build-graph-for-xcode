@@ -22,7 +22,7 @@ public class DetailsStatePresenter {
     func loadAndInsert(
         projectReference: ProjectReference,
         filter: FilterSettings,
-        didLoad: @escaping (_ projectReference: Project,
+        didLoad: @escaping (_ project: Project,
                             _ title: String,
                             _ projectReference: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
@@ -31,19 +31,12 @@ public class DetailsStatePresenter {
         
         do {
             let project = try parser.parse(
-                logURL: projectReference.currentActivityLog,
-                rootURL: projectReference.rootPath,
+                projectReference: projectReference,
                 filter: filter)
             
             if let depsPath = parser.depsPath,
                let dependencies = dependencies(depsURL: depsPath) {
                 project.connect(dependencies: dependencies)
-            }
-            
-            guard project.events.count > 0 else {
-                // TODO: depends on compilationOnly flag
-                didFail(ParsingError.noEventsFound.localizedDescription)
-                return
             }
             
             didLoad(project, self.parser.title, projectReference)
@@ -77,18 +70,5 @@ public class DetailsStatePresenter {
         }
         
         return DependencyParser().parseFile(depsContent)
-    }
-}
-
-
-enum ParsingError: Error {
-    case noEventsFound
-}
-
-extension ParsingError: CustomNSError {
-    var localizedDescription: String {
-        switch self {
-        case .noEventsFound: return NSLocalizedString("No compilation data found", comment: "")
-        }
     }
 }

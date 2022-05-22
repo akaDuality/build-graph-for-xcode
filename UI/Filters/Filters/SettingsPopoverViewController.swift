@@ -8,7 +8,6 @@
 import AppKit
 import XCLogParser
 import BuildParser
-//import Details
 
 public protocol FilterSettingsDelegate: AnyObject {
     func didUpdateFilter(_ filterSettings: FilterSettings)
@@ -20,11 +19,16 @@ public class SettingsPopoverViewController: NSViewController {
         with delegate: FilterSettingsDelegate,
         counter: BuildStepCounter
     ) -> NSViewController {
-        let storyboard = NSStoryboard(name: "Settings", bundle: Bundle(for: SettingsPopoverViewController.self))
-        let settingsController = storyboard.instantiateController(withIdentifier: "Settings") as! SettingsPopoverViewController
-        settingsController.delegate = delegate
+        let storyboard = NSStoryboard(
+            name: "Settings",
+            bundle: Bundle(for: SettingsPopoverViewController.self))
         
+        let settingsController = storyboard.instantiateController(
+            withIdentifier: "Settings") as! SettingsPopoverViewController
+        
+        settingsController.delegate = delegate
         settingsController.setup(counter: counter) // TODO: Refactor
+        
         return settingsController
     }
     
@@ -32,8 +36,15 @@ public class SettingsPopoverViewController: NSViewController {
     @IBOutlet weak var otherStackView: NSStackView!
     @IBOutlet weak var formatStackView: NSStackView!
     
-    @IBOutlet weak var cachedModulesCheckbox: NSButton!
+    // MARK: Cache
+    @IBOutlet weak var cachedModuleSegmentedControl: NSSegmentedControl!
     
+    @IBAction func cachedModuleSegmentedControlDidChange(_ sender: Any) {
+        settings.cacheVisibility = .init(rawValue: cachedModuleSegmentedControl.indexOfSelectedItem)!
+        delegate?.didUpdateFilter(settings)
+    }
+    
+    // MARK: -
     let settings = FilterSettings.shared
     weak var delegate: FilterSettingsDelegate?
     private var counter: BuildStepCounter!
@@ -41,7 +52,7 @@ public class SettingsPopoverViewController: NSViewController {
     func setup(counter: BuildStepCounter) {
         _ = view // Load view from storyboard
         self.counter = counter
-        cachedModulesCheckbox.state = settings.showCached ? .on: .off
+        cachedModuleSegmentedControl.selectedSegment = settings.cacheVisibility.rawValue
         
         for stepType in DetailStepType.allCases {
             let button = checkBox(for: stepType)
@@ -120,13 +131,6 @@ public class SettingsPopoverViewController: NSViewController {
         } else {
             settings.remove(stepType: stepType)
         }
-    }
-    
-    @IBAction func showCachedModulesDidChagne(_ sender: NSButton) {
-        let isOn = sender.state == .on
-        settings.showCached = isOn
-        
-        delegate?.didUpdateFilter(settings)
     }
     
     // MARK: Format

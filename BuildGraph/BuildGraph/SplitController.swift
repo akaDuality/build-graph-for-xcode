@@ -86,12 +86,14 @@ extension SplitController: DetailsDelegate {
     }
     
     func didLoadProject(
-        project: ProjectReference,
+        project: Project,
+        projectReference: ProjectReference,
         detailsController: DetailViewController
     ) {
-        projectSettings.selectedProject = project.name // Save only after success parsing
+        projectSettings.selectedProject = projectReference.name // Save only after success parsing
         mainWindow().enableButtons()
-        
+        mainWindow().updateNavigationButtons(for: projectReference,
+                                             buildDuration: project.events.duration())
         showSettings()
         
         appReview.requestIfPossible()

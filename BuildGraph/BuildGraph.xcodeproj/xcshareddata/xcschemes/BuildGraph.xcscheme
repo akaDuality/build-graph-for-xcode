@@ -32,14 +32,14 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BuildParserTests"
-               BuildableName = "BuildParserTests"
+               BlueprintIdentifier = "1E7370A7280B0DA4007C7B10"
+               BuildableName = "BuildParserTests.xctest"
                BlueprintName = "BuildParserTests"
-               ReferencedContainer = "container:../BuildParser">
+               ReferencedContainer = "container:../Domain/BuildParser/BuildParser.xcodeproj">
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "GraphTests">
+                  Identifier = "TimelineLayerTests">
                </Test>
             </SkippedTests>
          </TestableReference>
@@ -47,10 +47,30 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "GraphParserTests"
-               BuildableName = "GraphParserTests"
-               BlueprintName = "GraphParserTests"
-               ReferencedContainer = "container:../BuildParser">
+               BlueprintIdentifier = "1E9AE0882800BD2500851519"
+               BuildableName = "DetailsTests.xctest"
+               BlueprintName = "DetailsTests"
+               ReferencedContainer = "container:../UI/Details/Details.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1E7371D3280B1822007C7B10"
+               BuildableName = "FiltersTests.xctest"
+               BlueprintName = "FiltersTests"
+               ReferencedContainer = "container:../UI/Filters/Filters.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1E73718E280B1331007C7B10"
+               BuildableName = "ProjectsTests.xctest"
+               BlueprintName = "ProjectsTests"
+               ReferencedContainer = "container:../UI/Projects/Projects.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

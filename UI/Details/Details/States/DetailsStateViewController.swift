@@ -22,7 +22,11 @@ public enum DetailsState: StateProtocol {
 
 public protocol DetailsDelegate: AnyObject {
     func willLoadProject(project: ProjectReference)
-    func didLoadProject(project: ProjectReference, detailsController: DetailViewController)
+    func didLoadProject(
+        project: Project,
+        projectReference: ProjectReference,
+        detailsController: DetailViewController
+    )
     func didFailLoadProject()
 }
 
@@ -87,8 +91,10 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                         
                         derivedData?.stopAccessingSecurityScopedResource()
                         
-                        self.delegate?.didLoadProject(project: projectReference,
-                                                      detailsController: self.currentController as! DetailViewController)
+                        self.delegate?.didLoadProject(
+                            project: project,
+                            projectReference: projectReference,
+                            detailsController: self.currentController as! DetailViewController)
                     }
                 },
                 didFail: { message in
@@ -102,13 +108,25 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
         }
     }
     
+    private func projectFromCurrentState() -> Project? {
+        switch state {
+            // TODO: Restore project
+//        case .error(_, let project):
+//            return project
+        case .data(project: let project, title: _, projectReference: _):
+            return project
+        default:
+            return nil
+        }
+    }
+    
     // MARK: - Update filter
     public func updateFilterForCurrentProject(_ filter: FilterSettings) {
         guard let projectReference = currentProject else {
             return
         }
         
-        guard case .data(let project, _, _) = self.state else {
+        guard let project = projectFromCurrentState() else {
             return
         }
         
@@ -132,8 +150,9 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                                        title: title,
                                        projectReference: projectReference)
                     
-                    delegate?.didLoadProject(
-                        project: projectReference,
+                    self.delegate?.didLoadProject(
+                        project: project,
+                        projectReference: projectReference,
                         detailsController: self.currentController as! DetailViewController)
                 }
             }
