@@ -1,6 +1,6 @@
 //
-//  ProjectsTests.swift
-//  ProjectsTests
+//  ProjectsIngtegrationTests.swift
+//  ProjectsIngtegrationTests
 //
 //  Created by Mikhail Rubanov on 16.04.2022.
 //
@@ -9,7 +9,7 @@ import XCTest
 @testable import Projects
 import BuildParser
 
-class ProjectsTests: XCTestCase {
+class ProjectsIngtegrationTests: XCTestCase {
 
     var presenter: ProjectsPresenter!
     

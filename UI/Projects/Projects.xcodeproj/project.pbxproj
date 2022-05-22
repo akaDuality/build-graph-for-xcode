@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E737190280B1331007C7B10 /* Projects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737185280B1331007C7B10 /* Projects.framework */; };
-		1E737195280B1331007C7B10 /* ProjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737194280B1331007C7B10 /* ProjectsTests.swift */; };
+		1E737195280B1331007C7B10 /* ProjectsIngtegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737194280B1331007C7B10 /* ProjectsIngtegrationTests.swift */; };
 		1E737196280B1331007C7B10 /* Projects.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E737188280B1331007C7B10 /* Projects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E7371B0280B1350007C7B10 /* ProjectsOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371AA280B1350007C7B10 /* ProjectsOutlineViewController.swift */; };
 		1E7371B1280B1350007C7B10 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7371AB280B1350007C7B10 /* Projects.storyboard */; };
@@ -53,7 +53,7 @@
 		1E737185280B1331007C7B10 /* Projects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Projects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E737188280B1331007C7B10 /* Projects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
 		1E73718F280B1331007C7B10 /* ProjectsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E737194280B1331007C7B10 /* ProjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTests.swift; sourceTree = "<group>"; };
+		1E737194280B1331007C7B10 /* ProjectsIngtegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsIngtegrationTests.swift; sourceTree = "<group>"; };
 		1E7371AA280B1350007C7B10 /* ProjectsOutlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsOutlineViewController.swift; sourceTree = "<group>"; };
 		1E7371AB280B1350007C7B10 /* Projects.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
 		1E7371AC280B1350007C7B10 /* ProjectsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsPresenter.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		1E737193280B1331007C7B10 /* ProjectsTests */ = {
 			isa = PBXGroup;
 			children = (
-				1E737194280B1331007C7B10 /* ProjectsTests.swift */,
+				1E737194280B1331007C7B10 /* ProjectsIngtegrationTests.swift */,
 				1EDABBFB283A921900D20945 /* Doubles */,
 			);
 			path = ProjectsTests;
@@ -275,7 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EDABC03283A966F00D20945 /* DerivedDataStub.swift in Sources */,
-				1E737195280B1331007C7B10 /* ProjectsTests.swift in Sources */,
+				1E737195280B1331007C7B10 /* ProjectsIngtegrationTests.swift in Sources */,
 				1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */,
 				1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */,
 				1EDABC01283A924100D20945 /* ProjectsFinderMock.swift in Sources */,
