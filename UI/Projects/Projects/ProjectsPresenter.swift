@@ -31,14 +31,22 @@ public class ProjectSettings {
 // TODO: Remove public
 public class ProjectsPresenter {
     
+    // Dependencies
+    weak var delegate: ProjectsSelectionDelegate?
+    weak var ui: ProjectsUI?
+    
+    // Private
+    private let projectSettings = ProjectSettings()
+    private(set) var projects: [ProjectReference] = []
+    private let projectDescriptionService = ProjectDescriptionService()
+    
+    // MARK: - Init
+    
     public init(delegate: ProjectsSelectionDelegate) {
         self.delegate = delegate
     }
     
-    weak var delegate: ProjectsSelectionDelegate?
-    weak var ui: ProjectsUI?
-    
-    private let projectSettings = ProjectSettings()
+    // MARK: - Public
     
     func requestAccessAndReloadProjects() {
         do {
@@ -70,6 +78,8 @@ public class ProjectsPresenter {
             
             if selectedProject == nil {
                 delegate?.didSelectNothing()
+            } else {
+                delegate?.didSelect(project: selectedProject)
             }
         } catch let error {
             ui?.state = .noAccessToDerivedData
@@ -82,6 +92,13 @@ public class ProjectsPresenter {
         reloadProjetcs()
     }
     
+    func selectProject(at index: Int) {
+        let project = projects[index]
+        delegate?.didSelect(project: project)
+    }
+    
+    // MARK: - Private
+    
     private func selectedProject(in projects: [ProjectReference]) -> ProjectReference? {
         guard let selectedProjectName = projectSettings.selectedProject else { return nil }
         
@@ -89,23 +106,31 @@ public class ProjectsPresenter {
             project.name == selectedProjectName
         })
     }
-    
-    private(set) var projects: [ProjectReference] = []
-    
-    
-    func select(project: ProjectReference) {
-        delegate?.didSelect(project: project)
-    }
-    
-    func selectProject(at index: Int) {
-        let project = projects[index]
-        delegate?.didSelect(project: project)
-    }
-
-    private let projectDescriptionService = ProjectDescriptionService()
 }
 
+// MARK: - ProjectsListDatasource
+
 extension ProjectsPresenter: ProjectsListDatasource {
+    
+    func select(project: ProjectReference) {
+        guard project != selectedProject(in: self.projects) else {
+            return
+        }
+        delegate?.didSelect(project: project)
+    }
+    
+    func changeBuild(project: ProjectReference, lastBuildIndex: Int) {
+        guard project != selectedProject(in: self.projects)
+                || project.currentActivityLogIndex != lastBuildIndex else {
+            return
+        }
+        delegate?.didSelect(project: project)
+    }
+    
+    func shouldSelectProject(project: ProjectReference) -> Bool {
+        return project == selectedProject(in: self.projects)
+    }
+    
     func description(for url: URL) -> String {
         projectDescriptionService.dateDescription(for: url)
     }

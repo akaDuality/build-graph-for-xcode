@@ -12,6 +12,8 @@ protocol ProjectsListDatasource {
     var projects: [ProjectReference] { get }
     
     func select(project: ProjectReference)
+    func changeBuild(project: ProjectReference, lastBuildIndex: Int)
+    func shouldSelectProject(project: ProjectReference) -> Bool
     
     func description(for url: URL) -> String
     func tooltip(for url: URL) -> String
@@ -19,7 +21,10 @@ protocol ProjectsListDatasource {
 
 public class ProjectsOutlineViewController: NSViewController {
     
+    // Dependencies
     var presenter: ProjectsListDatasource!
+    
+    // MARK: - Lifecycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +43,6 @@ public class ProjectsOutlineViewController: NSViewController {
         view as! ProjectsOutlineView
     }
     
-    private func addContextMenu() {
-        let menu = NSMenu()
-        menu.addItem(withTitle: NSLocalizedString("Show in Finder", comment: ""),
-                     action: #selector(showInFinder), keyEquivalent: "")
-        view().outlineView.menu = menu
-    }
-    
     @objc func showInFinder() {
         guard let url = view().selectedProject()?.currentActivityLog else {
             return
@@ -53,18 +51,30 @@ public class ProjectsOutlineViewController: NSViewController {
         
         openURL(url)
     }
+    
+    // MARK: - Private
+    
+    private func addContextMenu() {
+        let menu = NSMenu()
+        menu.addItem(withTitle: NSLocalizedString("Show in Finder", comment: ""),
+                     action: #selector(showInFinder), keyEquivalent: "")
+        view().outlineView.menu = menu
+    }
 
     private func openURL(_ url: URL) {
         let workspace = NSWorkspace.shared
         let selected = workspace.selectFile(url.path, inFileViewerRootedAtPath: "")
         if !selected {
-//             TODO: Handle errors
-//                        showError()
+//            TODO: Handle errors
+//            showError()
         }
     }
 }
 
+// MARK: - NSOutlineViewDataSource
+
 extension ProjectsOutlineViewController: NSOutlineViewDataSource {
+    
     public func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let project = item as? ProjectReference {
             return project.activityLogURL.count
@@ -90,6 +100,8 @@ extension ProjectsOutlineViewController: NSOutlineViewDataSource {
     }
 }
 
+// MARK: - NSOutlineViewDelegate
+
 extension ProjectsOutlineViewController: NSOutlineViewDelegate {
     
     public func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -111,13 +123,13 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         guard let outlineView = notification.object as? NSOutlineView else { return }
         
         if let project = outlineView.item(atRow: outlineView.selectedRow) as? ProjectReference {
-            // TODO: Select last currentActivityLogIndex?
             presenter.select(project: project)
         } else if let url = outlineView.item(atRow: outlineView.selectedRow) as? URL,
                   let project = outlineView.parent(forItem: url) as? ProjectReference {
             
+            let previousIndex = project.currentActivityLogIndex
             project.currentActivityLogIndex = outlineView.childIndex(forItem: url)
-            presenter.select(project: project)
+            presenter.changeBuild(project: project, lastBuildIndex: previousIndex)
         }
     }
     
@@ -134,12 +146,14 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
     public func outlineViewItemDidCollapse(_ notification: Notification) {
         guard let _ = notification.object as? NSOutlineView else { return }
         
-        if let project = notification.userInfo?["NSObject"] as? ProjectReference {
-            // TODO: Select only if same project is selected already
+        if let project = notification.userInfo?["NSObject"] as? ProjectReference,
+           presenter.shouldSelectProject(project: project) {
             view().select(project: project)
         }
     }
 }
+
+// MARK: - ProjectsOutlineViewController
 
 extension ProjectsOutlineViewController {
     
@@ -168,6 +182,8 @@ extension ProjectsOutlineViewController {
         view().select(url: project.currentActivityLog)
     }
 }
+
+// MARK: - ProjectsOutlineView
 
 class ProjectsOutlineView: NSView {
     
