@@ -69,8 +69,9 @@ extension Array where Element == Event {
         }
     }
     
+    // крашится приложение
     public func duration() -> TimeInterval {
-        last!.endDate.timeIntervalSince(first!.startDate)
+        last?.endDate.timeIntervalSince(first!.startDate) ?? 0
     }
     
     func start() -> Date {
