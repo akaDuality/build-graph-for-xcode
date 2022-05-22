@@ -19,13 +19,7 @@ class ProjectsTests: XCTestCase {
     var projectsFinder: ProjectsFinderMock!
     var projectSettings: ProjectSettingsMock!
     
-    // MARK: Constants
-    private let derivedData = URL(fileURLWithPath: "/DerivedData")
-    private let buildGraph = ProjectReference(
-        name: "Build Graph",
-        rootPath: URL(fileURLWithPath: "/DerivedData/BuildGraph"),
-        activityLogURL: [URL(fileURLWithPath: "/Test")],
-        depsURL: nil)
+    let stub = DerivedDataStub()
     
     // MARK: Test cycle
     override func setUpWithError() throws {
@@ -61,17 +55,17 @@ class ProjectsTests: XCTestCase {
     
     // 0. Когда показываю экран должен отобразиться список проектов.
     func test_userAllowAccessButThereInNoFile_whenReloadDatat_shouldShowEmptyState() {
-        projectsFinder.derivedDataPathResult = .success(derivedData)
+        projectsFinder.derivedDataPathResult = .success(stub.derivedData)
         
         presenter.reloadProjetcs(ui: ui)
         
-        XCTAssertEqual(ui.states, [.empty(derivedData)])
+        XCTAssertEqual(ui.states, [.empty(stub.derivedData)])
         // TODO: should present empty state to details?
     }
     
     func test_1ProjectInFolder_whenReleadData_shouldShowDataWithoutSelection() {
-        projectsFinder.derivedDataPathResult = .success(derivedData)
-        projectsFinder.projects = [buildGraph]
+        projectsFinder.derivedDataPathResult = .success(stub.derivedData)
+        projectsFinder.projects = [stub.buildGraph]
         
         presenter.reloadProjetcs(ui: ui)
         
@@ -80,21 +74,21 @@ class ProjectsTests: XCTestCase {
         XCTAssertNil(delegate.selectedProject, "Not select project yet")
         
         // Select
-        presenter.select(project: buildGraph)
-        XCTAssertEqual(delegate.selectedProject, buildGraph)
+        presenter.select(project: stub.buildGraph)
+        XCTAssertEqual(delegate.selectedProject, stub.buildGraph)
         
         // TODO: Test that senconde selection doesn't change selected project
     }
     
     func test_hasSelectedProject_1ProjectInFolder_whenReleadData_shouldShowDataWithoutSelection() {
-        projectsFinder.derivedDataPathResult = .success(derivedData)
-        projectsFinder.projects = [buildGraph]
-        projectSettings.selectedProject = buildGraph.name
+        projectsFinder.derivedDataPathResult = .success(stub.derivedData)
+        projectsFinder.projects = [stub.buildGraph]
+        projectSettings.selectedProject = stub.buildGraph.name
         
         presenter.reloadProjetcs(ui: ui)
         
-        XCTAssertEqual(ui.states, [.projects(buildGraph)])
-        XCTAssertEqual(delegate.selectedProject, buildGraph)
+        XCTAssertEqual(ui.states, [.projects(stub.buildGraph)])
+        XCTAssertEqual(delegate.selectedProject, stub.buildGraph)
     }
     
     // 1. Есть выбранный проект

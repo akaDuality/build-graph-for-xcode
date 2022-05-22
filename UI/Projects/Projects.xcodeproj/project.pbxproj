@@ -22,6 +22,7 @@
 		1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */; };
 		1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */; };
 		1EDABC01283A924100D20945 /* ProjectsFinderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABC00283A924100D20945 /* ProjectsFinderMock.swift */; };
+		1EDABC03283A966F00D20945 /* DerivedDataStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABC02283A966F00D20945 /* DerivedDataStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsUIMock.swift; sourceTree = "<group>"; };
 		1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsSelectionDelegateMock.swift; sourceTree = "<group>"; };
 		1EDABC00283A924100D20945 /* ProjectsFinderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsFinderMock.swift; sourceTree = "<group>"; };
+		1EDABC02283A966F00D20945 /* DerivedDataStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */,
+				1EDABC02283A966F00D20945 /* DerivedDataStub.swift */,
 				1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */,
 				1EDABC00283A924100D20945 /* ProjectsFinderMock.swift */,
 			);
@@ -271,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDABC03283A966F00D20945 /* DerivedDataStub.swift in Sources */,
 				1E737195280B1331007C7B10 /* ProjectsTests.swift in Sources */,
 				1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */,
 				1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */,
