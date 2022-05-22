@@ -61,7 +61,7 @@ extension SplitController: ProjectsSelectionDelegate {
         detail.state = .noProject
     }
     
-    func didSelect(project: ProjectReference?) {
+    func didSelect(project: ProjectReference) {
         detail.selectProject(projectReference: project, filter: filter)
     }
 }

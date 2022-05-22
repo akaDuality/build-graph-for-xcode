@@ -9,29 +9,20 @@ import Foundation
 import BuildParser
 
 public protocol ProjectsSelectionDelegate: AnyObject {
-    func didSelect(project: ProjectReference?)
-    func didSelectNothing()
+    func select(project: ProjectReference)
+    func selectNothing()
 }
 
 public protocol ProjectsUI: AnyObject {
     var state: ProjectsState { get set }
 }
 
-public class ProjectSettings {
-    public init() {}
-    
-    @Storage(key: "selectedProject", defaultValue: nil)
-    public var selectedProject: String?
-    
-    public func removeSelectedProject() {
-        UserDefaults.standard.removeObject(forKey: "selectedProject")
-    }
-}
-
 // TODO: Remove public
 public class ProjectsPresenter {
     
     // Dependencies
+    private var projectsFinder: ProjectsFinderProtocol
+    
     weak var delegate: ProjectsSelectionDelegate?
     weak var ui: ProjectsUI?
     
@@ -42,16 +33,21 @@ public class ProjectsPresenter {
     
     // MARK: - Init
     
-    public init(delegate: ProjectsSelectionDelegate) {
+    public init(
+        projectSettings: ProjectSettings = ProjectSettings(),
+        projectsFinder: ProjectsFinderProtocol = ProjectsFinder(),
+        delegate: ProjectsSelectionDelegate
+    ) {
+        self.projectsFinder = projectsFinder
         self.delegate = delegate
     }
     
     // MARK: - Public
     
+    /// Is called when change DerivedData's path
     func requestAccessAndReloadProjects() {
         do {
-            let pathFinder = ProjectsFinder()
-            let derivedDataPath = try pathFinder.derivedDataPath()
+            let derivedDataPath = try projectsFinder.derivedDataPath()
             
             let newDerivedData = try FileAccess()
                 .requestAccess(to: derivedDataPath)
@@ -64,9 +60,8 @@ public class ProjectsPresenter {
     
     public func reloadProjetcs() {
         do {
-            let pathFinder = ProjectsFinder()
-            let derivedData = try pathFinder.derivedDataPath()
-            projects = try pathFinder.projects(derivedDataPath: derivedData)
+            let derivedData = try projectsFinder.derivedDataPath()
+            projects = try projectsFinder.projects(derivedDataPath: derivedData)
 
             guard !projects.isEmpty else {
                 ui?.state = .empty(derivedData)
@@ -76,10 +71,10 @@ public class ProjectsPresenter {
             let selectedProject = selectedProject(in: projects)
             ui?.state = .projects(selectedProject)
             
-            if selectedProject == nil {
-                delegate?.didSelectNothing()
+            if let selectedProject = selectedProject {
+                delegate?.select(project: selectedProject)
             } else {
-                delegate?.didSelect(project: selectedProject)
+                delegate?.selectNothing()
             }
         } catch let error {
             ui?.state = .noAccessToDerivedData
@@ -94,7 +89,7 @@ public class ProjectsPresenter {
     
     func selectProject(at index: Int) {
         let project = projects[index]
-        delegate?.didSelect(project: project)
+        delegate?.select(project: project)
     }
     
     // MARK: - Private
@@ -116,7 +111,7 @@ extension ProjectsPresenter: ProjectsListDatasource {
         guard project != selectedProject(in: self.projects) else {
             return
         }
-        delegate?.didSelect(project: project)
+        delegate?.select(project: project)
     }
     
     func changeBuild(project: ProjectReference, lastBuildIndex: Int) {
@@ -124,7 +119,7 @@ extension ProjectsPresenter: ProjectsListDatasource {
                 || project.currentActivityLogIndex != lastBuildIndex else {
             return
         }
-        delegate?.didSelect(project: project)
+        delegate?.select(project: project)
     }
     
     func shouldSelectProject(project: ProjectReference) -> Bool {

@@ -9,13 +9,19 @@ import Foundation
 import XCLogParser
 import Foundation
 
-public class ProjectsFinder {
+public protocol ProjectsFinderProtocol {
+    func projects(derivedDataPath: URL) throws -> [ProjectReference]
+    func derivedDataPath() throws -> URL
+}
+
+public class ProjectsFinder: ProjectsFinderProtocol {
     
     public init() {}
     
     let fileAccess = FileAccess()
     let projectReferenceFactory = ProjectReferenceFactory()
     let defaultDerivedData = DefaultDerivedData()
+    let fileManager = FileManager.default
     
     public func projects(derivedDataPath: URL) throws -> [ProjectReference] {
         let hasAccess = derivedDataPath.startAccessingSecurityScopedResource()
@@ -26,7 +32,7 @@ public class ProjectsFinder {
             derivedDataPath.stopAccessingSecurityScopedResource()
         }
         
-        let derivedDataContents = try FileManager.default
+        let derivedDataContents = try fileManager
             .contentsOfDirectory(atPath: derivedDataPath.path)
         
         let result = filter(derivedDataContents)
@@ -56,7 +62,7 @@ public class ProjectsFinder {
             .filter { !$0.contains("Manifests") } // TODO: Is it Tuist? Remove from prod
     }
     
-    enum Error: Swift.Error {
+    public enum Error: Swift.Error {
         case noDerivedData
         case cantAccessResourceInScope
     }

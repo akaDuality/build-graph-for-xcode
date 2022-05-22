@@ -43,6 +43,15 @@ public class ProjectsOutlineViewController: NSViewController {
         view as! ProjectsOutlineView
     }
     
+    // MARK: - Context Menu
+    
+    private func addContextMenu() {
+        let menu = NSMenu()
+        menu.addItem(withTitle: NSLocalizedString("Show in Finder", comment: ""),
+                     action: #selector(showInFinder), keyEquivalent: "")
+        view().outlineView.menu = menu
+    }
+    
     @objc func showInFinder() {
         guard let url = view().selectedProject()?.currentActivityLog else {
             return
@@ -50,15 +59,6 @@ public class ProjectsOutlineViewController: NSViewController {
         }
         
         openURL(url)
-    }
-    
-    // MARK: - Private
-    
-    private func addContextMenu() {
-        let menu = NSMenu()
-        menu.addItem(withTitle: NSLocalizedString("Show in Finder", comment: ""),
-                     action: #selector(showInFinder), keyEquivalent: "")
-        view().outlineView.menu = menu
     }
 
     private func openURL(_ url: URL) {

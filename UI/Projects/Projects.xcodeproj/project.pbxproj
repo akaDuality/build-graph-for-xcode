@@ -18,6 +18,10 @@
 		1E7371B5280B1350007C7B10 /* ProjectsStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371AF280B1350007C7B10 /* ProjectsStateViewController.swift */; };
 		1E7371BB280B13F0007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371BA280B13F0007C7B10 /* BuildParser.framework */; };
 		1E7371BC280B13F0007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371BA280B13F0007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1EDABBFA283A8CD900D20945 /* ProjectSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBF9283A8CD900D20945 /* ProjectSettings.swift */; };
+		1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */; };
+		1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */; };
+		1EDABC01283A924100D20945 /* ProjectsFinderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABC00283A924100D20945 /* ProjectsFinderMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		1E7371AE280B1350007C7B10 /* NoAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAccessViewController.swift; sourceTree = "<group>"; };
 		1E7371AF280B1350007C7B10 /* ProjectsStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsStateViewController.swift; sourceTree = "<group>"; };
 		1E7371BA280B13F0007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EDABBF9283A8CD900D20945 /* ProjectSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettings.swift; sourceTree = "<group>"; };
+		1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsUIMock.swift; sourceTree = "<group>"; };
+		1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsSelectionDelegateMock.swift; sourceTree = "<group>"; };
+		1EDABC00283A924100D20945 /* ProjectsFinderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsFinderMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,7 @@
 				1E737188280B1331007C7B10 /* Projects.h */,
 				1E7371AB280B1350007C7B10 /* Projects.storyboard */,
 				1E7371AC280B1350007C7B10 /* ProjectsPresenter.swift */,
+				1EDABBF9283A8CD900D20945 /* ProjectSettings.swift */,
 				1E7371AD280B1350007C7B10 /* NoProjectsViewController.swift */,
 				1E7371AE280B1350007C7B10 /* NoAccessViewController.swift */,
 				1E7371AF280B1350007C7B10 /* ProjectsStateViewController.swift */,
@@ -115,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				1E737194280B1331007C7B10 /* ProjectsTests.swift */,
+				1EDABBFB283A921900D20945 /* Doubles */,
 			);
 			path = ProjectsTests;
 			sourceTree = "<group>";
@@ -125,6 +135,16 @@
 				1E7371BA280B13F0007C7B10 /* BuildParser.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1EDABBFB283A921900D20945 /* Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */,
+				1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */,
+				1EDABC00283A924100D20945 /* ProjectsFinderMock.swift */,
+			);
+			path = Doubles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDABBFA283A8CD900D20945 /* ProjectSettings.swift in Sources */,
 				1E7371B5280B1350007C7B10 /* ProjectsStateViewController.swift in Sources */,
 				1E7371B2280B1350007C7B10 /* ProjectsPresenter.swift in Sources */,
 				1E7371B0280B1350007C7B10 /* ProjectsOutlineViewController.swift in Sources */,
@@ -251,6 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E737195280B1331007C7B10 /* ProjectsTests.swift in Sources */,
+				1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */,
+				1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */,
+				1EDABC01283A924100D20945 /* ProjectsFinderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

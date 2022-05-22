@@ -67,7 +67,7 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
     
     var currentProject: ProjectReference?
     
-    public func selectProject(projectReference: ProjectReference?, filter: FilterSettings) {
+    public func selectProject(projectReference: ProjectReference, filter: FilterSettings) {
         self.currentProject = projectReference
         
         guard let projectReference = projectReference else {
