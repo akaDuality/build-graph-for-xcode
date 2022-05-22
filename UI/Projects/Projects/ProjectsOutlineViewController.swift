@@ -21,7 +21,10 @@ protocol ProjectsListDatasource {
 
 public class ProjectsOutlineViewController: NSViewController {
     
+    // Dependencies
     var presenter: ProjectsListDatasource!
+    
+    // MARK: - Lifecycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +43,6 @@ public class ProjectsOutlineViewController: NSViewController {
         view as! ProjectsOutlineView
     }
     
-    private func addContextMenu() {
-        let menu = NSMenu()
-        menu.addItem(withTitle: NSLocalizedString("Show in Finder", comment: ""),
-                     action: #selector(showInFinder), keyEquivalent: "")
-        view().outlineView.menu = menu
-    }
-    
     @objc func showInFinder() {
         guard let url = view().selectedProject()?.currentActivityLog else {
             return
@@ -55,18 +51,30 @@ public class ProjectsOutlineViewController: NSViewController {
         
         openURL(url)
     }
+    
+    // MARK: - Private
+    
+    private func addContextMenu() {
+        let menu = NSMenu()
+        menu.addItem(withTitle: NSLocalizedString("Show in Finder", comment: ""),
+                     action: #selector(showInFinder), keyEquivalent: "")
+        view().outlineView.menu = menu
+    }
 
     private func openURL(_ url: URL) {
         let workspace = NSWorkspace.shared
         let selected = workspace.selectFile(url.path, inFileViewerRootedAtPath: "")
         if !selected {
-//             TODO: Handle errors
-//                        showError()
+//            TODO: Handle errors
+//            showError()
         }
     }
 }
 
+// MARK: - NSOutlineViewDataSource
+
 extension ProjectsOutlineViewController: NSOutlineViewDataSource {
+    
     public func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let project = item as? ProjectReference {
             return project.activityLogURL.count
@@ -91,6 +99,8 @@ extension ProjectsOutlineViewController: NSOutlineViewDataSource {
         }
     }
 }
+
+// MARK: - NSOutlineViewDelegate
 
 extension ProjectsOutlineViewController: NSOutlineViewDelegate {
     
@@ -143,6 +153,8 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
     }
 }
 
+// MARK: - ProjectsOutlineViewController
+
 extension ProjectsOutlineViewController {
     
     func select(project: ProjectReference) {
@@ -170,6 +182,8 @@ extension ProjectsOutlineViewController {
         view().select(url: project.currentActivityLog)
     }
 }
+
+// MARK: - ProjectsOutlineView
 
 class ProjectsOutlineView: NSView {
     
