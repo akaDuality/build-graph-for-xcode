@@ -69,7 +69,6 @@ extension Array where Element == Event {
         }
     }
     
-    // крашится приложение
     public func duration() -> TimeInterval {
         guard count > 1 else { return 0 }
         return last!.endDate.timeIntervalSince(first!.startDate)
