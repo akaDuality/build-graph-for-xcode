@@ -62,8 +62,6 @@ public class ProjectReferenceFactory {
         accessedDerivedDataURL: URL,
         fullName: String
     ) -> ProjectReference? {
-        
-        
         let rootPath = accessedDerivedDataURL.appendingPathComponent(fullName)
         return projectReference(folder: rootPath)
     }

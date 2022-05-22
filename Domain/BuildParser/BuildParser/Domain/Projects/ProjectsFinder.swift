@@ -18,10 +18,13 @@ public class ProjectsFinder: ProjectsFinderProtocol {
     
     public init() {}
     
+    // MARK: Dependencies
     let fileAccess = FileAccess()
-    let projectReferenceFactory = ProjectReferenceFactory()
     let defaultDerivedData = DefaultDerivedData()
+    
+    // MARK: Not dependencies
     let fileManager = FileManager.default
+    let projectReferenceFactory = ProjectReferenceFactory()
     
     public func projects(derivedDataPath: URL) throws -> [ProjectReference] {
         let hasAccess = derivedDataPath.startAccessingSecurityScopedResource()

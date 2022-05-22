@@ -304,7 +304,6 @@
 				1E7370D8280B0DBA007C7B10 /* Dto.swift */,
 				1E7370D9280B0DBA007C7B10 /* StateViewController.swift */,
 				1E7370DA280B0DBA007C7B10 /* Project.swift */,
-				1E7370DB280B0DBA007C7B10 /* Common */,
 				1E7370DC280B0DBA007C7B10 /* FolderMonitor.swift */,
 				1E7370DD280B0DBA007C7B10 /* BuildStepCounter.swift */,
 				1EFF82F9280D3CFF000E022D /* UISettings.swift */,
@@ -321,13 +320,6 @@
 				1E7370D5280B0DBA007C7B10 /* BookmarkSaver.swift */,
 			);
 			path = Projects;
-			sourceTree = "<group>";
-		};
-		1E7370DB280B0DBA007C7B10 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		1E737134280B0E13007C7B10 /* __Snapshots__ */ = {
