@@ -17,6 +17,7 @@ class ProjectsTests: XCTestCase {
     var ui: ProjectsUIMock!
     var delegate: ProjectsSelectionDelegateMock!
     var projectsFinder: ProjectsFinderMock!
+    var projectSettings: ProjectSettingsMock!
     
     // MARK: Constants
     private let derivedData = URL(fileURLWithPath: "/DerivedData")
@@ -30,8 +31,10 @@ class ProjectsTests: XCTestCase {
     override func setUpWithError() throws {
         self.projectsFinder = ProjectsFinderMock()
         self.delegate = ProjectsSelectionDelegateMock()
+        self.projectSettings = ProjectSettingsMock()
         
         self.presenter = ProjectsPresenter(
+            projectSettings: projectSettings,
             projectsFinder: projectsFinder,
             delegate: delegate)
         
@@ -83,6 +86,17 @@ class ProjectsTests: XCTestCase {
         // TODO: Test that senconde selection doesn't change selected project
     }
     
+    func test_hasSelectedProject_1ProjectInFolder_whenReleadData_shouldShowDataWithoutSelection() {
+        projectsFinder.derivedDataPathResult = .success(derivedData)
+        projectsFinder.projects = [buildGraph]
+        projectSettings.selectedProject = buildGraph.name
+        
+        presenter.reloadProjetcs(ui: ui)
+        
+        XCTAssertEqual(ui.states, [.projects(buildGraph)])
+        XCTAssertEqual(delegate.selectedProject, buildGraph)
+    }
+    
     // 1. Есть выбранный проект
     // Разверенули список файлов
     // Не перезагрузили проект
@@ -90,4 +104,8 @@ class ProjectsTests: XCTestCase {
     // 2. - Сворачивание
     
     // 3. Если сворачиваем другой проект, то не нужно перезагружать текущий выбранный
+}
+
+class ProjectSettingsMock: ProjectSettingsProtocol {
+    var selectedProject: String? = nil
 }

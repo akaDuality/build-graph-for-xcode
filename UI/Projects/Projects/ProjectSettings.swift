@@ -7,7 +7,11 @@
 
 import BuildParser
 
-public class ProjectSettings {
+protocol ProjectSettingsProtocol {
+    var selectedProject: String? { get set }
+}
+
+public class ProjectSettings: ProjectSettingsProtocol {
     public init() {}
     
     @Storage(key: "selectedProject", defaultValue: nil)

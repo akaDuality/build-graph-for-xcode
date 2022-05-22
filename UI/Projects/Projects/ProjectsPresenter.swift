@@ -27,17 +27,27 @@ public class ProjectsPresenter {
     weak var ui: ProjectsUI?
     
     // Private
-    private let projectSettings = ProjectSettings()
+    private let projectSettings: ProjectSettingsProtocol
     private(set) var projects: [ProjectReference] = []
     private let projectDescriptionService = ProjectDescriptionService()
     
     // MARK: - Init
+    /// For production usage
+    public convenience init(delegate: ProjectsSelectionDelegate) {
+        self.init(
+            projectSettings: ProjectSettings(),
+            projectsFinder: ProjectsFinder(),
+            delegate: delegate
+        )
+    }
     
-    public init(
-        projectSettings: ProjectSettings = ProjectSettings(),
-        projectsFinder: ProjectsFinderProtocol = ProjectsFinder(),
+    /// For tests
+    init(
+        projectSettings: ProjectSettingsProtocol,
+        projectsFinder: ProjectsFinderProtocol,
         delegate: ProjectsSelectionDelegate
     ) {
+        self.projectSettings = projectSettings
         self.projectsFinder = projectsFinder
         self.delegate = delegate
     }
