@@ -70,11 +70,6 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
     public func selectProject(projectReference: ProjectReference, filter: FilterSettings) {
         self.currentProject = projectReference
         
-        guard let projectReference = projectReference else {
-            self.state = .noProject
-            return
-        }
-        
         let derivedData = FileAccess().accessedDerivedDataURL()
         _ = derivedData?.startAccessingSecurityScopedResource()
         
