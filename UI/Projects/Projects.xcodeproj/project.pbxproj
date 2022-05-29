@@ -179,6 +179,8 @@
 			dependencies = (
 			);
 			name = Projects;
+			packageProductDependencies = (
+			);
 			productName = Projects;
 			productReference = 1E737185280B1331007C7B10 /* Projects.framework */;
 			productType = "com.apple.product-type.framework";

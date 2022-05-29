@@ -26,7 +26,7 @@ class SplitController: NSSplitViewController {
         super.viewDidLoad()
         
         self.projectsPresenter = ProjectsPresenter(delegate: self) // TODO: Not self, should be another delegate
-        detail.delegate = self
+        detail.presenter.delegate = self
         detail.graphConfig = UISettings()
         projects.presenter = projectsPresenter
     }
@@ -87,8 +87,7 @@ extension SplitController: DetailsDelegate {
     
     func didLoadProject(
         project: Project,
-        projectReference: ProjectReference,
-        detailsController: DetailViewController
+        projectReference: ProjectReference
     ) {
         projectSettings.selectedProject = projectReference.name // Save only after success parsing
         mainWindow().enableButtons()

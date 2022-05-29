@@ -16,6 +16,8 @@ struct EventRelativeRect {
     let duration: CGFloat
     
     init(event: Event, absoluteStart: Date, totalDuration: TimeInterval) {
+        precondition(totalDuration != 0)
+        
         self.event = event
         self.text = event.description
         self.start = relativeStart(absoluteStart: absoluteStart,

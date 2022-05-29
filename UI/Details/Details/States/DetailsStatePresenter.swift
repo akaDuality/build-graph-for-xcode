@@ -10,16 +10,90 @@ import BuildParser
 import GraphParser
 import os
 
-//protocol DetailStateUIProtocol {
-//
-//}
+protocol DetailStateUIProtocol: AnyObject {
+    var state: DetailsState { get set }
+}
 
 public class DetailsStatePresenter {
-    //    weak var ui: DetailStateUIProtocol?
+    unowned var ui: DetailStateUIProtocol!
+    
+    public var delegate: DetailsDelegate?
     
     public let parser = RealBuildLogParser()
     
-    func loadAndInsert(
+    private var currentProject: ProjectReference?
+    
+    public func openProject(
+        projectReference: ProjectReference,
+        filter: FilterSettings,
+        then completion: () -> Void
+    ) {
+        self.currentProject = projectReference
+
+        ui.state = .loading
+        delegate?.willLoadProject(project: projectReference)
+        
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            loadAndInsert(
+                projectReference: projectReference,
+                filter: filter,
+                didLoad: { project, title, projectReference in
+                    DispatchQueue.main.async {
+                        if project.events.isEmpty {
+                            self.ui.state = .noEvents(project)
+                        } else {
+                            self.ui.state = .data(project: project, title: title, projectReference: projectReference)
+                        }
+    
+                        self.delegate?.didLoadProject(
+                            project: project,
+                            projectReference: projectReference)
+                    }
+                },
+                didFail: { message in
+                    DispatchQueue.main.async {
+                        // TODO: Sepatate to another state and pass message
+                        self.ui.state = .cantRead(projectReference: projectReference)
+                        self.delegate?.didFailLoadProject()
+                    }
+                }
+            )
+        }
+    }
+    
+    public func updateFilterForCurrentProject(project: Project, filter: FilterSettings) {
+        guard let projectReference = currentProject else {
+            return
+        }
+        
+        self.ui.state = .loading
+        delegate?.willLoadProject(project: projectReference)
+        
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            updateWithFilter(
+                oldProject: project,
+                projectReference: projectReference,
+                filter: filter
+            ) { project, title in
+                
+                DispatchQueue.main.async {
+                    if project.events.isEmpty {
+                        self.ui.state = .noEvents(project)
+                    } else {
+                        self.ui.state = .data(project: project,
+                                              title: title,
+                                              projectReference: projectReference)
+                    }
+                    
+                    self.delegate?.didLoadProject(
+                        project: project,
+                        projectReference: projectReference)
+                }
+            }
+        }
+    }
+    
+    private func loadAndInsert(
         projectReference: ProjectReference,
         filter: FilterSettings,
         didLoad: @escaping (_ project: Project,
@@ -45,7 +119,7 @@ public class DetailsStatePresenter {
         }
     }
     
-    func updateWithFilter(
+    private func updateWithFilter(
         oldProject: Project,
         projectReference: ProjectReference,
         filter: FilterSettings,
