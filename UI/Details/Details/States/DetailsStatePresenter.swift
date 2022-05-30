@@ -26,7 +26,7 @@ public class DetailsStatePresenter {
     public func openProject(
         projectReference: ProjectReference,
         filter: FilterSettings,
-        then completion: () -> Void
+        then completion: @escaping () -> Void
     ) {
         self.currentProject = projectReference
 
@@ -48,6 +48,7 @@ public class DetailsStatePresenter {
                         self.delegate?.didLoadProject(
                             project: project,
                             projectReference: projectReference)
+                        completion()
                     }
                 },
                 didFail: { message in
@@ -55,6 +56,7 @@ public class DetailsStatePresenter {
                         // TODO: Sepatate to another state and pass message
                         self.ui.state = .cantRead(projectReference: projectReference)
                         self.delegate?.didFailLoadProject()
+                        completion()
                     }
                 }
             )

@@ -8,12 +8,15 @@
 import Foundation
 import Details
 
-class TestBundle {
-    var simpleClean: XcodeBuildSnapshot {
+public class TestBundle {
+    
+    public init() {}
+    
+    public var simpleClean: XcodeBuildSnapshot {
         try! snapshot(name: "SimpleClean")
     }
     
-    func snapshot(name: String) throws -> XcodeBuildSnapshot {
+    public func snapshot(name: String) throws -> XcodeBuildSnapshot {
         let url = Bundle(for: TestBundle.self)
             .url(forResource: name,
                  withExtension: "bgbuildsnapshot")!

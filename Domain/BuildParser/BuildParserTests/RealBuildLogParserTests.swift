@@ -7,6 +7,7 @@
 
 import XCTest
 import BuildParser
+import Snapshot
 
 class RealBuildLogParserTests: XCTestCase {
 

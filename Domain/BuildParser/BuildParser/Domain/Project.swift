@@ -10,7 +10,8 @@ import GraphParser
 
 public class Project: Equatable {
     public static func == (lhs: Project, rhs: Project) -> Bool {
-        lhs === rhs
+        lhs.events == rhs.events
+        && lhs.relativeBuildStart == rhs.relativeBuildStart
     }
     
     public init(events: [Event], relativeBuildStart: CGFloat) {

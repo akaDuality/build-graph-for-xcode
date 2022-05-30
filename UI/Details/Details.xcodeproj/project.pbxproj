@@ -29,6 +29,8 @@
 		1E9AE0B62800BD2C00851519 /* DetailsStatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9AE0A82800BD2C00851519 /* DetailsStatePresenter.swift */; };
 		1E9AE0B72800BD2C00851519 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9AE0A92800BD2C00851519 /* LoadingViewController.swift */; };
 		1E9AE0B82800BD2C00851519 /* RetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9AE0AA2800BD2C00851519 /* RetryViewController.swift */; };
+		1EB282B52843A198001F27D4 /* Snapshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB282B42843A198001F27D4 /* Snapshot.framework */; };
+		1EB282C52843A956001F27D4 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 1EB282C42843A956001F27D4 /* CustomDump */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,7 @@
 		1E9AE0A82800BD2C00851519 /* DetailsStatePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsStatePresenter.swift; sourceTree = "<group>"; };
 		1E9AE0A92800BD2C00851519 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1E9AE0AA2800BD2C00851519 /* RetryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryViewController.swift; sourceTree = "<group>"; };
+		1EB282B42843A198001F27D4 /* Snapshot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Snapshot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E737177280B0F5F007C7B10 /* GraphParser.framework in Frameworks */,
+				1EB282C52843A956001F27D4 /* CustomDump in Frameworks */,
 				1E73716C280B0EFC007C7B10 /* BuildParser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EB282B52843A198001F27D4 /* Snapshot.framework in Frameworks */,
 				1E9AE08A2800BD2500851519 /* Details.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,6 +175,7 @@
 		1E9AE0B92800BD5000851519 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1EB282B42843A198001F27D4 /* Snapshot.framework */,
 				1E737176280B0F5F007C7B10 /* GraphParser.framework */,
 				1E73716B280B0EFC007C7B10 /* BuildParser.framework */,
 			);
@@ -206,6 +212,7 @@
 			);
 			name = Details;
 			packageProductDependencies = (
+				1EB282C42843A956001F27D4 /* CustomDump */,
 			);
 			productName = Details;
 			productReference = 1E9AE07F2800BD2500851519 /* Details.framework */;
@@ -256,6 +263,9 @@
 				Base,
 			);
 			mainGroup = 1E9AE0752800BD2500851519;
+			packageReferences = (
+				1EB282C32843A956001F27D4 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
+			);
 			productRefGroup = 1E9AE0802800BD2500851519 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -565,6 +575,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1EB282C32843A956001F27D4 /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1EB282C42843A956001F27D4 /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EB282C32843A956001F27D4 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1E9AE0762800BD2500851519 /* Project object */;
 }

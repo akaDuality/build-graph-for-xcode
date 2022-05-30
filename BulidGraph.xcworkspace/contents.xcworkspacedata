@@ -21,6 +21,9 @@
       location = "group:BuildGraph/../Domain"
       name = "Domain">
       <FileRef
+         location = "group:Snapshot/Snapshot.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:BuildParser/BuildParser.xcodeproj">
       </FileRef>
       <FileRef

@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import BuildParser
+import Snapshot
 
 class ParsingTests: XCTestCase {
 
