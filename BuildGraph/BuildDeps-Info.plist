@@ -9,6 +9,8 @@
 			<array>
 				<string>xcactivitylog</string>
 			</array>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>1</integer>
 			<key>CFBundleTypeName</key>
 			<string>Build log</string>
 			<key>CFBundleTypeRole</key>
@@ -17,6 +19,8 @@
 			<string>Default</string>
 		</dict>
 		<dict>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>1</integer>
 			<key>CFBundleTypeName</key>
 			<string>Build Snapshot</string>
 			<key>CFBundleTypeRole</key>

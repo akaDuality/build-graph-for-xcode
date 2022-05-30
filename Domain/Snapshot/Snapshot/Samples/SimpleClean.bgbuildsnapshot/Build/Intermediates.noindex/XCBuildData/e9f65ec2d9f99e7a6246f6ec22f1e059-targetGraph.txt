@@ -1,0 +1,57 @@
+Target dependency graph (14 targets)
+CocoaDebug in CocoaDebug, no dependencies
+DAcquirers in DAcquirers, no dependencies
+NQueue in NQueue, no dependencies
+NCallback in NCallback, depends on:
+NQueue in NQueue (explicit)
+DCommon in DCommon, depends on:
+NCallback in NCallback (explicit)
+NQueue in NQueue (explicit)
+DFoundation in DFoundation, depends on:
+DCommon in DCommon (explicit)
+NRequest in NRequest, depends on:
+NCallback in NCallback (explicit)
+NQueue in NQueue (explicit)
+DNetwork in DNetwork, depends on:
+NQueue in NQueue (explicit)
+NRequest in NRequest (explicit)
+NInject in NInject, no dependencies
+DUIKit in DUIKit, depends on:
+DFoundation in DFoundation (explicit)
+NInject in NInject (explicit)
+NI18n in NI18n, no dependencies
+PaymentSDK in PaymentSDK, depends on:
+DAcquirers in DAcquirers (explicit)
+DCommon in DCommon (explicit)
+DFoundation in DFoundation (explicit)
+DNetwork in DNetwork (explicit)
+DUIKit in DUIKit (explicit)
+NInject in NInject (explicit)
+NQueue in NQueue (explicit)
+Pods-CommonTarget-SDK-ios in Pods, depends on:
+CocoaDebug in CocoaDebug (explicit)
+DAcquirers in DAcquirers (explicit)
+DCommon in DCommon (explicit)
+DFoundation in DFoundation (explicit)
+DNetwork in DNetwork (explicit)
+DUIKit in DUIKit (explicit)
+NCallback in NCallback (explicit)
+NI18n in NI18n (explicit)
+NInject in NInject (explicit)
+NQueue in NQueue (explicit)
+NRequest in NRequest (explicit)
+PaymentSDK in PaymentSDK (explicit)
+SDK-ios in PaymentSDK, depends on:
+Pods-CommonTarget-SDK-ios in Pods (implicit dependency via file 'Pods_CommonTarget_SDK_ios.framework' in build phase 'Link Binary')
+CocoaDebug in CocoaDebug (implicit dependency via options '-framework CocoaDebug' in build setting 'OTHER_LDFLAGS')
+DAcquirers in DAcquirers (implicit dependency via options '-framework DAcquirers' in build setting 'OTHER_LDFLAGS')
+DCommon in DCommon (implicit dependency via options '-framework DCommon' in build setting 'OTHER_LDFLAGS')
+DFoundation in DFoundation (implicit dependency via options '-framework DFoundation' in build setting 'OTHER_LDFLAGS')
+DNetwork in DNetwork (implicit dependency via options '-framework DNetwork' in build setting 'OTHER_LDFLAGS')
+DUIKit in DUIKit (implicit dependency via options '-framework DUIKit' in build setting 'OTHER_LDFLAGS')
+NCallback in NCallback (implicit dependency via options '-framework NCallback' in build setting 'OTHER_LDFLAGS')
+NI18n in NI18n (implicit dependency via options '-framework NI18n' in build setting 'OTHER_LDFLAGS')
+NInject in NInject (implicit dependency via options '-framework NInject' in build setting 'OTHER_LDFLAGS')
+NQueue in NQueue (implicit dependency via options '-framework NQueue' in build setting 'OTHER_LDFLAGS')
+NRequest in NRequest (implicit dependency via options '-framework NRequest' in build setting 'OTHER_LDFLAGS')
+PaymentSDK in PaymentSDK (implicit dependency via options '-framework PaymentSDK' in build setting 'OTHER_LDFLAGS')
