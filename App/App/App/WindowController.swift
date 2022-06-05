@@ -61,7 +61,7 @@ public class WindowController: NSWindowController, NSWindowDelegate {
     public override func windowDidLoad() {
         super.windowDidLoad()
         
-        self.window?.delegate = self
+        window?.delegate = self
     }
     
     func window() -> MainWindow {
