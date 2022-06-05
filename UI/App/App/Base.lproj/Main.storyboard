@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -223,7 +223,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BuildGraph" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="App" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-739" y="445"/>
@@ -231,8 +231,8 @@
         <!--Window Controller-->
         <scene sceneID="8s9-m6-HQ8">
             <objects>
-                <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="BuildGraph" customModuleProvider="target">
+                <windowController id="LFf-Ro-PN7" customClass="WindowController" customModule="App" sceneMemberID="viewController">
+                    <window key="window" title="Build graph" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="Q8Y-ol-wdt" customClass="MainWindow" customModule="App">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="425" y="462" width="1200" height="200"/>
@@ -342,7 +342,7 @@
         <!--Split Controller-->
         <scene sceneID="6Af-iS-TkZ">
             <objects>
-                <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="BuildGraph" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="rM4-fs-hUl" customClass="SplitController" customModule="App" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="DCf-W7-ceh"/>
                         <splitViewItem id="z34-W5-asi"/>
@@ -358,7 +358,7 @@
                 </splitViewController>
                 <customObject id="a1m-Ts-5jr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="654"/>
+            <point key="canvasLocation" x="197" y="647"/>
         </scene>
         <!--Details State View Controller-->
         <scene sceneID="pAW-rV-PZr">
@@ -373,7 +373,7 @@
                 </viewController>
                 <customObject id="HQR-2l-vGl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="170" y="1126"/>
+            <point key="canvasLocation" x="389" y="1138"/>
         </scene>
         <!--Projects State View Controller-->
         <scene sceneID="mUt-g6-Me5">
@@ -389,7 +389,7 @@
                 <customObject id="38g-Vj-3ZZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <splitViewItem id="8Yg-CT-z6h"/>
             </objects>
-            <point key="canvasLocation" x="-201" y="1126"/>
+            <point key="canvasLocation" x="-48" y="1138"/>
         </scene>
     </scenes>
     <resources>

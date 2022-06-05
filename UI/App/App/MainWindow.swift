@@ -8,7 +8,7 @@
 import AppKit
 import BuildParser
 
-class MainWindow: NSWindow {
+public class MainWindow: NSWindow {
     
     @IBOutlet weak var previousButton: NSToolbarItem!
     @IBOutlet weak var nextButton: NSToolbarItem!
