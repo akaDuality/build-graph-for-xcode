@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
-               BuildableName = "BuildGraph.app"
+               BuildableName = "BuildGraphRelease.app"
                BlueprintName = "BuildGraphRelease"
                ReferencedContainer = "container:BuildGraphRelease.xcodeproj">
             </BuildableReference>
@@ -90,7 +90,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
-            BuildableName = "BuildGraph.app"
+            BuildableName = "BuildGraphRelease.app"
             BlueprintName = "BuildGraphRelease"
             ReferencedContainer = "container:BuildGraphRelease.xcodeproj">
          </BuildableReference>
@@ -107,7 +107,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1EDB5E3027135F0000741EEF"
-            BuildableName = "BuildGraph.app"
+            BuildableName = "BuildGraphRelease.app"
             BlueprintName = "BuildGraphRelease"
             ReferencedContainer = "container:BuildGraphRelease.xcodeproj">
          </BuildableReference>

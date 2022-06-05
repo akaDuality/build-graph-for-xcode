@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E8AB0A7284D37D500B864A1 /* CommonAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8AB0A6284D37D500B864A1 /* CommonAppDelegate.swift */; };
 		1ED4449E284CE85C005E77FA /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED44495284CE85C005E77FA /* App.framework */; };
 		1ED444A3284CE85C005E77FA /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444A2284CE85C005E77FA /* AppTests.swift */; };
 		1ED444A4284CE85C005E77FA /* App.h in Headers */ = {isa = PBXBuildFile; fileRef = 1ED44498284CE85C005E77FA /* App.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E8AB0A6284D37D500B864A1 /* CommonAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAppDelegate.swift; sourceTree = "<group>"; };
 		1ED44495284CE85C005E77FA /* App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED44498284CE85C005E77FA /* App.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		1ED4449D284CE85C005E77FA /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				1ED444BB284CE896005E77FA /* Main.storyboard */,
 				1ED4451C284D354D005E77FA /* Menu */,
 				1ED444B9284CE896005E77FA /* WindowController.swift */,
+				1E8AB0A6284D37D500B864A1 /* CommonAppDelegate.swift */,
 				1ED444B8284CE896005E77FA /* MainWindow.swift */,
 				1ED444B6284CE896005E77FA /* SplitController.swift */,
 				1ED444B7284CE896005E77FA /* AppReview.swift */,
@@ -267,6 +270,7 @@
 				1ED444BE284CE896005E77FA /* MainWindow.swift in Sources */,
 				1ED4451B284D353D005E77FA /* AppMenu.swift in Sources */,
 				1ED444BC284CE896005E77FA /* AppReview.swift in Sources */,
+				1E8AB0A7284D37D500B864A1 /* CommonAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
