@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1ED444E0284CF0AC005E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444DF284CF0AC005E77FA /* AppDelegate.swift */; };
-		1ED444E2284CF0AC005E77FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444E1284CF0AC005E77FA /* ViewController.swift */; };
-		1ED444E4284CF0AD005E77FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ED444E3284CF0AD005E77FA /* Assets.xcassets */; };
-		1ED444E7284CF0AD005E77FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ED444E5284CF0AD005E77FA /* Main.storyboard */; };
 		1ED444F2284CF0AE005E77FA /* BuildGraphDebugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444F1284CF0AE005E77FA /* BuildGraphDebugTests.swift */; };
 		1ED444FC284CF0AE005E77FA /* BuildGraphDebugUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444FB284CF0AE005E77FA /* BuildGraphDebugUITests.swift */; };
 		1ED444FE284CF0AE005E77FA /* BuildGraphDebugUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444FD284CF0AE005E77FA /* BuildGraphDebugUITestsLaunchTests.swift */; };
+		1ED4450F284CF160005E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4450D284CF160005E77FA /* AppDelegate.swift */; };
+		1ED44510284CF160005E77FA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4450E284CF160005E77FA /* main.swift */; };
+		1ED44513284CF188005E77FA /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED44512284CF188005E77FA /* App.framework */; };
+		1ED44514284CF188005E77FA /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED44512284CF188005E77FA /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,18 +33,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1ED44515284CF189005E77FA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1ED44514284CF188005E77FA /* App.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1ED444DC284CF0AC005E77FA /* BuildGraphDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraphDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1ED444DF284CF0AC005E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1ED444E1284CF0AC005E77FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1ED444E3284CF0AD005E77FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1ED444E6284CF0AD005E77FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1ED444E8284CF0AD005E77FA /* BuildGraphDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuildGraphDebug.entitlements; sourceTree = "<group>"; };
 		1ED444ED284CF0AE005E77FA /* BuildGraphDebugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuildGraphDebugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444F1284CF0AE005E77FA /* BuildGraphDebugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphDebugTests.swift; sourceTree = "<group>"; };
 		1ED444F7284CF0AE005E77FA /* BuildGraphDebugUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuildGraphDebugUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444FB284CF0AE005E77FA /* BuildGraphDebugUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphDebugUITests.swift; sourceTree = "<group>"; };
 		1ED444FD284CF0AE005E77FA /* BuildGraphDebugUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphDebugUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1ED4450A284CF14B005E77FA /* M1.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = M1.xcactivitylog; sourceTree = "<group>"; };
+		1ED4450B284CF14B005E77FA /* Intel_i5.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intel_i5.xcactivitylog; sourceTree = "<group>"; };
+		1ED4450D284CF160005E77FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1ED4450E284CF160005E77FA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		1ED44512284CF188005E77FA /* App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED44513284CF188005E77FA /* App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +95,7 @@
 				1ED444F0284CF0AE005E77FA /* BuildGraphDebugTests */,
 				1ED444FA284CF0AE005E77FA /* BuildGraphDebugUITests */,
 				1ED444DD284CF0AC005E77FA /* Products */,
+				1ED44511284CF188005E77FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,11 +112,10 @@
 		1ED444DE284CF0AC005E77FA /* BuildGraphDebug */ = {
 			isa = PBXGroup;
 			children = (
-				1ED444DF284CF0AC005E77FA /* AppDelegate.swift */,
-				1ED444E1284CF0AC005E77FA /* ViewController.swift */,
-				1ED444E3284CF0AD005E77FA /* Assets.xcassets */,
-				1ED444E5284CF0AD005E77FA /* Main.storyboard */,
+				1ED4450D284CF160005E77FA /* AppDelegate.swift */,
+				1ED4450E284CF160005E77FA /* main.swift */,
 				1ED444E8284CF0AD005E77FA /* BuildGraphDebug.entitlements */,
+				1ED4450C284CF14B005E77FA /* Samples */,
 			);
 			path = BuildGraphDebug;
 			sourceTree = "<group>";
@@ -121,6 +137,23 @@
 			path = BuildGraphDebugUITests;
 			sourceTree = "<group>";
 		};
+		1ED4450C284CF14B005E77FA /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				1ED4450A284CF14B005E77FA /* M1.xcactivitylog */,
+				1ED4450B284CF14B005E77FA /* Intel_i5.xcactivitylog */,
+			);
+			path = Samples;
+			sourceTree = "<group>";
+		};
+		1ED44511284CF188005E77FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1ED44512284CF188005E77FA /* App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,6 +164,7 @@
 				1ED444D8284CF0AC005E77FA /* Sources */,
 				1ED444D9284CF0AC005E77FA /* Frameworks */,
 				1ED444DA284CF0AC005E77FA /* Resources */,
+				1ED44515284CF189005E77FA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,8 +259,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ED444E4284CF0AD005E77FA /* Assets.xcassets in Resources */,
-				1ED444E7284CF0AD005E77FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ED444E2284CF0AC005E77FA /* ViewController.swift in Sources */,
-				1ED444E0284CF0AC005E77FA /* AppDelegate.swift in Sources */,
+				1ED44510284CF160005E77FA /* main.swift in Sources */,
+				1ED4450F284CF160005E77FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,17 +319,6 @@
 			targetProxy = 1ED444F8284CF0AE005E77FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		1ED444E5284CF0AD005E77FA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1ED444E6284CF0AD005E77FA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1ED444FF284CF0AE005E77FA /* Debug */ = {
@@ -416,7 +437,6 @@
 		1ED44502284CF0AE005E77FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BuildGraphDebug/BuildGraphDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -426,7 +446,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -443,7 +462,6 @@
 		1ED44503284CF0AE005E77FA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BuildGraphDebug/BuildGraphDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -453,7 +471,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
