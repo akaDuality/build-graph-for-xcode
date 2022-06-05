@@ -7,15 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0FAD512716D1C700DE2128 /* AppEventsMoveDomain.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FAD502716D1C700DE2128 /* AppEventsMoveDomain.json */; };
-		1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE5462716E35F00DE2128 /* AppEventsMoveDataPerstance.json */; };
-		1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */; };
-		1E16961B27247AF1006D93CE /* targetGraph.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E16961A27247918006D93CE /* targetGraph.txt */; };
 		1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */; };
 		1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */; };
 		1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */; };
-		1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E7106E7271F1C1600C292AA /* Tuist2.json */; };
-		1E71FE87271EC10000C292AA /* Tuist.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E71FE86271EC10000C292AA /* Tuist.json */; };
 		1E737179280B11EA007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; };
 		1E73717A280B11EA007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E7371B7280B1397007C7B10 /* Projects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371B6280B1397007C7B10 /* Projects.framework */; };
@@ -27,18 +21,12 @@
 		1E9AE0202800B62100851519 /* Details.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; };
 		1E9AE0212800B62100851519 /* Details.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9AE01F2800B62100851519 /* Details.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EB1A8D8272DCD4E00D31AB8 /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */; };
-		1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */; };
-		1EC72584271D436900352213 /* Drinkit.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72583271D436900352213 /* Drinkit.json */; };
-		1EC72E24271D4D3800352213 /* Doner 42.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EC72E23271D4D3800352213 /* Doner 42.json */; };
 		1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3427135F0000741EEF /* AppDelegate.swift */; };
 		1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3827135F0100741EEF /* Assets.xcassets */; };
 		1EDB5E3C27135F0100741EEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3A27135F0100741EEF /* Main.storyboard */; };
 		1EDB5E4727135F0100741EEF /* BuildGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E4627135F0100741EEF /* BuildGraphTests.swift */; };
 		1EDB5E5127135F0100741EEF /* BuildGraphUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E5027135F0100741EEF /* BuildGraphUITests.swift */; };
 		1EDB5E5327135F0100741EEF /* BuildGraphUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E5227135F0100741EEF /* BuildGraphUITestsLaunchTests.swift */; };
-		1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E6227136DBE00741EEF /* TestEvents.json */; };
-		1EDB6A242714183500741EEF /* AppEvents.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB6A232714182600741EEF /* AppEvents.json */; };
-		1EF2761E27207666000C95BA /* TuistIntel.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EF2761D27207666000C95BA /* TuistIntel.json */; };
 		1EF5609627844D2700001935 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5609527844D2700001935 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,13 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E0FAD502716D1C700DE2128 /* AppEventsMoveDomain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppEventsMoveDomain.json; sourceTree = "<group>"; };
-		1E0FE5462716E35F00DE2128 /* AppEventsMoveDataPerstance.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppEventsMoveDataPerstance.json; sourceTree = "<group>"; };
-		1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestEventsMoveDomainAndDataPersistence.json; sourceTree = "<group>"; };
-		1E16961A27247918006D93CE /* targetGraph.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = targetGraph.txt; sourceTree = "<group>"; };
 		1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1E7106E7271F1C1600C292AA /* Tuist2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist2.json; sourceTree = "<group>"; };
-		1E71FE86271EC10000C292AA /* Tuist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tuist.json; sourceTree = "<group>"; };
 		1E737165280B0EA3007C7B10 /* GraphParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GraphParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E737168280B0EA8007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7371B6280B1397007C7B10 /* Projects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Projects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,9 +77,6 @@
 		1EB1A8D7272DCD4E00D31AB8 /* SplitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitController.swift; sourceTree = "<group>"; };
 		1EB93615272BCECF00EF775B /* M1.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = M1.xcactivitylog; sourceTree = "<group>"; };
 		1EB93C09272BCF9D00EF775B /* Intel_i5.xcactivitylog */ = {isa = PBXFileReference; lastKnownFileType = file; path = Intel_i5.xcactivitylog; sourceTree = "<group>"; };
-		1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "targetGraph-Tuist.txt"; sourceTree = "<group>"; };
-		1EC72583271D436900352213 /* Drinkit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Drinkit.json; sourceTree = "<group>"; };
-		1EC72E23271D4D3800352213 /* Doner 42.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Doner 42.json"; sourceTree = "<group>"; };
 		1EDB5E3127135F0000741EEF /* BuildGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E3427135F0000741EEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDB5E3827135F0100741EEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,9 +87,6 @@
 		1EDB5E4C27135F0100741EEF /* BuildGraphUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuildGraphUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E5027135F0100741EEF /* BuildGraphUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphUITests.swift; sourceTree = "<group>"; };
 		1EDB5E5227135F0100741EEF /* BuildGraphUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildGraphUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1EDB5E6227136DBE00741EEF /* TestEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TestEvents.json; sourceTree = "<group>"; };
-		1EDB6A232714182600741EEF /* AppEvents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppEvents.json; sourceTree = "<group>"; };
-		1EF2761D27207666000C95BA /* TuistIntel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TuistIntel.json; sourceTree = "<group>"; };
 		1EF5609527844D2700001935 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,18 +124,6 @@
 		1EB1A8D4272DC17100D31AB8 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				1EDB6A232714182600741EEF /* AppEvents.json */,
-				1EDB5E6227136DBE00741EEF /* TestEvents.json */,
-				1E0FAD502716D1C700DE2128 /* AppEventsMoveDomain.json */,
-				1E0FE5462716E35F00DE2128 /* AppEventsMoveDataPerstance.json */,
-				1E0FE5482716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json */,
-				1EC72583271D436900352213 /* Drinkit.json */,
-				1EC72E23271D4D3800352213 /* Doner 42.json */,
-				1E71FE86271EC10000C292AA /* Tuist.json */,
-				1E7106E7271F1C1600C292AA /* Tuist2.json */,
-				1EF2761D27207666000C95BA /* TuistIntel.json */,
-				1E16961A27247918006D93CE /* targetGraph.txt */,
-				1EC1C5142726F9D40083124B /* targetGraph-Tuist.txt */,
 				1EB93615272BCECF00EF775B /* M1.xcactivitylog */,
 				1EB93C09272BCF9D00EF775B /* Intel_i5.xcactivitylog */,
 			);
@@ -346,20 +310,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EF2761E27207666000C95BA /* TuistIntel.json in Resources */,
-				1E16961B27247AF1006D93CE /* targetGraph.txt in Resources */,
-				1EDB6A242714183500741EEF /* AppEvents.json in Resources */,
-				1E71FE87271EC10000C292AA /* Tuist.json in Resources */,
 				1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */,
-				1EC72584271D436900352213 /* Drinkit.json in Resources */,
 				1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */,
-				1E0FAD512716D1C700DE2128 /* AppEventsMoveDomain.json in Resources */,
-				1EC72E24271D4D3800352213 /* Doner 42.json in Resources */,
-				1E0FE5492716E91600DE2128 /* TestEventsMoveDomainAndDataPersistence.json in Resources */,
-				1E7106E8271F1C1600C292AA /* Tuist2.json in Resources */,
-				1E0FE5472716E35F00DE2128 /* AppEventsMoveDataPerstance.json in Resources */,
-				1EDB5E6327136DC300741EEF /* TestEvents.json in Resources */,
-				1EC1C5152726F9D40083124B /* targetGraph-Tuist.txt in Resources */,
 				1EDB5E3C27135F0100741EEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
