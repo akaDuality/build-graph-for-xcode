@@ -57,11 +57,12 @@ public class DetailView: NSView {
         scrollView.automaticallyAdjustsContentInsets = false
         scrollView.contentInsets = .zero
         
-        hudView.setup(duration: project.events.duration(),
-                      legendIsHidden: !graphConfig.showLegend, // TODO: Move to parameters?
-                      scale: scale)
-        scrollView.hudLayer = hudView.hudLayer
-//        modulesLayer?.addSublayer(hudLayer!)
+        if let duration = project.events.duration() {
+            hudView.setup(duration: duration,
+                          legendIsHidden: !graphConfig.showLegend, // TODO: Move to parameters?
+                          scale: scale)
+            scrollView.hudLayer = hudView.hudLayer
+        }
         
         layoutModules() // calc intrinsic content size
         layoutSubtreeIfNeeded()

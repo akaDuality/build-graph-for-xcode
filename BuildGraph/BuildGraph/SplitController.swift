@@ -98,7 +98,9 @@ extension SplitController: DetailsDelegate {
         appReview.requestIfPossible()
     }
     
-    func didFailLoadProject() {
+    func didFailLoadProject(projectReference: ProjectReference) {
+        mainWindow().updateNavigationButtons(for: projectReference,
+                                             buildDuration: nil)
         showSettings()
     }
     

@@ -55,7 +55,7 @@ public class DetailsStatePresenter {
                     DispatchQueue.main.async {
                         // TODO: Sepatate to another state and pass message
                         self.ui.state = .cantRead(projectReference: projectReference)
-                        self.delegate?.didFailLoadProject()
+                        self.delegate?.didFailLoadProject(projectReference: projectReference)
                         completion()
                     }
                 }

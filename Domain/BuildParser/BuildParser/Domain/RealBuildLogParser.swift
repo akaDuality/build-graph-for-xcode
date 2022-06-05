@@ -87,18 +87,17 @@ public class RealBuildLogParser {
         )
     }
     
-    private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {
-        let duration = events.duration()
-        guard duration > 0 else {
-            return 0
-        }
-        
-        let earliestDate = events.start()
-        let buildStart = buildStep.startDate
-        
-        let relativeStart = buildStart.timeIntervalSince(earliestDate) / duration
-        return relativeStart
-    }
+//    private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {
+//        guard let duration = events.duration() else {
+//            return 0
+//        }
+//        
+//        let earliestDate = events.start()
+//        let buildStart = buildStep.startDate
+//        
+//        let relativeStart = buildStart.timeIntervalSince(earliestDate) / duration
+//        return relativeStart
+//    }
     
     public func update(with filter: FilterSettings) -> [Event] {
         BuildStepConverter().convertToEvents(steps: buildStep.subSteps,

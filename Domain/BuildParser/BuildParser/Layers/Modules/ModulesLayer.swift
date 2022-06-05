@@ -72,7 +72,7 @@ class ModulesLayer: CALayer {
         self.rects = events.map { event in
             EventRelativeRect(event: event,
                               absoluteStart: events.start(),
-                              totalDuration: events.duration())
+                              totalDuration: events.duration()!)
         }
         self.eventShapes = .init()
         self.higlightedLift = .init()

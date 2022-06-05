@@ -35,8 +35,11 @@ class ConcurrencyLayer: VerticalLineLayer {
         self.coordinate = coordinate
         updateLayoutWithoutAnimation()
         
+        guard let duration = events.duration() else {
+            return
+        }
         let relativeX = coordinate.x / frame.width
-        let time = events.duration() * relativeX
+        let time = duration * relativeX
         let concurency = events.concurrency(at: time)
         concurrencyTitle.string = "\(concurency)"
     }

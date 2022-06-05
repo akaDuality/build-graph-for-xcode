@@ -46,9 +46,13 @@ class MainWindow: NSWindow {
     
     func updateNavigationButtons(
         for project: ProjectReference,
-        buildDuration: TimeInterval) {
-        
-        subtitle = "\(project.indexDescription), \(durationFormatter.string(from: buildDuration))"
+        buildDuration: TimeInterval?
+    ) {
+        if let buildDuration = buildDuration {
+            subtitle = "\(project.indexDescription), \(durationFormatter.string(from: buildDuration))"
+        } else {
+            subtitle = "\(project.indexDescription)"
+        }
     }
     
     private let durationFormatter = DurationFormatter()

@@ -62,7 +62,9 @@ class BuildStepConverter {
     }
     
     private func removeGapForIncrementalBuilds(events: [Event]) {
-        let eventsDuration = events.duration()
+        guard let eventsDuration = events.duration() else {
+            return
+        }
         
         guard eventsDuration > 1 /* sec */ else { return }
         

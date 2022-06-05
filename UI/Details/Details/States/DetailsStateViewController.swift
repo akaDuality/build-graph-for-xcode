@@ -27,7 +27,7 @@ public protocol DetailsDelegate: AnyObject {
         project: Project,
         projectReference: ProjectReference
     )
-    func didFailLoadProject()
+    func didFailLoadProject(projectReference: ProjectReference)
 }
 
 public class DetailsStateViewController: StateViewController<DetailsState> {

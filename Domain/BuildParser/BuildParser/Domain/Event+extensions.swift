@@ -69,9 +69,16 @@ extension Array where Element == Event {
         }
     }
     
-    public func duration() -> TimeInterval {
-        guard count > 1 else { return 0 }
-        return last!.endDate.timeIntervalSince(first!.startDate)
+    public func duration() -> TimeInterval? {
+        guard count > 0 else {
+            return nil
+        }
+        
+        if count == 1 {
+            return self[0].duration
+        } else {
+            return last!.endDate.timeIntervalSince(first!.startDate)
+        }
     }
     
     func start() -> Date {

@@ -63,10 +63,10 @@
 		1E73715F280B0E14007C7B10 /* EventDepsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E73714A280B0E14007C7B10 /* EventDepsTests.swift */; };
 		1E737161280B0E14007C7B10 /* PathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E73714C280B0E14007C7B10 /* PathFinderTests.swift */; };
 		1E737162280B0E14007C7B10 /* ProjectReferenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E73714D280B0E14007C7B10 /* ProjectReferenceTests.swift */; };
-		1E737171280B0F38007C7B10 /* XCLogParser in Frameworks */ = {isa = PBXBuildFile; productRef = 1E737170280B0F38007C7B10 /* XCLogParser */; };
 		1E737173280B0F47007C7B10 /* GraphParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737172280B0F47007C7B10 /* GraphParser.framework */; };
 		1E737174280B0F47007C7B10 /* GraphParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737172280B0F47007C7B10 /* GraphParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EB282BC2843A541001F27D4 /* Snapshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB282BB2843A541001F27D4 /* Snapshot.framework */; };
+		1ED4448A284CD2F8005E77FA /* XCLogParser in Frameworks */ = {isa = PBXBuildFile; productRef = 1ED44489284CD2F8005E77FA /* XCLogParser */; };
 		1EFAB99728448E6C0071824B /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1EFAB99628448E6C0071824B /* SnapshotTesting */; };
 		1EFF82EE280D3A98000E022D /* ProjectDescriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82ED280D3A98000E022D /* ProjectDescriptionService.swift */; };
 		1EFF82FA280D3CFF000E022D /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82F9280D3CFF000E022D /* UISettings.swift */; };
@@ -166,7 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E737173280B0F47007C7B10 /* GraphParser.framework in Frameworks */,
-				1E737171280B0F38007C7B10 /* XCLogParser in Frameworks */,
+				1ED4448A284CD2F8005E77FA /* XCLogParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +401,7 @@
 			);
 			name = BuildParser;
 			packageProductDependencies = (
-				1E737170280B0F38007C7B10 /* XCLogParser */,
+				1ED44489284CD2F8005E77FA /* XCLogParser */,
 			);
 			productName = BuildParser;
 			productReference = 1E73709E280B0DA4007C7B10 /* BuildParser.framework */;
@@ -834,7 +834,7 @@
 			package = 1E1D7FCE2819C7F500B64954 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
 			productName = CustomDump;
 		};
-		1E737170280B0F38007C7B10 /* XCLogParser */ = {
+		1ED44489284CD2F8005E77FA /* XCLogParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = XCLogParser;
 		};
