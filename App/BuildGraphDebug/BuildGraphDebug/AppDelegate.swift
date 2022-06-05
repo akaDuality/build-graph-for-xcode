@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         windowController = WindowController.fromStoryboard()
         windowController.showWindow(self)
+        
+        NSApplication.shared.mainMenu = AppMenu.menu()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

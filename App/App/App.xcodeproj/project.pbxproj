@@ -21,6 +21,8 @@
 		1ED444C9284CE8EA005E77FA /* Projects.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED444C8284CE8EA005E77FA /* Projects.framework */; };
 		1ED444CA284CE8EA005E77FA /* Projects.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED444C8284CE8EA005E77FA /* Projects.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1ED444D2284CED11005E77FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ED444BB284CE896005E77FA /* Main.storyboard */; };
+		1ED44519284D344C005E77FA /* Application.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ED44518284D344C005E77FA /* Application.xib */; };
+		1ED4451B284D353D005E77FA /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4451A284D353D005E77FA /* AppMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		1ED444C1284CE8E1005E77FA /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444C5284CE8E5005E77FA /* Filters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Filters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444C8284CE8EA005E77FA /* Projects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Projects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1ED44518284D344C005E77FA /* Application.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Application.xib; sourceTree = "<group>"; };
+		1ED4451A284D353D005E77FA /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 			children = (
 				1ED44498284CE85C005E77FA /* App.h */,
 				1ED444BB284CE896005E77FA /* Main.storyboard */,
+				1ED4451C284D354D005E77FA /* Menu */,
 				1ED444B9284CE896005E77FA /* WindowController.swift */,
 				1ED444B8284CE896005E77FA /* MainWindow.swift */,
 				1ED444B6284CE896005E77FA /* SplitController.swift */,
@@ -134,6 +139,15 @@
 				1ED444C1284CE8E1005E77FA /* Details.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1ED4451C284D354D005E77FA /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				1ED44518284D344C005E77FA /* Application.xib */,
+				1ED4451A284D353D005E77FA /* AppMenu.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ED444D2284CED11005E77FA /* Main.storyboard in Resources */,
+				1ED44519284D344C005E77FA /* Application.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +265,7 @@
 				1ED444BD284CE896005E77FA /* SplitController.swift in Sources */,
 				1ED444BF284CE896005E77FA /* WindowController.swift in Sources */,
 				1ED444BE284CE896005E77FA /* MainWindow.swift in Sources */,
+				1ED4451B284D353D005E77FA /* AppMenu.swift in Sources */,
 				1ED444BC284CE896005E77FA /* AppReview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

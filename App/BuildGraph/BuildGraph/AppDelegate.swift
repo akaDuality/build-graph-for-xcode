@@ -11,12 +11,12 @@ import App
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    private var window: NSWindow!
+    private var windowController: NSWindowController!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         FirebaseApp.configure()
         
-        let windowController = WindowController.fromStoryboard()
+        windowController = WindowController.fromStoryboard()
         windowController.showWindow(self)
     }
 
