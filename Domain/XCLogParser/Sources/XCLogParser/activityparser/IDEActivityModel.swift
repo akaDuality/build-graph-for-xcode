@@ -286,6 +286,17 @@ public class DVTDocumentLocation {
 
 }
 
+public class DVTMemberDocumentLocation: DVTDocumentLocation {
+    public let some: Substring // Sample: irs-zY-n9e
+    
+    public init(documentURLString: Substring, timestamp: Double, some: Substring) {
+        self.some = some
+        
+        super.init(documentURLString: documentURLString,
+                   timestamp: timestamp)
+    }
+}
+
 public class DVTTextDocumentLocation: DVTDocumentLocation {
     public let startingLineNumber: UInt64
     public let startingColumnNumber: UInt64
