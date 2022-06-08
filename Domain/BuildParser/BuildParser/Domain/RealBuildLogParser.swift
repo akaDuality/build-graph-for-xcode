@@ -72,6 +72,9 @@ public class RealBuildLogParser {
     }
     
     private func relativeDuration(events: [Event], buildStart: Date) -> CGFloat {
+        guard events.count > 0 else { // Otherwise events.duration() can crash
+            return 0
+        }
         let duration = events.duration()
         guard duration > 0 else {
             return 0
