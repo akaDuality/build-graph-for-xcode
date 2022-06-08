@@ -8,11 +8,16 @@
 import AppKit
 import BuildParser
 
+public enum SelectSource {
+    case navigationButtons(project: ProjectReference)
+    case leftPanel(project: ProjectReference, lastBuildIndex: Int?)
+}
+
 protocol ProjectsListDatasource {
     var projects: [ProjectReference] { get }
     
-    func select(project: ProjectReference)
-    func changeBuild(project: ProjectReference, lastBuildIndex: Int)
+    func select(from: SelectSource)
+    func changeBuild(from: SelectSource)
     func shouldSelectProject(project: ProjectReference) -> Bool
     
     func description(for url: URL) -> String
@@ -123,13 +128,13 @@ extension ProjectsOutlineViewController: NSOutlineViewDelegate {
         guard let outlineView = notification.object as? NSOutlineView else { return }
         
         if let project = outlineView.item(atRow: outlineView.selectedRow) as? ProjectReference {
-            presenter.select(project: project)
+            presenter.select(from: .leftPanel(project: project, lastBuildIndex: nil))
         } else if let url = outlineView.item(atRow: outlineView.selectedRow) as? URL,
                   let project = outlineView.parent(forItem: url) as? ProjectReference {
             
             let previousIndex = project.currentActivityLogIndex
             project.currentActivityLogIndex = outlineView.childIndex(forItem: url)
-            presenter.changeBuild(project: project, lastBuildIndex: previousIndex)
+            presenter.changeBuild(from: .leftPanel(project: project, lastBuildIndex: previousIndex))
         }
     }
     
@@ -177,7 +182,7 @@ extension ProjectsOutlineViewController {
         guard let project = view().selectedProject() else { return }
         
         block(project)
-        presenter.select(project: project)
+        presenter.select(from: .navigationButtons(project: project))
             
         view().select(url: project.currentActivityLog)
     }

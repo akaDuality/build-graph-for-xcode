@@ -117,19 +117,29 @@ public class ProjectsPresenter {
 
 extension ProjectsPresenter: ProjectsListDatasource {
     
-    func select(project: ProjectReference) {
-        guard project != selectedProject(in: self.projects) else {
-            return
+    func select(from source: SelectSource) {
+        switch source {
+        case let .leftPanel(project,_):
+            guard project != selectedProject(in: self.projects) else {
+                return
+            }
+            delegate?.select(project: project)
+        case let .navigationButtons(project):
+            delegate?.select(project: project)
         }
-        delegate?.select(project: project)
     }
     
-    func changeBuild(project: ProjectReference, lastBuildIndex: Int) {
-        guard project != selectedProject(in: self.projects)
-                || project.currentActivityLogIndex != lastBuildIndex else {
-            return
+    func changeBuild(from source: SelectSource) {
+        switch source {
+        case let .leftPanel(project, lastBuildIndex):
+            guard let index = lastBuildIndex, project != selectedProject(in: self.projects)
+                    || project.currentActivityLogIndex != index else {
+                return
+            }
+            delegate?.select(project: project)
+        case let .navigationButtons(project):
+            delegate?.select(project: project)
         }
-        delegate?.select(project: project)
     }
     
     func shouldSelectProject(project: ProjectReference) -> Bool {
