@@ -61,9 +61,8 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                 return retryViewController
     
             case .cantRead(let projecReference):
-                // TODO: Handle
-                let controller = NSViewController()
-                return controller
+                let retryViewController = storyboard.instantiateController(withIdentifier: "fail") as! NSViewController
+                return retryViewController
             }
         }
     }

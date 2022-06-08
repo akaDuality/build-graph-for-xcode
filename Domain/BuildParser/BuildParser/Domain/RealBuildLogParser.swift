@@ -27,8 +27,12 @@ public class RealBuildLogParser {
         omitNotesDetails: true)
     
     var buildStep: BuildStep!
-    public func makeCounter() -> BuildStepCounter {
-        BuildStepCounter(buildStep: buildStep)
+    public func makeCounter() -> BuildStepCounter? {
+        if buildStep != nil {
+            return BuildStepCounter(buildStep: buildStep)
+        } else {
+            return nil
+        }
     }
     
     public var title: String {
