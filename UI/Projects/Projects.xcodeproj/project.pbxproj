@@ -18,6 +18,7 @@
 		1E7371B5280B1350007C7B10 /* ProjectsStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7371AF280B1350007C7B10 /* ProjectsStateViewController.swift */; };
 		1E7371BB280B13F0007C7B10 /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371BA280B13F0007C7B10 /* BuildParser.framework */; };
 		1E7371BC280B13F0007C7B10 /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7371BA280B13F0007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1EA25865285E48F800E25537 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA25864285E48F800E25537 /* XCTest+Extensions.swift */; };
 		1EDABBFA283A8CD900D20945 /* ProjectSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBF9283A8CD900D20945 /* ProjectSettings.swift */; };
 		1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */; };
 		1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */; };
@@ -61,6 +62,7 @@
 		1E7371AE280B1350007C7B10 /* NoAccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAccessViewController.swift; sourceTree = "<group>"; };
 		1E7371AF280B1350007C7B10 /* ProjectsStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsStateViewController.swift; sourceTree = "<group>"; };
 		1E7371BA280B13F0007C7B10 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EA25864285E48F800E25537 /* XCTest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
 		1EDABBF9283A8CD900D20945 /* ProjectSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettings.swift; sourceTree = "<group>"; };
 		1EDABBFC283A922700D20945 /* ProjectsUIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsUIMock.swift; sourceTree = "<group>"; };
 		1EDABBFE283A923300D20945 /* ProjectsSelectionDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsSelectionDelegateMock.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				1E737194280B1331007C7B10 /* ProjectsIngtegrationTests.swift */,
+				1EA25864285E48F800E25537 /* XCTest+Extensions.swift */,
 				1EDABBFB283A921900D20945 /* Doubles */,
 			);
 			path = ProjectsTests;
@@ -278,6 +281,7 @@
 			files = (
 				1EDABC03283A966F00D20945 /* DerivedDataStub.swift in Sources */,
 				1E737195280B1331007C7B10 /* ProjectsIngtegrationTests.swift in Sources */,
+				1EA25865285E48F800E25537 /* XCTest+Extensions.swift in Sources */,
 				1EDABBFF283A923300D20945 /* ProjectsSelectionDelegateMock.swift in Sources */,
 				1EDABBFD283A922700D20945 /* ProjectsUIMock.swift in Sources */,
 				1EDABC01283A924100D20945 /* ProjectsFinderMock.swift in Sources */,
