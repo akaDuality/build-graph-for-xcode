@@ -10,7 +10,9 @@ import BuildParser
 
 class ProjectsSelectionDelegateMock: ProjectsSelectionDelegate {
     var selectedProject: ProjectReference?
+    var selectedProjectCount = 0
     func select(project: ProjectReference) {
+        selectedProjectCount += 1
         self.selectedProject = project
     }
     

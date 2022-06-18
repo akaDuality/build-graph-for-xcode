@@ -45,61 +45,126 @@ class ProjectsIngtegrationTests: XCTestCase {
     // TODO: Show loading state?
     
     func test_userRestrictsAccessToDerivedData_whenReloadDatat_shouldShowNoAccessState() {
+        name("Отображаем специальное состояние, когда запрещён доступ к папке DerivedData.")
+        
+        // given
         projectsFinder.derivedDataPathResult = .failure(ProjectsFinder.Error.noDerivedData)
         
+        // when
         presenter.reloadProjetcs(ui: ui)
         
+        // then
         XCTAssertEqual(ui.states, [.noAccessToDerivedData])
         // TODO: should present empty state to details?
     }
     
-    // 0. Когда показываю экран должен отобразиться список проектов.
     func test_userAllowAccessButThereInNoFile_whenReloadDatat_shouldShowEmptyState() {
+        name("Показываемм экран - отображается список проектов.")
+        
+        // given
         projectsFinder.derivedDataPathResult = .success(stub.derivedData)
         
+        // when
         presenter.reloadProjetcs(ui: ui)
         
+        // then
         XCTAssertEqual(ui.states, [.empty(stub.derivedData)])
         // TODO: should present empty state to details?
     }
     
     func test_1ProjectInFolder_whenReleadData_shouldShowDataWithoutSelection() {
+        name("Ничего не выбрано. После перезагрузки должно остаться также.")
+        
+        // given
         projectsFinder.derivedDataPathResult = .success(stub.derivedData)
         projectsFinder.projects = [stub.buildGraph]
         
+        // when
         presenter.reloadProjetcs(ui: ui)
         
+        // then
         XCTAssertEqual(ui.states, [.projects(nil)])
         XCTAssertTrue(delegate.didSelectNothing)
         XCTAssertNil(delegate.selectedProject, "Not select project yet")
         
         // Select
-        presenter.select(project: stub.buildGraph)
+        presenter.select(from: .leftPanel(project: stub.buildGraph, lastBuildIndex: nil))
         XCTAssertEqual(delegate.selectedProject, stub.buildGraph)
         
         // TODO: Test that senconde selection doesn't change selected project
     }
     
     func test_hasSelectedProject_1ProjectInFolder_whenReleadData_shouldShowDataWithoutSelection() {
+        
+        // given
         projectsFinder.derivedDataPathResult = .success(stub.derivedData)
         projectsFinder.projects = [stub.buildGraph]
         projectSettings.selectedProject = stub.buildGraph.name
         
+        // when
         presenter.reloadProjetcs(ui: ui)
         
+        // then
         XCTAssertEqual(ui.states, [.projects(stub.buildGraph)])
         XCTAssertEqual(delegate.selectedProject, stub.buildGraph)
     }
     
-    // 1. Есть выбранный проект
-    // Разверенули список файлов
-    // Не перезагрузили проект
+    func test_expand_donot_reloadProject() {
+        name("Разворачивание проекта не перезагружает его.")
+        
+        // given
+        projectsFinder.derivedDataPathResult = .success(stub.derivedData)
+        let projectToSelect = stub.buildGraph
+        projectsFinder.projects = [projectToSelect]
+        projectSettings.selectedProject = stub.buildGraph.name
+        
+        // when
+        presenter.reloadProjetcs(ui: ui)
+        XCTAssertEqual(delegate.selectedProjectCount , .projectOnceSelected)
+        presenter.changeBuild(from: .leftPanel(project: projectToSelect, lastBuildIndex: 0))
+        XCTAssertEqual(delegate.selectedProjectCount , .projectOnceSelected)
+    }
     
-    // 2. - Сворачивание
+    func test_collapsingAnotherProject_donotSelectIt() {
+        name("Сорачивание другого проекта не выбирает его.")
+        
+        // given
+        projectsFinder.derivedDataPathResult = .success(stub.derivedData)
+        let selectedProject = stub.buildGraph
+        let projectToCollapse = stub.mobileBank
+        projectsFinder.projects = [selectedProject, projectToCollapse]
+        projectSettings.selectedProject = stub.buildGraph.name
+        
+        // when
+        presenter.reloadProjetcs(ui: ui)
+        
+        // then
+        XCTAssertFalse(presenter.shouldSelectProject(project: projectToCollapse))
+    }
     
-    // 3. Если сворачиваем другой проект, то не нужно перезагружать текущий выбранный
+    func test_collapseCurrentProject_donotReloadIt() {
+        name("Сорачивание проекта не перезагружает его.")
+        
+        // given
+        projectsFinder.derivedDataPathResult = .success(stub.derivedData)
+        let selectedProject = stub.buildGraph
+        projectsFinder.projects = [selectedProject]
+        projectSettings.selectedProject = stub.buildGraph.name
+        
+        // when
+        presenter.reloadProjetcs(ui: ui)
+        
+        // then
+        XCTAssertEqual(delegate.selectedProjectCount , .projectOnceSelected)
+        presenter.select(from: .leftPanel(project: selectedProject, lastBuildIndex: nil))
+        XCTAssertEqual(delegate.selectedProjectCount , .projectOnceSelected)
+    }
 }
 
 class ProjectSettingsMock: ProjectSettingsProtocol {
     var selectedProject: String? = nil
+}
+
+private extension Int {
+    static let projectOnceSelected = 1
 }
