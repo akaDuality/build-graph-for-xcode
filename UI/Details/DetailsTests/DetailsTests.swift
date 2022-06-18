@@ -118,6 +118,7 @@ class DetailStateUIMock: DetailStateUIProtocol {
 
 import BuildParser
 class DetailsDelegateMock: DetailsDelegate {
+    
     func willLoadProject(project: ProjectReference) {
         
     }
@@ -126,7 +127,7 @@ class DetailsDelegateMock: DetailsDelegate {
         
     }
     
-    func didFailLoadProject() {
-        
+    func didFailLoadProject(projectReference: ProjectReference) {
+    
     }
 }

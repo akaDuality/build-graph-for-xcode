@@ -56,14 +56,13 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                                     projectReference: projectReference,
                                     graphConfig: self.graphConfig)
                 return dataController
-            case .noEvents(let project):
+            case .noEvents(_):
                 let retryViewController = storyboard.instantiateController(withIdentifier: "retry") as! RetryViewController
                 return retryViewController
     
-            case .cantRead(let projecReference):
-                // TODO: Handle
-                let controller = NSViewController()
-                return controller
+            case .cantRead(_):
+                let retryViewController = storyboard.instantiateController(withIdentifier: "fail") as! NSViewController
+                return retryViewController
             }
         }
     }

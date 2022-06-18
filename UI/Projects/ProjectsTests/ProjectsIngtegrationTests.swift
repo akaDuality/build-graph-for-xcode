@@ -88,7 +88,7 @@ class ProjectsIngtegrationTests: XCTestCase {
         XCTAssertNil(delegate.selectedProject, "Not select project yet")
         
         // Select
-        presenter.select(from: .leftPanel(project: stub.buildGraph, lastBuildIndex: nil))
+        presenter.select(from: .navigationButtons(project: stub.buildGraph))
         XCTAssertEqual(delegate.selectedProject, stub.buildGraph)
         
         // TODO: Test that senconde selection doesn't change selected project

@@ -11,7 +11,7 @@ open class CommonAppDelegate: NSObject, NSApplicationDelegate {
     
     private var windowController: NSWindowController!
     
-    public func applicationDidFinishLaunching(_ aNotification: Notification) {
+    open func applicationDidFinishLaunching(_ aNotification: Notification) {
         windowController = WindowController.fromStoryboard()
         windowController.showWindow(self)
         

@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/1024jp/GzipSwift",
         "state": {
           "branch": null,
-          "revision": "ba0b6cb51cc6202f896e469b87d2889a46b10d1b",
-          "version": "5.1.1"
+          "revision": "7a7f17761c76a932662ab77028a4329f67d645a4",
+          "version": "5.2.0"
         }
       },
       {
@@ -114,7 +114,7 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-custom-dump",
         "state": {
           "branch": "main",
-          "revision": "15fae98653ab3573b458bdb416cbba06e95348a4",
+          "revision": "21ec1d717c07cea5a026979cb0471dd95c7087e7",
           "version": null
         }
       },
@@ -132,7 +132,7 @@
         "repositoryURL": "git@github.com:pointfreeco/swift-snapshot-testing.git",
         "state": {
           "branch": "main",
-          "revision": "88f6e2c0afe04221fcfb1601a2ecaad83115a05f",
+          "revision": "567c66adf318612f9482fdaf62c09df1aa57ee87",
           "version": null
         }
       },

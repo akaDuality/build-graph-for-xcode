@@ -113,9 +113,14 @@ extension SplitController: DetailsDelegate {
     private func showSettings() {
         hideSettingsIfNeeded()
         
+        guard let counter = detail.presenter.parser.makeCounter() else {
+            // In case of fail reading
+            return
+        }
+        
         let filterSettingsController = SettingsPopoverViewController.load(
             with: self,
-            counter: detail.presenter.parser.makeCounter())
+            counter: counter)
         
         addSplitViewItem(NSSplitViewItem(sidebarWithViewController: filterSettingsController))
     }
