@@ -59,7 +59,7 @@ public class ProjectsPresenter {
         do {
             let derivedDataPath = try projectsFinder.derivedDataPath()
             
-            let newDerivedData = try FileAccess()
+            let _ = try FileAccess()
                 .requestAccess(to: derivedDataPath)
             
             reloadProjetcs()
@@ -86,7 +86,7 @@ public class ProjectsPresenter {
             } else {
                 delegate?.selectNothing()
             }
-        } catch let error {
+        } catch let _ {
             ui?.state = .noAccessToDerivedData
         }
     }

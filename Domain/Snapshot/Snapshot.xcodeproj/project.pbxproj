@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EA25859285E3D8C00E25537 /* Details.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA25858285E3D8C00E25537 /* Details.framework */; };
+		1EA2585A285E3D8C00E25537 /* Details.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA25858285E3D8C00E25537 /* Details.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1EAF0BDF284390A500CEDBA3 /* Snapshot.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF0BDE284390A500CEDBA3 /* Snapshot.docc */; };
 		1EAF0BE5284390A500CEDBA3 /* Snapshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EAF0BDA284390A500CEDBA3 /* Snapshot.framework */; };
 		1EAF0BEA284390A500CEDBA3 /* SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAF0BE9284390A500CEDBA3 /* SnapshotTests.swift */; };
@@ -37,6 +39,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1EB282B92843A1A5001F27D4 /* BuildParser.framework in Embed Frameworks */,
+				1EA2585A285E3D8C00E25537 /* Details.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1EA25858285E3D8C00E25537 /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EAF0BDA284390A500CEDBA3 /* Snapshot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Snapshot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EAF0BDD284390A500CEDBA3 /* Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Snapshot.h; sourceTree = "<group>"; };
 		1EAF0BDE284390A500CEDBA3 /* Snapshot.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Snapshot.docc; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EB282B82843A1A5001F27D4 /* BuildParser.framework in Frameworks */,
+				1EA25859285E3D8C00E25537 /* Details.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +132,7 @@
 		1EB282B62843A1A5001F27D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1EA25858285E3D8C00E25537 /* Details.framework */,
 				1EB282B72843A1A5001F27D4 /* BuildParser.framework */,
 			);
 			name = Frameworks;

@@ -15,7 +15,8 @@
 		1E73712F280B0DF8007C7B10 /* DependencyParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737128280B0DF8007C7B10 /* DependencyParserTests.swift */; };
 		1E737130280B0DF8007C7B10 /* targetGraph.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E737129280B0DF8007C7B10 /* targetGraph.txt */; };
 		1E737131280B0DF8007C7B10 /* test_wholeFile.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E73712C280B0DF8007C7B10 /* test_wholeFile.1.txt */; };
-		1E737132280B0DF8007C7B10 /* test_wholeFile.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E73712E280B0DF8007C7B10 /* test_wholeFile.1.txt */; };
+		1EA25860285E3F8900E25537 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 1EA2585F285E3F8900E25537 /* CustomDump */; };
+		1EA25863285E467E00E25537 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1EA25862285E467E00E25537 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +54,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA25863285E467E00E25537 /* SnapshotTesting in Frameworks */,
 				1E737115280B0DDB007C7B10 /* GraphParser.framework in Frameworks */,
+				1EA25860285E3F8900E25537 /* CustomDump in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +69,7 @@
 				1E73710C280B0DDB007C7B10 /* GraphParser */,
 				1E737118280B0DDB007C7B10 /* GraphParserTests */,
 				1E73710B280B0DDB007C7B10 /* Products */,
+				1EA2585E285E3F8900E25537 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +128,13 @@
 			path = DependencyParserTests;
 			sourceTree = "<group>";
 		};
+		1EA2585E285E3F8900E25537 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -152,6 +163,8 @@
 			dependencies = (
 			);
 			name = GraphParser;
+			packageProductDependencies = (
+			);
 			productName = GraphParser;
 			productReference = 1E73710A280B0DDB007C7B10 /* GraphParser.framework */;
 			productType = "com.apple.product-type.framework";
@@ -170,6 +183,10 @@
 				1E737117280B0DDB007C7B10 /* PBXTargetDependency */,
 			);
 			name = GraphParserTests;
+			packageProductDependencies = (
+				1EA2585F285E3F8900E25537 /* CustomDump */,
+				1EA25862285E467E00E25537 /* SnapshotTesting */,
+			);
 			productName = GraphParserTests;
 			productReference = 1E737114280B0DDB007C7B10 /* GraphParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -201,6 +218,10 @@
 				Base,
 			);
 			mainGroup = 1E737100280B0DDB007C7B10;
+			packageReferences = (
+				1EA2585B285E3F7A00E25537 /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
+				1EA25861285E467E00E25537 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = 1E73710B280B0DDB007C7B10 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -225,7 +246,6 @@
 			files = (
 				1E737130280B0DF8007C7B10 /* targetGraph.txt in Resources */,
 				1E737131280B0DF8007C7B10 /* test_wholeFile.1.txt in Resources */,
-				1E737132280B0DF8007C7B10 /* test_wholeFile.1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +521,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1EA2585B285E3F7A00E25537 /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1EA25861285E467E00E25537 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1EA2585F285E3F8900E25537 /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EA2585B285E3F7A00E25537 /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
+		};
+		1EA25862285E467E00E25537 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1EA25861285E467E00E25537 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1E737101280B0DDB007C7B10 /* Project object */;
 }

@@ -16,7 +16,7 @@ class SnapshotSaveService {
             document.save(to: url, ofType: XcodeBuildSnapshot.bgbuildsnapshot, for: .saveOperation) { error in
                
             }
-        } catch let error {
+        } catch let _ {
             // TODO: Handle error
         }
     }

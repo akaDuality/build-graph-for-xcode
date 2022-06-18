@@ -51,11 +51,6 @@
 		1E7370FE280B0DBA007C7B10 /* BuildStepCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7370DD280B0DBA007C7B10 /* BuildStepCounter.swift */; };
 		1E7370FF280B0DBA007C7B10 /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7370DE280B0DBA007C7B10 /* FilterSettings.swift */; };
 		1E73714E280B0E14007C7B10 /* XCLogParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737133280B0E13007C7B10 /* XCLogParserTests.swift */; };
-		1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713B280B0E13007C7B10 /* test2Min.1.png */; };
-		1E737153280B0E14007C7B10 /* test60Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713C280B0E13007C7B10 /* test60Min.1.png */; };
-		1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713D280B0E13007C7B10 /* test10Min.1.png */; };
-		1E737155280B0E14007C7B10 /* test20Min.1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E73713E280B0E13007C7B10 /* test20Min.1.png */; };
-		1E737156280B0E14007C7B10 /* test_wholFile.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E737140280B0E13007C7B10 /* test_wholFile.1.txt */; };
 		1E73715A280B0E14007C7B10 /* EventTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737145280B0E14007C7B10 /* EventTest.swift */; };
 		1E73715B280B0E14007C7B10 /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737146280B0E14007C7B10 /* GraphTests.swift */; };
 		1E73715C280B0E14007C7B10 /* DurationFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E737147280B0E14007C7B10 /* DurationFormatterTest.swift */; };
@@ -141,12 +136,6 @@
 		1E7370DD280B0DBA007C7B10 /* BuildStepCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildStepCounter.swift; sourceTree = "<group>"; };
 		1E7370DE280B0DBA007C7B10 /* FilterSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
 		1E737133280B0E13007C7B10 /* XCLogParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCLogParserTests.swift; sourceTree = "<group>"; };
-		1E737139280B0E13007C7B10 /* test_drawingTestEvents.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_drawingTestEvents.1.png; sourceTree = "<group>"; };
-		1E73713B280B0E13007C7B10 /* test2Min.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test2Min.1.png; sourceTree = "<group>"; };
-		1E73713C280B0E13007C7B10 /* test60Min.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test60Min.1.png; sourceTree = "<group>"; };
-		1E73713D280B0E13007C7B10 /* test10Min.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test10Min.1.png; sourceTree = "<group>"; };
-		1E73713E280B0E13007C7B10 /* test20Min.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test20Min.1.png; sourceTree = "<group>"; };
-		1E737140280B0E13007C7B10 /* test_wholFile.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_wholFile.1.txt; sourceTree = "<group>"; };
 		1E737145280B0E14007C7B10 /* EventTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTest.swift; sourceTree = "<group>"; };
 		1E737146280B0E14007C7B10 /* GraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
 		1E737147280B0E14007C7B10 /* DurationFormatterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationFormatterTest.swift; sourceTree = "<group>"; };
@@ -232,7 +221,6 @@
 		1E7370AC280B0DA4007C7B10 /* BuildParserTests */ = {
 			isa = PBXGroup;
 			children = (
-				1E737134280B0E13007C7B10 /* __Snapshots__ */,
 				1E737147280B0E14007C7B10 /* DurationFormatterTest.swift */,
 				1E1D7FE0281BC3BD00B64954 /* RealBuildLogParserTests.swift */,
 				1E1D7FDB2819CB1E00B64954 /* ParsingTests.swift */,
@@ -315,51 +303,6 @@
 				1E7370D5280B0DBA007C7B10 /* BookmarkSaver.swift */,
 			);
 			path = Projects;
-			sourceTree = "<group>";
-		};
-		1E737134280B0E13007C7B10 /* __Snapshots__ */ = {
-			isa = PBXGroup;
-			children = (
-				1E737135280B0E13007C7B10 /* GraphTests */,
-				1E737138280B0E13007C7B10 /* BuildParserTests */,
-				1E73713A280B0E13007C7B10 /* TimelineLayerTests */,
-				1E73713F280B0E13007C7B10 /* BuildGraphTests */,
-			);
-			path = __Snapshots__;
-			sourceTree = "<group>";
-		};
-		1E737135280B0E13007C7B10 /* GraphTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GraphTests;
-			sourceTree = "<group>";
-		};
-		1E737138280B0E13007C7B10 /* BuildParserTests */ = {
-			isa = PBXGroup;
-			children = (
-				1E737139280B0E13007C7B10 /* test_drawingTestEvents.1.png */,
-			);
-			path = BuildParserTests;
-			sourceTree = "<group>";
-		};
-		1E73713A280B0E13007C7B10 /* TimelineLayerTests */ = {
-			isa = PBXGroup;
-			children = (
-				1E73713B280B0E13007C7B10 /* test2Min.1.png */,
-				1E73713C280B0E13007C7B10 /* test60Min.1.png */,
-				1E73713D280B0E13007C7B10 /* test10Min.1.png */,
-				1E73713E280B0E13007C7B10 /* test20Min.1.png */,
-			);
-			path = TimelineLayerTests;
-			sourceTree = "<group>";
-		};
-		1E73713F280B0E13007C7B10 /* BuildGraphTests */ = {
-			isa = PBXGroup;
-			children = (
-				1E737140280B0E13007C7B10 /* test_wholFile.1.txt */,
-			);
-			path = BuildGraphTests;
 			sourceTree = "<group>";
 		};
 		1E73716F280B0F38007C7B10 /* Frameworks */ = {
@@ -482,11 +425,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E737156280B0E14007C7B10 /* test_wholFile.1.txt in Resources */,
-				1E737155280B0E14007C7B10 /* test20Min.1.png in Resources */,
-				1E737154280B0E14007C7B10 /* test10Min.1.png in Resources */,
-				1E737152280B0E14007C7B10 /* test2Min.1.png in Resources */,
-				1E737153280B0E14007C7B10 /* test60Min.1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
