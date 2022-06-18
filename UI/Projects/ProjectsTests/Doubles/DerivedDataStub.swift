@@ -21,4 +21,16 @@ class DerivedDataStub {
             depsURL: nil
         )
     }
+    
+    var mobileBank: ProjectReference {
+        let rootPath = derivedData.appendingPathComponent("MB-dadwdawdwafewfew")
+        
+        return ProjectReference(
+            name: "Mobile Bank",
+            rootPath: rootPath,
+            activityLogURL: [
+                rootPath.appendingPathComponent("Logs/Build/3452119C-C9F6-3213-9FD4-C9B5E6DCCFC9.xcactivitylog")],
+            depsURL: nil
+        )
+    }
 }
