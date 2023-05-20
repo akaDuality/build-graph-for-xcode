@@ -5,7 +5,7 @@
       location = "container:"
       name = "App">
       <FileRef
-         location = "group:/Users/rubanov/Documents/Projects/CodeMetrics/App/BuildGraph/BuildGraphRelease.xcodeproj">
+         location = "group:App/BuildGraph/BuildGraphRelease.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:App/BuildGraphDebug/BuildGraphDebug.xcodeproj">
@@ -40,7 +40,7 @@
          location = "group:GraphParser/GraphParser.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:/Users/rubanov/Documents/Projects/CodeMetrics/Domain/XCLogParser">
+         location = "group:XCLogParser">
       </FileRef>
    </Group>
 </Workspace>
