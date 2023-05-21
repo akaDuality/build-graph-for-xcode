@@ -111,13 +111,21 @@ public class DetailViewController: NSViewController {
             .requestLocation(
                 project: projectReference,
                 title: title!,
+                fileExtension: "png")
+        { url in
+            ImageSaveService().saveImage(
+                url: url,
+                view: self.view().contentView)
+        }
+    }
+    
+    public func shareSnapshot() {
+        FileLocationSelector()
+            .requestLocation(
+                project: projectReference,
+                title: title!,
                 fileExtension: XcodeBuildSnapshot.bgbuildsnapshot)
         { url in
-            
-//            ImageSaveService().saveImage(
-//                url: url,
-//                view: self.view().contentView)
-            
             SnapshotSaveService().save(
                 project: self.projectReference!,
                 to: url)
