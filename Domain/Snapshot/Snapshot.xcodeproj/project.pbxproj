@@ -19,6 +19,7 @@
 		1EB282C02843A756001F27D4 /* PrepareBuildOnly.bgbuildsnapshot in Resources */ = {isa = PBXBuildFile; fileRef = 1EAF0BF6284390C100CEDBA3 /* PrepareBuildOnly.bgbuildsnapshot */; };
 		1EB282C12843A756001F27D4 /* SimpleClean.bgbuildsnapshot in Resources */ = {isa = PBXBuildFile; fileRef = 1EAF0BF7284390C100CEDBA3 /* SimpleClean.bgbuildsnapshot */; };
 		1EB282C22843A756001F27D4 /* IncrementalWithBigGap.bgbuildsnapshot in Resources */ = {isa = PBXBuildFile; fileRef = 1EAF0BF8284390C100CEDBA3 /* IncrementalWithBigGap.bgbuildsnapshot */; };
+		7401DF6C2A1A570300365B73 /* Xcode14.3.bgbuildsnapshot in Resources */ = {isa = PBXBuildFile; fileRef = 7401DF6B2A1A570300365B73 /* Xcode14.3.bgbuildsnapshot */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		1EAF0BF7284390C100CEDBA3 /* SimpleClean.bgbuildsnapshot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleClean.bgbuildsnapshot; sourceTree = "<group>"; };
 		1EAF0BF8284390C100CEDBA3 /* IncrementalWithBigGap.bgbuildsnapshot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = IncrementalWithBigGap.bgbuildsnapshot; sourceTree = "<group>"; };
 		1EB282B72843A1A5001F27D4 /* BuildParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BuildParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7401DF6B2A1A570300365B73 /* Xcode14.3.bgbuildsnapshot */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Xcode14.3.bgbuildsnapshot; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		1EAF0BF9284390C100CEDBA3 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				7401DF6B2A1A570300365B73 /* Xcode14.3.bgbuildsnapshot */,
 				1EAF0BF6284390C100CEDBA3 /* PrepareBuildOnly.bgbuildsnapshot */,
 				1EAF0BF7284390C100CEDBA3 /* SimpleClean.bgbuildsnapshot */,
 				1EAF0BF8284390C100CEDBA3 /* IncrementalWithBigGap.bgbuildsnapshot */,
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EB282C02843A756001F27D4 /* PrepareBuildOnly.bgbuildsnapshot in Resources */,
+				7401DF6C2A1A570300365B73 /* Xcode14.3.bgbuildsnapshot in Resources */,
 				1EB282C22843A756001F27D4 /* IncrementalWithBigGap.bgbuildsnapshot in Resources */,
 				1EB282C12843A756001F27D4 /* SimpleClean.bgbuildsnapshot in Resources */,
 			);

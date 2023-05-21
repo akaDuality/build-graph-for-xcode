@@ -16,6 +16,10 @@ public class TestBundle {
         try! snapshot(name: "SimpleClean")
     }
     
+    public var xcode14_3: XcodeBuildSnapshot {
+        try! snapshot(name: "Xcode14.3")
+    }
+    
     public func snapshot(name: String) throws -> XcodeBuildSnapshot {
         let url = Bundle(for: TestBundle.self)
             .url(forResource: name,
