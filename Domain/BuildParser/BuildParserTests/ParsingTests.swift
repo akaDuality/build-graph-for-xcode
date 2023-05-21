@@ -28,8 +28,6 @@ class ParsingTests: XCTestCase {
             "/Users/mikhail/Library/Developer/Xcode/DerivedData/BulidGraph-bzryakxofvjibdffbqmtzvinmpdk/Build/Products/Debug/Snapshot.framework/Resources/SimpleClean.bgbuildsnapshot/Build/Intermediates.noindex/XCBuildData/e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt")
     }
     
-    // TODO: Add reading of new version
-    
     // TODO: No events for current filter isn't a problem. Other settings can reveal events
 }
 
