@@ -17,8 +17,7 @@ class DerivedDataStub {
             name: "Build Graph",
             rootPath: rootPath,
             activityLogURL: [
-                rootPath.appendingPathComponent("Logs/Build/0539119C-C9F6-4C93-9FD4-C9B5E6DCCFC9.xcactivitylog")],
-            depsURL: nil
+                rootPath.appendingPathComponent("Logs/Build/0539119C-C9F6-4C93-9FD4-C9B5E6DCCFC9.xcactivitylog")]
         )
     }
     
@@ -29,8 +28,7 @@ class DerivedDataStub {
             name: "Mobile Bank",
             rootPath: rootPath,
             activityLogURL: [
-                rootPath.appendingPathComponent("Logs/Build/3452119C-C9F6-3213-9FD4-C9B5E6DCCFC9.xcactivitylog")],
-            depsURL: nil
+                rootPath.appendingPathComponent("Logs/Build/3452119C-C9F6-3213-9FD4-C9B5E6DCCFC9.xcactivitylog")]
         )
     }
 }

@@ -79,23 +79,6 @@ public struct LogFinder {
 
         throw LogError.noLogFound(dir: projectDir.path)
     }
-    
-    public func buildGraphURL() throws -> URL {
-        let projectDir = try getProjectDir()
-        return try targetGraph(projectDir: projectDir)
-    }
-    
-    func targetGraph(projectDir: URL) throws -> URL {
-        let intemediates = projectDir
-            .appendingPathComponent("Build")
-            .appendingPathComponent("Intermediates.noIndex")
-            .appendingPathComponent("XCBuildData")
-        
-        let graph = try LatestFileScanner().findLatestForProject(inDir: intemediates, filter: { url in
-            url.path.hasSuffix("-targetGraph.txt")
-        })
-        return graph
-    }
 }
 
 class LatestFileScanner {

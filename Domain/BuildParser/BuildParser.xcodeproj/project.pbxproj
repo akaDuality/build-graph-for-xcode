@@ -65,6 +65,7 @@
 		1EFAB99728448E6C0071824B /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1EFAB99628448E6C0071824B /* SnapshotTesting */; };
 		1EFF82EE280D3A98000E022D /* ProjectDescriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82ED280D3A98000E022D /* ProjectDescriptionService.swift */; };
 		1EFF82FA280D3CFF000E022D /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFF82F9280D3CFF000E022D /* UISettings.swift */; };
+		7401DF6A2A199C9600365B73 /* DepsPathExtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7401DF692A199C9600365B73 /* DepsPathExtractionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		1EB282BB2843A541001F27D4 /* Snapshot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Snapshot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EFF82ED280D3A98000E022D /* ProjectDescriptionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDescriptionService.swift; sourceTree = "<group>"; };
 		1EFF82F9280D3CFF000E022D /* UISettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
+		7401DF692A199C9600365B73 /* DepsPathExtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepsPathExtractionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 				1E1D7FE0281BC3BD00B64954 /* RealBuildLogParserTests.swift */,
 				1E1D7FDB2819CB1E00B64954 /* ParsingTests.swift */,
 				1E73714A280B0E14007C7B10 /* EventDepsTests.swift */,
+				7401DF692A199C9600365B73 /* DepsPathExtractionTests.swift */,
 				1E737145280B0E14007C7B10 /* EventTest.swift */,
 				1E737146280B0E14007C7B10 /* GraphTests.swift */,
 				1E73714C280B0E14007C7B10 /* PathFinderTests.swift */,
@@ -482,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7401DF6A2A199C9600365B73 /* DepsPathExtractionTests.swift in Sources */,
 				1E73715B280B0E14007C7B10 /* GraphTests.swift in Sources */,
 				1E73715F280B0E14007C7B10 /* EventDepsTests.swift in Sources */,
 				1E73715C280B0E14007C7B10 /* DurationFormatterTest.swift in Sources */,

@@ -43,10 +43,12 @@ public class RealBuildLogParser {
     public private(set) var depsPath: URL?
     
     public func parse(projectReference: ProjectReference, filter: FilterSettings) throws -> Project {
-        try parse(
+        let project = try parse(
             logURL: projectReference.currentActivityLog,
             rootURL: projectReference.rootPath,
             filter: filter)
+        
+        return project
     }
     
     public func parse(logURL: URL, rootURL: URL, filter: FilterSettings) throws -> Project {
@@ -56,7 +58,7 @@ public class RealBuildLogParser {
         // 1. Read file
         let activityLog = try activityLogParser.parseActivityLogInURL(logURL)
         
-        depsPath = DepsPathExtraction(rootURL: rootURL).depedenciesPath(activityLog: activityLog)
+        depsPath = DepsPathExtractionWithVersions(rootURL: rootURL).depedenciesPath(activityLog: activityLog)
         
         var diff = Date().timeIntervalSince(date)
         if #available(macOS 11.0, *) {

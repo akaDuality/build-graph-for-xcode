@@ -103,7 +103,7 @@ public class DetailsStatePresenter {
                             _ projectReference: ProjectReference) -> Void,
         didFail: @escaping (_ error: String) -> Void
     ) {
-        os_log("will read \(projectReference.activityLogURL), depsURL \(String(describing: projectReference.depsURL))")
+        os_log("will read \(projectReference.activityLogURL)")
         
         do {
             let project = try parser.parse(
@@ -113,6 +113,8 @@ public class DetailsStatePresenter {
             if let depsPath = parser.depsPath,
                let dependencies = dependencies(depsURL: depsPath) {
                 project.connect(dependencies: dependencies)
+            } else {
+                os_log("No connections found")
             }
             
             didLoad(project, self.parser.title, projectReference)

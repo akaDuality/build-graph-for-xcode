@@ -11,14 +11,12 @@ public class ProjectReference: Equatable {
     public static func == (lhs: ProjectReference, rhs: ProjectReference) -> Bool {
         lhs.name == rhs.name
         && lhs.activityLogURL == rhs.activityLogURL
-        && lhs.depsURL == rhs.depsURL
     }
     
     public init(
         name: String,
         rootPath: URL,
-        activityLogURL: [URL],
-        depsURL: URL?
+        activityLogURL: [URL]
     ) {
         precondition(activityLogURL.count > 0)
         
@@ -26,7 +24,6 @@ public class ProjectReference: Equatable {
         self.name = name
         self.rootPath = rootPath
         self.activityLogURL = activityLogURL
-        self.depsURL = depsURL
     }
     
     public let name: String
@@ -64,8 +61,6 @@ public class ProjectReference: Equatable {
         
         self.currentActivityLogIndex += 1
     }
-    
-    public let depsURL: URL?
     
     static func shortName(from fileName: String) -> String {
         fileName.components(separatedBy: "-").dropLast().joined(separator: "-")

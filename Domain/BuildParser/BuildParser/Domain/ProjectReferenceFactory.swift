@@ -22,14 +22,10 @@ public class ProjectReferenceFactory {
             .deletingLastPathComponent() // Skip Name of file
             .deletingLastPathComponent() // Skip Build folder
             .deletingLastPathComponent() // Skip Logs folder
-        
-        let logFinder = LogFinder(
-            projectDir: rootPathForProject)
 
         return ProjectReference(name: name,
                                 rootPath: rootPathForProject,
-                                activityLogURL: [activityLogURL],
-                                depsURL: try? logFinder.buildGraphURL())
+                                activityLogURL: [activityLogURL])
     }
     
     public func projectReference(
@@ -50,8 +46,7 @@ public class ProjectReferenceFactory {
             
             return ProjectReference(name: shortName,
                                     rootPath: folder,
-                                    activityLogURL: logsWithContent,
-                                    depsURL: try? logFinder.buildGraphURL())
+                                    activityLogURL: logsWithContent)
         } catch {
             print("skip \(shortName), can't find .activityLog with build information")
             return nil
