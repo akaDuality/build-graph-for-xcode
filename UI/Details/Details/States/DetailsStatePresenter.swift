@@ -106,7 +106,7 @@ public class DetailsStatePresenter {
             filter: filter)
         
         if let depsPath = parser.depsPath,
-           let dependencies = dependencies(depsURL: depsPath) {
+           let dependencies = DependencyParser().parse(path: depsPath) {
             project.connect(dependencies: dependencies)
         } else {
             os_log("No connections found")
@@ -129,13 +129,5 @@ public class DetailsStatePresenter {
         }
         
         return project
-    }
-    
-    private func dependencies(depsURL: URL) -> [Dependency]? {
-        guard let depsContent = try? String(contentsOf: depsURL) else {
-            return nil
-        }
-        
-        return DependencyParser().parseFile(depsContent)
     }
 }

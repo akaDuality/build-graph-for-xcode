@@ -11,6 +11,14 @@ public class DependencyParser {
     
     public init() {}
     
+    public func parse(path: URL) -> [Dependency]? {
+        guard let depsContent = try? String(contentsOf: path) else {
+            return nil
+        }
+        
+        return parseFile(depsContent)
+    }
+    
     public func parseFile(_ input: String) -> [Dependency] {
         let strings = input.components(separatedBy: "\n")
             .dropFirst() // No need in "Target dependency graph ..."
