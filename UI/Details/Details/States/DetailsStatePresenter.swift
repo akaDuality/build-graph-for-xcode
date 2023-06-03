@@ -71,26 +71,24 @@ public class DetailsStatePresenter {
         self.ui.state = .loading
         delegate?.willLoadProject(project: projectReference)
         
-        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            updateWithFilter(
+        Task {
+            let project = updateWithFilter(
                 oldProject: project,
-                projectReference: projectReference,
                 filter: filter
-            ) { project, title in
+            )
                 
-                DispatchQueue.main.async {
-                    if project.events.isEmpty {
-                        self.ui.state = .noEvents(project)
-                    } else {
-                        self.ui.state = .data(project: project,
-                                              title: title,
-                                              projectReference: projectReference)
-                    }
-                    
-                    self.delegate?.didLoadProject(
-                        project: project,
-                        projectReference: projectReference)
+            await MainActor.run {
+                if project.events.isEmpty {
+                    self.ui.state = .noEvents(project)
+                } else {
+                    self.ui.state = .data(project: project,
+                                          title: parser.title,
+                                          projectReference: projectReference)
                 }
+                
+                self.delegate?.didLoadProject(
+                    project: project,
+                    projectReference: projectReference)
             }
         }
     }
@@ -123,23 +121,20 @@ public class DetailsStatePresenter {
         }
     }
     
-    private func updateWithFilter(
+    func updateWithFilter(
         oldProject: Project,
-        projectReference: ProjectReference,
-        filter: FilterSettings,
-        didLoad: @escaping (_ project: Project, _ title: String) -> Void
-    ) {
+        filter: FilterSettings
+    ) -> Project {
         // TODO: Rework to project
         let events = parser.update(with: filter)
         
-        if let dependencies = oldProject.cachedDependencies {
-            events.connect(by: dependencies)
-        }
-        
         // TODO: Create in another place
         let project = Project(events: events, relativeBuildStart: 0)
+        if let dependencies = oldProject.cachedDependencies {
+            project.connect(dependencies: dependencies)
+        }
         
-        didLoad(project, parser.title)
+        return project
     }
     
     private func dependencies(depsURL: URL) -> [Dependency]? {

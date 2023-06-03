@@ -50,6 +50,7 @@ class DetailsStatePresenterTests: XCTestCase {
         
         let completeExpect = expectation(description: "Set state to UI")
         
+        let currentProject = snapshot.project
         sut.openProject(
             projectReference: snapshot.project,
             filter: .shared) {
@@ -92,6 +93,24 @@ class DetailsStatePresenterTests: XCTestCase {
              "SDK-ios"])
         
         XCTAssertEqual(title, "Build SDK-ios")
+    }
+    
+    func test_filterdProject_whenUpdateFilter_shouldRememberAboutDependencies() throws {
+        try loadFile(name: "SimpleClean")
+        guard case let .data(project, _, _) = ui.states.last else {
+            XCTFail()
+            return
+        }
+
+        let filter = FilterSettings()
+        filter.cacheVisibility = .all
+
+        let newProject = sut.updateWithFilter(oldProject: project, filter: filter)
+        XCTAssertNotNil(newProject.cachedDependencies)
+        
+        filter.cacheVisibility = .cached
+        let newProject2 = sut.updateWithFilter(oldProject: newProject, filter: filter)
+        XCTAssertNotNil(newProject2.cachedDependencies)
     }
     
     // TODO: all disabled filters should show empty state. Enabling some filter should present graph
