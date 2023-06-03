@@ -90,6 +90,7 @@ class DetailsStatePresenterTests: XCTestCase {
              "DFoundation",
              "DNetwork",
              "DUIKit",
+             "PaymentSDK",
              "SDK-ios"])
         
         XCTAssertEqual(title, "Build SDK-ios")
