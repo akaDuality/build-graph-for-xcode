@@ -58,7 +58,7 @@
 		1E9AE01F2800B62100851519 /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444CB284CE8FA005E77FA /* App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444D0284CEB34005E77FA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		1EDB5E3127135F0000741EEF /* BuildGraphRelease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraphRelease.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EDB5E3127135F0000741EEF /* BuildGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E3427135F0000741EEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDB5E3827135F0100741EEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuildGraph.entitlements; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		1EDB5E3227135F0000741EEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EDB5E3127135F0000741EEF /* BuildGraphRelease.app */,
+				1EDB5E3127135F0000741EEF /* BuildGraph.app */,
 				1EDB5E4227135F0100741EEF /* BuildGraphReleaseTests.xctest */,
 				1EDB5E4C27135F0100741EEF /* BuildGraphReleaseUITests.xctest */,
 			);
@@ -142,9 +142,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1EDB5E3027135F0000741EEF /* BuildGraphRelease */ = {
+		1EDB5E3027135F0000741EEF /* BuildGraph */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphRelease" */;
+			buildConfigurationList = 1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraph" */;
 			buildPhases = (
 				1EDB5E2D27135F0000741EEF /* Sources */,
 				1EDB5E2E27135F0000741EEF /* Frameworks */,
@@ -155,13 +155,13 @@
 			);
 			dependencies = (
 			);
-			name = BuildGraphRelease;
+			name = BuildGraph;
 			packageProductDependencies = (
 				1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */,
 				1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */,
 			);
 			productName = BuildGraph;
-			productReference = 1EDB5E3127135F0000741EEF /* BuildGraphRelease.app */;
+			productReference = 1EDB5E3127135F0000741EEF /* BuildGraph.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1EDB5E4127135F0100741EEF /* BuildGraphReleaseTests */ = {
@@ -239,7 +239,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1EDB5E3027135F0000741EEF /* BuildGraphRelease */,
+				1EDB5E3027135F0000741EEF /* BuildGraph */,
 				1EDB5E4127135F0100741EEF /* BuildGraphReleaseTests */,
 				1EDB5E4B27135F0100741EEF /* BuildGraphReleaseUITests */,
 			);
@@ -301,12 +301,12 @@
 /* Begin PBXTargetDependency section */
 		1EDB5E4427135F0100741EEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1EDB5E3027135F0000741EEF /* BuildGraphRelease */;
+			target = 1EDB5E3027135F0000741EEF /* BuildGraph */;
 			targetProxy = 1EDB5E4327135F0100741EEF /* PBXContainerItemProxy */;
 		};
 		1EDB5E4E27135F0100741EEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1EDB5E3027135F0000741EEF /* BuildGraphRelease */;
+			target = 1EDB5E3027135F0000741EEF /* BuildGraph */;
 			targetProxy = 1EDB5E4D27135F0100741EEF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -593,7 +593,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphRelease" */ = {
+		1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraph" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1EDB5E5727135F0100741EEF /* Debug */,
