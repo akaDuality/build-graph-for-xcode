@@ -66,36 +66,3 @@ extension Event {
         return Colors.Events.subtask ()
     }
 }
-
-func isPod(name: String) -> Bool {
-    if name.hasPrefix("Firebase") {
-        return true
-    }
-    
-    if name.hasPrefix("Google") {
-        return true
-    }
-    
-    if pods.contains(name) {
-        return true
-    }
-    
-    return false
-}
-let pods: [String] = [
-"nanopb",
-"libPhoneNumber-iOS",
-"SwCrypt",
-"PromisesObjC",
-"PinLayout",
-"Nuke",
-"MBProgressHUD",
-"MARoundButton",
-"KeychainSwift",
-"KVOController",
-"DeviceKit",
-"CocoaAsyncSocket",
-"HCaptcha-HCaptcha",
-"BRYXBanner",
-"Bagel"
-]
