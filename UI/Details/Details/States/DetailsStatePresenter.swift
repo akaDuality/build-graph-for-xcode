@@ -14,6 +14,12 @@ protocol DetailStateUIProtocol: AnyObject {
     var state: DetailsState { get set }
 }
 
+public struct ParsedProject: Equatable {
+    let project: Project
+    let title: String
+    let reference: ProjectReference
+}
+
 public class DetailsStatePresenter {
     unowned var ui: DetailStateUIProtocol!
     
@@ -33,33 +39,32 @@ public class DetailsStatePresenter {
         ui.state = .loading
         delegate?.willLoadProject(project: projectReference)
         
-        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            loadAndInsert(
-                projectReference: projectReference,
-                filter: filter,
-                didLoad: { project, title, projectReference in
-                    DispatchQueue.main.async {
-                        if project.events.isEmpty {
-                            self.ui.state = .noEvents(project)
-                        } else {
-                            self.ui.state = .data(project: project, title: title, projectReference: projectReference)
-                        }
-    
-                        self.delegate?.didLoadProject(
-                            project: project,
-                            projectReference: projectReference)
-                        completion()
+        Task {
+            do {
+                let parsedProject = try await loadAndInsert(
+                    projectReference: projectReference,
+                    filter: filter)
+                
+                await MainActor.run {
+                    if parsedProject.project.events.isEmpty {
+                        self.ui.state = .noEvents(parsedProject.project)
+                    } else {
+                        self.ui.state = .data(parsedProject: parsedProject)
                     }
-                },
-                didFail: { message in
-                    DispatchQueue.main.async {
-                        // TODO: Sepatate to another state and pass message
-                        self.ui.state = .cantRead(projectReference: projectReference)
-                        self.delegate?.didFailLoadProject(projectReference: projectReference)
-                        completion()
-                    }
+                    
+                    self.delegate?.didLoadProject(
+                        project: parsedProject.project,
+                        projectReference: parsedProject.reference)
+                    completion()
                 }
-            )
+            } catch let error {
+                await MainActor.run {
+                    // TODO: Sepatate to another state and pass message
+                    self.ui.state = .cantRead(projectReference: projectReference)
+                    self.delegate?.didFailLoadProject(projectReference: projectReference)
+                    completion()
+                }
+            }
         }
     }
     
@@ -72,18 +77,15 @@ public class DetailsStatePresenter {
         delegate?.willLoadProject(project: projectReference)
         
         Task {
-            let project = updateWithFilter(
-                oldProject: project,
-                filter: filter
-            )
+            let project = updateWithFilter(oldProject: project, filter: filter)
+            
+            let parsedProject = ParsedProject(project: project, title: parser.title, reference: projectReference)
                 
             await MainActor.run {
                 if project.events.isEmpty {
                     self.ui.state = .noEvents(project)
                 } else {
-                    self.ui.state = .data(project: project,
-                                          title: parser.title,
-                                          projectReference: projectReference)
+                    self.ui.state = .data(parsedProject: parsedProject)
                 }
                 
                 self.delegate?.didLoadProject(
@@ -95,30 +97,22 @@ public class DetailsStatePresenter {
     
     private func loadAndInsert(
         projectReference: ProjectReference,
-        filter: FilterSettings,
-        didLoad: @escaping (_ project: Project,
-                            _ title: String,
-                            _ projectReference: ProjectReference) -> Void,
-        didFail: @escaping (_ error: String) -> Void
-    ) {
+        filter: FilterSettings
+    ) async throws -> ParsedProject {
         os_log("will read \(projectReference.activityLogURL)")
         
-        do {
-            let project = try parser.parse(
-                projectReference: projectReference,
-                filter: filter)
-            
-            if let depsPath = parser.depsPath,
-               let dependencies = dependencies(depsURL: depsPath) {
-                project.connect(dependencies: dependencies)
-            } else {
-                os_log("No connections found")
-            }
-            
-            didLoad(project, self.parser.title, projectReference)
-        } catch let error {
-            didFail(error.localizedDescription)
+        let project = try parser.parse(
+            projectReference: projectReference,
+            filter: filter)
+        
+        if let depsPath = parser.depsPath,
+           let dependencies = dependencies(depsURL: depsPath) {
+            project.connect(dependencies: dependencies)
+        } else {
+            os_log("No connections found")
         }
+            
+        return ParsedProject(project: project, title: parser.title, reference: projectReference)
     }
     
     func updateWithFilter(

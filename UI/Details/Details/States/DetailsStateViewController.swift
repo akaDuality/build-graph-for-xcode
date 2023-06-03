@@ -14,7 +14,7 @@ public enum DetailsState: StateProtocol {
     case blank
     case noProject
     case loading
-    case data(project: Project, title: String, projectReference: ProjectReference)
+    case data(parsedProject: ParsedProject)
     case noEvents(_ project: Project)
     case cantRead(projectReference: ProjectReference)
     
@@ -48,12 +48,12 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
                 return storyboard.instantiateController(withIdentifier: "noProject") as! ViewController
             case .loading:
                 return storyboard.instantiateController(withIdentifier: "loading") as! ViewController
-            case .data(let project, let title, let projectReference):
+            case .data(let parsedProject):
                 let dataController = storyboard.instantiateController(withIdentifier: "data") as! DetailViewController
-                dataController.show(project: project,
-                                    title: title,
+                dataController.show(project: parsedProject.project,
+                                    title: parsedProject.title,
                                     embeddInWindow: true,
-                                    projectReference: projectReference,
+                                    projectReference: parsedProject.reference,
                                     graphConfig: self.graphConfig)
                 return dataController
             case .noEvents(_):
@@ -88,8 +88,8 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
         switch state {
         case .noEvents(let project):
             return project
-        case .data(project: let project, title: _, projectReference: _):
-            return project
+        case .data(let projectReference):
+            return projectReference.project
         default:
             return nil
         }
