@@ -27,8 +27,6 @@
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
-			<key>NSDocumentClass</key>
-			<string>XcodeBuildSnapshot</string>
 		</dict>
 	</array>
 	<key>CFBundleURLTypes</key>
