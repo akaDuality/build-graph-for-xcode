@@ -10,32 +10,11 @@
 		1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */; };
 		1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */; };
 		1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */; };
-		1ED444CC284CE8FA005E77FA /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED444CB284CE8FA005E77FA /* App.framework */; };
-		1ED444CD284CE8FA005E77FA /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED444CB284CE8FA005E77FA /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1ED444D1284CEB34005E77FA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444D0284CEB34005E77FA /* main.swift */; };
 		1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3427135F0000741EEF /* AppDelegate.swift */; };
 		1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3827135F0100741EEF /* Assets.xcassets */; };
-		7445A6192A1C431D0047EBDD /* BuildParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; };
-		7445A61A2A1C431D0047EBDD /* BuildParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737168280B0EA8007C7B10 /* BuildParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7445A61B2A1C431D0047EBDD /* GraphParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737165280B0EA3007C7B10 /* GraphParser.framework */; };
-		7445A61C2A1C431D0047EBDD /* GraphParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E737165280B0EA3007C7B10 /* GraphParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		74ACCA5B2A2D508900436360 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 74ACCA5A2A2D508900436360 /* App */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1E9AE0222800B62100851519 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7445A61C2A1C431D0047EBDD /* GraphParser.framework in Embed Frameworks */,
-				7445A61A2A1C431D0047EBDD /* BuildParser.framework in Embed Frameworks */,
-				1ED444CD284CE8FA005E77FA /* App.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -58,11 +37,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74ACCA5B2A2D508900436360 /* App in Frameworks */,
 				1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */,
-				1ED444CC284CE8FA005E77FA /* App.framework in Frameworks */,
-				7445A6192A1C431D0047EBDD /* BuildParser.framework in Frameworks */,
 				1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */,
-				7445A61B2A1C431D0047EBDD /* GraphParser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +99,6 @@
 				1EDB5E2D27135F0000741EEF /* Sources */,
 				1EDB5E2E27135F0000741EEF /* Frameworks */,
 				1EDB5E2F27135F0000741EEF /* Resources */,
-				1E9AE0222800B62100851519 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +108,7 @@
 			packageProductDependencies = (
 				1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */,
 				1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */,
+				74ACCA5A2A2D508900436360 /* App */,
 			);
 			productName = BuildGraph;
 			productReference = 1EDB5E3127135F0000741EEF /* BuildGraph.app */;
@@ -415,6 +392,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E1EAED827D4A36100D552F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		74ACCA5A2A2D508900436360 /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
