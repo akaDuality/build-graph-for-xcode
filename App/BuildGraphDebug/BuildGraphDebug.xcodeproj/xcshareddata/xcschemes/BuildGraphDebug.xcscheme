@@ -32,65 +32,60 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1ED4449C284CE85C005E77FA"
-               BuildableName = "AppTests.xctest"
-               BlueprintName = "AppTests"
-               ReferencedContainer = "container:../App/App.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1E7370A7280B0DA4007C7B10"
-               BuildableName = "BuildParserTests.xctest"
+               BlueprintIdentifier = "BuildParserTests"
+               BuildableName = "BuildParserTests"
                BlueprintName = "BuildParserTests"
-               ReferencedContainer = "container:../../Domain/BuildParser/BuildParser.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "TimelineLayerTests">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1E9AE0882800BD2500851519"
-               BuildableName = "DetailsTests.xctest"
-               BlueprintName = "DetailsTests"
-               ReferencedContainer = "container:../../UI/Details/Details.xcodeproj">
+               ReferencedContainer = "container:../../Domain">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1E7371D3280B1822007C7B10"
-               BuildableName = "FiltersTests.xctest"
-               BlueprintName = "FiltersTests"
-               ReferencedContainer = "container:../../UI/Filters/Filters.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1E737113280B0DDB007C7B10"
-               BuildableName = "GraphParserTests.xctest"
+               BlueprintIdentifier = "GraphParserTests"
+               BuildableName = "GraphParserTests"
                BlueprintName = "GraphParserTests"
-               ReferencedContainer = "container:../../Domain/GraphParser/GraphParser.xcodeproj">
+               ReferencedContainer = "container:../../Domain">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1E73718E280B1331007C7B10"
-               BuildableName = "ProjectsTests.xctest"
+               BlueprintIdentifier = "SnapshotTests"
+               BuildableName = "SnapshotTests"
+               BlueprintName = "SnapshotTests"
+               ReferencedContainer = "container:../../Domain">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DetailsTests"
+               BuildableName = "DetailsTests"
+               BlueprintName = "DetailsTests"
+               ReferencedContainer = "container:../../UI">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FiltersTests"
+               BuildableName = "FiltersTests"
+               BlueprintName = "FiltersTests"
+               ReferencedContainer = "container:../../UI">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ProjectsTests"
+               BuildableName = "ProjectsTests"
                BlueprintName = "ProjectsTests"
-               ReferencedContainer = "container:../../UI/Projects/Projects.xcodeproj">
+               ReferencedContainer = "container:../../UI">
             </BuildableReference>
          </TestableReference>
       </Testables>
