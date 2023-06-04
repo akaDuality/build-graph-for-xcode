@@ -24,8 +24,6 @@ let package = Package(
             name: "Details",
             dependencies: [
                 "Domain",
-//                .product(name: "BuildParser", package: "Domain"),
-//                .product(name: "GraphParser", package: "Domain"),
                 "XCLogParser",
             ]),
         .testTarget(
