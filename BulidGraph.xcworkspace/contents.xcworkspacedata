@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <Group
-      location = "container:"
-      name = "App">
-      <FileRef
-         location = "group:App/BuildGraph/BuildGraphRelease.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:App/BuildGraphDebug/BuildGraphDebug.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:App/App/App.xcodeproj">
-      </FileRef>
-   </Group>
+   <FileRef
+      location = "group:App/BuildGraph/BuildGraphRelease.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:App/BuildGraphDebug/BuildGraphDebug.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:App/App">
+   </FileRef>
    <FileRef
       location = "group:UI">
    </FileRef>

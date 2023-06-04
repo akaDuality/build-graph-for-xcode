@@ -11,8 +11,7 @@
 		1ED444FE284CF0AE005E77FA /* BuildGraphDebugUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444FD284CF0AE005E77FA /* BuildGraphDebugUITestsLaunchTests.swift */; };
 		1ED4450F284CF160005E77FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4450D284CF160005E77FA /* AppDelegate.swift */; };
 		1ED44510284CF160005E77FA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED4450E284CF160005E77FA /* main.swift */; };
-		1ED44513284CF188005E77FA /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED44512284CF188005E77FA /* App.framework */; };
-		1ED44514284CF188005E77FA /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED44512284CF188005E77FA /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		74ACCA592A2D4C6500436360 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 74ACCA582A2D4C6500436360 /* App */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,20 +23,6 @@
 			remoteInfo = BuildGraphDebug;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1ED44515284CF189005E77FA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1ED44514284CF188005E77FA /* App.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1ED444DC284CF0AC005E77FA /* BuildGraphDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraphDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ED44513284CF188005E77FA /* App.framework in Frameworks */,
+				74ACCA592A2D4C6500436360 /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,13 +122,15 @@
 				1ED444D8284CF0AC005E77FA /* Sources */,
 				1ED444D9284CF0AC005E77FA /* Frameworks */,
 				1ED444DA284CF0AC005E77FA /* Resources */,
-				1ED44515284CF189005E77FA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = BuildGraphDebug;
+			packageProductDependencies = (
+				74ACCA582A2D4C6500436360 /* App */,
+			);
 			productName = BuildGraphDebug;
 			productReference = 1ED444DC284CF0AC005E77FA /* BuildGraphDebug.app */;
 			productType = "com.apple.product-type.application";
@@ -479,6 +466,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		74ACCA582A2D4C6500436360 /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1ED444D4284CF0AC005E77FA /* Project object */;
 }
