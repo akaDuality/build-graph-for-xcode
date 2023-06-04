@@ -21,7 +21,7 @@ public class TestBundle {
     }
     
     public func snapshot(name: String) throws -> XcodeBuildSnapshot {
-        let url = Bundle(for: TestBundle.self)
+        let url = Bundle.module
             .url(forResource: name,
                  withExtension: "bgbuildsnapshot")!
         
