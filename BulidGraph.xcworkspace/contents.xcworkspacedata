@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "group:XCLogParser">
-   </FileRef>
-   <FileRef
-      location = "group:Domain">
-   </FileRef>
    <Group
       location = "container:"
       name = "App">
@@ -20,17 +14,13 @@
          location = "group:App/App/App.xcodeproj">
       </FileRef>
    </Group>
-   <Group
-      location = "group:BuildGraph/../UI"
-      name = "UI">
-      <FileRef
-         location = "group:Details/Details.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Projects/Projects.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:Filters/Filters.xcodeproj">
-      </FileRef>
-   </Group>
+   <FileRef
+      location = "group:UI">
+   </FileRef>
+   <FileRef
+      location = "group:Domain">
+   </FileRef>
+   <FileRef
+      location = "group:XCLogParser">
+   </FileRef>
 </Workspace>

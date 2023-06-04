@@ -113,9 +113,9 @@
         "package": "swift-custom-dump",
         "repositoryURL": "https://github.com/pointfreeco/swift-custom-dump",
         "state": {
-          "branch": "main",
-          "revision": "21ec1d717c07cea5a026979cb0471dd95c7087e7",
-          "version": null
+          "branch": null,
+          "revision": "505aa98716275fbd045d8f934fee3337c82ffbd3",
+          "version": "0.10.3"
         }
       },
       {
@@ -125,6 +125,15 @@
           "branch": null,
           "revision": "0af9125c4eae12a4973fb66574c53a54962a9e1e",
           "version": "1.21.0"
+        }
+      },
+      {
+        "package": "swift-snapshot-testing",
+        "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
+        "state": {
+          "branch": null,
+          "revision": "cef5b3f6f11781dd4591bdd1dd0a3d22bd609334",
+          "version": "1.11.0"
         }
       },
       {

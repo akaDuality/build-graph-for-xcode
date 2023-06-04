@@ -10,7 +10,6 @@ import XCTest
 import Snapshot
 
 import CustomDump
-import Projects
 
 class DetailsStatePresenterTests: XCTestCase {
 
@@ -73,12 +72,12 @@ class DetailsStatePresenterTests: XCTestCase {
     func test_whenLoadFile_shouldShowNoEventsState() throws {
         try loadFile(name: "SimpleClean")
         
-        guard case let .data(project, title, _) = ui.states.last else {
+        guard case let .data(parsedProject) = ui.states.last else {
             XCTFail("Expect data state on UI"); return
         }
         
         XCTAssertNoDifference(
-            project.events.map(\.taskName),
+            parsedProject.project.events.map(\.taskName),
             ["NQueue",
              "NInject",
              "NI18n",
@@ -93,12 +92,12 @@ class DetailsStatePresenterTests: XCTestCase {
              "PaymentSDK",
              "SDK-ios"])
         
-        XCTAssertEqual(title, "Build SDK-ios")
+        XCTAssertEqual(parsedProject.title, "Build SDK-ios")
     }
     
     func test_filterdProject_whenUpdateFilter_shouldRememberAboutDependencies() throws {
         try loadFile(name: "SimpleClean")
-        guard case let .data(project, _, _) = ui.states.last else {
+        guard case let .data(parsedProject) = ui.states.last else {
             XCTFail()
             return
         }
@@ -106,7 +105,7 @@ class DetailsStatePresenterTests: XCTestCase {
         let filter = FilterSettings()
         filter.cacheVisibility = .all
 
-        let newProject = sut.updateWithFilter(oldProject: project, filter: filter)
+        let newProject = sut.updateWithFilter(oldProject: parsedProject.project, filter: filter)
         XCTAssertNotNil(newProject.cachedDependencies)
         
         filter.cacheVisibility = .cached

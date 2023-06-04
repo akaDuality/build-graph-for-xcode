@@ -6,6 +6,7 @@
 //
 
 import BuildParser
+import Foundation
 
 protocol ProjectSettingsProtocol {
     var selectedProject: String? { get set }

@@ -6,6 +6,7 @@
 //
 
 import BuildParser
+import Foundation
 
 class ProjectsFinderMock: ProjectsFinderProtocol {
     var projects = [ProjectReference]()

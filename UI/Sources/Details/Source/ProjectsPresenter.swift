@@ -7,7 +7,6 @@
 
 import Foundation
 import BuildParser
-import Details
 
 protocol ProjectsSelectionDelegate: AnyObject {
     func didSelect(project: ProjectReference?)
@@ -67,11 +66,12 @@ class ProjectsPresenter {
     }
     
     private func selectedProject(in projects: [ProjectReference]) -> ProjectReference? {
-        guard let selectedProjectName = uiSettings.selectedProject else { return nil }
-        
-        return projects.first(where: { project in
-            project.name == selectedProjectName
-        })
+        return nil // TODO: Uncomment
+//        guard let selectedProjectName = uiSettings.selectedProject else { return nil }
+//        
+//        return projects.first(where: { project in
+//            project.name == selectedProjectName
+//        })
     }
     
     private(set) var projects: [ProjectReference] = []

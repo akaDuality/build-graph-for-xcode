@@ -6,6 +6,7 @@
 //
 
 import BuildParser
+import Foundation
 
 class DerivedDataStub {
     let derivedData = URL(fileURLWithPath: "/Users/rubanov/Library/Developer/Xcode/DerivedData")
