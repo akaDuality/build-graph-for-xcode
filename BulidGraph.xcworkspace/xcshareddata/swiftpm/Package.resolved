@@ -128,15 +128,6 @@
         }
       },
       {
-        "package": "swift-snapshot-testing",
-        "repositoryURL": "git@github.com:pointfreeco/swift-snapshot-testing.git",
-        "state": {
-          "branch": "main",
-          "revision": "f5489a273ddd57239fd68b9889b3b541bdcbfa3a",
-          "version": null
-        }
-      },
-      {
         "package": "xctest-dynamic-overlay",
         "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
         "state": {
