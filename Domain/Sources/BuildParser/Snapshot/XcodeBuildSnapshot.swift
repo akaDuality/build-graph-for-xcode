@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import BuildParser
 import AppKit
 
 // https://www.raywenderlich.com/5244-document-based-apps-tutorial-getting-started

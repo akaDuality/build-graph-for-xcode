@@ -13,12 +13,6 @@ let package = Package(
                 "GraphParser",
             ]),
         .library(
-            name: "BuildParser",
-            targets: ["BuildParser"]),
-        .library(
-            name: "GraphParser",
-            targets: ["GraphParser"]),
-        .library(
             name: "Snapshot",
             targets: ["Snapshot"]),
     ],
@@ -40,6 +34,7 @@ let package = Package(
                 "BuildParser",
                 "Snapshot",
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing", condition: nil),
+                .product(name: "CustomDump", package: "swift-custom-dump", condition: nil),
             ]),
         .target(
             name: "GraphParser"
@@ -53,7 +48,10 @@ let package = Package(
             ]),
         
         .target(
-            name: "Snapshot",
+            name: "Snapshot", // TODO: rename to make test purpose explicit
+            dependencies: [
+                "BuildParser",
+            ],
             resources: [
                 .copy("Samples/IncrementalWithBigGap.bgbuildsnapshot"),
                 .copy("Samples/PrepareBuildOnly.bgbuildsnapshot"),

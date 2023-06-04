@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Details
+import BuildParser
 
 public class TestBundle {
     
