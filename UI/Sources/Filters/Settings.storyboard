@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Settings Popover View Controller-->
         <scene sceneID="nCs-C1-vSk">
             <objects>
-                <viewController storyboardIdentifier="Settings" id="i5P-uT-lAI" customClass="SettingsPopoverViewController" customModule="Filters" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Settings" id="i5P-uT-lAI" customClass="SettingsPopoverViewController" customModule="Filters" sceneMemberID="viewController">
                     <view key="view" id="DJs-8H-6iB">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="800"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box title="Compilation" translatesAutoresizingMaskIntoConstraints="NO" id="cvp-Jd-EPS">
-                                <rect key="frame" x="15" y="626" width="250" height="44"/>
+                                <rect key="frame" x="15" y="624" width="250" height="46"/>
                                 <view key="contentView" id="kk8-Ht-hFn">
-                                    <rect key="frame" x="3" y="3" width="244" height="24"/>
+                                    <rect key="frame" x="4" y="5" width="242" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbr-yY-b1b">
-                                            <rect key="frame" x="0.0" y="0.0" width="244" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="242" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>
@@ -35,13 +35,13 @@
                                 <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
                             </box>
                             <box title="Other" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-G6-FUa">
-                                <rect key="frame" x="15" y="536" width="250" height="44"/>
+                                <rect key="frame" x="15" y="534" width="250" height="46"/>
                                 <view key="contentView" id="gBC-CM-QwR">
-                                    <rect key="frame" x="3" y="3" width="244" height="24"/>
+                                    <rect key="frame" x="4" y="5" width="242" height="24"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lst-8O-MWA">
-                                            <rect key="frame" x="0.0" y="0.0" width="244" height="24"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="242" height="24"/>
                                             <edgeInsets key="edgeInsets" left="12" right="16" top="8" bottom="16"/>
                                         </stackView>
                                     </subviews>
@@ -55,7 +55,7 @@
                                 <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
                             </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P5m-Ia-AQZ">
-                                <rect key="frame" x="18" y="604" width="77" height="18"/>
+                                <rect key="frame" x="19" y="604" width="77" height="18"/>
                                 <buttonCell key="cell" type="inline" title="Check all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MPW-Z6-Ajh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -65,7 +65,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hrA-vi-u8q">
-                                <rect key="frame" x="188" y="514" width="74" height="18"/>
+                                <rect key="frame" x="187" y="514" width="74" height="18"/>
                                 <buttonCell key="cell" type="inline" title="Uncheck all" bezelStyle="inline" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kag-S5-b93">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystemBold"/>
@@ -75,13 +75,13 @@
                                 </connections>
                             </button>
                             <box title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="KVd-fa-EXc">
-                                <rect key="frame" x="15" y="401" width="250" height="105"/>
+                                <rect key="frame" x="16" y="399" width="248" height="107"/>
                                 <view key="contentView" id="KR2-6I-21J">
-                                    <rect key="frame" x="3" y="3" width="244" height="85"/>
+                                    <rect key="frame" x="4" y="5" width="240" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-NO-yzk">
-                                            <rect key="frame" x="0.0" y="0.0" width="244" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="85"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13W-4J-Bj2">
                                                     <rect key="frame" x="10" y="61" width="81" height="16"/>
@@ -132,7 +132,7 @@
                                 <font key="titleFont" textStyle="headline" name=".SFNS-Bold"/>
                             </box>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UCV-iQ-jnk">
-                                <rect key="frame" x="16" y="705" width="248" height="24"/>
+                                <rect key="frame" x="17" y="705" width="246" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="IIo-vl-jBT">
                                     <font key="font" metaFont="system"/>
                                     <segments>

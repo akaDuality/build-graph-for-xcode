@@ -21,7 +21,7 @@ public class SettingsPopoverViewController: NSViewController {
     ) -> NSViewController {
         let storyboard = NSStoryboard(
             name: "Settings",
-            bundle: Bundle(for: SettingsPopoverViewController.self))
+            bundle: Bundle.module)
         
         let settingsController = storyboard.instantiateController(
             withIdentifier: "Settings") as! SettingsPopoverViewController

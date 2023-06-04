@@ -39,7 +39,7 @@ public class DetailsStateViewController: StateViewController<DetailsState> {
         super.init(coder: coder)
         
         self.stateFactory = { state in
-            let storyboard = NSStoryboard(name: "Details", bundle: Bundle(for: type(of: self)))
+            let storyboard = NSStoryboard(name: "Details", bundle: Bundle.module)
             
             switch state {
             case .blank:

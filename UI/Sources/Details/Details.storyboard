@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21179.7" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21179.7"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,12 +10,12 @@
         <!--Detail View Controller-->
         <scene sceneID="Wbn-Um-3ry">
             <objects>
-                <viewController storyboardIdentifier="data" id="mdS-38-uT0" customClass="DetailViewController" customModule="Details" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" id="Iu8-Pp-pFO" customClass="DetailView" customModule="Details" customModuleProvider="target">
+                <viewController storyboardIdentifier="data" id="mdS-38-uT0" customClass="DetailViewController" customModule="Details" sceneMemberID="viewController">
+                    <view key="view" autoresizesSubviews="NO" id="Iu8-Pp-pFO" customClass="DetailView" customModule="Details">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D" customClass="HUDScrollView" customModule="Details" customModuleProvider="target">
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" allowsMagnification="YES" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="zGP-rt-v5D" customClass="HUDScrollView" customModule="Details">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
                                 <clipView key="contentView" id="kmJ-xz-3Wv">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="218"/>
@@ -36,7 +36,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ddB-Q6-2lq" customClass="HUDView" customModule="Details" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ddB-Q6-2lq" customClass="HUDView" customModule="Details">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvU-A5-cDZ" userLabel="Zoom controls">
@@ -150,7 +150,7 @@
         <!--Loading View Controller-->
         <scene sceneID="5RB-OX-ktn">
             <objects>
-                <viewController storyboardIdentifier="loading" id="4EO-VF-8Wl" customClass="LoadingViewController" customModule="Details" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loading" id="4EO-VF-8Wl" customClass="LoadingViewController" customModule="Details" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="exb-51-eaO">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <subviews>
@@ -174,7 +174,7 @@
         <!--Retry View Controller-->
         <scene sceneID="gbv-xA-DnE">
             <objects>
-                <viewController storyboardIdentifier="retry" id="hqM-UB-Pyh" customClass="RetryViewController" customModule="Details" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="retry" id="hqM-UB-Pyh" customClass="RetryViewController" customModule="Details" sceneMemberID="viewController">
                     <view key="view" id="9Xc-mZ-syu">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>

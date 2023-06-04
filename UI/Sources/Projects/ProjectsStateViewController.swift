@@ -26,7 +26,7 @@ public class ProjectsStateViewController: StateViewController<ProjectsState>, Pr
         super.init(coder: coder)
         
         self.stateFactory = { state in
-            let storyboard = NSStoryboard(name: "Projects", bundle: Bundle(for: type(of: self)))
+            let storyboard = NSStoryboard(name: "Projects", bundle: Bundle.module)
             
             switch state {
             case .loading:

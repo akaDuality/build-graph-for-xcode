@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,8 +10,8 @@
         <!--No Projects View Controller-->
         <scene sceneID="PEd-7d-5j0">
             <objects>
-                <viewController storyboardIdentifier="empty" id="bU7-R8-ocO" customClass="NoProjectsViewController" customModule="Projects" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="tOy-S4-hL0" customClass="NoProjectsView" customModule="Projects" customModuleProvider="target">
+                <viewController storyboardIdentifier="empty" id="bU7-R8-ocO" customClass="NoProjectsViewController" customModule="Projects" sceneMemberID="viewController">
+                    <view key="view" id="tOy-S4-hL0" customClass="NoProjectsView" customModule="Projects">
                         <rect key="frame" x="0.0" y="0.0" width="282" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -139,8 +140,8 @@
         <!--Projects Outline View Controller-->
         <scene sceneID="vaX-4m-xVW">
             <objects>
-                <viewController storyboardIdentifier="projects" id="O8g-gR-oDc" customClass="ProjectsOutlineViewController" customModule="Projects" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Dan-Tq-aY8" customClass="ProjectsOutlineView" customModule="Projects" customModuleProvider="target">
+                <viewController storyboardIdentifier="projects" id="O8g-gR-oDc" customClass="ProjectsOutlineViewController" customModule="Projects" sceneMemberID="viewController">
+                    <view key="view" id="Dan-Tq-aY8" customClass="ProjectsOutlineView" customModule="Projects">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -246,8 +247,8 @@
         <!--No Access View Controller-->
         <scene sceneID="usj-BB-QZx">
             <objects>
-                <viewController storyboardIdentifier="noAccess" id="QnW-fe-Syf" customClass="NoAccessViewController" customModule="Projects" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="3MY-c0-tAL" customClass="NoProjectsView" customModule="Projects" customModuleProvider="target">
+                <viewController storyboardIdentifier="noAccess" id="QnW-fe-Syf" customClass="NoAccessViewController" customModule="Projects" sceneMemberID="viewController">
+                    <view key="view" id="3MY-c0-tAL" customClass="NoProjectsView" customModule="Projects">
                         <rect key="frame" x="0.0" y="0.0" width="282" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>

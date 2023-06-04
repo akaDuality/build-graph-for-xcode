@@ -11,7 +11,7 @@ public class AppMenu: NSMenu {
     public static func menu() -> NSMenu {
         var topLevelObjects: NSArray? = []
         
-        Bundle(for: WindowController.self)
+        Bundle.module
             .loadNibNamed("Application", owner: self, topLevelObjects: &topLevelObjects)
         
         return topLevelObjects?.filter { $0 is NSMenu }.first as! NSMenu

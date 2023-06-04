@@ -13,7 +13,7 @@ import BuildParser
 public class WindowController: NSWindowController, NSWindowDelegate {
     
     public static func fromStoryboard() -> NSWindowController {
-        let storyboard = NSStoryboard(name: "Main", bundle: Bundle(for: WindowController.self))
+        let storyboard = NSStoryboard(name: "Main", bundle: Bundle.module)
         
         return storyboard.instantiateInitialController() as! NSWindowController
     }
