@@ -23,42 +23,39 @@ public class DependencyParser15 {
         let strings = input.components(separatedBy: "\n")
             .dropFirst() // No need in "Target dependency graph ..."
        
-        let deps = deps(Array(strings))
+        let deps = dependenciesChunks(Array(strings))
             .compactMap(dependency(from:))
         return deps
     }
     
-    func deps(_ strings: [String]) -> [[String]] {
-        var indices = [Int]()
+    func dependenciesChunks(_ strings: [String]) -> [[String]] {
+        var chunkStartIndexes = [Int]()
         for (index, string) in strings.enumerated() {
-            let startOfDependencies = string.contains("➜ ")
-            if startOfDependencies {
-                indices.append(index)
+            let startOfDependenciesChunk = !string.contains("➜ ")
+            if startOfDependenciesChunk {
+                chunkStartIndexes.append(index)
             }
         }
         
         var result = [[String]]()
-        for (i, index) in indices.dropLast().enumerated() {
-            let nextIndex = indices[i + 1]
-            let range = index..<nextIndex
+        for (i, chunkStart) in chunkStartIndexes
+            .dropLast() // will increment index
+            .enumerated()
+        {
+            let nextIndex = chunkStartIndexes[i + 1]
+            let range = chunkStart..<nextIndex
             let depsDescription = strings[range]
             result.append(Array(depsDescription))
         }
         
-        guard indices.count > 0 else { return [] }
+        guard chunkStartIndexes.count > 0 else { return [] }
         
-        result.append(Array(strings[indices.last!...(strings.count - 1)]))
+        result.append(Array(strings[chunkStartIndexes.last!...(strings.count - 1)]))
         
         return result
     }
     
-    func parse(_ input: String) -> Dependency? {
-        let strings = input.components(separatedBy: "\n")
-        
-        return dependency(from: strings)
-    }
-    
-    private func dependency(from strings: [String]) -> Dependency? {
+    func dependency(from strings: [String]) -> Dependency? {
         var deps: [Target] = []
         if strings.count > 1 {
             deps = strings.dropFirst().map(parseTarget(_:))
@@ -66,9 +63,9 @@ public class DependencyParser15 {
         
         let target = parseTarget(strings[0])
         
-        guard !deps.hasRecursiveDependencies(to: target) else {
-            return nil
-        }
+//        guard !deps.hasRecursiveDependencies(to: target) else {
+//            return nil
+//        }
                 
         return Dependency(
             target: target,

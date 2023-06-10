@@ -52,13 +52,7 @@ public class DependencyParser {
         return result
     }
     
-    func parse(_ input: String) -> Dependency? {
-        let strings = input.components(separatedBy: "\n")
-        
-        return dependency(from: strings)
-    }
-    
-    private func dependency(from strings: [String]) -> Dependency? {
+    func dependency(from strings: [String]) -> Dependency? {
         var deps: [Target] = []
         if strings[0].hasSuffix(", depends on:") {
             deps = strings.dropFirst().map(parseTarget(_:))

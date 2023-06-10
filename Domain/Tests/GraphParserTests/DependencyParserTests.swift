@@ -30,7 +30,7 @@ class BuildGraphTests: XCTestCase {
                                     project: "libPhoneNumber-iOS")
     
     func test_noDependency_Crypto() {
-        let dependency = parse("Crypto in Crypto, no dependencies")
+        let dependency = parseDependency("Crypto in Crypto, no dependencies")
         
         XCTAssertNoDifference(
             dependency,
@@ -40,7 +40,7 @@ class BuildGraphTests: XCTestCase {
     
     func test_noDependency_Autocomplete() {
         
-        let dependency = parse("Acquirers in Acquirers, no dependencies")
+        let dependency = parseDependency("Acquirers in Acquirers, no dependencies")
         
         XCTAssertNoDifference(
             dependency,
@@ -49,7 +49,7 @@ class BuildGraphTests: XCTestCase {
     }
     
     func test_1Dependency() throws {
-        let dependency = parse(
+        let dependency = parseDependency(
 """
 Acquirers in Acquirers, depends on:
 Crypto in Crypto (explicit)
@@ -67,7 +67,7 @@ Crypto in Crypto (explicit)
         let NCallback = Target(target: "NCallback", project: "NCallback")
         let NQueue = Target(target: "NQueue", project: "NQueue")
         
-        let dependency = parse(
+        let dependency = parseDependency(
 """
 DCommon in DCommon, depends on:
 NCallback in NCallback (explicit)
@@ -84,7 +84,7 @@ NQueue in NQueue (explicit)
         let MindBoxNotification = Target(target: "MindBoxNotification", project: "DodoPizza")
         let nanopb = Target(target: "nanopb", project: "nanopb")
         
-        let dependency = parse(
+        let dependency = parseDependency(
 """
 MindBoxNotification in DodoPizza, depends on:
 nanopb in nanopb (implicit dependency via options '-framework nanopb' in build setting 'OTHER_LDFLAGS')
@@ -121,7 +121,7 @@ HCaptcha-HCaptcha in HCaptcha (explicit)
     }
     
     func test_dashBothDependency() throws {
-        let dependency = parse(
+        let dependency = parseDependency(
 """
 libPhoneNumber-iOS in libPhoneNumber-iOS, no dependencies
 """
@@ -185,35 +185,59 @@ Crypto in Crypto (explicit)
             ])
     }
     
-    func parse(_ input: String) -> Dependency {
-        DependencyParser().parse(input)!
+    func parseDependency(_ input: String) -> Dependency {
+        let strings = input.components(separatedBy: "\n")
+
+        return DependencyParser().dependency(from: strings)!
     }
     
     func parseFile(_ input: String) -> [Dependency] {
         DependencyParser().parseFile(input)
     }
+}
+
+// MARK: Xcode 15
+class BuildGraphTests_Xcode15: XCTestCase {
     
-    // MARK: Xcode 15
-    
-    func test_xcode15_part() {
-        let depedencies = DependencyParser15().parseFile("""
-Target dependency graph (1 targets)
+    func test_singleDependencyXcode15() {
+        let depedencies = parseDependency("""
 Target \'App\' in project \'App\'
 ➜ Explicit dependency on target \'App\' in project \'App\'
 ➜ Explicit dependency on target \'App_App\' in project \'App\'
 ➜ Explicit dependency on target \'UI\' in project \'UI\'
 """)
         
-        XCTAssertNoDifference(depedencies, [
+        XCTAssertNoDifference(
+            depedencies,
             Dependency(target: Target(target: "App", project: "App"),
                        dependencies: [
                         Target(target: "App", project: "App"),
                         Target(target: "App_App", project: "App"),
                         Target(target: "UI", project: "UI"),
                        ])
-            ])
+        )
+    }
+    
+    func test_xcode15File() {
+        let dependencies = parseFile(xcode15)
+        
+        assertSnapshot(
+            matching: dependencies,
+            as: .description
+        )
+    }
+    
+    func parseDependency(_ input: String) -> Dependency {
+        let strings = input.components(separatedBy: "\n")
+        
+        return DependencyParser15().dependency(from: strings)!
+    }
+    
+    func parseFile(_ input: String) -> [Dependency] {
+        DependencyParser15().parseFile(input)
     }
 }
+
 
 let xcode15 = """
 Target dependency graph (19 targets)
