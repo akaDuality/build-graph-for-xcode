@@ -185,20 +185,6 @@ Crypto in Crypto (explicit)
             ])
     }
     
-    func test_recursiveDependency2Times() throws {
-        throw XCTSkip("Insert any text to analyze")
-        let dependencies = parseFile(
-"""
-"""
-        )
-        
-        XCTAssertNoDifference(
-            dependencies,
-            [
-                
-            ])
-    }
-    
     func parse(_ input: String) -> Dependency {
         DependencyParser().parse(input)!
     }
@@ -206,4 +192,134 @@ Crypto in Crypto (explicit)
     func parseFile(_ input: String) -> [Dependency] {
         DependencyParser().parseFile(input)
     }
+    
+    // MARK: Xcode 15
+    
+    func test_xcode15_part() {
+        let depedencies = DependencyParser15().parseFile("""
+Target dependency graph (1 targets)
+Target \'App\' in project \'App\'
+➜ Explicit dependency on target \'App\' in project \'App\'
+➜ Explicit dependency on target \'App_App\' in project \'App\'
+➜ Explicit dependency on target \'UI\' in project \'UI\'
+""")
+        
+        XCTAssertNoDifference(depedencies, [
+            Dependency(target: Target(target: "App", project: "App"),
+                       dependencies: [
+                        Target(target: "App", project: "App"),
+                        Target(target: "App_App", project: "App"),
+                        Target(target: "UI", project: "UI"),
+                       ])
+            ])
+    }
 }
+
+let xcode15 = """
+Target dependency graph (19 targets)
+Target \'BuildGraphDebug\' in project \'BuildGraphDebug\'
+➜ Explicit dependency on target \'App\' in project \'App\'
+Target \'App\' in project \'App\'
+➜ Explicit dependency on target \'App\' in project \'App\'
+➜ Explicit dependency on target \'App_App\' in project \'App\'
+➜ Explicit dependency on target \'UI\' in project \'UI\'
+Target \'App\' in project \'App\'
+➜ Explicit dependency on target \'App_App\' in project \'App\'
+➜ Explicit dependency on target \'UI\' in project \'UI\'
+Target \'UI\' in project \'UI\'
+➜ Explicit dependency on target \'Details\' in project \'UI\'
+➜ Explicit dependency on target \'Filters\' in project \'UI\'
+➜ Explicit dependency on target \'Projects\' in project \'UI\'
+➜ Explicit dependency on target \'UI_Details\' in project \'UI\'
+➜ Explicit dependency on target \'UI_Filters\' in project \'UI\'
+➜ Explicit dependency on target \'UI_Projects\' in project \'UI\'
+➜ Explicit dependency on target \'Domain\' in project \'Domain\'
+➜ Explicit dependency on target \'XCLogParser\' in project \'XCLogParser\'
+Target \'Projects\' in project \'UI\'
+➜ Explicit dependency on target \'UI_Projects\' in project \'UI\'
+➜ Explicit dependency on target \'Domain\' in project \'Domain\'
+Target \'UI_Projects\' in project \'UI\' (no dependencies)
+Target \'Filters\' in project \'UI\'
+➜ Explicit dependency on target \'UI_Filters\' in project \'UI\'
+➜ Explicit dependency on target \'Domain\' in project \'Domain\'
+Target \'UI_Filters\' in project \'UI\' (no dependencies)
+Target \'Details\' in project \'UI\'
+➜ Explicit dependency on target \'UI_Details\' in project \'UI\'
+➜ Explicit dependency on target \'Domain\' in project \'Domain\'
+➜ Explicit dependency on target \'XCLogParser\' in project \'XCLogParser\'
+Target \'Domain\' in project \'Domain\'
+➜ Explicit dependency on target \'BuildParser\' in project \'Domain\'
+➜ Explicit dependency on target \'GraphParser\' in project \'Domain\'
+➜ Explicit dependency on target \'XCLogParser\' in project \'XCLogParser\'\nTarget \'BuildParser\' in project \'Domain\'
+➜ Explicit dependency on target \'GraphParser\' in project \'Domain\'
+➜ Explicit dependency on target \'XCLogParser\' in project \'XCLogParser\'
+Target \'XCLogParser\' in project \'XCLogParser\'
+➜ Explicit dependency on target \'XCLogParser\' in project \'XCLogParser\'
+➜ Explicit dependency on target \'Gzip\' in project \'Gzip\'
+Target \'XCLogParser\' in project \'XCLogParser\'
+➜ Explicit dependency on target \'Gzip\' in project \'Gzip\'
+Target \'Gzip\' in project \'Gzip\'
+➜ Explicit dependency on target \'Gzip\' in project \'Gzip\'
+➜ Explicit dependency on target \'system-zlib\' in project \'Gzip\'
+Target \'Gzip\' in project \'Gzip\'
+➜ Explicit dependency on target \'system-zlib\' in project \'Gzip\'
+Target \'system-zlib\' in project \'Gzip\' (no dependencies)
+Target \'GraphParser\' in project \'Domain\' (no dependencies)
+Target \'UI_Details\' in project \'UI\' (no dependencies)
+Target \'App_App\' in project \'App\' (no dependencies)
+"""
+
+let xcode14 = """
+Target dependency graph (19 targets)
+App_App in App, no dependencies
+UI_Details in UI, no dependencies
+GraphParser in Domain, no dependencies
+system-zlib in Gzip, no dependencies
+Gzip in Gzip, depends on:
+system-zlib in Gzip (explicit)
+Gzip in Gzip, depends on:
+Gzip in Gzip (explicit)
+system-zlib in Gzip (explicit)
+XCLogParser in XCLogParser, depends on:
+Gzip in Gzip (explicit)
+XCLogParser in XCLogParser, depends on:
+XCLogParser in XCLogParser (explicit)
+Gzip in Gzip (explicit)
+BuildParser in Domain, depends on:
+GraphParser in Domain (explicit)
+XCLogParser in XCLogParser (explicit)
+Domain in Domain, depends on:
+BuildParser in Domain (explicit)
+GraphParser in Domain (explicit)
+XCLogParser in XCLogParser (explicit)
+Details in UI, depends on:
+UI_Details in UI (explicit)
+Domain in Domain (explicit)
+XCLogParser in XCLogParser (explicit)
+UI_Filters in UI, no dependencies
+Filters in UI, depends on:
+UI_Filters in UI (explicit)
+Domain in Domain (explicit)
+UI_Projects in UI, no dependencies
+Projects in UI, depends on:
+UI_Projects in UI (explicit)
+Domain in Domain (explicit)
+UI in UI, depends on:
+Details in UI (explicit)
+Filters in UI (explicit)
+Projects in UI (explicit)
+UI_Details in UI (explicit)
+UI_Filters in UI (explicit)
+UI_Projects in UI (explicit)
+Domain in Domain (explicit)
+XCLogParser in XCLogParser (explicit)
+App in App, depends on:
+App_App in App (explicit)
+UI in UI (explicit)
+App in App, depends on:
+App in App (explicit)
+App_App in App (explicit)
+UI in UI (explicit)
+BuildGraphDebug in BuildGraphDebug, depends on:
+App in App (explicit)
+"""

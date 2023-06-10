@@ -88,6 +88,16 @@
                ReferencedContainer = "container:../../UI">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1ED444F6284CF0AE005E77FA"
+               BuildableName = "BuildGraphDebugUITests.xctest"
+               BlueprintName = "BuildGraphDebugUITests"
+               ReferencedContainer = "container:BuildGraphDebug.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
