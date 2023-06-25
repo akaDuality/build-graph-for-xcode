@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <application id="SGq-9q-EM6">
-            <menu key="mainMenu" title="Main Menu" systemMenu="main" id="zUf-er-cKY">
+            <menu key="mainMenu" title="Main Menu" systemMenu="main" id="zUf-er-cKY" customClass="AppMenu" customModule="App">
                 <items>
                     <menuItem title="BuildGraph" id="qd6-3V-UIq">
                         <modifierMask key="keyEquivalentModifierMask"/>
@@ -59,96 +59,10 @@
                         <modifierMask key="keyEquivalentModifierMask"/>
                         <menu key="submenu" title="File" id="C0Q-p8-kc7">
                             <items>
-                                <menuItem title="New" keyEquivalent="n" id="Dh2-KK-wo1">
-                                    <connections>
-                                        <action selector="newDocument:" target="-1" id="5sG-Qa-OIs"/>
-                                    </connections>
-                                </menuItem>
-                                <menuItem title="Open…" keyEquivalent="o" id="eH4-TJ-icS">
-                                    <connections>
-                                        <action selector="openDocument:" target="-1" id="vr0-FR-ECI"/>
-                                    </connections>
-                                </menuItem>
-                                <menuItem title="Open Recent" id="arw-FG-oNw">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                    <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="jZr-2c-KPW">
-                                        <items>
-                                            <menuItem title="Clear Menu" id="VzH-4r-pMX">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                                <connections>
-                                                    <action selector="clearRecentDocuments:" target="-1" id="lNY-Au-lai"/>
-                                                </connections>
-                                            </menuItem>
-                                        </items>
-                                    </menu>
-                                </menuItem>
-                                <menuItem isSeparatorItem="YES" id="aBQ-gE-aPt"/>
                                 <menuItem title="Close" keyEquivalent="w" id="9hK-Aj-p89">
                                     <connections>
                                         <action selector="performClose:" target="-1" id="kM2-wq-b6m"/>
                                     </connections>
-                                </menuItem>
-                                <menuItem title="Save…" keyEquivalent="s" id="qMS-d8-uCi">
-                                    <connections>
-                                        <action selector="saveDocument:" target="-1" id="OtS-c9-YO7"/>
-                                    </connections>
-                                </menuItem>
-                                <menuItem title="Save As…" keyEquivalent="S" id="AJ3-wc-m4g">
-                                    <connections>
-                                        <action selector="saveDocumentAs:" target="-1" id="Fbo-6j-2lu"/>
-                                    </connections>
-                                </menuItem>
-                                <menuItem title="Revert to Saved" keyEquivalent="r" id="NSw-g5-huD">
-                                    <connections>
-                                        <action selector="revertDocumentToSaved:" target="-1" id="9GT-Ne-oEc"/>
-                                    </connections>
-                                </menuItem>
-                                <menuItem isSeparatorItem="YES" id="c84-d9-0hC"/>
-                                <menuItem title="Page Setup…" keyEquivalent="P" id="su7-wh-jFv">
-                                    <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                    <connections>
-                                        <action selector="runPageLayout:" target="-1" id="zGa-B2-3Wf"/>
-                                    </connections>
-                                </menuItem>
-                                <menuItem title="Print…" keyEquivalent="p" id="7Yz-c4-iH1">
-                                    <connections>
-                                        <action selector="print:" target="-1" id="pHT-Df-Qt5"/>
-                                    </connections>
-                                </menuItem>
-                            </items>
-                        </menu>
-                    </menuItem>
-                    <menuItem title="Edit" id="bLt-jf-guD">
-                        <modifierMask key="keyEquivalentModifierMask"/>
-                        <menu key="submenu" title="Edit" id="ym8-sq-a1d">
-                            <items>
-                                <menuItem title="Find" id="AiD-qg-s7t">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                    <menu key="submenu" title="Find" id="ZiX-Qd-agU">
-                                        <items>
-                                            <menuItem title="Find…" tag="1" keyEquivalent="f" id="waL-09-Bwe">
-                                                <connections>
-                                                    <action selector="performFindPanelAction:" target="-1" id="7TC-56-0Bp"/>
-                                                </connections>
-                                            </menuItem>
-                                        </items>
-                                    </menu>
-                                </menuItem>
-                            </items>
-                        </menu>
-                    </menuItem>
-                    <menuItem title="Format" id="gdj-sq-Oc0">
-                        <modifierMask key="keyEquivalentModifierMask"/>
-                        <menu key="submenu" title="Format" id="EZl-kE-PwM">
-                            <items>
-                                <menuItem title="Font" id="pIE-03-2Kk">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                    <menu key="submenu" title="Font" systemMenu="font" id="KgY-xR-Rx5">
-                                        <items>
-                                            <menuItem title="Bigger" tag="3" keyEquivalent="+" id="fuJ-uZ-7wT"/>
-                                            <menuItem title="Smaller" tag="4" keyEquivalent="-" id="iEP-2X-bd1"/>
-                                        </items>
-                                    </menu>
                                 </menuItem>
                             </items>
                         </menu>
