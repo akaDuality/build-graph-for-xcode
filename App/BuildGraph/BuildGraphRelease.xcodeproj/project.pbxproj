@@ -10,43 +10,11 @@
 		1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */; };
 		1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */; };
 		1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */; };
-		1ED444CC284CE8FA005E77FA /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED444CB284CE8FA005E77FA /* App.framework */; };
-		1ED444CD284CE8FA005E77FA /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED444CB284CE8FA005E77FA /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1ED444D1284CEB34005E77FA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED444D0284CEB34005E77FA /* main.swift */; };
 		1EDB5E3527135F0000741EEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3427135F0000741EEF /* AppDelegate.swift */; };
 		1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDB5E3827135F0100741EEF /* Assets.xcassets */; };
+		74ACCA5B2A2D508900436360 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 74ACCA5A2A2D508900436360 /* App */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		1EDB5E4327135F0100741EEF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1EDB5E2927135F0000741EEF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EDB5E3027135F0000741EEF;
-			remoteInfo = BuildGraph;
-		};
-		1EDB5E4D27135F0100741EEF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1EDB5E2927135F0000741EEF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EDB5E3027135F0000741EEF;
-			remoteInfo = BuildGraph;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1E9AE0222800B62100851519 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1ED444CD284CE8FA005E77FA /* App.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E1EAEDF27D4A47F00D552F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -58,12 +26,10 @@
 		1E9AE01F2800B62100851519 /* Details.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Details.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444CB284CE8FA005E77FA /* App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED444D0284CEB34005E77FA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		1EDB5E3127135F0000741EEF /* BuildGraphRelease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraphRelease.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EDB5E3127135F0000741EEF /* BuildGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDB5E3427135F0000741EEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EDB5E3827135F0100741EEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EDB5E3D27135F0100741EEF /* BuildGraph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuildGraph.entitlements; sourceTree = "<group>"; };
-		1EDB5E4227135F0100741EEF /* BuildGraphReleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuildGraphReleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1EDB5E4C27135F0100741EEF /* BuildGraphReleaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BuildGraphReleaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,23 +37,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74ACCA5B2A2D508900436360 /* App in Frameworks */,
 				1E1EAEDC27D4A36100D552F6 /* FirebaseCrashlytics in Frameworks */,
-				1ED444CC284CE8FA005E77FA /* App.framework in Frameworks */,
 				1E1EAEDA27D4A36100D552F6 /* FirebaseAnalytics in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDB5E3F27135F0100741EEF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDB5E4927135F0100741EEF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,9 +60,7 @@
 		1EDB5E3227135F0000741EEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1EDB5E3127135F0000741EEF /* BuildGraphRelease.app */,
-				1EDB5E4227135F0100741EEF /* BuildGraphReleaseTests.xctest */,
-				1EDB5E4C27135F0100741EEF /* BuildGraphReleaseUITests.xctest */,
+				1EDB5E3127135F0000741EEF /* BuildGraph.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,63 +92,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1EDB5E3027135F0000741EEF /* BuildGraphRelease */ = {
+		1EDB5E3027135F0000741EEF /* BuildGraph */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphRelease" */;
+			buildConfigurationList = 1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraph" */;
 			buildPhases = (
 				1EDB5E2D27135F0000741EEF /* Sources */,
 				1EDB5E2E27135F0000741EEF /* Frameworks */,
 				1EDB5E2F27135F0000741EEF /* Resources */,
-				1E9AE0222800B62100851519 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BuildGraphRelease;
+			name = BuildGraph;
 			packageProductDependencies = (
 				1E1EAED927D4A36100D552F6 /* FirebaseAnalytics */,
 				1E1EAEDB27D4A36100D552F6 /* FirebaseCrashlytics */,
+				74ACCA5A2A2D508900436360 /* App */,
 			);
 			productName = BuildGraph;
-			productReference = 1EDB5E3127135F0000741EEF /* BuildGraphRelease.app */;
+			productReference = 1EDB5E3127135F0000741EEF /* BuildGraph.app */;
 			productType = "com.apple.product-type.application";
-		};
-		1EDB5E4127135F0100741EEF /* BuildGraphReleaseTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1EDB5E5927135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphReleaseTests" */;
-			buildPhases = (
-				1EDB5E3E27135F0100741EEF /* Sources */,
-				1EDB5E3F27135F0100741EEF /* Frameworks */,
-				1EDB5E4027135F0100741EEF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1EDB5E4427135F0100741EEF /* PBXTargetDependency */,
-			);
-			name = BuildGraphReleaseTests;
-			productName = BuildGraphTests;
-			productReference = 1EDB5E4227135F0100741EEF /* BuildGraphReleaseTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1EDB5E4B27135F0100741EEF /* BuildGraphReleaseUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1EDB5E5C27135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphReleaseUITests" */;
-			buildPhases = (
-				1EDB5E4827135F0100741EEF /* Sources */,
-				1EDB5E4927135F0100741EEF /* Frameworks */,
-				1EDB5E4A27135F0100741EEF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1EDB5E4E27135F0100741EEF /* PBXTargetDependency */,
-			);
-			name = BuildGraphReleaseUITests;
-			productName = BuildGraphUITests;
-			productReference = 1EDB5E4C27135F0100741EEF /* BuildGraphReleaseUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -212,14 +126,6 @@
 				TargetAttributes = {
 					1EDB5E3027135F0000741EEF = {
 						CreatedOnToolsVersion = 13.0;
-					};
-					1EDB5E4127135F0100741EEF = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 1EDB5E3027135F0000741EEF;
-					};
-					1EDB5E4B27135F0100741EEF = {
-						CreatedOnToolsVersion = 13.0;
-						TestTargetID = 1EDB5E3027135F0000741EEF;
 					};
 				};
 			};
@@ -239,9 +145,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1EDB5E3027135F0000741EEF /* BuildGraphRelease */,
-				1EDB5E4127135F0100741EEF /* BuildGraphReleaseTests */,
-				1EDB5E4B27135F0100741EEF /* BuildGraphReleaseUITests */,
+				1EDB5E3027135F0000741EEF /* BuildGraph */,
 			);
 		};
 /* End PBXProject section */
@@ -253,20 +157,6 @@
 			files = (
 				1E1EAEE027D4A47F00D552F6 /* GoogleService-Info.plist in Resources */,
 				1EDB5E3927135F0100741EEF /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDB5E4027135F0100741EEF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDB5E4A27135F0100741EEF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,34 +172,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1EDB5E3E27135F0100741EEF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1EDB5E4827135F0100741EEF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1EDB5E4427135F0100741EEF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1EDB5E3027135F0000741EEF /* BuildGraphRelease */;
-			targetProxy = 1EDB5E4327135F0100741EEF /* PBXContainerItemProxy */;
-		};
-		1EDB5E4E27135F0100741EEF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1EDB5E3027135F0000741EEF /* BuildGraphRelease */;
-			targetProxy = 1EDB5E4D27135F0100741EEF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1EDB5E5427135F0100741EEF /* Debug */ = {
@@ -435,7 +298,7 @@
 				CODE_SIGN_ENTITLEMENTS = BuildGraph/BuildGraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = P67Q4Q7HA9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -447,7 +310,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akaDuality.BuildGraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -464,7 +327,7 @@
 				CODE_SIGN_ENTITLEMENTS = BuildGraph/BuildGraph.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = P67Q4Q7HA9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -476,108 +339,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.akaDuality.BuildGraph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		1EDB5E5A27135F0100741EEF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AVGCX5Z5VU;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.BuildGraphTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuildGraphRelease.app/Contents/MacOS/BuildGraphRelease";
-			};
-			name = Debug;
-		};
-		1EDB5E5B27135F0100741EEF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AVGCX5Z5VU;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.BuildGraphTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuildGraphRelease.app/Contents/MacOS/BuildGraphRelease";
-			};
-			name = Release;
-		};
-		1EDB5E5D27135F0100741EEF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AVGCX5Z5VU;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.BuildGraphUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = BuildGraph;
-			};
-			name = Debug;
-		};
-		1EDB5E5E27135F0100741EEF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AVGCX5Z5VU;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.BuildGraphUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = BuildGraph;
 			};
 			name = Release;
 		};
@@ -593,29 +360,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphRelease" */ = {
+		1EDB5E5627135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraph" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1EDB5E5727135F0100741EEF /* Debug */,
 				1EDB5E5827135F0100741EEF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1EDB5E5927135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphReleaseTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1EDB5E5A27135F0100741EEF /* Debug */,
-				1EDB5E5B27135F0100741EEF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1EDB5E5C27135F0100741EEF /* Build configuration list for PBXNativeTarget "BuildGraphReleaseUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1EDB5E5D27135F0100741EEF /* Debug */,
-				1EDB5E5E27135F0100741EEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -628,7 +377,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				minimumVersion = 10.10.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -643,6 +392,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E1EAED827D4A36100D552F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		74ACCA5A2A2D508900436360 /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

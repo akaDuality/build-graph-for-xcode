@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <application id="SGq-9q-EM6">
+            <menu key="mainMenu" title="Main Menu" systemMenu="main" id="zUf-er-cKY" customClass="AppMenu" customModule="App">
+                <items>
+                    <menuItem title="BuildGraph" id="qd6-3V-UIq">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <menu key="submenu" title="BuildGraph" systemMenu="apple" id="3by-cY-97D">
+                            <items>
+                                <menuItem title="About BuildGraph" id="dd2-hh-U7z">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                    <connections>
+                                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="wV7-2u-X4T"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem isSeparatorItem="YES" id="0ed-AW-dnw"/>
+                                <menuItem title="Preferences…" keyEquivalent="," id="i2Y-cA-tVN"/>
+                                <menuItem isSeparatorItem="YES" id="3JK-mz-k3k"/>
+                                <menuItem title="Services" id="2jM-C9-WNE">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                    <menu key="submenu" title="Services" systemMenu="services" id="zCx-T4-Ygx"/>
+                                </menuItem>
+                                <menuItem isSeparatorItem="YES" id="lUi-5t-UoT"/>
+                                <menuItem title="Hide BuildGraph" keyEquivalent="h" id="VOJ-e4-Js7">
+                                    <connections>
+                                        <action selector="hide:" target="-1" id="jvg-Rv-8Or"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem title="Hide Others" keyEquivalent="h" id="N3s-Jb-isK">
+                                    <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                    <connections>
+                                        <action selector="hideOtherApplications:" target="-1" id="WRU-ag-oMg"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem title="Show All" id="gji-Sn-dXU">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                    <connections>
+                                        <action selector="unhideAllApplications:" target="-1" id="bPN-H5-jcx"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem isSeparatorItem="YES" id="pdB-yu-1Ha"/>
+                                <menuItem title="Quit BuildGraph" keyEquivalent="q" id="3My-dU-ilt">
+                                    <connections>
+                                        <action selector="terminate:" target="-1" id="HRn-kS-RZh"/>
+                                    </connections>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </menuItem>
+                    <menuItem title="File" id="l3n-Iq-0d6">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <menu key="submenu" title="File" id="C0Q-p8-kc7">
+                            <items>
+                                <menuItem title="Close" keyEquivalent="w" id="9hK-Aj-p89">
+                                    <connections>
+                                        <action selector="performClose:" target="-1" id="kM2-wq-b6m"/>
+                                    </connections>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </menuItem>
+                    <menuItem title="View" id="0CO-re-uyV">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <menu key="submenu" title="View" id="syY-hk-cE5">
+                            <items>
+                                <menuItem title="Show Projects" keyEquivalent="s" id="VNn-NY-rNf">
+                                    <connections>
+                                        <action selector="toggleSidebar:" target="-1" id="fn6-XI-es7"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem title="Toggle Settings" keyEquivalent="s" id="Y2S-3R-Hl9">
+                                    <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                    <connections>
+                                        <action selector="togglesSettingsSidebar:" target="-1" id="iCj-2q-snX"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem title="Enter Full Screen" keyEquivalent="f" id="SvC-D4-FRV">
+                                    <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                    <connections>
+                                        <action selector="toggleFullScreen:" target="-1" id="wmH-GM-U43"/>
+                                    </connections>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </menuItem>
+                    <menuItem title="Window" id="0Q4-di-Jwp">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <menu key="submenu" title="Window" systemMenu="window" id="4Nw-hZ-MRp">
+                            <items>
+                                <menuItem title="Minimize" keyEquivalent="m" id="446-5G-dQX">
+                                    <connections>
+                                        <action selector="performMiniaturize:" target="-1" id="m9L-CC-2Eb"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem title="Zoom" id="rgH-3V-T9S">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                    <connections>
+                                        <action selector="performZoom:" target="-1" id="mDa-Aj-WWo"/>
+                                    </connections>
+                                </menuItem>
+                                <menuItem isSeparatorItem="YES" id="Xcz-Zl-SHp"/>
+                                <menuItem title="Bring All to Front" id="Bgn-x0-Oc1">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                    <connections>
+                                        <action selector="arrangeInFront:" target="-1" id="xyS-3C-G7L"/>
+                                    </connections>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </menuItem>
+                    <menuItem title="Help" id="4I4-b5-GGi">
+                        <modifierMask key="keyEquivalentModifierMask"/>
+                        <menu key="submenu" title="Help" systemMenu="help" id="1JJ-W6-FB4">
+                            <items>
+                                <menuItem title="BuildGraph Help" keyEquivalent="?" id="QkW-0R-wM3">
+                                    <connections>
+                                        <action selector="showHelp:" target="-1" id="viN-rl-p0E"/>
+                                    </connections>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </menuItem>
+                </items>
+            </menu>
+            <point key="canvasLocation" x="-739" y="445"/>
+        </application>
+    </objects>
+</document>
