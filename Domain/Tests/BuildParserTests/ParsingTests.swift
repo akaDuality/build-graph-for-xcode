@@ -23,11 +23,10 @@ class ParsingTests: XCTestCase {
         
         XCTAssertEqual(project.events.count, 12) // TODO: There was 14
         
-        XCTAssertEqual(
-            parser.depsPath?.path,
-            "/Users/mikhail/Library/Developer/Xcode/DerivedData/BulidGraph-bzryakxofvjibdffbqmtzvinmpdk/Build/Products/Debug/Snapshot.framework/Resources/SimpleClean.bgbuildsnapshot/Build/Intermediates.noindex/XCBuildData/e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt")
+        // Relative path because SampleClean is placed at user's location in runtime
+        let path = "/Resources/SimpleClean.bgbuildsnapshot/Build/Intermediates.noindex/XCBuildData/e9f65ec2d9f99e7a6246f6ec22f1e059-targetGraph.txt"
+        XCTAssertTrue(parser.depsPath?.path.hasSuffix(path) ?? false)
     }
     
     // TODO: No events for current filter isn't a problem. Other settings can reveal events
 }
-
