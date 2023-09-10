@@ -8,10 +8,15 @@
 import Foundation
 import XCLogParser
 
+public enum DepedendencyPath {
+    case xcode14_3(URL)
+    case xcode15(URL)
+}
+
 struct DepsPathExtractionWithVersions {
     let rootURL: URL
     
-    func depedenciesPath(activityLog: IDEActivityLog) -> URL? {
+    func depedenciesPath(activityLog: IDEActivityLog) -> DepedendencyPath? {
         guard let path = DepsPathExtraction()
             .depedenciesPath(activityLog: activityLog)
         else { return nil }
@@ -20,12 +25,14 @@ struct DepsPathExtractionWithVersions {
         
         if isFileExists {
             // Latest version is found
-            return path
+            return .xcode15(path)
+        } else if let pathOld = DepsPathExtraction_old(rootURL: rootURL)
+            .depedenciesPath(activityLog: activityLog) {
+            
+            // Fallback to previous version
+            return .xcode14_3(pathOld)
         } else {
-            // Old check
-            let pathOld = DepsPathExtraction_old(rootURL: rootURL)
-                .depedenciesPath(activityLog: activityLog)
-            return pathOld
+            return nil
         }
     }
 }
