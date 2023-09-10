@@ -217,13 +217,20 @@ extension Event {
         Set(steps.map(\.startDate) + steps.map(\.endDate))
     }
     
-    func parentsContains(_ domain: String) -> Bool {
+    func parentsContains(_ domain: String, recursiveLevel: Int = 0) -> Bool {
+        guard recursiveLevel < 4 else {
+            #if DEBUG
+            fatalError("Something goes completely wrong on previous step")
+            #endif
+            return false
+        }
+        
         for parent in parents {
             if parent.taskName == domain {
                 return true
             }
             
-            if parent.parentsContains(domain) {
+            if parent.parentsContains(domain, recursiveLevel: recursiveLevel + 1) {
                 return true
             }
         }
