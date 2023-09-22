@@ -50,7 +50,7 @@ final class TimelineLayerTests: XCTestCase {
         layer.frame = .init(x: 0,
                             y: 0,
                             width: 300,
-                            height: 120)
+                            height: 300)
         return layer
     }
 }

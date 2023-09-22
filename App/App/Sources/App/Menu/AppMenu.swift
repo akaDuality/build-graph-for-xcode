@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import Filters
 
 public class AppMenu: NSMenu {
     public static func menu() -> NSMenu {
@@ -14,6 +15,8 @@ public class AppMenu: NSMenu {
         Bundle.module
             .loadNibNamed("Application", owner: self, topLevelObjects: &topLevelObjects)
         
-        return topLevelObjects?.filter { $0 is NSMenu }.first as! NSMenu
+        let menu = topLevelObjects?.filter { $0 is NSMenu }.first as! AppMenu
+        
+        return menu
     }
 }

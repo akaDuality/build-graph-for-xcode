@@ -155,14 +155,6 @@ public class SettingsPopoverViewController: NSViewController {
         delegate?.didUpdateUISettings()
     }
     
-//    @IBAction func textSizeDidChange(_ sender: NSStepper) {
-//        UISettings().textSize = sender.integerValue
-//
-//        setupTextSize()
-//
-//        delegate?.didUpdateUISettings()
-//    }
-    
     @IBOutlet weak var textSizeLabel: NSTextField!
     @IBOutlet weak var textSizeSlider: NSSlider!
 }

@@ -17,10 +17,11 @@ final class GraphTests: XCTestCase {
     let parser = RealBuildLogParser()
     
     // MARK: DSL
-    private func layer(snapshotName: String) throws -> CALayer {
+    private func layer(snapshotName: String, filter: FilterSettings) throws -> CALayer {
         let snapshot = try TestBundle().snapshot(name: snapshotName)
+        
         let project = try parser.parse(projectReference: snapshot.project,
-                                       filter: .shared)
+                                       filter: filter)
         
         let layer = AppLayer(events: project.events, relativeBuildStart: 0, fontSize: 10, scale: 1)
         
@@ -34,10 +35,11 @@ final class GraphTests: XCTestCase {
     }
     
     private func snapshot(name: String,
+                          filter: FilterSettings,
                           testName: String = #function,
                           file: StaticString = #file,
                           line: UInt = #line) throws {
-        let layer = try layer(snapshotName: name)
+        let layer = try layer(snapshotName: name, filter: filter)
         
         assertSnapshot(matching: layer,
                        as: .image,
@@ -49,13 +51,38 @@ final class GraphTests: XCTestCase {
     
     // MARK: Tests
     func test_drawingSimpleClean() throws {
-        try snapshot(name: "SimpleClean")
+        try snapshot(name: "SimpleClean", filter: .shared)
     }
     
-    func test_drawingIncrementalWithGap() throws {
-        try snapshot(name: "IncrementalWithBigGap")
-        
-        // TODO: Draw cache only
-        // TODO: Draw incremental build only
+    func test_drawingIncrementalWithGap_everything() throws {
+        try snapshot(name: "IncrementalWithBigGap", filter: .all)
+    }
+    
+    func test_drawingIncrementalWithGap_cached() throws {
+        try snapshot(name: "IncrementalWithBigGap", filter: .cached)
+    }
+    
+    func test_drawingIncrementalWithGap_currentBuild() throws {
+        try snapshot(name: "IncrementalWithBigGap", filter: .currentBuld)
+    }
+}
+
+extension FilterSettings {
+    static var currentBuld: FilterSettings {
+        let filter = FilterSettings()
+        filter.cacheVisibility = .currentBuild
+        return filter
+    }
+    
+    static var all: FilterSettings {
+        let filter = FilterSettings()
+        filter.cacheVisibility = .all
+        return filter
+    }
+    
+    static var cached: FilterSettings {
+        let filter = FilterSettings()
+        filter.cacheVisibility = .cached
+        return filter
     }
 }
