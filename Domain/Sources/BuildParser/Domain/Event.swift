@@ -34,6 +34,9 @@ public class Event: Equatable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(taskName)
     }
+    
+    /// Parent check is heavy operation: a lot of string comparison and array allocations. Cache fix performance problems as a result
+    public var parentCheckCache = [String: Bool]()
 }
 
 extension Event: CustomDebugStringConvertible {

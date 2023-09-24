@@ -168,27 +168,23 @@ extension Array where Element == Event {
     
     public func connect(by deps: [Dependency]) {
         for dep in deps {
-            for tagret in dep.dependencies {
+            for target in dep.dependencies {
                 let child = event(with: dep.target.target)
-                let parent = event(with: tagret.target)
+                let parent = event(with: target.target)
                 
                 guard let parent = parent,
                       let child = child
                 else { continue }
                 
-                // TODO: Can be removed as I understand
                 guard child.parents.first?.taskName != parent.taskName else {
-                    // TODO: Remove on parsing
-                    print("cycle dependency \(parent.taskName), skip")
+                    // The parent has been added already
                     continue
                 }
                 
-                guard child.parents.first?.taskName != parent.taskName else {
-                    // TODO: Remove on parsing
-                    print("cycle dependency \(parent.taskName), skip")
+                guard child !== parent else {
+                    // Can't add to themselves
                     continue
                 }
-                
                 child.parents.append(parent)
             }
         }
@@ -217,24 +213,37 @@ extension Event {
         Set(steps.map(\.startDate) + steps.map(\.endDate))
     }
     
-    func parentsContains(_ domain: String, recursiveLevel: Int = 0) -> Bool {
-        guard recursiveLevel < 4 else {
-            #if DEBUG
-            fatalError("Something goes completely wrong on previous step")
-            #endif
-            return false
+    
+    func parentsContains(
+        _ domain: String,
+        checkedParents: inout [String]
+    ) -> Bool {
+        if let cachedResult = parentCheckCache[domain] {
+            return cachedResult
         }
         
         for parent in parents {
             if parent.taskName == domain {
+                parentCheckCache[domain] = true
                 return true
             }
             
-            if parent.parentsContains(domain, recursiveLevel: recursiveLevel + 1) {
+            guard !checkedParents.contains(parent.taskName) else {
+                // Sometimes cycles between dependencies are possible.
+                // As a result we had to skip infinite loop between dependencies
+                continue
+            }
+            
+            checkedParents.append(parent.taskName)
+            
+            if parent.parentsContains(domain,
+                                      checkedParents: &checkedParents) {
+                parentCheckCache[domain] = true
                 return true
             }
         }
         
+        parentCheckCache[domain] = false
         return false
     }
     
