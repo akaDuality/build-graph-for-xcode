@@ -34,13 +34,16 @@ struct DepsPathExtractionWithVersions {
         
         if isFileExists {
             // Latest version is found
+            print("Detects dependencies of Xcode 15")
             return .xcode15(path)
         } else if let pathOld = DepsPathExtraction_old(rootURL: rootURL)
             .depedenciesPath(activityLog: activityLog) {
             
+            print("Detects dependencies of Xcode 14")
             // Fallback to previous version
             return .xcode14_3(pathOld)
         } else {
+            print("Unknown dependencies format or no file")
             return nil
         }
     }
