@@ -39,6 +39,8 @@ public class Event: Equatable, Hashable {
     public var parentCheckCache = [String: Bool]()
     
     public lazy var durationDescription: String = eventDescriptionFormatter.string(from: duration)
+    
+    public var fontSizeCache = [CGFloat: CGSize]()
 }
 
 private let eventDescriptionFormatter  = DurationFormatter()
