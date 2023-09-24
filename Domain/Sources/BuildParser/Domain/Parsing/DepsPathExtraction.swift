@@ -11,6 +11,15 @@ import XCLogParser
 public enum DepedendencyPath {
     case xcode14_3(URL)
     case xcode15(URL)
+    
+    public var url: URL {
+        switch self {
+        case .xcode14_3(let url):
+            return url
+        case .xcode15(let url):
+            return url
+        }
+    }
 }
 
 struct DepsPathExtractionWithVersions {

@@ -73,17 +73,37 @@ public class DependencyParser15 {
     }
     
     func parseTarget(_ input: String) -> Target {
-        let regex = try! NSRegularExpression(
-            pattern: "\\'(\\w*-?\\w*)\\' in project \\'(\\w*-?\\w*)\\'"
-        )
-        
-        let matche = regex
-            .matches(in: input,
-                     options: [],
-                     range: input.fullRange)
-            .first!
-        
-        return Target(target: matche.range(at: 1, in: input),
-                      project: matche.range(at: 2, in: input))
+        if let match = targetInProjectRegex.firstMatch(in: input) {
+            return Target(target: match.range(at: 1, in: input),
+                          project: match.range(at: 2, in: input))
+        } else if let match = targetInModuleRegex.firstMatch(in: input) {
+            return Target(target: match.range(at: 1, in: input),
+                          project: match.range(at: 2, in: input))
+        } else if let match = targetInModuleRegexWithoutBraces.firstMatch(in: input) {
+            return Target(target: match.range(at: 1, in: input),
+                          project: match.range(at: 2, in: input))
+        } else {
+            fatalError()
+        }
+    }
+    
+    let libName = "(\\w*[-?\\w]*)"
+    
+    lazy var targetInProjectRegex = try! NSRegularExpression(
+        pattern: "\\'\(libName)\\' in project \\'\(libName)\\'"
+    )
+    
+    lazy var targetInModuleRegex = try! NSRegularExpression(
+        pattern: "\\'\(libName)\\' in \\'\(libName)\\'"
+    )
+    
+    lazy var targetInModuleRegexWithoutBraces = try! NSRegularExpression(
+        pattern: "\(libName) in \(libName)"
+    )
+}
+
+extension NSRegularExpression {
+    func firstMatch(in input: String) -> NSTextCheckingResult? {
+        matches(in: input, range: input.fullRange).first
     }
 }
