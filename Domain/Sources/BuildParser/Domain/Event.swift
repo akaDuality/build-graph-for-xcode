@@ -36,7 +36,9 @@ public class Event: Equatable, Hashable {
     }
     
     /// Parent check is heavy operation: a lot of string comparison and array allocations. Cache fix performance problems as a result
-    public var parentCheckCache = [String: Bool]()
+    var parentCheckResultCache = [String: Bool]()
+    
+    var checkedParentsProgress: [String] = []
     
     public lazy var durationDescription: String = eventDescriptionFormatter.string(from: duration)
     

@@ -152,10 +152,10 @@ extension Array where Element == Event {
         return concAfter > concBefore
     }
     
-    public func connect(by deps: [Dependency]) {
-        for dep in deps {
-            for target in dep.dependencies {
-                let child = event(with: dep.target.target)
+    public func connect(by dependencies: [Dependency]) {
+        for dependency in dependencies {
+            for target in dependency.dependencies {
+                let child = event(with: dependency.target.target)
                 let parent = event(with: target.target)
                 
                 guard let parent = parent,
@@ -201,36 +201,39 @@ extension Event {
     
     
     func parentsContains(
-        _ domain: String,
-        checkedParents: inout [String]
+        _ domain: String
     ) -> Bool {
-        if let cachedResult = parentCheckCache[domain] {
+        if let cachedResult = parentCheckResultCache[domain] {
             return cachedResult
         }
         
         for parent in parents {
+            // Simple check
             if parent.taskName == domain {
-                parentCheckCache[domain] = true
-                return true
+                return completeParentSearch(domain: domain, didFound: true)
             }
             
-            guard !checkedParents.contains(parent.taskName) else {
+            // Check recursive cache
+            guard !checkedParentsProgress.contains(parent.taskName) else {
                 // Sometimes cycles between dependencies are possible.
                 // As a result we had to skip infinite loop between dependencies
                 continue
             }
+            checkedParentsProgress.append(parent.taskName)
             
-            checkedParents.append(parent.taskName)
-            
-            if parent.parentsContains(domain,
-                                      checkedParents: &checkedParents) {
-                parentCheckCache[domain] = true
-                return true
+            // Run check in recursion
+            if parent.parentsContains(domain) {
+                return completeParentSearch(domain: domain, didFound: true)
             }
         }
         
-        parentCheckCache[domain] = false
-        return false
+        return completeParentSearch(domain: domain, didFound: false)
+    }
+    
+    private func completeParentSearch(domain: String, didFound: Bool) -> Bool {
+        parentCheckResultCache[domain] = didFound
+        checkedParentsProgress = []
+        return didFound
     }
     
     func isBlocked(by event: Event) -> Bool {

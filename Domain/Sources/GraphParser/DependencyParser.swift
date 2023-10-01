@@ -16,6 +16,9 @@ public class DependencyParser {
             return nil
         }
         
+        #if DEBUG
+        print(depsContent)
+        #endif
         return parseFile(depsContent)
     }
     

@@ -40,7 +40,7 @@ public class RealBuildLogParser {
     }
     
 
-    public private(set) var depsPath: DepedendencyPath?
+    public private(set) var depsPath: DependencyPath?
     
     public func parse(projectReference: ProjectReference, filter: FilterSettings) throws -> Project {
         let project = try parse(

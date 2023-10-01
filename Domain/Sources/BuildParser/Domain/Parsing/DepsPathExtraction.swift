@@ -8,51 +8,72 @@
 import Foundation
 import XCLogParser
 
-public enum DepedendencyPath {
-    case xcode14_3(URL)
-    case xcode15(URL)
+public struct DependencyPath {
     
-    public var url: URL {
-        switch self {
-        case .xcode14_3(let url):
-            return url
-        case .xcode15(let url):
-            return url
-        }
+    public let url: URL
+    public let type: FileType
+    
+    public enum FileType {
+    case xcode14_3
+    case xcode15
     }
+    
+
 }
 
 struct DepsPathExtractionWithVersions {
     let rootURL: URL
     
-    func depedenciesPath(activityLog: IDEActivityLog) -> DepedendencyPath? {
-        guard let path = DepsPathExtraction()
-            .depedenciesPath(activityLog: activityLog)
-        else { return nil }
-        
-        let isFileExists = FileManager.default.fileExists(atPath: path.path)
-        
-        if isFileExists {
-            // Latest version is found
-            print("Detects dependencies of Xcode 15")
-            return .xcode15(path)
-        } else if let pathOld = DepsPathExtraction_old(rootURL: rootURL)
-            .depedenciesPath(activityLog: activityLog) {
-            
-            print("Detects dependencies of Xcode 14")
-            // Fallback to previous version
-            return .xcode14_3(pathOld)
-        } else {
-            print("Unknown dependencies format or no file")
+    func depedenciesPath(activityLog: IDEActivityLog) -> DependencyPath? {
+        path_xcode15(activityLog: activityLog)
+        ?? path_xcode14(activityLog: activityLog)
+    }
+    
+    func path_xcode15(activityLog: IDEActivityLog) -> DependencyPath? {
+        guard let path = DepsPathExtraction().depedenciesPath(activityLog: activityLog) else {
+            print("No path to dependency Xcode 15 in activityLog")
             return nil
         }
+        
+        // Replace
+        // file:///Users/mikhail/Library/Developer/Xcode/DerivedData/BulidGraph-bzryakxofvjibdffbqmtzvinmpdk/Build/Intermediates.noindex/XCBuildData/584b872b7e96316afd6ba1f3a3c43f43.xcbuilddata/target-graph.txt
+        // to
+        // file:///Users/mikhail/Library/Developer/Xcode/DerivedData/BulidGraph-bzryakxofvjibdffbqmtzvinmpdk/Build/Products/Debug/BuildParserTests.xctest/Contents/Resources/Domain_Snapshot.bundle/Contents/Resources/Xcode14.3.bgbuildsnapshot/Build/Intermediates.noindex/XCBuildData/584b872b7e96316afd6ba1f3a3c43f43.xcbuilddata/target-graph.txt
+        
+        
+        guard let content = try? String(contentsOf: path) else {
+            return nil
+        }
+        let containsArrows = content.contains { character in
+            character == "➜"
+        }
+        
+        
+        return DependencyPath(url: path, type: containsArrows ? .xcode15: .xcode14_3)
+    }
+    
+    func path_xcode14(activityLog: IDEActivityLog) -> DependencyPath? {
+        guard let path = DepsPathExtraction_old(rootURL: rootURL).depedenciesPath(activityLog: activityLog) else {
+            print("No path to dependency Xcode 14 in activityLog")
+            return nil
+        }
+        
+        guard let content = try? String(contentsOf: path) else {
+            return nil
+        }
+        let containsArrows = content.contains { character in
+            character == "➜"
+        }
+        
+        
+        return DependencyPath(url: path, type: containsArrows ? .xcode15: .xcode14_3)
     }
 }
 
-/// Xcode 14.3
+/// Xcode 15
 struct DepsPathExtraction {
     func depedenciesPath(activityLog: IDEActivityLog) -> URL? {
-        guard let sectionText = textFromcreateBuildDescription(at: activityLog)
+        guard let sectionText = textFromCreateBuildDescription(at: activityLog)
         else { return nil }
         
         let path = path(sectionText: sectionText)
@@ -69,14 +90,50 @@ struct DepsPathExtraction {
             .appendingPathComponent("target-graph.txt")
     }
     
-    func textFromcreateBuildDescription(at activityLog: IDEActivityLog) -> String? {
+    func textFromCreateBuildDescription(at activityLog: IDEActivityLog) -> String? {
         guard let section = activityLog
             .mainSection
             .subsection(title: "Prepare build")?
             .subsection(title: "Create build description")
-        else { return nil }
+        else {
+            print("Can't find \"Create build description\" subsection")
+            return nil
+        }
 
-        return String(section.text)
+        let text = String(section.text)
+        
+//        #if DEBUG
+        if text.isEmpty {
+            activityLog.printRecursiveDescription()
+        }
+//        #endif
+        
+        return text
+    }
+    
+    // TODO: Prepare build contains subSections with "Compute target dependency graph" messages. We can extract this data directly from activityLog
+}
+
+extension IDEActivityLog {
+    func printRecursiveDescription() {
+        for section in mainSection.subSections {
+            section.printRecursiveDescription()
+        }
+    }
+}
+
+extension IDEActivityLogSection {
+    func printRecursiveDescription(inset: String? = nil) {
+        for section in subSections {
+            if let inset {
+                print("\(inset)\(section.title)")
+                section.printRecursiveDescription(inset: inset + "\t")
+            } else {
+                print("\t\(section.title)")
+                section.printRecursiveDescription(inset: "\t")
+            }
+            
+        }
     }
 }
 
@@ -110,11 +167,12 @@ struct DepsPathExtraction_old {
         else { return nil }
         let sectionText = String(section.text)
         
-        guard let number = NSRegularExpression.firstMatch(in: sectionText, pattern: "XCBuildData\\/(\\w*)-")
+        guard let number = number(from: sectionText)
         else { return nil }
         
         return "\(number)-targetGraph.txt"
     }
+
     
     func number(from description: String) -> String? {
         return NSRegularExpression.firstMatch(in: description, pattern: "XCBuildData\\/(\\w*)-")

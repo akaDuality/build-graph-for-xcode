@@ -15,7 +15,9 @@ public class DependencyParser15 {
         guard let depsContent = try? String(contentsOf: path) else {
             return nil
         }
-        
+#if DEBUG
+        print(depsContent)
+#endif
         return parseFile(depsContent)
     }
     
@@ -31,7 +33,7 @@ public class DependencyParser15 {
     func dependenciesChunks(_ strings: [String]) -> [[String]] {
         var chunkStartIndexes = [Int]()
         for (index, string) in strings.enumerated() {
-            let startOfDependenciesChunk = !string.contains("➜ ")
+            let startOfDependenciesChunk = !string.contains("➜ ")//string.contains(", ")//
             if startOfDependenciesChunk {
                 chunkStartIndexes.append(index)
             }

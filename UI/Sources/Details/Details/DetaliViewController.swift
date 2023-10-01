@@ -106,7 +106,11 @@ public class DetailViewController: NSViewController {
         shareImage()
     }
     
-    public func shareImage() {
+    public func share() {
+        shareSnapshot()
+    }
+    
+    func shareImage() {
         FileLocationSelector()
             .requestLocation(
                 project: projectReference,
@@ -119,7 +123,7 @@ public class DetailViewController: NSViewController {
         }
     }
     
-    public func shareSnapshot() {
+    func shareSnapshot() {
         FileLocationSelector()
             .requestLocation(
                 project: projectReference,

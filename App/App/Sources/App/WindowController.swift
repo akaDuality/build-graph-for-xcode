@@ -73,7 +73,7 @@ public class WindowController: NSWindowController, NSWindowDelegate {
             return
         }
         
-        detailController.shareImage()
+        detailController.share()
     }
     
     @IBAction func searchDidChange(_ sender: NSSearchField) {

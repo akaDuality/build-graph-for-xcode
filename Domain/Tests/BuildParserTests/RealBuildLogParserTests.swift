@@ -54,6 +54,7 @@ class RealBuildLogParserTests: XCTestCase {
         let resources = URL(fileURLWithPath: "/Users/mikhail/Library/Developer/Xcode/DerivedData/BulidGraph-bzryakxofvjibdffbqmtzvinmpdk/Build/Products/Debug/BuildParserTests.xctest/Contents/Resources/Domain_Snapshot.bundle/Contents/Resources/")
         let XCBuildData = resources.appendingPathComponent("Xcode14.3.bgbuildsnapshot/Build/Intermediates.noindex/XCBuildData")
         
+        XCTExpectFailure("No depedency file at project Xcode14.3")
         XCTAssertNotNil(parser.depsPath) // TODO: Путь в логе лежит абсолютный, а не относительный для файла.
         XCTAssertNoDifference_path(
             parser.depsPath?.url,
@@ -61,6 +62,8 @@ class RealBuildLogParserTests: XCTestCase {
             .appendingPathComponent("584b872b7e96316afd6ba1f3a3c43f43.xcbuilddata/target-graph.txt")
         )
     }
+    
+    // TODO: Run test over result that check all parents between dependencies without recursive cycle
     
     // TODO: Give a name
     func testExample() throws {

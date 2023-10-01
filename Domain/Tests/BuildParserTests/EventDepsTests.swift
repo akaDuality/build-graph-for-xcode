@@ -87,6 +87,18 @@ class EventDepsTests: XCTestCase {
         XCTAssertTrue(events[2].parentsContains("1"))
         XCTAssertTrue(events[2].parentsContains("2"))
     }
+    
+    func test_dependenciesLoop() {
+        let deps = [
+            Dependency(target: target1, dependencies: [target2]),
+            Dependency(target: target2, dependencies: [target1]),
+        ]
+        
+        events.connect(by: deps)
+        
+        XCTAssertTrue(events[0].parentsContains("2"))
+        XCTAssertTrue(events[1].parentsContains("1"))
+    }
 }
 
 extension Event {

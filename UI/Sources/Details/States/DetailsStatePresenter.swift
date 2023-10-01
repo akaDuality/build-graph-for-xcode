@@ -111,6 +111,8 @@ public class DetailsStatePresenter {
             if dependencies.count == 0 {
                 os_log("File exists, but no connections found")
             }
+            
+            os_log("Connect \(dependencies.count) depedencies")
             project.connect(dependencies: dependencies)
         } else {
             os_log("No connections found")
@@ -139,12 +141,12 @@ public class DetailsStatePresenter {
 public class DependencyParserWithVersions {
     public init() {}
     
-    public func parse(path: DepedendencyPath) -> [Dependency]? {
-        switch path {
-        case .xcode15(let path):
-            return DependencyParser15().parse(path: path)
-        case .xcode14_3(let path):
-            return DependencyParser().parse(path: path)
+    public func parse(path: DependencyPath) -> [Dependency]? {
+        switch path.type {
+        case .xcode15:
+            return DependencyParser15().parse(path: path.url)
+        case .xcode14_3:
+            return DependencyParser().parse(path: path.url)
         }
     }
 }
