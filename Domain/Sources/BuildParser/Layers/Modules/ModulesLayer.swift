@@ -229,17 +229,12 @@ class ModulesLayer: CALayer {
     }
     
     private func shouldBeHighlighted(event: Event, domain: String, taskName: String) -> Bool {
-        loopBreaker = []
-        
+
         let isContains = domain == event.domain
-        || event.parentsContains(taskName, checkedParents: &loopBreaker)
-        
-        loopBreaker = []
-        
+        || event.parentsContains(taskName)
+
         return isContains
     }
-    
-    private var loopBreaker = [String]()
 }
 
 extension CGRect {
