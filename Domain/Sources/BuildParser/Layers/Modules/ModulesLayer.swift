@@ -229,8 +229,11 @@ class ModulesLayer: CALayer {
     }
     
     private func shouldBeHighlighted(event: Event, domain: String, taskName: String) -> Bool {
-        return domain == event.domain
-            || event.parentsContains(taskName)
+
+        let isContains = domain == event.domain
+        || event.parentsContains(taskName)
+
+        return isContains
     }
 }
 

@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk",
         "state": {
           "branch": null,
-          "revision": "5034479ca0c4f32f299677fb0ba1fe4d3e3e20b4",
-          "version": "10.10.0"
+          "revision": "8a8ec57a272e0d31480fb0893dda0cf4f769b57e",
+          "version": "10.15.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "69f5b8425dd473d2f2475bba7f88f82cd9da0e36",
-          "version": "10.10.0"
+          "revision": "03b9beee1a61f62d32c521e172e192a1663a5e8b",
+          "version": "10.13.0"
         }
       },
       {
@@ -71,6 +71,15 @@
           "branch": null,
           "revision": "7a7f17761c76a932662ab77028a4329f67d645a4",
           "version": "5.2.0"
+        }
+      },
+      {
+        "package": "InteropForGoogle",
+        "repositoryURL": "https://github.com/google/interop-ios-for-google-sdks.git",
+        "state": {
+          "branch": null,
+          "revision": "2d12673670417654f08f5f90fdd62926dc3a2648",
+          "version": "100.0.0"
         }
       },
       {

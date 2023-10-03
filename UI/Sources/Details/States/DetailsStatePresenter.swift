@@ -99,14 +99,20 @@ public class DetailsStatePresenter {
         projectReference: ProjectReference,
         filter: FilterSettings
     ) async throws -> ParsedProject {
-        os_log("will read \(projectReference.activityLogURL)")
+        os_log("Will read: \(projectReference.activityLogURL)")
         
         let project = try parser.parse(
             projectReference: projectReference,
             filter: filter)
         
+//        os_log("Dependencies: \(self.parser.depsPath?.absoluteString ?? "Unknown")")
         if let depsPath = parser.depsPath,
-           let dependencies = DependencyParser().parse(path: depsPath) {
+           let dependencies = DependencyParserWithVersions().parse(path: depsPath) {
+            if dependencies.count == 0 {
+                os_log("File exists, but no connections found")
+            }
+            
+            os_log("Connect \(dependencies.count) depedencies")
             project.connect(dependencies: dependencies)
         } else {
             os_log("No connections found")
@@ -129,5 +135,18 @@ public class DetailsStatePresenter {
         }
         
         return project
+    }
+}
+
+public class DependencyParserWithVersions {
+    public init() {}
+    
+    public func parse(path: DependencyPath) -> [Dependency]? {
+        switch path.type {
+        case .xcode15:
+            return DependencyParser15().parse(path: path.url)
+        case .xcode14_3:
+            return DependencyParser().parse(path: path.url)
+        }
     }
 }

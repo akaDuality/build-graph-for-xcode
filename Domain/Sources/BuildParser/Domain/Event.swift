@@ -34,7 +34,18 @@ public class Event: Equatable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(taskName)
     }
+    
+    /// Parent check is heavy operation: a lot of string comparison and array allocations. Cache fix performance problems as a result
+    var parentCheckResultCache = [String: Bool]()
+    
+    var checkedParentsProgress: [String] = []
+    
+    public lazy var durationDescription: String = eventDescriptionFormatter.string(from: duration)
+    
+    public var fontSizeCache = [CGFloat: CGSize]()
 }
+
+private let eventDescriptionFormatter  = DurationFormatter()
 
 extension Event: CustomDebugStringConvertible {
     public var debugDescription: String {

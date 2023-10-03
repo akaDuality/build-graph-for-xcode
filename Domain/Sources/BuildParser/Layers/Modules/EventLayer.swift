@@ -96,8 +96,7 @@ class EventLayer: CALayer {
         textLayer.string = event.description
 //        textLayer.backgroundColor = NSColor.systemRed.cgColor
         
-        let textWidth: CGFloat = event.description
-            .size(OfFont: NSFont.systemFont(ofSize: textLayer.fontSize))
+        let textWidth: CGFloat = event.descriptionSize(fontSize: textLayer.fontSize)
             .width
         
         if spaceToLeft > textWidth {
@@ -146,5 +145,20 @@ class EventLayer: CALayer {
 extension String {
     func size(OfFont font: NSFont) -> CGSize {
         return (self as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+    }
+}
+
+extension Event {
+    func descriptionSize(fontSize: CGFloat) -> CGSize {
+        if let cachedSize = fontSizeCache[fontSize] {
+            return cachedSize
+        }
+        
+        let font = NSFont.systemFont(ofSize: fontSize)
+        
+        let size = description.size(OfFont: font)
+        
+        fontSizeCache[fontSize] = size
+        return size
     }
 }

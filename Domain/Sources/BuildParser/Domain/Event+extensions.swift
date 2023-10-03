@@ -11,9 +11,6 @@ import GraphParser
 let helpersSuffix = "TestHelpers"
 let testsSuffix = "TestHelpers-Unit-Tests"
 
-// TODO: Remove global access
-private let eventDescriptionFormatter  = DurationFormatter()
-
 extension Event {
     var type: EventType {
         if taskName.hasSuffix(helpersSuffix) {
@@ -41,19 +38,8 @@ extension Event {
     }
     
     public var description: String {
-        "\(taskName), \(eventDescriptionFormatter.string(from: duration))"
+        "\(taskName), \(durationDescription))"
     }
-    
-//    public var dateDescription: String {
-//        String(format: "%0.2f, \(taskName)", duration)
-//    }
-//
-//    public func output() {
-//        print("\n\(taskName)")
-//        for step in steps {
-//            print(step.dateDescription)
-//        }
-//    }
 }
 
 extension Array where Element == Event {
@@ -166,29 +152,25 @@ extension Array where Element == Event {
         return concAfter > concBefore
     }
     
-    public func connect(by deps: [Dependency]) {
-        for dep in deps {
-            for tagret in dep.dependencies {
-                let child = event(with: dep.target.target)
-                let parent = event(with: tagret.target)
+    public func connect(by dependencies: [Dependency]) {
+        for dependency in dependencies {
+            for target in dependency.dependencies {
+                let child = event(with: dependency.target.target)
+                let parent = event(with: target.target)
                 
                 guard let parent = parent,
                       let child = child
                 else { continue }
                 
-                // TODO: Can be removed as I understand
                 guard child.parents.first?.taskName != parent.taskName else {
-                    // TODO: Remove on parsing
-                    print("cycle dependency \(parent.taskName), skip")
+                    // The parent has been added already
                     continue
                 }
                 
-                guard child.parents.first?.taskName != parent.taskName else {
-                    // TODO: Remove on parsing
-                    print("cycle dependency \(parent.taskName), skip")
+                guard child !== parent else {
+                    // Can't add to themselves
                     continue
                 }
-                
                 child.parents.append(parent)
             }
         }
@@ -217,18 +199,41 @@ extension Event {
         Set(steps.map(\.startDate) + steps.map(\.endDate))
     }
     
-    func parentsContains(_ domain: String) -> Bool {
+    
+    func parentsContains(
+        _ domain: String
+    ) -> Bool {
+        if let cachedResult = parentCheckResultCache[domain] {
+            return cachedResult
+        }
+        
         for parent in parents {
+            // Simple check
             if parent.taskName == domain {
-                return true
+                return completeParentSearch(domain: domain, didFound: true)
             }
             
+            // Check recursive cache
+            guard !checkedParentsProgress.contains(parent.taskName) else {
+                // Sometimes cycles between dependencies are possible.
+                // As a result we had to skip infinite loop between dependencies
+                continue
+            }
+            checkedParentsProgress.append(parent.taskName)
+            
+            // Run check in recursion
             if parent.parentsContains(domain) {
-                return true
+                return completeParentSearch(domain: domain, didFound: true)
             }
         }
         
-        return false
+        return completeParentSearch(domain: domain, didFound: false)
+    }
+    
+    private func completeParentSearch(domain: String, didFound: Bool) -> Bool {
+        parentCheckResultCache[domain] = didFound
+        checkedParentsProgress = []
+        return didFound
     }
     
     func isBlocked(by event: Event) -> Bool {
