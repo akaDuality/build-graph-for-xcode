@@ -102,11 +102,11 @@ struct DepsPathExtraction {
 
         let text = String(section.text)
         
-//        #if DEBUG
+        #if DEBUG
         if text.isEmpty {
             activityLog.printRecursiveDescription()
         }
-//        #endif
+        #endif
         
         return text
     }
@@ -141,7 +141,7 @@ extension IDEActivityLogSection {
     func subsection(title: String) -> IDEActivityLogSection? {
         subSections
             .first(where: { section in
-                section.title == title
+                String(section.title) == title
             })
     }
 }
