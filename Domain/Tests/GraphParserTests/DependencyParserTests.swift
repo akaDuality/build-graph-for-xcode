@@ -206,7 +206,7 @@ Crypto in Crypto (explicit)
 }
 
 // MARK: Xcode 15 & Xcode 16
-class DependencyParser_xcode15_xcode16: XCTestCase {
+class DependencyParser_xcode15_16: XCTestCase {
     
     func test_noDependencies() {
         let depedencies = parseDependency("""
@@ -281,17 +281,8 @@ Target \'App\' in project \'App\'
         )
     }
     
-    func test_fullFile_xcode15() {
-        let dependencies = parseFile(xcode15)
-        
-        assertSnapshot(
-            matching: dependencies,
-            as: .description
-        )
-    }
-    
-    func test_fullFile_xcode16() {
-        let dependencies = parseFile(xcode16)
+    func test_fullFile_xcode15_16() {
+        let dependencies = parseFile(xcode15_16)
         
         assertSnapshot(
             matching: dependencies,
@@ -310,62 +301,7 @@ Target \'App\' in project \'App\'
     }
 }
 
-let xcode16 = """
-Target dependency graph (19 targets)
-Target 'BuildGraphDebug' in project 'BuildGraphDebug'
-➜ Explicit dependency on target 'App' in project 'App'
-Target 'App' in project 'App'
-➜ Explicit dependency on target 'App' in project 'App'
-➜ Explicit dependency on target 'App_App' in project 'App'
-➜ Explicit dependency on target 'UI' in project 'UI'
-Target 'App' in project 'App'
-➜ Explicit dependency on target 'App_App' in project 'App'
-➜ Explicit dependency on target 'UI' in project 'UI'
-Target 'UI' in project 'UI'
-➜ Explicit dependency on target 'Details' in project 'UI'
-➜ Explicit dependency on target 'Filters' in project 'UI'
-➜ Explicit dependency on target 'Projects' in project 'UI'
-➜ Explicit dependency on target 'UI_Details' in project 'UI'
-➜ Explicit dependency on target 'UI_Filters' in project 'UI'
-➜ Explicit dependency on target 'UI_Projects' in project 'UI'
-➜ Explicit dependency on target 'Domain' in project 'Domain'
-➜ Explicit dependency on target 'XCLogParser' in project 'XCLogParser'
-Target 'Projects' in project 'UI'
-➜ Explicit dependency on target 'UI_Projects' in project 'UI'
-➜ Explicit dependency on target 'Domain' in project 'Domain'
-Target 'UI_Projects' in project 'UI' (no dependencies)
-Target 'Filters' in project 'UI'
-➜ Explicit dependency on target 'UI_Filters' in project 'UI'
-➜ Explicit dependency on target 'Domain' in project 'Domain'
-Target 'UI_Filters' in project 'UI' (no dependencies)
-Target 'Details' in project 'UI'
-➜ Explicit dependency on target 'UI_Details' in project 'UI'
-➜ Explicit dependency on target 'Domain' in project 'Domain'
-➜ Explicit dependency on target 'XCLogParser' in project 'XCLogParser'
-Target 'Domain' in project 'Domain'
-➜ Explicit dependency on target 'BuildParser' in project 'Domain'
-➜ Explicit dependency on target 'GraphParser' in project 'Domain'
-➜ Explicit dependency on target 'XCLogParser' in project 'XCLogParser'
-Target 'BuildParser' in project 'Domain'
-➜ Explicit dependency on target 'GraphParser' in project 'Domain'
-➜ Explicit dependency on target 'XCLogParser' in project 'XCLogParser'
-Target 'XCLogParser' in project 'XCLogParser'
-➜ Explicit dependency on target 'XCLogParser' in project 'XCLogParser'
-➜ Explicit dependency on target 'Gzip' in project 'Gzip'
-Target 'XCLogParser' in project 'XCLogParser'
-➜ Explicit dependency on target 'Gzip' in project 'Gzip'
-Target 'Gzip' in project 'Gzip'
-➜ Explicit dependency on target 'Gzip' in project 'Gzip'
-➜ Explicit dependency on target 'system-zlib' in project 'Gzip'
-Target 'Gzip' in project 'Gzip'
-➜ Explicit dependency on target 'system-zlib' in project 'Gzip'
-Target 'system-zlib' in project 'Gzip' (no dependencies)
-Target 'GraphParser' in project 'Domain' (no dependencies)
-Target 'UI_Details' in project 'UI' (no dependencies)
-Target 'App_App' in project 'App' (no dependencies)
-"""
-
-let xcode15 = """
+let xcode15_16 = """
 Target dependency graph (19 targets)
 Target \'BuildGraphDebug\' in project \'BuildGraphDebug\'
 ➜ Explicit dependency on target \'App\' in project \'App\'
