@@ -102,11 +102,11 @@ struct DepsPathExtraction {
 
         let text = String(section.text)
         
-//        #if DEBUG
+        #if DEBUG
         if text.isEmpty {
             activityLog.printRecursiveDescription()
         }
-//        #endif
+        #endif
         
         return text
     }
