@@ -205,8 +205,8 @@ Crypto in Crypto (explicit)
     }
 }
 
-// MARK: Xcode 15
-class DependencyParser_xcode15: XCTestCase {
+// MARK: Xcode 15 & Xcode 16
+class DependencyParser_xcode15_16: XCTestCase {
     
     func test_noDependencies() {
         let depedencies = parseDependency("""
@@ -281,8 +281,8 @@ Target \'App\' in project \'App\'
         )
     }
     
-    func test_fullFile_xcode15() {
-        let dependencies = parseFile(xcode15)
+    func test_fullFile_xcode15_16() {
+        let dependencies = parseFile(xcode15_16)
         
         assertSnapshot(
             matching: dependencies,
@@ -301,8 +301,7 @@ Target \'App\' in project \'App\'
     }
 }
 
-
-let xcode15 = """
+let xcode15_16 = """
 Target dependency graph (19 targets)
 Target \'BuildGraphDebug\' in project \'BuildGraphDebug\'
 ➜ Explicit dependency on target \'App\' in project \'App\'

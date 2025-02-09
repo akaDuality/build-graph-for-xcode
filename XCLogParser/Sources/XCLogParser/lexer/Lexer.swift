@@ -141,6 +141,9 @@ public final class Lexer {
             return .null
         case .list:
             return handleListTokenTypeCase(payload: payload)
+        case .json:
+            return handleJSONTokenTypeCase(scanner: scanner,
+                                           payload: payload)
         }
     }
 
@@ -181,6 +184,16 @@ public final class Lexer {
                                         return nil
         }
         return .string(content)
+    }
+
+    private func handleJSONTokenTypeCase(scanner: Scanner,
+                                         payload: String) -> Token? {
+        guard let content = scanString(length: payload,
+                                       scanner: scanner) else {
+                                        print("error parsing string")
+                                        return nil
+        }
+        return .json(content)
     }
 
     private func handleDoubleTokenTypeCase(payload: String) -> Token? {
