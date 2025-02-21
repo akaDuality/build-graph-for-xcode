@@ -9,9 +9,9 @@ The app shows the compilation order for modules and links between them, allowing
 <img width="1844" alt="HeaderLight" src="https://github.com/user-attachments/assets/fdf2d818-0e77-4660-9caa-5a27aa746ec2" />
 
 ## How to use
-- Launch, give access to read files
 - Open Xcode with your project, clean, and build from scratch
-- Go back to Build Graph, update structure, and select the last build
+- Launch Build Graph, give access to read files at Derived Data
+- Select your project in the left panel
 
 ## Modules Structure
 - Build Graph Release – target for release, including FireBase.
