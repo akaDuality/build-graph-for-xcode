@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="LFf-Ro-PN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="Search Toolbar Item" minToolsVersion="12.0" minSystemVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +21,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="1200" height="200"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
-                        <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
+                        <toolbar key="toolbar" implicitIdentifier="83EAEABC-FCE2-4265-8AE8-23538BDA51AE" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="XWM-y2-U07">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="892B5DBF-E693-4392-A8A3-5A49838F341B" label="Refresh" paletteLabel="Refresh" tag="-1" image="arrow.clockwise" catalog="system" bordered="YES" sizingBehavior="auto" id="1HI-xL-x8z">
                                     <connections>
@@ -74,7 +74,7 @@
                                 </toolbarItem>
                                 <searchToolbarItem implicitItemIdentifier="C85423F7-402E-40CA-9263-9B99624CB297" label="Search" paletteLabel="Search" visibilityPriority="1001" id="ZhZ-nU-lfr">
                                     <nil key="toolTip"/>
-                                    <searchField key="view" verticalHuggingPriority="750" textCompletion="NO" id="OxR-ft-YoY">
+                                    <searchField key="view" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" id="OxR-ft-YoY">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsSearchStringImmediately="YES" id="sOQ-83-0vr">
@@ -177,6 +177,6 @@
         <image name="NSGoRightTemplate" width="12" height="17"/>
         <image name="arrow.clockwise" catalog="system" width="14" height="16"/>
         <image name="sidebar.right" catalog="system" width="18" height="14"/>
-        <image name="square.and.arrow.up" catalog="system" width="15" height="17"/>
+        <image name="square.and.arrow.up" catalog="system" width="15" height="18"/>
     </resources>
 </document>

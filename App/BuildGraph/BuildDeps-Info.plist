@@ -27,14 +27,16 @@
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.akaDuality.bgbuildsnapshot</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict/>
 	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
 	<key>UTExportedTypeDeclarations</key>
